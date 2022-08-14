@@ -1,0 +1,15 @@
+Package: EDCHM
+Type: Package
+Title: Editable Distributed Conceptual (c++) Hydrological Model
+Version: 0.1.0
+Date: 2022-08-14
+Author: Kan Lei
+Maintainer: Kan Lei <kan.lei@tu-dresden.de>
+Description: A colletion of some hydrological models (processes). 
+  In order to improve the model efficency, the processes are in c++ implemented.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.7)
+LinkingTo: Rcpp
+RoxygenNote: 7.2.0
+Roxygen: list(markdown = TRUE)
+Encoding: UTF-8

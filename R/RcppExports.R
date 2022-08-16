@@ -326,3 +326,7 @@ snowMelt_Factor <- function(snow_ice_mm, param_snow_fac_Tmelt, param_snow_fac_Tb
     .Call(`_EDCHM_snowMelt_Factor`, snow_ice_mm, param_snow_fac_Tmelt, param_snow_fac_Tb, param_snow_fac_f)
 }
 
+# Register entry points for exported C++ functions
+methods::setLoadAction(function(ns) {
+    .Call('_EDCHM_RcppExport_registerCCallable', PACKAGE = 'EDCHM')
+})

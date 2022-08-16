@@ -163,6 +163,12 @@ evatransActual_GR4J <- function(atmos_potentialEvatrans_mm, capacity_mm, water_m
 }
 
 #' @rdname evatransActual
+#' @param param_infilt_ubc_P0EGEN parameters for [evatransActual_UBC()]
+evatransActual_UBC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN) {
+    .Call('_EDCHM_evatransActual_UBC', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN)
+}
+
+#' @rdname evatransActual
 #' @param param_evatrans_lia_gamma parameters for [evatransLand_Liang()]
 evatransLand_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma) {
     .Call('_EDCHM_evatransLand_Liang', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma)
@@ -218,6 +224,13 @@ infilt_GR4J <- function(land_water_mm, soil_water_mm, soil_capacity_mm) {
 #' @param param_infilt_scs_CN parameters for [infilt_SCS()]
 infilt_SCS <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN) {
     .Call('_EDCHM_infilt_SCS', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN)
+}
+
+#' @rdname infilt
+#' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
+#' @param param_infilt_ubc_P0AGEN parameters for [infilt_UBC()]
+infilt_UBC <- function(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN) {
+    .Call('_EDCHM_infilt_UBC', PACKAGE = 'EDCHM', land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN)
 }
 
 #' @rdname infilt

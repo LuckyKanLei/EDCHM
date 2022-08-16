@@ -290,6 +290,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// evatransActual_UBC
+NumericVector evatransActual_UBC(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_infilt_ubc_P0EGEN);
+RcppExport SEXP _EDCHM_evatransActual_UBC(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_infilt_ubc_P0EGENSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type water_mm(water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_infilt_ubc_P0EGEN(param_infilt_ubc_P0EGENSEXP);
+    rcpp_result_gen = Rcpp::wrap(evatransActual_UBC(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN));
+    return rcpp_result_gen;
+END_RCPP
+}
 // evatransLand_Liang
 NumericVector evatransLand_Liang(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_gamma);
 RcppExport SEXP _EDCHM_evatransLand_Liang(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_gammaSEXP) {
@@ -417,6 +431,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// infilt_UBC
+NumericVector infilt_UBC(NumericVector land_water_mm, NumericVector land_impermeableFrac_1, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_ubc_P0AGEN);
+RcppExport SEXP _EDCHM_infilt_UBC(SEXP land_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_infilt_ubc_P0AGENSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type land_water_mm(land_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type land_impermeableFrac_1(land_impermeableFrac_1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_infilt_ubc_P0AGEN(param_infilt_ubc_P0AGENSEXP);
+    rcpp_result_gen = Rcpp::wrap(infilt_UBC(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN));
+    return rcpp_result_gen;
+END_RCPP
+}
 // infilt_XAJ
 NumericVector infilt_XAJ(NumericVector land_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_xaj_B);
 RcppExport SEXP _EDCHM_infilt_XAJ(SEXP land_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_infilt_xaj_BSEXP) {
@@ -534,6 +563,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_evatransActual_SupplyPow", (DL_FUNC) &_EDCHM_evatransActual_SupplyPow, 5},
     {"_EDCHM_evatransActual_VIC", (DL_FUNC) &_EDCHM_evatransActual_VIC, 4},
     {"_EDCHM_evatransActual_GR4J", (DL_FUNC) &_EDCHM_evatransActual_GR4J, 3},
+    {"_EDCHM_evatransActual_UBC", (DL_FUNC) &_EDCHM_evatransActual_UBC, 4},
     {"_EDCHM_evatransLand_Liang", (DL_FUNC) &_EDCHM_evatransLand_Liang, 4},
     {"_EDCHM_evatransSoil_Liang", (DL_FUNC) &_EDCHM_evatransSoil_Liang, 4},
     {"_EDCHM_infilt_SupplyRatio", (DL_FUNC) &_EDCHM_infilt_SupplyRatio, 4},
@@ -543,6 +573,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_infilt_HBV", (DL_FUNC) &_EDCHM_infilt_HBV, 4},
     {"_EDCHM_infilt_GR4J", (DL_FUNC) &_EDCHM_infilt_GR4J, 3},
     {"_EDCHM_infilt_SCS", (DL_FUNC) &_EDCHM_infilt_SCS, 4},
+    {"_EDCHM_infilt_UBC", (DL_FUNC) &_EDCHM_infilt_UBC, 5},
     {"_EDCHM_infilt_XAJ", (DL_FUNC) &_EDCHM_infilt_XAJ, 4},
     {"_EDCHM_intercep_Full", (DL_FUNC) &_EDCHM_intercep_Full, 3},
     {"_EDCHM_percola_GR4J", (DL_FUNC) &_EDCHM_percola_GR4J, 3},

@@ -2,9 +2,17 @@
 
 using namespace Rcpp;  
 
-NumericVector vecpow(NumericVector a, NumericVector b) {
-  NumericVector out(a.size());
-  std::transform(a.begin(), a.end(),
-                 b.begin(), out.begin(), ::pow);
+NumericVector vecpow(NumericVector base, NumericVector exp) {
+  NumericVector out(base.size());
+  std::transform(base.begin(), base.end(),
+                 exp.begin(), out.begin(), ::pow);
   return out;
+}
+
+
+NumericVector vecpow10(NumericVector exp) {
+  
+  NumericVector base10 (exp.size(), 10.0);
+  
+  return vecpow(base10, exp);
 }

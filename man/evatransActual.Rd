@@ -8,6 +8,7 @@
 \alias{evatransActual_SupplyPow}
 \alias{evatransActual_VIC}
 \alias{evatransActual_GR4J}
+\alias{evatransActual_UBC}
 \alias{evatransLand_Liang}
 \alias{evatransSoil_Liang}
 \title{\strong{actuall evapotranspiration}}
@@ -45,6 +46,13 @@ evatransActual_VIC(
 
 evatransActual_GR4J(atmos_potentialEvatrans_mm, capacity_mm, water_mm)
 
+evatransActual_UBC(
+  atmos_potentialEvatrans_mm,
+  water_mm,
+  capacity_mm,
+  param_infilt_ubc_P0EGEN
+)
+
 evatransLand_Liang(
   atmos_potentialEvatrans_mm,
   water_mm,
@@ -73,6 +81,8 @@ evatransSoil_Liang(
 \item{param_evatrans_pow_k, param_evatrans_pow_gamma}{parameters for \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}}
 
 \item{param_evatrans_vic_gamma}{parameters for \code{\link[=evatransActual_VIC]{evatransActual_VIC()}}}
+
+\item{param_infilt_ubc_P0EGEN}{parameters for \code{\link[=evatransActual_UBC]{evatransActual_UBC()}}}
 
 \item{param_evatrans_lia_gamma}{parameters for \code{\link[=evatransLand_Liang]{evatransLand_Liang()}}}
 

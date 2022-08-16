@@ -1,8 +1,8 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-NumericVector vecpow(NumericVector a, NumericVector b);
-
+NumericVector vecpow(NumericVector base, NumericVector exp);
+NumericVector vecpow10(NumericVector exp);
 //' **potential evapotranspiration**
 //' @name evatransPotential
 //' @param time_step_h (1, 24 h) time step in hour
@@ -210,6 +210,26 @@ NumericVector evatransActual_GR4J(
   AET = water_mm * (2 - water_mm / capacity_mm) * tanh(atmos_potentialEvatrans_mm / capacity_mm) / (1 + (1 - water_mm / capacity_mm) * tanh(atmos_potentialEvatrans_mm / capacity_mm));
   return ifelse(AET > water_mm, water_mm, AET);
   
+}
+
+//' @rdname evatransActual
+//' @param param_infilt_ubc_P0EGEN parameters for [evatransActual_UBC()]
+// [[Rcpp::export]]
+NumericVector evatransActual_UBC(
+    NumericVector atmos_potentialEvatrans_mm,
+    NumericVector water_mm,
+    NumericVector capacity_mm,
+    NumericVector param_infilt_ubc_P0EGEN
+)
+{
+  NumericVector diff_mm, AET, k_;
+  diff_mm = capacity_mm - water_mm;
+  
+  
+
+  k_ = vecpow10(- diff_mm / param_infilt_ubc_P0EGEN);
+  AET = atmos_potentialEvatrans_mm * k_;
+  return ifelse(AET > water_mm, water_mm, AET);
 }
 
 //' @rdname evatransActual

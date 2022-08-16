@@ -9,6 +9,7 @@
 \alias{infilt_HBV}
 \alias{infilt_GR4J}
 \alias{infilt_SCS}
+\alias{infilt_UBC}
 \alias{infilt_XAJ}
 \title{\strong{infiltration}}
 \usage{
@@ -53,6 +54,14 @@ infilt_GR4J(land_water_mm, soil_water_mm, soil_capacity_mm)
 
 infilt_SCS(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN)
 
+infilt_UBC(
+  land_water_mm,
+  land_impermeableFrac_1,
+  soil_water_mm,
+  soil_capacity_mm,
+  param_infilt_ubc_P0AGEN
+)
+
 infilt_XAJ(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
 }
 \arguments{
@@ -73,6 +82,10 @@ infilt_XAJ(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
 \item{param_infilt_hbv_beta}{parameters for \code{\link[=infilt_HBV]{infilt_HBV()}}}
 
 \item{param_infilt_scs_CN}{parameters for \code{\link[=infilt_SCS]{infilt_SCS()}}}
+
+\item{land_impermeableFrac_1}{the maximum impermeable fraction when th soil is fully saturated}
+
+\item{param_infilt_ubc_P0AGEN}{parameters for \code{\link[=infilt_UBC]{infilt_UBC()}}}
 
 \item{param_infilt_xaj_B}{parameters for \code{\link[=infilt_XAJ]{infilt_XAJ()}}}
 }

@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-NumericVector vecpow(NumericVector a, NumericVector b);
+NumericVector vecpow(NumericVector base, NumericVector exp);
 
 //' **percolation**
 //' @name percola

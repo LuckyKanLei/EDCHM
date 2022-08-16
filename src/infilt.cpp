@@ -1,8 +1,8 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-NumericVector vecpow(NumericVector a, NumericVector b);
-
+NumericVector vecpow(NumericVector base, NumericVector exp);
+NumericVector vecpow10(NumericVector exp);
 //' **infiltration**
 //' @name infilt
 //' @param land_water_mm (mm/m2) water volum in `landLy`, different than `land_interceptWater_mm`
@@ -154,6 +154,29 @@ NumericVector infilt_SCS(
   S_ = 25400 / param_infilt_scs_CN -254;
   k_ = (1 - pow(land_water_mm - 0.2 * S_, 2) / (land_water_mm + 0.8 * S_));
   k_ = ifelse(k_ > 0, k_, 0);
+  infilt_water_mm = land_water_mm * k_;
+  
+  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
+}
+
+//' @rdname infilt
+//' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
+//' @param param_infilt_ubc_P0AGEN parameters for [infilt_UBC()]
+// [[Rcpp::export]]
+NumericVector infilt_UBC(
+    NumericVector land_water_mm, 
+    NumericVector land_impermeableFrac_1, 
+    NumericVector soil_water_mm,
+    NumericVector soil_capacity_mm, 
+    NumericVector param_infilt_ubc_P0AGEN
+)
+{
+  NumericVector soil_diff_mm, k_, infilt_water_mm, limit_mm;
+  
+  soil_diff_mm = soil_capacity_mm - soil_water_mm;
+  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
+  
+  k_ = (1 - land_impermeableFrac_1 * vecpow10(- soil_diff_mm / param_infilt_ubc_P0AGEN));
   infilt_water_mm = land_water_mm * k_;
   
   return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);

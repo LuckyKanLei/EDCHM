@@ -8,6 +8,7 @@ using namespace Rcpp;
 //' @param atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
 //' @param param_snow_kus_fE,param_snow_kus_fT parameters for [snowMelt_Kustas()]
 //' @return snow_melt_mm (mm/m2) melted snow
+//' @export
 // [[Rcpp::export]]
 NumericVector snowMelt_Kustas(
     NumericVector snow_ice_mm,
@@ -25,6 +26,7 @@ NumericVector snowMelt_Kustas(
 
 //' @rdname snow
 //' @param param_snow_fac_Tmelt,param_snow_fac_Tb,param_snow_fac_f parameters for [snowMelt_Factor()]
+//' @export
 // [[Rcpp::export]]
 NumericVector snowMelt_Factor(
     NumericVector snow_ice_mm,

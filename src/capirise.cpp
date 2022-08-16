@@ -10,6 +10,7 @@ NumericVector vecpow(NumericVector base, NumericVector exp);
 //' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
 //' @param param_capirise_sur_k parameters for[capirise_SupplyRatio()]
 //' @return  capilarise (mm/m2)
+//' @export
 // [[Rcpp::export]]
 NumericVector capirise_SupplyRatio(
     NumericVector ground_water_mm,
@@ -30,6 +31,7 @@ NumericVector capirise_SupplyRatio(
 
 //' @rdname capirise
 //' @param param_capirise_sup_k,param_capirise_sup_gamma parameters for [capirise_SupplyPow()]
+//' @export
 // [[Rcpp::export]]
 NumericVector capirise_SupplyPow(
     NumericVector ground_water_mm,
@@ -51,6 +53,7 @@ NumericVector capirise_SupplyPow(
 
 //' @rdname capirise
 //' @param param_capirise_acr_k parameters [capirise_AcceptRatio()]
+//' @export
 // [[Rcpp::export]]
 NumericVector capirise_AcceptRatio(
     NumericVector ground_water_mm, 
@@ -72,6 +75,7 @@ NumericVector capirise_AcceptRatio(
 
 //' @rdname capirise
 //' @param param_capirise_acp_k,param_capirise_acp_gamma parameters for [capirise_AcceptPow()]
+//' @export
 // [[Rcpp::export]]
 NumericVector capirise_AcceptPow(
     NumericVector ground_water_mm, 

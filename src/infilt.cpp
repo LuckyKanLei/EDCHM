@@ -10,6 +10,7 @@ NumericVector vecpow10(NumericVector exp);
 //' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
 //' @param param_infilt_sur_k parameters for [infilt_SupplyRatio()]
 //' @return infilt_mm (mm/m2) 
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_SupplyRatio(
     NumericVector land_water_mm,
@@ -30,6 +31,7 @@ NumericVector infilt_SupplyRatio(
 
 //' @rdname infilt
 //' @param param_infilt_sup_k,param_infilt_sup_gamma parameters for [infilt_SupplyPow()]
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_SupplyPow(
     NumericVector land_water_mm,
@@ -52,6 +54,7 @@ NumericVector infilt_SupplyPow(
 
 //' @rdname infilt
 //' @param param_infilt_acr_k parameters for [infilt_AcceptRatio()]
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_AcceptRatio(
     NumericVector land_water_mm, 
@@ -74,6 +77,7 @@ NumericVector infilt_AcceptRatio(
 
 //' @rdname infilt
 //' @param param_infilt_acp_k,param_infilt_acp_gamma parameters for [infilt_AcceptPow()]
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_AcceptPow(
     NumericVector land_water_mm, 
@@ -96,6 +100,7 @@ NumericVector infilt_AcceptPow(
 
 //' @rdname infilt
 //' @param param_infilt_hbv_beta parameters for [infilt_HBV()]
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_HBV(
     NumericVector land_water_mm, 
@@ -117,6 +122,7 @@ NumericVector infilt_HBV(
 }
 
 //' @rdname infilt
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_GR4J(
     NumericVector land_water_mm,
@@ -138,6 +144,7 @@ NumericVector infilt_GR4J(
 
 //' @rdname infilt
 //' @param param_infilt_scs_CN parameters for [infilt_SCS()]
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_SCS(
     NumericVector land_water_mm, 
@@ -162,6 +169,7 @@ NumericVector infilt_SCS(
 //' @rdname infilt
 //' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
 //' @param param_infilt_ubc_P0AGEN parameters for [infilt_UBC()]
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_UBC(
     NumericVector land_water_mm, 
@@ -184,6 +192,7 @@ NumericVector infilt_UBC(
 
 //' @rdname infilt
 //' @param param_infilt_xaj_B parameters for [infilt_XAJ()]
+//' @export
 // [[Rcpp::export]]
 NumericVector infilt_XAJ(
     NumericVector land_water_mm, 

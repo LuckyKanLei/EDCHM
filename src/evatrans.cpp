@@ -19,6 +19,7 @@ NumericVector vecpow10(NumericVector exp);
 //' @param land_albedo_1 (0, 1) albedo of this region
 //' @param param_evatrans_tur_k parameters for [evatransPotential_TurcWendling()]
 //' @return potential evapotranspiration (mm/m2)
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_TurcWendling(
     NumericVector atmos_temperature_Cel, 
@@ -31,6 +32,7 @@ NumericVector evatransPotential_TurcWendling(
 }
 
 //' @rdname evatransPotential
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_Linacre(
     NumericVector time_dayOfYear_,
@@ -45,6 +47,7 @@ NumericVector evatransPotential_Linacre(
 }
 
 //' @rdname evatransPotential
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_FAO56(
     NumericVector time_dayOfYear_,
@@ -58,14 +61,14 @@ NumericVector evatransPotential_FAO56(
 )
 {
   NumericVector Delta_, e_s, e_a, R_n, P_, gamma_, u_2, ET_o;
-
+  
   R_n = atmos_netRadiat_MJ;
   u_2 = atmos_windSpeed2m_m_s;
   e_a = atmos_vaporPress_hPa;
   e_s = atmos_saturatVaporPress_hPa;
   //// Delta_,
   Delta_ = 4098 * (0.6108 * exp(17.27 * atmos_temperature_Cel / (atmos_temperature_Cel + 237.3))) / ((atmos_temperature_Cel + 237.3) * (atmos_temperature_Cel + 237.3)); // Eq.13
-
+  
   //// e_s,
   // e_s = 0.3054 * exp(17.27 * atmos_temperature_max_Cel / (atmos_temperature_max_Cel + 237.3)) + 0.3054 * exp(17.27 * atmos_temperature_min_Cel / (atmos_temperature_min_Cel + 237.3)); // Eq.11, 12
   // 
@@ -109,6 +112,7 @@ NumericVector evatransPotential_FAO56(
 //' - evaporation in interception (landLy)
 //' - transpiration in root
 //' - evaporation in soil (soilLy)
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_FestRatio(
     NumericVector atmos_potentialEvatrans_mm,
@@ -125,6 +129,7 @@ NumericVector evatransActual_FestRatio(
 }
 
 //' @rdname evatransActual
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_Supply(
     NumericVector atmos_potentialEvatrans_mm,
@@ -141,6 +146,7 @@ NumericVector evatransActual_Supply(
 
 //' @rdname evatransActual
 //' @param param_evatrans_sup_k parameters for [evatransActual_SupplyRatio()]
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_SupplyRatio(
     NumericVector atmos_potentialEvatrans_mm,
@@ -158,6 +164,7 @@ NumericVector evatransActual_SupplyRatio(
 
 //' @rdname evatransActual
 //' @param param_evatrans_pow_k,param_evatrans_pow_gamma parameters for [evatransActual_SupplyPow()]
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_SupplyPow(
     NumericVector atmos_potentialEvatrans_mm,
@@ -178,6 +185,7 @@ NumericVector evatransActual_SupplyPow(
 
 //' @rdname evatransActual
 //' @param param_evatrans_vic_gamma parameters for [evatransActual_VIC()]
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_VIC(
     NumericVector atmos_potentialEvatrans_mm,
@@ -197,6 +205,7 @@ NumericVector evatransActual_VIC(
 
 
 //' @rdname evatransActual
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_GR4J(
     NumericVector atmos_potentialEvatrans_mm,
@@ -214,6 +223,7 @@ NumericVector evatransActual_GR4J(
 
 //' @rdname evatransActual
 //' @param param_infilt_ubc_P0EGEN parameters for [evatransActual_UBC()]
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_UBC(
     NumericVector atmos_potentialEvatrans_mm,
@@ -226,7 +236,7 @@ NumericVector evatransActual_UBC(
   diff_mm = capacity_mm - water_mm;
   
   
-
+  
   k_ = vecpow10(- diff_mm / param_infilt_ubc_P0EGEN);
   AET = atmos_potentialEvatrans_mm * k_;
   return ifelse(AET > water_mm, water_mm, AET);
@@ -234,6 +244,7 @@ NumericVector evatransActual_UBC(
 
 //' @rdname evatransActual
 //' @param param_evatrans_lia_gamma parameters for [evatransLand_Liang()]
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransLand_Liang(
     NumericVector atmos_potentialEvatrans_mm,
@@ -255,6 +266,7 @@ NumericVector evatransLand_Liang(
 
 //' @rdname evatransActual
 //' @param param_evatrans_lia_B parameters for [evatransSoil_Liang()]
+//' @export
 // [[Rcpp::export]]
 NumericVector evatransSoil_Liang(
     NumericVector atmos_potentialEvatrans_mm,

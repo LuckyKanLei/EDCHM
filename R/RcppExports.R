@@ -14,26 +14,30 @@
 #' @param land_latitude_Degree (degree) average latitude
 #' @param land_elevation_m (m) average elevation
 #' @return atmos_netRadiat_MJ (MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
+#' @export
 atmos_NettoRadiat <- function(time_dayOfYear_, atmos_temperature_Cel, atmos_temperatureMax_Cel, atmos_temperatureMin_Cel, atmos_relativeHumidity_1, atmos_solarRadiat_MJ, land_latitude_Degree, land_elevation_m) {
-    .Call('_EDCHM_atmos_NettoRadiat', PACKAGE = 'EDCHM', time_dayOfYear_, atmos_temperature_Cel, atmos_temperatureMax_Cel, atmos_temperatureMin_Cel, atmos_relativeHumidity_1, atmos_solarRadiat_MJ, land_latitude_Degree, land_elevation_m)
+    .Call(`_EDCHM_atmos_NettoRadiat`, time_dayOfYear_, atmos_temperature_Cel, atmos_temperatureMax_Cel, atmos_temperatureMin_Cel, atmos_relativeHumidity_1, atmos_solarRadiat_MJ, land_latitude_Degree, land_elevation_m)
 }
 
 #' @rdname  atmos
 #' @return atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earth's surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
+#' @export
 atmos_SaturatVaporPress <- function(atmos_temperature_Cel) {
-    .Call('_EDCHM_atmos_SaturatVaporPress', PACKAGE = 'EDCHM', atmos_temperature_Cel)
+    .Call(`_EDCHM_atmos_SaturatVaporPress`, atmos_temperature_Cel)
 }
 
 #' @rdname  atmos
 #' @return atmos_vaporPress_hPa	(hPa) actual vapour pressure, can be calculated by [atmos_VaporPress()]
+#' @export
 atmos_VaporPress <- function(atmos_temperature_Cel, atmos_relativeHumidity_1) {
-    .Call('_EDCHM_atmos_VaporPress', PACKAGE = 'EDCHM', atmos_temperature_Cel, atmos_relativeHumidity_1)
+    .Call(`_EDCHM_atmos_VaporPress`, atmos_temperature_Cel, atmos_relativeHumidity_1)
 }
 
 #' @rdname  atmos
 #' @return atmos_WindSpeed2m_m_s (m/s) wind speed at 2 m above ground surface
+#' @export
 atmos_WindSpeed2m <- function(atmos_windSpeed_m_s, atmos_windMeasureHeight_m) {
-    .Call('_EDCHM_atmos_WindSpeed2m', PACKAGE = 'EDCHM', atmos_windSpeed_m_s, atmos_windMeasureHeight_m)
+    .Call(`_EDCHM_atmos_WindSpeed2m`, atmos_windSpeed_m_s, atmos_windMeasureHeight_m)
 }
 
 #' **baseflow**
@@ -41,15 +45,17 @@ atmos_WindSpeed2m <- function(atmos_windSpeed_m_s, atmos_windMeasureHeight_m) {
 #' @param ground_water_mm (mm/m2) water volum in `groundLy`
 #' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
 #' @param param_baseflow_sup_k,param_baseflow_sup_gamma parameters for [baseflow_SupplyPow()]
+#' @export
 baseflow_SupplyPow <- function(ground_water_mm, capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma) {
-    .Call('_EDCHM_baseflow_SupplyPow', PACKAGE = 'EDCHM', ground_water_mm, capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma)
+    .Call(`_EDCHM_baseflow_SupplyPow`, ground_water_mm, capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma)
 }
 
 #' @rdname baseflow
 #' @param param_baseflow_sur_k parameters for [baseflow_SupplyRatio()]
 #' @return baseflow (mm/m2) 
+#' @export
 baseflow_SupplyRatio <- function(ground_water_mm, param_baseflow_sur_k) {
-    .Call('_EDCHM_baseflow_SupplyRatio', PACKAGE = 'EDCHM', ground_water_mm, param_baseflow_sur_k)
+    .Call(`_EDCHM_baseflow_SupplyRatio`, ground_water_mm, param_baseflow_sur_k)
 }
 
 #' **capilarise**
@@ -59,26 +65,30 @@ baseflow_SupplyRatio <- function(ground_water_mm, param_baseflow_sur_k) {
 #' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
 #' @param param_capirise_sur_k parameters for[capirise_SupplyRatio()]
 #' @return  capilarise (mm/m2)
+#' @export
 capirise_SupplyRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sur_k) {
-    .Call('_EDCHM_capirise_SupplyRatio', PACKAGE = 'EDCHM', ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sur_k)
+    .Call(`_EDCHM_capirise_SupplyRatio`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sur_k)
 }
 
 #' @rdname capirise
 #' @param param_capirise_sup_k,param_capirise_sup_gamma parameters for [capirise_SupplyPow()]
+#' @export
 capirise_SupplyPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sup_k, param_capirise_sup_gamma) {
-    .Call('_EDCHM_capirise_SupplyPow', PACKAGE = 'EDCHM', ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sup_k, param_capirise_sup_gamma)
+    .Call(`_EDCHM_capirise_SupplyPow`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sup_k, param_capirise_sup_gamma)
 }
 
 #' @rdname capirise
 #' @param param_capirise_acr_k parameters [capirise_AcceptRatio()]
+#' @export
 capirise_AcceptRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acr_k) {
-    .Call('_EDCHM_capirise_AcceptRatio', PACKAGE = 'EDCHM', ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acr_k)
+    .Call(`_EDCHM_capirise_AcceptRatio`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acr_k)
 }
 
 #' @rdname capirise
 #' @param param_capirise_acp_k,param_capirise_acp_gamma parameters for [capirise_AcceptPow()]
+#' @export
 capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acp_k, param_capirise_acp_gamma) {
-    .Call('_EDCHM_capirise_AcceptPow', PACKAGE = 'EDCHM', ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acp_k, param_capirise_acp_gamma)
+    .Call(`_EDCHM_capirise_AcceptPow`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acp_k, param_capirise_acp_gamma)
 }
 
 #' **confluence**
@@ -86,8 +96,9 @@ capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm,
 #' @param confluen_inputWater_mm (mm/m2) input water volum in every routeline
 #' @param confluen_iuh_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 #' @return confluenced water (mm/m2)
+#' @export
 confluen_IUH <- function(confluen_inputWater_mm, confluen_iuh_1) {
-    .Call('_EDCHM_confluen_IUH', PACKAGE = 'EDCHM', confluen_inputWater_mm, confluen_iuh_1)
+    .Call(`_EDCHM_confluen_IUH`, confluen_inputWater_mm, confluen_iuh_1)
 }
 
 #' **potential evapotranspiration**
@@ -106,18 +117,21 @@ confluen_IUH <- function(confluen_inputWater_mm, confluen_iuh_1) {
 #' @param land_albedo_1 (0, 1) albedo of this region
 #' @param param_evatrans_tur_k parameters for [evatransPotential_TurcWendling()]
 #' @return potential evapotranspiration (mm/m2)
+#' @export
 evatransPotential_TurcWendling <- function(atmos_temperature_Cel, atmos_solarRadiat_MJ, time_step_h, param_evatrans_tur_k) {
-    .Call('_EDCHM_evatransPotential_TurcWendling', PACKAGE = 'EDCHM', atmos_temperature_Cel, atmos_solarRadiat_MJ, time_step_h, param_evatrans_tur_k)
+    .Call(`_EDCHM_evatransPotential_TurcWendling`, atmos_temperature_Cel, atmos_solarRadiat_MJ, time_step_h, param_evatrans_tur_k)
 }
 
 #' @rdname evatransPotential
+#' @export
 evatransPotential_Linacre <- function(time_dayOfYear_, atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1) {
-    .Call('_EDCHM_evatransPotential_Linacre', PACKAGE = 'EDCHM', time_dayOfYear_, atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1)
+    .Call(`_EDCHM_evatransPotential_Linacre`, time_dayOfYear_, atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1)
 }
 
 #' @rdname evatransPotential
+#' @export
 evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m) {
-    .Call('_EDCHM_evatransPotential_FAO56', PACKAGE = 'EDCHM', time_dayOfYear_, atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m)
+    .Call(`_EDCHM_evatransPotential_FAO56`, time_dayOfYear_, atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m)
 }
 
 #' **actuall evapotranspiration**
@@ -130,54 +144,63 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 #' - evaporation in interception (landLy)
 #' - transpiration in root
 #' - evaporation in soil (soilLy)
+#' @export
 evatransActual_FestRatio <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_fst_k) {
-    .Call('_EDCHM_evatransActual_FestRatio', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_fst_k)
+    .Call(`_EDCHM_evatransActual_FestRatio`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_fst_k)
 }
 
 #' @rdname evatransActual
+#' @export
 evatransActual_Supply <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm) {
-    .Call('_EDCHM_evatransActual_Supply', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm)
+    .Call(`_EDCHM_evatransActual_Supply`, atmos_potentialEvatrans_mm, water_mm, capacity_mm)
 }
 
 #' @rdname evatransActual
 #' @param param_evatrans_sup_k parameters for [evatransActual_SupplyRatio()]
+#' @export
 evatransActual_SupplyRatio <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k) {
-    .Call('_EDCHM_evatransActual_SupplyRatio', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k)
+    .Call(`_EDCHM_evatransActual_SupplyRatio`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k)
 }
 
 #' @rdname evatransActual
 #' @param param_evatrans_pow_k,param_evatrans_pow_gamma parameters for [evatransActual_SupplyPow()]
+#' @export
 evatransActual_SupplyPow <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_pow_k, param_evatrans_pow_gamma) {
-    .Call('_EDCHM_evatransActual_SupplyPow', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_pow_k, param_evatrans_pow_gamma)
+    .Call(`_EDCHM_evatransActual_SupplyPow`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_pow_k, param_evatrans_pow_gamma)
 }
 
 #' @rdname evatransActual
 #' @param param_evatrans_vic_gamma parameters for [evatransActual_VIC()]
+#' @export
 evatransActual_VIC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_vic_gamma) {
-    .Call('_EDCHM_evatransActual_VIC', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_vic_gamma)
+    .Call(`_EDCHM_evatransActual_VIC`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_vic_gamma)
 }
 
 #' @rdname evatransActual
+#' @export
 evatransActual_GR4J <- function(atmos_potentialEvatrans_mm, capacity_mm, water_mm) {
-    .Call('_EDCHM_evatransActual_GR4J', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, capacity_mm, water_mm)
+    .Call(`_EDCHM_evatransActual_GR4J`, atmos_potentialEvatrans_mm, capacity_mm, water_mm)
 }
 
 #' @rdname evatransActual
 #' @param param_infilt_ubc_P0EGEN parameters for [evatransActual_UBC()]
+#' @export
 evatransActual_UBC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN) {
-    .Call('_EDCHM_evatransActual_UBC', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN)
+    .Call(`_EDCHM_evatransActual_UBC`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN)
 }
 
 #' @rdname evatransActual
 #' @param param_evatrans_lia_gamma parameters for [evatransLand_Liang()]
+#' @export
 evatransLand_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma) {
-    .Call('_EDCHM_evatransLand_Liang', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma)
+    .Call(`_EDCHM_evatransLand_Liang`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma)
 }
 
 #' @rdname evatransActual
 #' @param param_evatrans_lia_B parameters for [evatransSoil_Liang()]
+#' @export
 evatransSoil_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B) {
-    .Call('_EDCHM_evatransSoil_Liang', PACKAGE = 'EDCHM', atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B)
+    .Call(`_EDCHM_evatransSoil_Liang`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B)
 }
 
 #' **infiltration**
@@ -187,56 +210,65 @@ evatransSoil_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
 #' @param param_infilt_sur_k parameters for [infilt_SupplyRatio()]
 #' @return infilt_mm (mm/m2) 
+#' @export
 infilt_SupplyRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sur_k) {
-    .Call('_EDCHM_infilt_SupplyRatio', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sur_k)
+    .Call(`_EDCHM_infilt_SupplyRatio`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sur_k)
 }
 
 #' @rdname infilt
 #' @param param_infilt_sup_k,param_infilt_sup_gamma parameters for [infilt_SupplyPow()]
+#' @export
 infilt_SupplyPow <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sup_k, param_infilt_sup_gamma) {
-    .Call('_EDCHM_infilt_SupplyPow', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sup_k, param_infilt_sup_gamma)
+    .Call(`_EDCHM_infilt_SupplyPow`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sup_k, param_infilt_sup_gamma)
 }
 
 #' @rdname infilt
 #' @param param_infilt_acr_k parameters for [infilt_AcceptRatio()]
+#' @export
 infilt_AcceptRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k) {
-    .Call('_EDCHM_infilt_AcceptRatio', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k)
+    .Call(`_EDCHM_infilt_AcceptRatio`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k)
 }
 
 #' @rdname infilt
 #' @param param_infilt_acp_k,param_infilt_acp_gamma parameters for [infilt_AcceptPow()]
+#' @export
 infilt_AcceptPow <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acp_k, param_infilt_acp_gamma) {
-    .Call('_EDCHM_infilt_AcceptPow', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acp_k, param_infilt_acp_gamma)
+    .Call(`_EDCHM_infilt_AcceptPow`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acp_k, param_infilt_acp_gamma)
 }
 
 #' @rdname infilt
 #' @param param_infilt_hbv_beta parameters for [infilt_HBV()]
+#' @export
 infilt_HBV <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_hbv_beta) {
-    .Call('_EDCHM_infilt_HBV', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_hbv_beta)
+    .Call(`_EDCHM_infilt_HBV`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_hbv_beta)
 }
 
 #' @rdname infilt
+#' @export
 infilt_GR4J <- function(land_water_mm, soil_water_mm, soil_capacity_mm) {
-    .Call('_EDCHM_infilt_GR4J', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm)
+    .Call(`_EDCHM_infilt_GR4J`, land_water_mm, soil_water_mm, soil_capacity_mm)
 }
 
 #' @rdname infilt
 #' @param param_infilt_scs_CN parameters for [infilt_SCS()]
+#' @export
 infilt_SCS <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN) {
-    .Call('_EDCHM_infilt_SCS', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN)
+    .Call(`_EDCHM_infilt_SCS`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN)
 }
 
 #' @rdname infilt
 #' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
 #' @param param_infilt_ubc_P0AGEN parameters for [infilt_UBC()]
+#' @export
 infilt_UBC <- function(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN) {
-    .Call('_EDCHM_infilt_UBC', PACKAGE = 'EDCHM', land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN)
+    .Call(`_EDCHM_infilt_UBC`, land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN)
 }
 
 #' @rdname infilt
 #' @param param_infilt_xaj_B parameters for [infilt_XAJ()]
+#' @export
 infilt_XAJ <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B) {
-    .Call('_EDCHM_infilt_XAJ', PACKAGE = 'EDCHM', land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
+    .Call(`_EDCHM_infilt_XAJ`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
 }
 
 #' **interception** water from land go into the soil.
@@ -245,8 +277,9 @@ infilt_XAJ <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 #' @param land_interceptWater_mm (mm/m2) initial water volum that can be intercepted
 #' @param land_interceptCapacity_mm (mm/m2) average intercept Capacity (maximal storage capacity)
 #' @return intercept_water_mm (mm/m2) intercepted water in this timestep
+#' @export
 intercep_Full <- function(atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm) {
-    .Call('_EDCHM_intercep_Full', PACKAGE = 'EDCHM', atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm)
+    .Call(`_EDCHM_intercep_Full`, atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm)
 }
 
 #' **percolation**
@@ -255,20 +288,23 @@ intercep_Full <- function(atmos_rain_mm, land_interceptWater_mm, land_interceptC
 #' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
 #' @param param_percola_gr4_k parameters
 #' @return percola_mm (mm/m2)
+#' @export
 percola_GR4J <- function(soil_water_mm, soil_capacity_mm, param_percola_gr4_k) {
-    .Call('_EDCHM_percola_GR4J', PACKAGE = 'EDCHM', soil_water_mm, soil_capacity_mm, param_percola_gr4_k)
+    .Call(`_EDCHM_percola_GR4J`, soil_water_mm, soil_capacity_mm, param_percola_gr4_k)
 }
 
 #' @rdname percola
 #' @param param_percola_sur_k parameters for [percola_SupplyRatio()]
+#' @export
 percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
-    .Call('_EDCHM_percola_SupplyRatio', PACKAGE = 'EDCHM', soil_water_mm, param_percola_sur_k)
+    .Call(`_EDCHM_percola_SupplyRatio`, soil_water_mm, param_percola_sur_k)
 }
 
 #' @rdname percola
 #' @param param_percola_sup_k,param_percola_sup_gamma parameters for [percola_SupplyPow()]
+#' @export
 percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma) {
-    .Call('_EDCHM_percola_SupplyPow', PACKAGE = 'EDCHM', soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma)
+    .Call(`_EDCHM_percola_SupplyPow`, soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma)
 }
 
 #' **snow**
@@ -278,13 +314,15 @@ percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup
 #' @param atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
 #' @param param_snow_kus_fE,param_snow_kus_fT parameters for [snowMelt_Kustas()]
 #' @return snow_melt_mm (mm/m2) melted snow
+#' @export
 snowMelt_Kustas <- function(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT) {
-    .Call('_EDCHM_snowMelt_Kustas', PACKAGE = 'EDCHM', snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT)
+    .Call(`_EDCHM_snowMelt_Kustas`, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT)
 }
 
 #' @rdname snow
 #' @param param_snow_fac_Tmelt,param_snow_fac_Tb,param_snow_fac_f parameters for [snowMelt_Factor()]
+#' @export
 snowMelt_Factor <- function(snow_ice_mm, param_snow_fac_Tmelt, param_snow_fac_Tb, param_snow_fac_f) {
-    .Call('_EDCHM_snowMelt_Factor', PACKAGE = 'EDCHM', snow_ice_mm, param_snow_fac_Tmelt, param_snow_fac_Tb, param_snow_fac_f)
+    .Call(`_EDCHM_snowMelt_Factor`, snow_ice_mm, param_snow_fac_Tmelt, param_snow_fac_Tb, param_snow_fac_f)
 }
 

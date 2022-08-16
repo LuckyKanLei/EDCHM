@@ -7,6 +7,7 @@ using namespace Rcpp;
 //' @param land_interceptWater_mm (mm/m2) initial water volum that can be intercepted
 //' @param land_interceptCapacity_mm (mm/m2) average intercept Capacity (maximal storage capacity)
 //' @return intercept_water_mm (mm/m2) intercepted water in this timestep
+//' @export
 // [[Rcpp::export]]
 NumericVector intercep_Full(
     NumericVector atmos_rain_mm,

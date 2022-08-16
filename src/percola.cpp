@@ -9,6 +9,7 @@ NumericVector vecpow(NumericVector base, NumericVector exp);
 //' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
 //' @param param_percola_gr4_k parameters
 //' @return percola_mm (mm/m2)
+//' @export
 // [[Rcpp::export]]
 NumericVector percola_GR4J(
     NumericVector soil_water_mm,
@@ -21,6 +22,7 @@ NumericVector percola_GR4J(
 
 //' @rdname percola
 //' @param param_percola_sur_k parameters for [percola_SupplyRatio()]
+//' @export
 // [[Rcpp::export]]
 NumericVector percola_SupplyRatio(
     NumericVector soil_water_mm,
@@ -33,6 +35,7 @@ NumericVector percola_SupplyRatio(
 
 //' @rdname percola
 //' @param param_percola_sup_k,param_percola_sup_gamma parameters for [percola_SupplyPow()]
+//' @export
 // [[Rcpp::export]]
 NumericVector percola_SupplyPow(
     NumericVector soil_water_mm,

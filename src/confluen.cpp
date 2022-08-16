@@ -6,6 +6,7 @@ using namespace Rcpp;
 //' @param confluen_inputWater_mm (mm/m2) input water volum in every routeline
 //' @param confluen_iuh_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 //' @return confluenced water (mm/m2)
+//' @export
 // [[Rcpp::export]]
 NumericVector confluen_IUH(
     NumericVector confluen_inputWater_mm, 

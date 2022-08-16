@@ -14,6 +14,7 @@ using namespace Rcpp;
 //' @param land_latitude_Degree (degree) average latitude
 //' @param land_elevation_m (m) average elevation
 //' @return atmos_netRadiat_MJ (MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
+//' @export
 // [[Rcpp::export]]
 NumericVector atmos_NettoRadiat(
     NumericVector time_dayOfYear_,
@@ -54,6 +55,7 @@ NumericVector atmos_NettoRadiat(
 
 //' @rdname  atmos
 //' @return atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earth's surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
+//' @export
 // [[Rcpp::export]]
 NumericVector atmos_SaturatVaporPress(
     NumericVector atmos_temperature_Cel 
@@ -64,6 +66,7 @@ NumericVector atmos_SaturatVaporPress(
 
 //' @rdname  atmos
 //' @return atmos_vaporPress_hPa	(hPa) actual vapour pressure, can be calculated by [atmos_VaporPress()]
+//' @export
 // [[Rcpp::export]]
 NumericVector atmos_VaporPress(
     NumericVector atmos_temperature_Cel,
@@ -75,6 +78,7 @@ NumericVector atmos_VaporPress(
 
 //' @rdname  atmos
 //' @return atmos_WindSpeed2m_m_s (m/s) wind speed at 2 m above ground surface
+//' @export
 // [[Rcpp::export]]
 NumericVector atmos_WindSpeed2m(
     NumericVector atmos_windSpeed_m_s,

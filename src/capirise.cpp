@@ -1,7 +1,7 @@
 #include <Rcpp.h>
+#include "00utilis.h"
 using namespace Rcpp;
 
-NumericVector vecpow(NumericVector base, NumericVector exp);
 
 //' **capilarise**
 //' @name capirise

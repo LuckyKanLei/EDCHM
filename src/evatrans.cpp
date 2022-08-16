@@ -1,8 +1,7 @@
 #include <Rcpp.h>
+#include "00utilis.h"
 using namespace Rcpp;
 
-NumericVector vecpow(NumericVector base, NumericVector exp);
-NumericVector vecpow10(NumericVector exp);
 //' **potential evapotranspiration**
 //' @name evatransPotential
 //' @param time_step_h (1, 24 h) time step in hour

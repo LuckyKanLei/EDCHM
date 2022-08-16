@@ -1,8 +1,7 @@
 #include <Rcpp.h>
+#include "00utilis.h"
 using namespace Rcpp;
 
-NumericVector vecpow(NumericVector base, NumericVector exp);
-NumericVector vecpow10(NumericVector exp);
 //' **infiltration**
 //' @name infilt
 //' @param land_water_mm (mm/m2) water volum in `landLy`, different than `land_interceptWater_mm`

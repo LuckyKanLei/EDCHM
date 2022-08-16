@@ -24,17 +24,17 @@ namespace EDCHM {
         }
     }
 
-    inline NumericVector atmos_NettoRadiat(NumericVector time_dayOfYear_, NumericVector atmos_temperature_Cel, NumericVector atmos_temperatureMax_Cel, NumericVector atmos_temperatureMin_Cel, NumericVector atmos_relativeHumidity_1, NumericVector atmos_solarRadiat_MJ, NumericVector land_latitude_Degree, NumericVector land_elevation_m) {
-        typedef SEXP(*Ptr_atmos_NettoRadiat)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
-        static Ptr_atmos_NettoRadiat p_atmos_NettoRadiat = NULL;
-        if (p_atmos_NettoRadiat == NULL) {
-            validateSignature("NumericVector(*atmos_NettoRadiat)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-            p_atmos_NettoRadiat = (Ptr_atmos_NettoRadiat)R_GetCCallable("EDCHM", "_EDCHM_atmos_NettoRadiat");
+    inline NumericVector atmosSnow_ThresholdT(NumericVector atmos_precipitation_mm, NumericVector atmos_temperature_Cel, NumericVector param_atmos_thr_Ts) {
+        typedef SEXP(*Ptr_atmosSnow_ThresholdT)(SEXP,SEXP,SEXP);
+        static Ptr_atmosSnow_ThresholdT p_atmosSnow_ThresholdT = NULL;
+        if (p_atmosSnow_ThresholdT == NULL) {
+            validateSignature("NumericVector(*atmosSnow_ThresholdT)(NumericVector,NumericVector,NumericVector)");
+            p_atmosSnow_ThresholdT = (Ptr_atmosSnow_ThresholdT)R_GetCCallable("EDCHM", "_EDCHM_atmosSnow_ThresholdT");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_atmos_NettoRadiat(Shield<SEXP>(Rcpp::wrap(time_dayOfYear_)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_temperatureMax_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_temperatureMin_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_relativeHumidity_1)), Shield<SEXP>(Rcpp::wrap(atmos_solarRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(land_latitude_Degree)), Shield<SEXP>(Rcpp::wrap(land_elevation_m)));
+            rcpp_result_gen = p_atmosSnow_ThresholdT(Shield<SEXP>(Rcpp::wrap(atmos_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(param_atmos_thr_Ts)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -45,17 +45,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector atmos_SaturatVaporPress(NumericVector atmos_temperature_Cel) {
-        typedef SEXP(*Ptr_atmos_SaturatVaporPress)(SEXP);
-        static Ptr_atmos_SaturatVaporPress p_atmos_SaturatVaporPress = NULL;
-        if (p_atmos_SaturatVaporPress == NULL) {
-            validateSignature("NumericVector(*atmos_SaturatVaporPress)(NumericVector)");
-            p_atmos_SaturatVaporPress = (Ptr_atmos_SaturatVaporPress)R_GetCCallable("EDCHM", "_EDCHM_atmos_SaturatVaporPress");
+    inline NumericVector atmosSnow_UBC(NumericVector atmos_precipitation_mm, NumericVector atmos_temperature_Cel, NumericVector param_atmos_ubc_A0FORM) {
+        typedef SEXP(*Ptr_atmosSnow_UBC)(SEXP,SEXP,SEXP);
+        static Ptr_atmosSnow_UBC p_atmosSnow_UBC = NULL;
+        if (p_atmosSnow_UBC == NULL) {
+            validateSignature("NumericVector(*atmosSnow_UBC)(NumericVector,NumericVector,NumericVector)");
+            p_atmosSnow_UBC = (Ptr_atmosSnow_UBC)R_GetCCallable("EDCHM", "_EDCHM_atmosSnow_UBC");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_atmos_SaturatVaporPress(Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)));
+            rcpp_result_gen = p_atmosSnow_UBC(Shield<SEXP>(Rcpp::wrap(atmos_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(param_atmos_ubc_A0FORM)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -66,49 +66,7 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector atmos_VaporPress(NumericVector atmos_temperature_Cel, NumericVector atmos_relativeHumidity_1) {
-        typedef SEXP(*Ptr_atmos_VaporPress)(SEXP,SEXP);
-        static Ptr_atmos_VaporPress p_atmos_VaporPress = NULL;
-        if (p_atmos_VaporPress == NULL) {
-            validateSignature("NumericVector(*atmos_VaporPress)(NumericVector,NumericVector)");
-            p_atmos_VaporPress = (Ptr_atmos_VaporPress)R_GetCCallable("EDCHM", "_EDCHM_atmos_VaporPress");
-        }
-        RObject rcpp_result_gen;
-        {
-            RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_atmos_VaporPress(Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_relativeHumidity_1)));
-        }
-        if (rcpp_result_gen.inherits("interrupted-error"))
-            throw Rcpp::internal::InterruptedException();
-        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
-            throw Rcpp::LongjumpException(rcpp_result_gen);
-        if (rcpp_result_gen.inherits("try-error"))
-            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
-        return Rcpp::as<NumericVector >(rcpp_result_gen);
-    }
-
-    inline NumericVector atmos_WindSpeed2m(NumericVector atmos_windSpeed_m_s, NumericVector atmos_windMeasureHeight_m) {
-        typedef SEXP(*Ptr_atmos_WindSpeed2m)(SEXP,SEXP);
-        static Ptr_atmos_WindSpeed2m p_atmos_WindSpeed2m = NULL;
-        if (p_atmos_WindSpeed2m == NULL) {
-            validateSignature("NumericVector(*atmos_WindSpeed2m)(NumericVector,NumericVector)");
-            p_atmos_WindSpeed2m = (Ptr_atmos_WindSpeed2m)R_GetCCallable("EDCHM", "_EDCHM_atmos_WindSpeed2m");
-        }
-        RObject rcpp_result_gen;
-        {
-            RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_atmos_WindSpeed2m(Shield<SEXP>(Rcpp::wrap(atmos_windSpeed_m_s)), Shield<SEXP>(Rcpp::wrap(atmos_windMeasureHeight_m)));
-        }
-        if (rcpp_result_gen.inherits("interrupted-error"))
-            throw Rcpp::internal::InterruptedException();
-        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
-            throw Rcpp::LongjumpException(rcpp_result_gen);
-        if (rcpp_result_gen.inherits("try-error"))
-            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
-        return Rcpp::as<NumericVector >(rcpp_result_gen);
-    }
-
-    inline NumericVector baseflow_SupplyPow(NumericVector ground_water_mm, NumericVector capacity_mm, NumericVector param_baseflow_sup_k, NumericVector param_baseflow_sup_gamma) {
+    inline NumericVector baseflow_SupplyPow(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector param_baseflow_sup_k, NumericVector param_baseflow_sup_gamma) {
         typedef SEXP(*Ptr_baseflow_SupplyPow)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_baseflow_SupplyPow p_baseflow_SupplyPow = NULL;
         if (p_baseflow_SupplyPow == NULL) {
@@ -118,7 +76,7 @@ namespace EDCHM {
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_baseflow_SupplyPow(Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_baseflow_sup_k)), Shield<SEXP>(Rcpp::wrap(param_baseflow_sup_gamma)));
+            rcpp_result_gen = p_baseflow_SupplyPow(Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_baseflow_sup_k)), Shield<SEXP>(Rcpp::wrap(param_baseflow_sup_gamma)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

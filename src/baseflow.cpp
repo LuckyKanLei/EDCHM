@@ -8,20 +8,20 @@ using namespace Rcpp;
 //' **baseflow**
 //' @name baseflow
 //' @param ground_water_mm (mm/m2) water volum in `groundLy`
-//' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
+//' @param ground_capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
 //' @param param_baseflow_sup_k,param_baseflow_sup_gamma parameters for [baseflow_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector baseflow_SupplyPow(
     NumericVector ground_water_mm,
-    NumericVector capacity_mm,
+    NumericVector ground_capacity_mm,
     NumericVector param_baseflow_sup_k,
     NumericVector param_baseflow_sup_gamma
 )
 {
   NumericVector baseflow_, k_;
   
-  k_ = param_baseflow_sup_k * vecpow((ground_water_mm / capacity_mm), param_baseflow_sup_gamma);
+  k_ = param_baseflow_sup_k * vecpow((ground_water_mm / ground_capacity_mm), param_baseflow_sup_gamma);
   baseflow_ = k_ * ground_water_mm;
   
   return ifelse(baseflow_ > ground_water_mm, ground_water_mm, baseflow_) ;

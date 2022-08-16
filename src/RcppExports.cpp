@@ -13,28 +13,23 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// atmos_NettoRadiat
-NumericVector atmos_NettoRadiat(NumericVector time_dayOfYear_, NumericVector atmos_temperature_Cel, NumericVector atmos_temperatureMax_Cel, NumericVector atmos_temperatureMin_Cel, NumericVector atmos_relativeHumidity_1, NumericVector atmos_solarRadiat_MJ, NumericVector land_latitude_Degree, NumericVector land_elevation_m);
-static SEXP _EDCHM_atmos_NettoRadiat_try(SEXP time_dayOfYear_SEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_temperatureMax_CelSEXP, SEXP atmos_temperatureMin_CelSEXP, SEXP atmos_relativeHumidity_1SEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP) {
+// atmosSnow_ThresholdT
+NumericVector atmosSnow_ThresholdT(NumericVector atmos_precipitation_mm, NumericVector atmos_temperature_Cel, NumericVector param_atmos_thr_Ts);
+static SEXP _EDCHM_atmosSnow_ThresholdT_try(SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP param_atmos_thr_TsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type time_dayOfYear_(time_dayOfYear_SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type atmos_precipitation_mm(atmos_precipitation_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_temperatureMax_Cel(atmos_temperatureMax_CelSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_temperatureMin_Cel(atmos_temperatureMin_CelSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_relativeHumidity_1(atmos_relativeHumidity_1SEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_solarRadiat_MJ(atmos_solarRadiat_MJSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type land_latitude_Degree(land_latitude_DegreeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type land_elevation_m(land_elevation_mSEXP);
-    rcpp_result_gen = Rcpp::wrap(atmos_NettoRadiat(time_dayOfYear_, atmos_temperature_Cel, atmos_temperatureMax_Cel, atmos_temperatureMin_Cel, atmos_relativeHumidity_1, atmos_solarRadiat_MJ, land_latitude_Degree, land_elevation_m));
+    Rcpp::traits::input_parameter< NumericVector >::type param_atmos_thr_Ts(param_atmos_thr_TsSEXP);
+    rcpp_result_gen = Rcpp::wrap(atmosSnow_ThresholdT(atmos_precipitation_mm, atmos_temperature_Cel, param_atmos_thr_Ts));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_atmos_NettoRadiat(SEXP time_dayOfYear_SEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_temperatureMax_CelSEXP, SEXP atmos_temperatureMin_CelSEXP, SEXP atmos_relativeHumidity_1SEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP) {
+RcppExport SEXP _EDCHM_atmosSnow_ThresholdT(SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP param_atmos_thr_TsSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_atmos_NettoRadiat_try(time_dayOfYear_SEXP, atmos_temperature_CelSEXP, atmos_temperatureMax_CelSEXP, atmos_temperatureMin_CelSEXP, atmos_relativeHumidity_1SEXP, atmos_solarRadiat_MJSEXP, land_latitude_DegreeSEXP, land_elevation_mSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_atmosSnow_ThresholdT_try(atmos_precipitation_mmSEXP, atmos_temperature_CelSEXP, param_atmos_thr_TsSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -54,91 +49,23 @@ RcppExport SEXP _EDCHM_atmos_NettoRadiat(SEXP time_dayOfYear_SEXP, SEXP atmos_te
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// atmos_SaturatVaporPress
-NumericVector atmos_SaturatVaporPress(NumericVector atmos_temperature_Cel);
-static SEXP _EDCHM_atmos_SaturatVaporPress_try(SEXP atmos_temperature_CelSEXP) {
+// atmosSnow_UBC
+NumericVector atmosSnow_UBC(NumericVector atmos_precipitation_mm, NumericVector atmos_temperature_Cel, NumericVector param_atmos_ubc_A0FORM);
+static SEXP _EDCHM_atmosSnow_UBC_try(SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP param_atmos_ubc_A0FORMSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type atmos_precipitation_mm(atmos_precipitation_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
-    rcpp_result_gen = Rcpp::wrap(atmos_SaturatVaporPress(atmos_temperature_Cel));
+    Rcpp::traits::input_parameter< NumericVector >::type param_atmos_ubc_A0FORM(param_atmos_ubc_A0FORMSEXP);
+    rcpp_result_gen = Rcpp::wrap(atmosSnow_UBC(atmos_precipitation_mm, atmos_temperature_Cel, param_atmos_ubc_A0FORM));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_atmos_SaturatVaporPress(SEXP atmos_temperature_CelSEXP) {
+RcppExport SEXP _EDCHM_atmosSnow_UBC(SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP param_atmos_ubc_A0FORMSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_atmos_SaturatVaporPress_try(atmos_temperature_CelSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
-// atmos_VaporPress
-NumericVector atmos_VaporPress(NumericVector atmos_temperature_Cel, NumericVector atmos_relativeHumidity_1);
-static SEXP _EDCHM_atmos_VaporPress_try(SEXP atmos_temperature_CelSEXP, SEXP atmos_relativeHumidity_1SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_relativeHumidity_1(atmos_relativeHumidity_1SEXP);
-    rcpp_result_gen = Rcpp::wrap(atmos_VaporPress(atmos_temperature_Cel, atmos_relativeHumidity_1));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _EDCHM_atmos_VaporPress(SEXP atmos_temperature_CelSEXP, SEXP atmos_relativeHumidity_1SEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_atmos_VaporPress_try(atmos_temperature_CelSEXP, atmos_relativeHumidity_1SEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
-// atmos_WindSpeed2m
-NumericVector atmos_WindSpeed2m(NumericVector atmos_windSpeed_m_s, NumericVector atmos_windMeasureHeight_m);
-static SEXP _EDCHM_atmos_WindSpeed2m_try(SEXP atmos_windSpeed_m_sSEXP, SEXP atmos_windMeasureHeight_mSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_windSpeed_m_s(atmos_windSpeed_m_sSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_windMeasureHeight_m(atmos_windMeasureHeight_mSEXP);
-    rcpp_result_gen = Rcpp::wrap(atmos_WindSpeed2m(atmos_windSpeed_m_s, atmos_windMeasureHeight_m));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _EDCHM_atmos_WindSpeed2m(SEXP atmos_windSpeed_m_sSEXP, SEXP atmos_windMeasureHeight_mSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_atmos_WindSpeed2m_try(atmos_windSpeed_m_sSEXP, atmos_windMeasureHeight_mSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_atmosSnow_UBC_try(atmos_precipitation_mmSEXP, atmos_temperature_CelSEXP, param_atmos_ubc_A0FORMSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -159,23 +86,23 @@ RcppExport SEXP _EDCHM_atmos_WindSpeed2m(SEXP atmos_windSpeed_m_sSEXP, SEXP atmo
     return rcpp_result_gen;
 }
 // baseflow_SupplyPow
-NumericVector baseflow_SupplyPow(NumericVector ground_water_mm, NumericVector capacity_mm, NumericVector param_baseflow_sup_k, NumericVector param_baseflow_sup_gamma);
-static SEXP _EDCHM_baseflow_SupplyPow_try(SEXP ground_water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_baseflow_sup_kSEXP, SEXP param_baseflow_sup_gammaSEXP) {
+NumericVector baseflow_SupplyPow(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector param_baseflow_sup_k, NumericVector param_baseflow_sup_gamma);
+static SEXP _EDCHM_baseflow_SupplyPow_try(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP param_baseflow_sup_kSEXP, SEXP param_baseflow_sup_gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_capacity_mm(ground_capacity_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_baseflow_sup_k(param_baseflow_sup_kSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_baseflow_sup_gamma(param_baseflow_sup_gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(baseflow_SupplyPow(ground_water_mm, capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma));
+    rcpp_result_gen = Rcpp::wrap(baseflow_SupplyPow(ground_water_mm, ground_capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_baseflow_SupplyPow(SEXP ground_water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_baseflow_sup_kSEXP, SEXP param_baseflow_sup_gammaSEXP) {
+RcppExport SEXP _EDCHM_baseflow_SupplyPow(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP param_baseflow_sup_kSEXP, SEXP param_baseflow_sup_gammaSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_baseflow_SupplyPow_try(ground_water_mmSEXP, capacity_mmSEXP, param_baseflow_sup_kSEXP, param_baseflow_sup_gammaSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_baseflow_SupplyPow_try(ground_water_mmSEXP, ground_capacity_mmSEXP, param_baseflow_sup_kSEXP, param_baseflow_sup_gammaSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1423,10 +1350,8 @@ RcppExport SEXP _EDCHM_snowMelt_Factor(SEXP snow_ice_mmSEXP, SEXP param_snow_fac
 static int _EDCHM_RcppExport_validate(const char* sig) { 
     static std::set<std::string> signatures;
     if (signatures.empty()) {
-        signatures.insert("NumericVector(*atmos_NettoRadiat)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*atmos_SaturatVaporPress)(NumericVector)");
-        signatures.insert("NumericVector(*atmos_VaporPress)(NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*atmos_WindSpeed2m)(NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*atmosSnow_ThresholdT)(NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*atmosSnow_UBC)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_SupplyRatio)(NumericVector,NumericVector)");
         signatures.insert("NumericVector(*capirise_SupplyRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -1467,10 +1392,8 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
 
 // registerCCallable (register entry points for exported C++ functions)
 RcppExport SEXP _EDCHM_RcppExport_registerCCallable() { 
-    R_RegisterCCallable("EDCHM", "_EDCHM_atmos_NettoRadiat", (DL_FUNC)_EDCHM_atmos_NettoRadiat_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_atmos_SaturatVaporPress", (DL_FUNC)_EDCHM_atmos_SaturatVaporPress_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_atmos_VaporPress", (DL_FUNC)_EDCHM_atmos_VaporPress_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_atmos_WindSpeed2m", (DL_FUNC)_EDCHM_atmos_WindSpeed2m_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_atmosSnow_ThresholdT", (DL_FUNC)_EDCHM_atmosSnow_ThresholdT_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_atmosSnow_UBC", (DL_FUNC)_EDCHM_atmosSnow_UBC_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_SupplyPow", (DL_FUNC)_EDCHM_baseflow_SupplyPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_SupplyRatio", (DL_FUNC)_EDCHM_baseflow_SupplyRatio_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_capirise_SupplyRatio", (DL_FUNC)_EDCHM_capirise_SupplyRatio_try);
@@ -1510,10 +1433,8 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_EDCHM_atmos_NettoRadiat", (DL_FUNC) &_EDCHM_atmos_NettoRadiat, 8},
-    {"_EDCHM_atmos_SaturatVaporPress", (DL_FUNC) &_EDCHM_atmos_SaturatVaporPress, 1},
-    {"_EDCHM_atmos_VaporPress", (DL_FUNC) &_EDCHM_atmos_VaporPress, 2},
-    {"_EDCHM_atmos_WindSpeed2m", (DL_FUNC) &_EDCHM_atmos_WindSpeed2m, 2},
+    {"_EDCHM_atmosSnow_ThresholdT", (DL_FUNC) &_EDCHM_atmosSnow_ThresholdT, 3},
+    {"_EDCHM_atmosSnow_UBC", (DL_FUNC) &_EDCHM_atmosSnow_UBC, 3},
     {"_EDCHM_baseflow_SupplyPow", (DL_FUNC) &_EDCHM_baseflow_SupplyPow, 4},
     {"_EDCHM_baseflow_SupplyRatio", (DL_FUNC) &_EDCHM_baseflow_SupplyRatio, 2},
     {"_EDCHM_capirise_SupplyRatio", (DL_FUNC) &_EDCHM_capirise_SupplyRatio, 4},

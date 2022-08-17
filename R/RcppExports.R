@@ -71,13 +71,22 @@ capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm,
 }
 
 #' **confluence**
+#' @description Routing methods with 
+#' - `IUH`: IUH (Instant Unit Hydrograph) with one watercourse, 
+#' - `IUH2S`; IUH with tweo watersource, those have the different IUH-vector, 
 #' @name confluen
-#' @param confluen_inputWater_mm (mm/m2) input water volum in every routeline
-#' @param confluen_iuh_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
+#' @param confluen_inputWater_mm,land_runoff_mm,ground_baseflow_mm (mm/m2) input water volum in every routeline
+#' @param confluen_iuh_1,confluen_iuhLand_1,confluen_iuhGround_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 #' @return confluenced water (mm/m2)
 #' @export
 confluen_IUH <- function(confluen_inputWater_mm, confluen_iuh_1) {
     .Call(`_EDCHM_confluen_IUH`, confluen_inputWater_mm, confluen_iuh_1)
+}
+
+#' @rdname confluen
+#' @export
+confluen_IUH2S <- function(land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhGround_1) {
+    .Call(`_EDCHM_confluen_IUH2S`, land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhGround_1)
 }
 
 #' **potential evapotranspiration**

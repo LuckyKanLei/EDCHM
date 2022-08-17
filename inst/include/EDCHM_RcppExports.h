@@ -213,6 +213,27 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
+    inline NumericVector confluen_IUH2S(NumericVector land_runoff_mm, NumericVector ground_baseflow_mm, NumericVector confluen_iuhLand_1, NumericVector confluen_iuhGround_1) {
+        typedef SEXP(*Ptr_confluen_IUH2S)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_confluen_IUH2S p_confluen_IUH2S = NULL;
+        if (p_confluen_IUH2S == NULL) {
+            validateSignature("NumericVector(*confluen_IUH2S)(NumericVector,NumericVector,NumericVector,NumericVector)");
+            p_confluen_IUH2S = (Ptr_confluen_IUH2S)R_GetCCallable("EDCHM", "_EDCHM_confluen_IUH2S");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluen_IUH2S(Shield<SEXP>(Rcpp::wrap(land_runoff_mm)), Shield<SEXP>(Rcpp::wrap(ground_baseflow_mm)), Shield<SEXP>(Rcpp::wrap(confluen_iuhLand_1)), Shield<SEXP>(Rcpp::wrap(confluen_iuhGround_1)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
     inline NumericVector evatransPotential_TurcWendling(NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector time_step_h, NumericVector param_evatrans_tur_k) {
         typedef SEXP(*Ptr_evatransPotential_TurcWendling)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransPotential_TurcWendling p_evatransPotential_TurcWendling = NULL;

@@ -5,9 +5,12 @@ using namespace Rcpp;
 
 
 //' **confluence**
+//' @description Routing methods with 
+//' - `IUH`: IUH (Instant Unit Hydrograph) with one watercourse, 
+//' - `IUH2S`; IUH with tweo watersource, those have the different IUH-vector, 
 //' @name confluen
-//' @param confluen_inputWater_mm (mm/m2) input water volum in every routeline
-//' @param confluen_iuh_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
+//' @param confluen_inputWater_mm,land_runoff_mm,ground_baseflow_mm (mm/m2) input water volum in every routeline
+//' @param confluen_iuh_1,confluen_iuhLand_1,confluen_iuhGround_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 //' @return confluenced water (mm/m2)
 //' @export
 // [[Rcpp::export]]
@@ -31,5 +34,30 @@ NumericVector confluen_IUH(
   }
   
   return confluen_outputWater_mm;
+  
+}
+
+//' @rdname confluen
+//' @export
+// [[Rcpp::export]]
+NumericVector confluen_IUH2S(
+    NumericVector land_runoff_mm,
+    NumericVector ground_baseflow_mm, 
+    NumericVector confluen_iuhLand_1,
+    NumericVector confluen_iuhGround_1
+)
+{
+  NumericVector confluen_runoff_mm (land_runoff_mm.size()), confluen_baseflow_mm (ground_baseflow_mm.size());
+  confluen_runoff_mm = confluen_IUH(
+    land_runoff_mm, 
+    confluen_iuhLand_1
+  );
+  confluen_baseflow_mm = confluen_IUH(
+    ground_baseflow_mm, 
+    confluen_iuhGround_1
+  );
+  
+
+  return confluen_runoff_mm + confluen_baseflow_mm;
   
 }

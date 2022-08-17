@@ -1,4 +1,5 @@
 #' functions for **atmosphere**
+#' @description calculate some basic physical, meteorological variables
 #' @name atmos
 #' @param time_dayOfYear_ (1, 366) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
 #' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase

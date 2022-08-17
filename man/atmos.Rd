@@ -56,5 +56,5 @@ atmos_vaporPress_hPa	(hPa) actual vapour pressure, can be calculated by \code{\l
 atmos_WindSpeed2m_m_s (m/s) wind speed at 2 m above ground surface
 }
 \description{
-functions for \strong{atmosphere}
+calculate some basic physical, meteorological variables
 }

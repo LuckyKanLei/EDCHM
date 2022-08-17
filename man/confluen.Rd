@@ -3,18 +3,30 @@
 \name{confluen}
 \alias{confluen}
 \alias{confluen_IUH}
+\alias{confluen_IUH2S}
 \title{\strong{confluence}}
 \usage{
 confluen_IUH(confluen_inputWater_mm, confluen_iuh_1)
+
+confluen_IUH2S(
+  land_runoff_mm,
+  ground_baseflow_mm,
+  confluen_iuhLand_1,
+  confluen_iuhGround_1
+)
 }
 \arguments{
-\item{confluen_inputWater_mm}{(mm/m2) input water volum in every routeline}
+\item{confluen_inputWater_mm, land_runoff_mm, ground_baseflow_mm}{(mm/m2) input water volum in every routeline}
 
-\item{confluen_iuh_1}{(vector of num, sume() = 1) the ratio in every timestep, can be calculated by \code{\link[=confluenIUH_GR4J1]{confluenIUH_GR4J1()}}, \code{\link[=confluenIUH_GR4J2]{confluenIUH_GR4J2()}}}
+\item{confluen_iuh_1, confluen_iuhLand_1, confluen_iuhGround_1}{(vector of num, sume() = 1) the ratio in every timestep, can be calculated by \code{\link[=confluenIUH_GR4J1]{confluenIUH_GR4J1()}}, \code{\link[=confluenIUH_GR4J2]{confluenIUH_GR4J2()}}}
 }
 \value{
 confluenced water (mm/m2)
 }
 \description{
-\strong{confluence}
+Routing methods with
+\itemize{
+\item \code{IUH}: IUH (Instant Unit Hydrograph) with one watercourse,
+\item \code{IUH2S}; IUH with tweo watersource, those have the different IUH-vector,
+}
 }

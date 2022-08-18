@@ -39,19 +39,19 @@ evatransPotential_FAO56(
 
 \item{atmos_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}
 
-\item{time_step_h}{(1, 24 h) time step in hour}
+\item{time_step_h}{<1, 24> (h) time step in hour}
 
-\item{param_evatrans_tur_k}{parameters for \code{\link[=evatransPotential_TurcWendling]{evatransPotential_TurcWendling()}}}
+\item{param_evatrans_tur_k}{<0.6, 1> parameter for \code{\link[=evatransPotential_TurcWendling]{evatransPotential_TurcWendling()}}, higher value when closer to the sea}
 
-\item{time_dayOfYear_}{(1, 366) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
+\item{time_dayOfYear_}{<1, 366> the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
 
-\item{atmos_relativeHumidity_1}{(0, 1) relative humidity}
+\item{atmos_relativeHumidity_1}{<0, 1> relative humidity}
 
 \item{land_latitude_Degree}{(degree) average latitude}
 
 \item{land_elevation_m}{(m) average elevation}
 
-\item{land_albedo_1}{(0, 1) albedo of this region}
+\item{land_albedo_1}{<0, 1> albedo of the region}
 
 \item{atmos_vaporPress_hPa}{(hPa) actual vapour pressure, can be calculated by \code{\link[=atmos_VaporPress]{atmos_VaporPress()}}}
 

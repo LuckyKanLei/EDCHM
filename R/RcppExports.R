@@ -91,19 +91,19 @@ confluen_IUH2S <- function(land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_
 
 #' **potential evapotranspiration**
 #' @name evatransPotential
-#' @param time_step_h (1, 24 h) time step in hour
-#' @param time_dayOfYear_ (1, 366) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
+#' @param time_step_h <1, 24> (h) time step in hour
+#' @param time_dayOfYear_ <1, 366> the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
 #' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
 #' @param atmos_solarRadiat_MJ (MJ/m2/TS) the solar radiation that actually reaches the earths surface
 #' @param atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
 #' @param atmos_vaporPress_hPa (hPa) actual vapour pressure, can be calculated by [atmos_VaporPress()]
 #' @param atmos_saturatVaporPress_hPa (hPa) saturation vapour pressure at `atmos_temperature_Cel`, can be calculated by [atmos_SaturatVaporPress()]
 #' @param atmos_windSpeed2m_m_s (m/s) wind speed at 2 m above ground surface
-#' @param atmos_relativeHumidity_1 (0, 1) relative humidity
+#' @param atmos_relativeHumidity_1 <0, 1> relative humidity
 #' @param land_latitude_Degree (degree) average latitude
 #' @param land_elevation_m (m) average elevation
-#' @param land_albedo_1 (0, 1) albedo of this region
-#' @param param_evatrans_tur_k parameters for [evatransPotential_TurcWendling()]
+#' @param land_albedo_1 <0, 1> albedo of the region
+#' @param param_evatrans_tur_k <0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea
 #' @return potential evapotranspiration (mm/m2)
 #' @export
 evatransPotential_TurcWendling <- function(atmos_temperature_Cel, atmos_solarRadiat_MJ, time_step_h, param_evatrans_tur_k) {
@@ -127,7 +127,7 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 #' @param atmos_potentialEvatrans_mm (mm/m2) **potential / reference** evapotranspiration
 #' @param water_mm (mm/m2) water volum in `soilLy` or interceptof `landLy`
 #' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
-#' @param param_evatrans_fst_k parameters for [evatransActual_FestRatio()]
+#' @param param_evatrans_fst_k parameter for [evatransActual_FestRatio()]
 #' @return actuall evapotranspiration (mm/m2) in one storage: 
 #' - evaporation in interception (landLy)
 #' - transpiration in root
@@ -138,27 +138,47 @@ evatransActual_FestRatio <- function(atmos_potentialEvatrans_mm, water_mm, capac
 }
 
 #' @rdname evatransActual
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the actually ET is always consider as a part of potential ET:
+#' \mjsdeqn{E_a = f E_p}
+#' where
+#' - \mjseqn{E_a} is actually ET in (mm/m2/TS), `land_evatrans_mm` or `soil_evatrans_mm`
+#' - \mjseqn{E_q} is potential ET in (mm/m2/TS), `atmos_potentialEvatrans_mm`
+#' - \mjseqn{f} is estimated ratio.
+#' Then the different `evatransActual` methods will estimate the ratio \mjseqn{f}.
+#' @return actually ET in (mm/m2/TS), `land_evatrans_mm` or `soil_evatrans_mm`
+#' @details
+#' - `_SupplyRatio`: the water content (the ratio to the maximal capacity) 
+#' is considered as th main factors for the ratio \mjseqn{f}.
+#' \mjsdeqn{f = k  \frac{W}{C}}
+#' where
+#'   - \mjseqn{W} is water volume in (mm/m2/TS), `water_mm`, `land_interceptWater_mm`, `soil_water_mm`
+#'   - \mjseqn{C} is water capacity in (mm/m2), `capacity_mm`, `land_interceptCapacity_mm`, `soil_capacity_mm`
+#'   - \mjseqn{k} is `param_evatrans_sur_k`
+#' @param param_evatrans_sur_k <0.1, 1> parameter for [evatransActual_SupplyRatio()], ratio of potential ET, that is estimated as actually ET  
 #' @export
-evatransActual_Supply <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm) {
-    .Call(`_EDCHM_evatransActual_Supply`, atmos_potentialEvatrans_mm, water_mm, capacity_mm)
+evatransActual_SupplyRatio <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sur_k) {
+    .Call(`_EDCHM_evatransActual_SupplyRatio`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sur_k)
 }
 
 #' @rdname evatransActual
-#' @param param_evatrans_sup_k parameters for [evatransActual_SupplyRatio()]
+#' @details
+#' - `_SupplyPow`: the water content (the ratio to the maximal capacity) 
+#' is considered as th main factors for the ratio \mjseqn{f}.
+#' \mjsdeqn{f = k  \left(\frac{W}{C}\right)^\gamma}
+#' where
+#'   - \mjseqn{k} is `param_evatrans_sup_k`
+#'   - \mjseqn{\gamma} is `param_evatrans_sup_gamma`
+#' @param param_evatrans_sup_k <0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method
+#' @param param_evatrans_sup_gamma <-3, 5> parameter for [evatransActual_SupplyPow()], exponent of this method
 #' @export
-evatransActual_SupplyRatio <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k) {
-    .Call(`_EDCHM_evatransActual_SupplyRatio`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k)
+evatransActual_SupplyPow <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k, param_evatrans_sup_gamma) {
+    .Call(`_EDCHM_evatransActual_SupplyPow`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k, param_evatrans_sup_gamma)
 }
 
 #' @rdname evatransActual
-#' @param param_evatrans_pow_k,param_evatrans_pow_gamma parameters for [evatransActual_SupplyPow()]
-#' @export
-evatransActual_SupplyPow <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_pow_k, param_evatrans_pow_gamma) {
-    .Call(`_EDCHM_evatransActual_SupplyPow`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_pow_k, param_evatrans_pow_gamma)
-}
-
-#' @rdname evatransActual
-#' @param param_evatrans_vic_gamma parameters for [evatransActual_VIC()]
+#' @param param_evatrans_vic_gamma parameter for [evatransActual_VIC()]
 #' @export
 evatransActual_VIC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_vic_gamma) {
     .Call(`_EDCHM_evatransActual_VIC`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_vic_gamma)
@@ -171,21 +191,21 @@ evatransActual_GR4J <- function(atmos_potentialEvatrans_mm, capacity_mm, water_m
 }
 
 #' @rdname evatransActual
-#' @param param_infilt_ubc_P0EGEN parameters for [evatransActual_UBC()]
+#' @param param_infilt_ubc_P0EGEN parameter for [evatransActual_UBC()]
 #' @export
 evatransActual_UBC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN) {
     .Call(`_EDCHM_evatransActual_UBC`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN)
 }
 
 #' @rdname evatransActual
-#' @param param_evatrans_lia_gamma parameters for [evatransLand_Liang()]
+#' @param param_evatrans_lia_gamma parameter for [evatransLand_Liang()]
 #' @export
 evatransLand_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma) {
     .Call(`_EDCHM_evatransLand_Liang`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma)
 }
 
 #' @rdname evatransActual
-#' @param param_evatrans_lia_B parameters for [evatransSoil_Liang()]
+#' @param param_evatrans_lia_B parameter for [evatransSoil_Liang()]
 #' @export
 evatransSoil_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B) {
     .Call(`_EDCHM_evatransSoil_Liang`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B)

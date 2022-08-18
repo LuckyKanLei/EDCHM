@@ -533,60 +533,24 @@ RcppExport SEXP _EDCHM_evatransActual_FestRatio(SEXP atmos_potentialEvatrans_mmS
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// evatransActual_Supply
-NumericVector evatransActual_Supply(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm);
-static SEXP _EDCHM_evatransActual_Supply_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type water_mm(water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransActual_Supply(atmos_potentialEvatrans_mm, water_mm, capacity_mm));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _EDCHM_evatransActual_Supply(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_Supply_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
 // evatransActual_SupplyRatio
-NumericVector evatransActual_SupplyRatio(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_sup_k);
-static SEXP _EDCHM_evatransActual_SupplyRatio_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_sup_kSEXP) {
+NumericVector evatransActual_SupplyRatio(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_sur_k);
+static SEXP _EDCHM_evatransActual_SupplyRatio_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_sur_kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type water_mm(water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_sup_k(param_evatrans_sup_kSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransActual_SupplyRatio(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k));
+    Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_sur_k(param_evatrans_sur_kSEXP);
+    rcpp_result_gen = Rcpp::wrap(evatransActual_SupplyRatio(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sur_k));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransActual_SupplyRatio(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_sup_kSEXP) {
+RcppExport SEXP _EDCHM_evatransActual_SupplyRatio(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_sur_kSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_SupplyRatio_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_sup_kSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_SupplyRatio_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_sur_kSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -607,24 +571,24 @@ RcppExport SEXP _EDCHM_evatransActual_SupplyRatio(SEXP atmos_potentialEvatrans_m
     return rcpp_result_gen;
 }
 // evatransActual_SupplyPow
-NumericVector evatransActual_SupplyPow(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_pow_k, NumericVector param_evatrans_pow_gamma);
-static SEXP _EDCHM_evatransActual_SupplyPow_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_pow_kSEXP, SEXP param_evatrans_pow_gammaSEXP) {
+NumericVector evatransActual_SupplyPow(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_sup_k, NumericVector param_evatrans_sup_gamma);
+static SEXP _EDCHM_evatransActual_SupplyPow_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_sup_kSEXP, SEXP param_evatrans_sup_gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type water_mm(water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_pow_k(param_evatrans_pow_kSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_pow_gamma(param_evatrans_pow_gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransActual_SupplyPow(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_pow_k, param_evatrans_pow_gamma));
+    Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_sup_k(param_evatrans_sup_kSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_sup_gamma(param_evatrans_sup_gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(evatransActual_SupplyPow(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k, param_evatrans_sup_gamma));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransActual_SupplyPow(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_pow_kSEXP, SEXP param_evatrans_pow_gammaSEXP) {
+RcppExport SEXP _EDCHM_evatransActual_SupplyPow(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_sup_kSEXP, SEXP param_evatrans_sup_gammaSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_SupplyPow_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_pow_kSEXP, param_evatrans_pow_gammaSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_SupplyPow_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_sup_kSEXP, param_evatrans_sup_gammaSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1401,7 +1365,6 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*evatransPotential_Linacre)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_FestRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*evatransActual_Supply)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_SupplyRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_VIC)(NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -1444,7 +1407,6 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransPotential_Linacre", (DL_FUNC)_EDCHM_evatransPotential_Linacre_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransPotential_FAO56", (DL_FUNC)_EDCHM_evatransPotential_FAO56_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_FestRatio", (DL_FUNC)_EDCHM_evatransActual_FestRatio_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_Supply", (DL_FUNC)_EDCHM_evatransActual_Supply_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_SupplyRatio", (DL_FUNC)_EDCHM_evatransActual_SupplyRatio_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_SupplyPow", (DL_FUNC)_EDCHM_evatransActual_SupplyPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_VIC", (DL_FUNC)_EDCHM_evatransActual_VIC_try);
@@ -1486,7 +1448,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_evatransPotential_Linacre", (DL_FUNC) &_EDCHM_evatransPotential_Linacre, 6},
     {"_EDCHM_evatransPotential_FAO56", (DL_FUNC) &_EDCHM_evatransPotential_FAO56, 8},
     {"_EDCHM_evatransActual_FestRatio", (DL_FUNC) &_EDCHM_evatransActual_FestRatio, 4},
-    {"_EDCHM_evatransActual_Supply", (DL_FUNC) &_EDCHM_evatransActual_Supply, 3},
     {"_EDCHM_evatransActual_SupplyRatio", (DL_FUNC) &_EDCHM_evatransActual_SupplyRatio, 4},
     {"_EDCHM_evatransActual_SupplyPow", (DL_FUNC) &_EDCHM_evatransActual_SupplyPow, 5},
     {"_EDCHM_evatransActual_VIC", (DL_FUNC) &_EDCHM_evatransActual_VIC, 4},

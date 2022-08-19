@@ -124,30 +124,22 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 
 #' **actuall evapotranspiration**
 #' @name evatransActual
-#' @param atmos_potentialEvatrans_mm (mm/m2) **potential / reference** evapotranspiration
-#' @param water_mm (mm/m2) water volum in `soilLy` or interceptof `landLy`
-#' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
-#' @param param_evatrans_fst_k parameter for [evatransActual_FestRatio()]
-#' @return actuall evapotranspiration (mm/m2) in one storage: 
-#' - evaporation in interception (landLy)
-#' - transpiration in root
-#' - evaporation in soil (soilLy)
-#' @export
-evatransActual_FestRatio <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_fst_k) {
-    .Call(`_EDCHM_evatransActual_FestRatio`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_fst_k)
-}
-
-#' @rdname evatransActual
 #' @description
 #' \loadmathjax
 #' Under the concept of the conceptional HM, the actually ET is always consider as a part of potential ET:
 #' \mjsdeqn{E_a = f E_p}
 #' where
-#' - \mjseqn{E_a} is actually ET in (mm/m2/TS), `land_evatrans_mm` or `soil_evatrans_mm`
-#' - \mjseqn{E_q} is potential ET in (mm/m2/TS), `atmos_potentialEvatrans_mm`
+#' - \mjseqn{E_a} is `land_evatrans_mm` or `soil_evatrans_mm`
+#' - \mjseqn{E_q} is `atmos_potentialEvatrans_mm`
 #' - \mjseqn{f} is estimated ratio.
 #' Then the different `evatransActual` methods will estimate the ratio \mjseqn{f}.
-#' @return actually ET in (mm/m2/TS), `land_evatrans_mm` or `soil_evatrans_mm`
+#' @return actually ET in (mm/m2/TS)
+#' - evaporation in interception (landLy), `land_evatrans_mm`
+#' - transpiration in root
+#' - evaporation in soil (soilLy), `soil_evatrans_mm`
+#' @param atmos_potentialEvatrans_mm (mm/m2/TS) **potential / reference** evapotranspiration
+#' @param water_mm (mm/m2/TS) water volum in `soilLy` or interceptof `landLy`
+#' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
 #' @details
 #' - `_SupplyRatio`: the water content (the ratio to the maximal capacity) 
 #' is considered as th main factors for the ratio \mjseqn{f}.
@@ -175,6 +167,34 @@ evatransActual_SupplyRatio <- function(atmos_potentialEvatrans_mm, water_mm, cap
 #' @export
 evatransActual_SupplyPow <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k, param_evatrans_sup_gamma) {
     .Call(`_EDCHM_evatransActual_SupplyPow`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k, param_evatrans_sup_gamma)
+}
+
+#' @rdname evatransActual
+#' @details
+#' - `_AcceptPow`: only the potential ET 
+#' is considered as th main factors for the ratio \mjseqn{f}.
+#' \mjsdeqn{f = k}
+#' where
+#'   - \mjseqn{k} is `param_evatrans_acr_k`
+#' @param param_evatrans_acr_k <0.1, 1> parameter for [evatransActual_AcceptRatio()]
+#' @export
+evatransActual_AcceptRatio <- function(atmos_potentialEvatrans_mm, water_mm, param_evatrans_acr_k) {
+    .Call(`_EDCHM_evatransActual_AcceptRatio`, atmos_potentialEvatrans_mm, water_mm, param_evatrans_acr_k)
+}
+
+#' @rdname evatransActual
+#' @details
+#' - `_AcceptPow`: only the potential ET 
+#' is considered as th main factors for the ratio \mjseqn{f}.
+#' \mjsdeqn{E_a = k  E_p^\gamma}
+#' where
+#'   - \mjseqn{k} is `param_evatrans_acp_k`
+#'   - \mjseqn{\gamma} is `param_evatrans_acp_gamma`
+#' @param param_evatrans_acp_k <0.1, 1> parameter for [evatransActual_AcceptPow()], ratio of this method
+#' @param param_evatrans_acp_gamma <-3, 1> parameter for [evatransActual_AcceptPow()], exponent of this method
+#' @export
+evatransActual_AcceptPow <- function(atmos_potentialEvatrans_mm, water_mm, param_evatrans_acp_k, param_evatrans_acp_gamma) {
+    .Call(`_EDCHM_evatransActual_AcceptPow`, atmos_potentialEvatrans_mm, water_mm, param_evatrans_acp_k, param_evatrans_acp_gamma)
 }
 
 #' @rdname evatransActual

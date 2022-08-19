@@ -2,9 +2,10 @@
 % Please edit documentation in R/RcppExports.R
 \name{evatransActual}
 \alias{evatransActual}
-\alias{evatransActual_FestRatio}
 \alias{evatransActual_SupplyRatio}
 \alias{evatransActual_SupplyPow}
+\alias{evatransActual_AcceptRatio}
+\alias{evatransActual_AcceptPow}
 \alias{evatransActual_VIC}
 \alias{evatransActual_GR4J}
 \alias{evatransActual_UBC}
@@ -12,13 +13,6 @@
 \alias{evatransSoil_Liang}
 \title{\strong{actuall evapotranspiration}}
 \usage{
-evatransActual_FestRatio(
-  atmos_potentialEvatrans_mm,
-  water_mm,
-  capacity_mm,
-  param_evatrans_fst_k
-)
-
 evatransActual_SupplyRatio(
   atmos_potentialEvatrans_mm,
   water_mm,
@@ -32,6 +26,19 @@ evatransActual_SupplyPow(
   capacity_mm,
   param_evatrans_sup_k,
   param_evatrans_sup_gamma
+)
+
+evatransActual_AcceptRatio(
+  atmos_potentialEvatrans_mm,
+  water_mm,
+  param_evatrans_acr_k
+)
+
+evatransActual_AcceptPow(
+  atmos_potentialEvatrans_mm,
+  water_mm,
+  param_evatrans_acp_k,
+  param_evatrans_acp_gamma
 )
 
 evatransActual_VIC(
@@ -65,19 +72,23 @@ evatransSoil_Liang(
 )
 }
 \arguments{
-\item{atmos_potentialEvatrans_mm}{(mm/m2) \strong{potential / reference} evapotranspiration}
+\item{atmos_potentialEvatrans_mm}{(mm/m2/TS) \strong{potential / reference} evapotranspiration}
 
-\item{water_mm}{(mm/m2) water volum in \code{soilLy} or interceptof \code{landLy}}
+\item{water_mm}{(mm/m2/TS) water volum in \code{soilLy} or interceptof \code{landLy}}
 
 \item{capacity_mm}{(mm/m2) water storage capacity in \code{soilLy} or interceptof \code{landLy}}
-
-\item{param_evatrans_fst_k}{parameter for \code{\link[=evatransActual_FestRatio]{evatransActual_FestRatio()}}}
 
 \item{param_evatrans_sur_k}{<0.1, 1> parameter for \code{\link[=evatransActual_SupplyRatio]{evatransActual_SupplyRatio()}}, ratio of potential ET, that is estimated as actually ET}
 
 \item{param_evatrans_sup_k}{<0.1, 1> parameter for \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, ratio of this method}
 
 \item{param_evatrans_sup_gamma}{<-3, 5> parameter for \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, exponent of this method}
+
+\item{param_evatrans_acr_k}{<0.1, 1> parameter for \code{\link[=evatransActual_AcceptRatio]{evatransActual_AcceptRatio()}}}
+
+\item{param_evatrans_acp_k}{<0.1, 1> parameter for \code{\link[=evatransActual_AcceptPow]{evatransActual_AcceptPow()}}, ratio of this method}
+
+\item{param_evatrans_acp_gamma}{<-3, 1> parameter for \code{\link[=evatransActual_AcceptPow]{evatransActual_AcceptPow()}}, exponent of this method}
 
 \item{param_evatrans_vic_gamma}{parameter for \code{\link[=evatransActual_VIC]{evatransActual_VIC()}}}
 
@@ -88,14 +99,12 @@ evatransSoil_Liang(
 \item{param_evatrans_lia_B}{parameter for \code{\link[=evatransSoil_Liang]{evatransSoil_Liang()}}}
 }
 \value{
-actuall evapotranspiration (mm/m2) in one storage:
+actually ET in (mm/m2/TS)
 \itemize{
-\item evaporation in interception (landLy)
+\item evaporation in interception (landLy), \code{land_evatrans_mm}
 \item transpiration in root
-\item evaporation in soil (soilLy)
+\item evaporation in soil (soilLy), \code{soil_evatrans_mm}
 }
-
-actually ET in (mm/m2/TS), \code{land_evatrans_mm} or \code{soil_evatrans_mm}
 }
 \description{
 \loadmathjax
@@ -103,8 +112,8 @@ Under the concept of the conceptional HM, the actually ET is always consider as 
 \mjsdeqn{E_a = f E_p}
 where
 \itemize{
-\item \mjseqn{E_a} is actually ET in (mm/m2/TS), \code{land_evatrans_mm} or \code{soil_evatrans_mm}
-\item \mjseqn{E_q} is potential ET in (mm/m2/TS), \code{atmos_potentialEvatrans_mm}
+\item \mjseqn{E_a} is \code{land_evatrans_mm} or \code{soil_evatrans_mm}
+\item \mjseqn{E_q} is \code{atmos_potentialEvatrans_mm}
 \item \mjseqn{f} is estimated ratio.
 Then the different \code{evatransActual} methods will estimate the ratio \mjseqn{f}.
 }
@@ -130,6 +139,27 @@ where
 \itemize{
 \item \mjseqn{k} is \code{param_evatrans_sup_k}
 \item \mjseqn{\gamma} is \code{param_evatrans_sup_gamma}
+}
+}
+
+\itemize{
+\item \verb{_AcceptPow}: only the potential ET
+is considered as th main factors for the ratio \mjseqn{f}.
+\mjsdeqn{f = k}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_evatrans_acr_k}
+}
+}
+
+\itemize{
+\item \verb{_AcceptPow}: only the potential ET
+is considered as th main factors for the ratio \mjseqn{f}.
+\mjsdeqn{E_a = k  E_p^\gamma}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_evatrans_acp_k}
+\item \mjseqn{\gamma} is \code{param_evatrans_acp_gamma}
 }
 }
 }

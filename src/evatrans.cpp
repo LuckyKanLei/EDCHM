@@ -104,41 +104,22 @@ NumericVector evatransPotential_FAO56(
 
 //' **actuall evapotranspiration**
 //' @name evatransActual
-//' @param atmos_potentialEvatrans_mm (mm/m2) **potential / reference** evapotranspiration
-//' @param water_mm (mm/m2) water volum in `soilLy` or interceptof `landLy`
-//' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
-//' @param param_evatrans_fst_k parameter for [evatransActual_FestRatio()]
-//' @return actuall evapotranspiration (mm/m2) in one storage: 
-//' - evaporation in interception (landLy)
-//' - transpiration in root
-//' - evaporation in soil (soilLy)
-//' @export
-// [[Rcpp::export]]
-NumericVector evatransActual_FestRatio(
-    NumericVector atmos_potentialEvatrans_mm,
-    NumericVector water_mm,
-    NumericVector capacity_mm,
-    NumericVector param_evatrans_fst_k
-)
-{
-  NumericVector AET;
-  
-  AET = atmos_potentialEvatrans_mm * param_evatrans_fst_k;
-  
-  return ifelse(AET > water_mm, water_mm, AET);
-}
-
-//' @rdname evatransActual
 //' @description
 //' \loadmathjax
 //' Under the concept of the conceptional HM, the actually ET is always consider as a part of potential ET:
 //' \mjsdeqn{E_a = f E_p}
 //' where
-//' - \mjseqn{E_a} is actually ET in (mm/m2/TS), `land_evatrans_mm` or `soil_evatrans_mm`
-//' - \mjseqn{E_q} is potential ET in (mm/m2/TS), `atmos_potentialEvatrans_mm`
+//' - \mjseqn{E_a} is `land_evatrans_mm` or `soil_evatrans_mm`
+//' - \mjseqn{E_q} is `atmos_potentialEvatrans_mm`
 //' - \mjseqn{f} is estimated ratio.
 //' Then the different `evatransActual` methods will estimate the ratio \mjseqn{f}.
-//' @return actually ET in (mm/m2/TS), `land_evatrans_mm` or `soil_evatrans_mm`
+//' @return actually ET in (mm/m2/TS)
+//' - evaporation in interception (landLy), `land_evatrans_mm`
+//' - transpiration in root
+//' - evaporation in soil (soilLy), `soil_evatrans_mm`
+//' @param atmos_potentialEvatrans_mm (mm/m2/TS) **potential / reference** evapotranspiration
+//' @param water_mm (mm/m2/TS) water volum in `soilLy` or interceptof `landLy`
+//' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
 //' @details
 //' - `_SupplyRatio`: the water content (the ratio to the maximal capacity) 
 //' is considered as th main factors for the ratio \mjseqn{f}.
@@ -187,6 +168,55 @@ NumericVector evatransActual_SupplyPow(
   NumericVector AET, k_;
   
   k_ = param_evatrans_sup_k * vecpow((water_mm / capacity_mm), param_evatrans_sup_gamma);
+  AET = atmos_potentialEvatrans_mm * k_;
+  return ifelse(AET > water_mm, water_mm, AET);
+}
+
+//' @rdname evatransActual
+//' @details
+//' - `_AcceptPow`: only the potential ET 
+//' is considered as th main factors for the ratio \mjseqn{f}.
+//' \mjsdeqn{f = k}
+//' where
+//'   - \mjseqn{k} is `param_evatrans_acr_k`
+//' @param param_evatrans_acr_k <0.1, 1> parameter for [evatransActual_AcceptRatio()]
+//' @export
+// [[Rcpp::export]]
+NumericVector evatransActual_AcceptRatio(
+    NumericVector atmos_potentialEvatrans_mm,
+    NumericVector water_mm,
+    NumericVector param_evatrans_acr_k
+)
+{
+  NumericVector AET;
+  
+  AET = atmos_potentialEvatrans_mm * param_evatrans_acr_k;
+  
+  return ifelse(AET > water_mm, water_mm, AET);
+}
+
+//' @rdname evatransActual
+//' @details
+//' - `_AcceptPow`: only the potential ET 
+//' is considered as th main factors for the ratio \mjseqn{f}.
+//' \mjsdeqn{E_a = k  E_p^\gamma}
+//' where
+//'   - \mjseqn{k} is `param_evatrans_acp_k`
+//'   - \mjseqn{\gamma} is `param_evatrans_acp_gamma`
+//' @param param_evatrans_acp_k <0.1, 1> parameter for [evatransActual_AcceptPow()], ratio of this method
+//' @param param_evatrans_acp_gamma <-3, 1> parameter for [evatransActual_AcceptPow()], exponent of this method
+//' @export
+// [[Rcpp::export]]
+NumericVector evatransActual_AcceptPow(
+    NumericVector atmos_potentialEvatrans_mm,
+    NumericVector water_mm,
+    NumericVector param_evatrans_acp_k,
+    NumericVector param_evatrans_acp_gamma
+)
+{
+  NumericVector AET, k_;
+  
+  k_ = param_evatrans_acp_k * vecpow(atmos_potentialEvatrans_mm, param_evatrans_acp_gamma);
   AET = atmos_potentialEvatrans_mm * k_;
   return ifelse(AET > water_mm, water_mm, AET);
 }

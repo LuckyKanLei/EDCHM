@@ -5,6 +5,21 @@ using namespace Rcpp;
 
 //' **potential evapotranspiration**
 //' @name evatransPotential
+//' @description The concept potential ET estimate mainly the confluence from atmosphere, 
+//' when the water in the ET-area is always enough. 
+//' Actually we should also consider the charterers of the ET-area, there is free water area or vegetation or bar soil,
+//' But we may don't have so many information and effective method, in order to get the truly potential ET.
+//' So there is the simplified method: reference ET, it define the ET-area with some fest charterers, e.g. [evatransPotential_FAO56()].
+//' In this situation we should give some factor for different ET-area.
+//' @details
+//' - **_TurcWendling**: consider only the radiation and temperature as the main factors. 
+//' \mjsdeqn{E_p = \frac{(100 R_s + 3.875 t_h k)\cdot(T + 22)}{150 (T + 123)}}
+//' where
+//'   - \mjseqn{E_p} is potential ET, `atmos_potentialEvatrans_mm`
+//'   - \mjseqn{R_s} is solar radiation, `atmos_solarRadiat_MJ`
+//'   - \mjseqn{t_h} is time step in hour, `time_step_h`
+//'   - \mjseqn{T} is average air temperature, `atmos_temperature_Cel`
+//'   - \mjseqn{k} is `param_evatrans_tur_k`
 //' @param time_step_h <1, 24> (h) time step in hour
 //' @param time_dayOfYear_ <1, 366> the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
 //' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
@@ -32,6 +47,15 @@ NumericVector evatransPotential_TurcWendling(
 }
 
 //' @rdname evatransPotential
+//' @details
+//' - **_Linacre**: consider only the temperature as the main factors. 
+//' \mjsdeqn{E_p = \frac{\frac{100(0.75 - \alpha)(T + 0.006 z)}{100 - \phi} + 15(T - T_d)}{80 - T}}
+//' \mjsdeqn{T_d = T - 20 (1-H_R)}
+//' where
+//'   - \mjseqn{\alpha} is albedo, `land_albedo_1`
+//'   - \mjseqn{z} is elevation, `land_elevation_m`
+//'   - \mjseqn{T_d} is dewpoint temperature,
+//'   - \mjseqn{H_R} is relative humidity, `atmos_relativeHumidity_1`
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_Linacre(
@@ -47,6 +71,18 @@ NumericVector evatransPotential_Linacre(
 }
 
 //' @rdname evatransPotential
+//' @details
+//' - **_FAO56**: consider not only radiation and temperature but also other variable like wind speed
+//' as the main factors. 
+//' \mjsdeqn{E_p =\frac{0.408 \Delta\left(R_n - G\right)+\gamma \frac{900}{T+273} {u}_{2}\left({e}_{{s}}-{e}_{{a}}\right)}{\Delta+\gamma\left(1+0.34 {u}_{2}\right)}}
+//' where
+//'   - \mjseqn{\Delta} is slope vapour pressure curve (kPa °C-1)
+//'   - \mjseqn{R_n} is net radiation, `atmos_netRadiat_MJ`
+//'   - \mjseqn{G} is soil heat flux density
+//'   - \mjseqn{u_2} is wind speed at 2 m height, `atmos_windSpeed2m_m_s`
+//'   - \mjseqn{e_s} is saturation vapour pressure, `atmos_saturatVaporPress_hPa`
+//'   - \mjseqn{e_a} is actual vapour pressure, `atmos_vaporPress_hPa`
+//'   - \mjseqn{\gamma} is psychrometric constant
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_FAO56(
@@ -110,7 +146,7 @@ NumericVector evatransPotential_FAO56(
 //' \mjsdeqn{E_a = f E_p}
 //' where
 //' - \mjseqn{E_a} is `land_evatrans_mm` or `soil_evatrans_mm`
-//' - \mjseqn{E_q} is `atmos_potentialEvatrans_mm`
+//' - \mjseqn{E_p} is `atmos_potentialEvatrans_mm`
 //' - \mjseqn{f} is estimated ratio.
 //' Then the different `evatransActual` methods will estimate the ratio \mjseqn{f}.
 //' @return actually ET in (mm/m2/TS)
@@ -121,7 +157,7 @@ NumericVector evatransPotential_FAO56(
 //' @param water_mm (mm/m2/TS) water volum in `soilLy` or interceptof `landLy`
 //' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
 //' @details
-//' - `_SupplyRatio`: the water content (the ratio to the maximal capacity) 
+//' - **_SupplyRatio**: the water content (the ratio to the maximal capacity) 
 //' is considered as th main factors for the ratio \mjseqn{f}.
 //' \mjsdeqn{f = k  \frac{W}{C}}
 //' where
@@ -147,7 +183,7 @@ NumericVector evatransActual_SupplyRatio(
 
 //' @rdname evatransActual
 //' @details
-//' - `_SupplyPow`: the water content (the ratio to the maximal capacity) 
+//' - **_SupplyPow**: the water content (the ratio to the maximal capacity) 
 //' is considered as th main factors for the ratio \mjseqn{f}.
 //' \mjsdeqn{f = k  \left(\frac{W}{C}\right)^\gamma}
 //' where
@@ -174,7 +210,7 @@ NumericVector evatransActual_SupplyPow(
 
 //' @rdname evatransActual
 //' @details
-//' - `_AcceptPow`: only the potential ET 
+//' - **_AcceptPow**: only the potential ET 
 //' is considered as th main factors for the ratio \mjseqn{f}.
 //' \mjsdeqn{f = k}
 //' where
@@ -197,7 +233,7 @@ NumericVector evatransActual_AcceptRatio(
 
 //' @rdname evatransActual
 //' @details
-//' - `_AcceptPow`: only the potential ET 
+//' - **_AcceptPow**: only the potential ET 
 //' is considered as th main factors for the ratio \mjseqn{f}.
 //' \mjsdeqn{E_a = k  E_p^\gamma}
 //' where
@@ -224,7 +260,12 @@ NumericVector evatransActual_AcceptPow(
 
 
 //' @rdname evatransActual
-//' @param param_evatrans_vic_gamma parameter for [evatransActual_VIC()]
+//' @details
+//' - **_VIC**: is similar with [evatransActual_SupplyPow()], estimate the water content in the storage.
+//' \mjsdeqn{f = 1-\left(1-\frac{W}{C}\right)^{\gamma}}
+//' where
+//'   - \mjseqn{\gamma} is `param_evatrans_vic_gamma`
+//' @param param_evatrans_vic_gamma <0.2, 5> parameter for [evatransActual_VIC()]
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_VIC(
@@ -245,6 +286,11 @@ NumericVector evatransActual_VIC(
 
 
 //' @rdname evatransActual
+//' @details
+//' - **_GR4J**: is a little different than other method, it estimate not the ratio \mjseqn{f},
+//' rather dieectly a equation with potential ET and water content.
+//' And it need **no parameter**.
+//' \mjsdeqn{E_a = \frac{W\left(2-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}{1 + \left(1-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}}
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_GR4J(
@@ -262,14 +308,20 @@ NumericVector evatransActual_GR4J(
 }
 
 //' @rdname evatransActual
-//' @param param_infilt_ubc_P0EGEN parameter for [evatransActual_UBC()]
+//' @details
+//' - **_UBC**: estimate the water content in the storage. 
+//' (This is a little different than original, the parameter `P0AGEN` is replaced by \mjseqn{\frac{C}{\gamma}}.)
+//' \mjsdeqn{f = 10^{\gamma \frac{W-C}{C}}}
+//' where
+//'   - \mjseqn{\gamma} is `param_evatrans_ubc_gamma`
+//' @param param_evatrans_ubc_gamma <0.5, 2>parameter for [evatransActual_UBC()]
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_UBC(
     NumericVector atmos_potentialEvatrans_mm,
     NumericVector water_mm,
     NumericVector capacity_mm,
-    NumericVector param_infilt_ubc_P0EGEN
+    NumericVector param_evatrans_ubc_gamma
 )
 {
   NumericVector diff_mm, AET, k_;
@@ -277,13 +329,23 @@ NumericVector evatransActual_UBC(
   
   
   
-  k_ = vecpow10(- diff_mm / param_infilt_ubc_P0EGEN);
+  k_ = vecpow10(- diff_mm / param_evatrans_ubc_gamma);
   AET = atmos_potentialEvatrans_mm * k_;
   return ifelse(AET > water_mm, water_mm, AET);
 }
 
 //' @rdname evatransActual
-//' @param param_evatrans_lia_gamma parameter for [evatransLand_Liang()]
+//' 
+//' @details
+//' - **Land_Liang**: is also a similar method like [evatransActual_SupplyPow()], 
+//' but it will estimate the supply ability agian, whwn the water is still not enough.
+//' \mjsdeqn{E_l^* = \left(\frac{W}{C}\right)^\gamma E_p}
+//' \mjsdeqn{E_l = \min \left(1, \frac{W}{E_l^*}\right) E_l^*}
+//' where
+//'   - \mjseqn{E_l^*} is the first estimated actuall ET
+//'   - \mjseqn{E_l} is actuall ET from land, `land_evatrans_mm`
+//'   - \mjseqn{\gamma} is `param_evatrans_lia_gamma`
+//' @param param_evatrans_lia_gamma <0.4, 1> parameter for [evatransLand_Liang()]
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransLand_Liang(
@@ -305,7 +367,13 @@ NumericVector evatransLand_Liang(
 
 
 //' @rdname evatransActual
-//' @param param_evatrans_lia_B parameter for [evatransSoil_Liang()]
+//' @details
+//' - **Soil_Liang**: estimate the water content in the storage. 
+//' (This is a little different than original, the parameter `P0AGEN` is replaced by \mjseqn{\frac{C}{\gamma}}.)
+//' \mjsdeqn{f = \int_{0}^{A_{s}} d A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} d A }
+//' where
+//'   - \mjseqn{B} is `param_evatrans_lia_B`
+//' @param param_evatrans_lia_B <0.3, 2> parameter for [evatransSoil_Liang()]
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransSoil_Liang(

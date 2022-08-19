@@ -423,7 +423,7 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector evatransActual_UBC(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_infilt_ubc_P0EGEN) {
+    inline NumericVector evatransActual_UBC(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_ubc_gamma) {
         typedef SEXP(*Ptr_evatransActual_UBC)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransActual_UBC p_evatransActual_UBC = NULL;
         if (p_evatransActual_UBC == NULL) {
@@ -433,7 +433,7 @@ namespace EDCHM {
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_evatransActual_UBC(Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_infilt_ubc_P0EGEN)));
+            rcpp_result_gen = p_evatransActual_UBC(Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_evatrans_ubc_gamma)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

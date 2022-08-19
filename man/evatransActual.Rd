@@ -54,7 +54,7 @@ evatransActual_UBC(
   atmos_potentialEvatrans_mm,
   water_mm,
   capacity_mm,
-  param_infilt_ubc_P0EGEN
+  param_evatrans_ubc_gamma
 )
 
 evatransLand_Liang(
@@ -90,13 +90,13 @@ evatransSoil_Liang(
 
 \item{param_evatrans_acp_gamma}{<-3, 1> parameter for \code{\link[=evatransActual_AcceptPow]{evatransActual_AcceptPow()}}, exponent of this method}
 
-\item{param_evatrans_vic_gamma}{parameter for \code{\link[=evatransActual_VIC]{evatransActual_VIC()}}}
+\item{param_evatrans_vic_gamma}{<0.2, 5> parameter for \code{\link[=evatransActual_VIC]{evatransActual_VIC()}}}
 
-\item{param_infilt_ubc_P0EGEN}{parameter for \code{\link[=evatransActual_UBC]{evatransActual_UBC()}}}
+\item{param_evatrans_ubc_gamma}{<0.5, 2>parameter for \code{\link[=evatransActual_UBC]{evatransActual_UBC()}}}
 
-\item{param_evatrans_lia_gamma}{parameter for \code{\link[=evatransLand_Liang]{evatransLand_Liang()}}}
+\item{param_evatrans_lia_gamma}{<0.4, 1> parameter for \code{\link[=evatransLand_Liang]{evatransLand_Liang()}}}
 
-\item{param_evatrans_lia_B}{parameter for \code{\link[=evatransSoil_Liang]{evatransSoil_Liang()}}}
+\item{param_evatrans_lia_B}{<0.3, 2> parameter for \code{\link[=evatransSoil_Liang]{evatransSoil_Liang()}}}
 }
 \value{
 actually ET in (mm/m2/TS)
@@ -113,14 +113,14 @@ Under the concept of the conceptional HM, the actually ET is always consider as 
 where
 \itemize{
 \item \mjseqn{E_a} is \code{land_evatrans_mm} or \code{soil_evatrans_mm}
-\item \mjseqn{E_q} is \code{atmos_potentialEvatrans_mm}
+\item \mjseqn{E_p} is \code{atmos_potentialEvatrans_mm}
 \item \mjseqn{f} is estimated ratio.
 Then the different \code{evatransActual} methods will estimate the ratio \mjseqn{f}.
 }
 }
 \details{
 \itemize{
-\item \verb{_SupplyRatio}: the water content (the ratio to the maximal capacity)
+\item \strong{_SupplyRatio}: the water content (the ratio to the maximal capacity)
 is considered as th main factors for the ratio \mjseqn{f}.
 \mjsdeqn{f = k  \frac{W}{C}}
 where
@@ -132,7 +132,7 @@ where
 }
 
 \itemize{
-\item \verb{_SupplyPow}: the water content (the ratio to the maximal capacity)
+\item \strong{_SupplyPow}: the water content (the ratio to the maximal capacity)
 is considered as th main factors for the ratio \mjseqn{f}.
 \mjsdeqn{f = k  \left(\frac{W}{C}\right)^\gamma}
 where
@@ -143,7 +143,7 @@ where
 }
 
 \itemize{
-\item \verb{_AcceptPow}: only the potential ET
+\item \strong{_AcceptPow}: only the potential ET
 is considered as th main factors for the ratio \mjseqn{f}.
 \mjsdeqn{f = k}
 where
@@ -153,13 +153,62 @@ where
 }
 
 \itemize{
-\item \verb{_AcceptPow}: only the potential ET
+\item \strong{_AcceptPow}: only the potential ET
 is considered as th main factors for the ratio \mjseqn{f}.
 \mjsdeqn{E_a = k  E_p^\gamma}
 where
 \itemize{
 \item \mjseqn{k} is \code{param_evatrans_acp_k}
 \item \mjseqn{\gamma} is \code{param_evatrans_acp_gamma}
+}
+}
+
+\itemize{
+\item \strong{_VIC}: is similar with \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, estimate the water content in the storage.
+\mjsdeqn{f = 1-\left(1-\frac{W}{C}\right)^{\gamma}}
+where
+\itemize{
+\item \mjseqn{\gamma} is \code{param_evatrans_vic_gamma}
+}
+}
+
+\itemize{
+\item \strong{_GR4J}: is a little different than other method, it estimate not the ratio \mjseqn{f},
+rather dieectly a equation with potential ET and water content.
+And it need \strong{no parameter}.
+\mjsdeqn{E_a = \frac{W\left(2-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}{1 + \left(1-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}}
+}
+
+\itemize{
+\item \strong{_UBC}: estimate the water content in the storage.
+(This is a little different than original, the parameter \code{P0AGEN} is replaced by \mjseqn{\frac{C}{\gamma}}.)
+\mjsdeqn{f = 10^{\gamma \frac{W-C}{C}}}
+where
+\itemize{
+\item \mjseqn{\gamma} is \code{param_evatrans_ubc_gamma}
+}
+}
+
+\itemize{
+\item \strong{Land_Liang}: is also a similar method like \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}},
+but it will estimate the supply ability agian, whwn the water is still not enough.
+\mjsdeqn{E_l^* = \left(\frac{W}{C}\right)^\gamma E_p}
+\mjsdeqn{E_l = \min \left(1, \frac{W}{E_l^*}\right) E_l^*}
+where
+\itemize{
+\item \mjseqn{E_l^*} is the first estimated actuall ET
+\item \mjseqn{E_l} is actuall ET from land, \code{land_evatrans_mm}
+\item \mjseqn{\gamma} is \code{param_evatrans_lia_gamma}
+}
+}
+
+\itemize{
+\item \strong{Soil_Liang}: estimate the water content in the storage.
+(This is a little different than original, the parameter \code{P0AGEN} is replaced by \mjseqn{\frac{C}{\gamma}}.)
+\mjsdeqn{f = \int_{0}^{A_{s}} d A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} d A }
+where
+\itemize{
+\item \mjseqn{B} is \code{param_evatrans_lia_B}
 }
 }
 }

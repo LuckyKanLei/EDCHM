@@ -65,5 +65,53 @@ evatransPotential_FAO56(
 potential evapotranspiration (mm/m2)
 }
 \description{
-\strong{potential evapotranspiration}
+The concept potential ET estimate mainly the confluence from atmosphere,
+when the water in the ET-area is always enough.
+Actually we should also consider the charterers of the ET-area, there is free water area or vegetation or bar soil,
+But we may don't have so many information and effective method, in order to get the truly potential ET.
+So there is the simplified method: reference ET, it define the ET-area with some fest charterers, e.g. \code{\link[=evatransPotential_FAO56]{evatransPotential_FAO56()}}.
+In this situation we should give some factor for different ET-area.
+}
+\details{
+\itemize{
+\item \strong{_TurcWendling}: consider only the radiation and temperature as the main factors.
+\mjsdeqn{E_p = \frac{(100 R_s + 3.875 t_h k)\cdot(T + 22)}{150 (T + 123)}}
+where
+\itemize{
+\item \mjseqn{E_p} is potential ET, \code{atmos_potentialEvatrans_mm}
+\item \mjseqn{R_s} is solar radiation, \code{atmos_solarRadiat_MJ}
+\item \mjseqn{t_h} is time step in hour, \code{time_step_h}
+\item \mjseqn{T} is average air temperature, \code{atmos_temperature_Cel}
+\item \mjseqn{k} is \code{param_evatrans_tur_k}
+}
+}
+
+\itemize{
+\item \strong{_Linacre}: consider only the temperature as the main factors.
+\mjsdeqn{E_p = \frac{\frac{100(0.75 - \alpha)(T + 0.006 z)}{100 - \phi} + 15(T - T_d)}{80 - T}}
+\mjsdeqn{T_d = T - 20 (1-H_R)}
+where
+\itemize{
+\item \mjseqn{\alpha} is albedo, \code{land_albedo_1}
+\item \mjseqn{z} is elevation, \code{land_elevation_m}
+\item \mjseqn{T_d} is dewpoint temperature,
+\item \mjseqn{H_R} is relative humidity, \code{atmos_relativeHumidity_1}
+}
+}
+
+\itemize{
+\item \strong{_FAO56}: consider not only radiation and temperature but also other variable like wind speed
+as the main factors.
+\mjsdeqn{E_p =\frac{0.408 \Delta\left(R_n - G\right)+\gamma \frac{900}{T+273} {u}_{2}\left({e}_{{s}}-{e}_{{a}}\right)}{\Delta+\gamma\left(1+0.34 {u}_{2}\right)}}
+where
+\itemize{
+\item \mjseqn{\Delta} is slope vapour pressure curve (kPa °C-1)
+\item \mjseqn{R_n} is net radiation, \code{atmos_netRadiat_MJ}
+\item \mjseqn{G} is soil heat flux density
+\item \mjseqn{u_2} is wind speed at 2 m height, \code{atmos_windSpeed2m_m_s}
+\item \mjseqn{e_s} is saturation vapour pressure, \code{atmos_saturatVaporPress_hPa}
+\item \mjseqn{e_a} is actual vapour pressure, \code{atmos_vaporPress_hPa}
+\item \mjseqn{\gamma} is psychrometric constant
+}
+}
 }

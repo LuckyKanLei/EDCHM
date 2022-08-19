@@ -718,23 +718,23 @@ RcppExport SEXP _EDCHM_evatransActual_GR4J(SEXP atmos_potentialEvatrans_mmSEXP, 
     return rcpp_result_gen;
 }
 // evatransActual_UBC
-NumericVector evatransActual_UBC(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_infilt_ubc_P0EGEN);
-static SEXP _EDCHM_evatransActual_UBC_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_infilt_ubc_P0EGENSEXP) {
+NumericVector evatransActual_UBC(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_ubc_gamma);
+static SEXP _EDCHM_evatransActual_UBC_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_ubc_gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type water_mm(water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_infilt_ubc_P0EGEN(param_infilt_ubc_P0EGENSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransActual_UBC(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_infilt_ubc_P0EGEN));
+    Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_ubc_gamma(param_evatrans_ubc_gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(evatransActual_UBC(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_ubc_gamma));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransActual_UBC(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_infilt_ubc_P0EGENSEXP) {
+RcppExport SEXP _EDCHM_evatransActual_UBC(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_ubc_gammaSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_UBC_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_infilt_ubc_P0EGENSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_UBC_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_ubc_gammaSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {

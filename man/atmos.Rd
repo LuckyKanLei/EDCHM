@@ -26,7 +26,7 @@ atmos_VaporPress(atmos_temperature_Cel, atmos_relativeHumidity_1)
 atmos_WindSpeed2m(atmos_windSpeed_m_s, atmos_windMeasureHeight_m)
 }
 \arguments{
-\item{time_dayOfYear_}{(1, 366) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
+\item{time_dayOfYear_}{<1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
 
 \item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}
 

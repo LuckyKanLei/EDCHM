@@ -16,7 +16,7 @@ baseflow_SupplyPow(
 baseflow_SupplyRatio(ground_water_mm, param_baseflow_sur_k)
 }
 \arguments{
-\item{ground_water_mm}{(mm/m2) water volum in \code{groundLy}}
+\item{ground_water_mm}{(mm/m2) water volume in \code{groundLy}}
 
 \item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{soilLy} or interceptof \code{landLy}}
 

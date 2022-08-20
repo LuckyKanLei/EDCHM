@@ -11,6 +11,7 @@ using namespace Rcpp;
 //' But we may don't have so many information and effective method, in order to get the truly potential ET.
 //' So there is the simplified method: reference ET, it define the ET-area with some fest charterers, e.g. [evatransPotential_FAO56()].
 //' In this situation we should give some factor for different ET-area.
+//' @inheritParams all_vari
 //' @details
 //' - **_TurcWendling**: consider only the radiation and temperature as the main factors. 
 //' \mjsdeqn{E_p = \frac{(100 R_s + 3.875 t_h k)\cdot(T + 22)}{150 (T + 123)}}
@@ -20,18 +21,6 @@ using namespace Rcpp;
 //'   - \mjseqn{t_h} is time step in hour, `time_step_h`
 //'   - \mjseqn{T} is average air temperature, `atmos_temperature_Cel`
 //'   - \mjseqn{k} is `param_evatrans_tur_k`
-//' @param time_step_h <1, 24> (h) time step in hour
-//' @param time_dayOfYear_ <1, 366> the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
-//' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
-//' @param atmos_solarRadiat_MJ (MJ/m2/TS) the solar radiation that actually reaches the earths surface
-//' @param atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
-//' @param atmos_vaporPress_hPa (hPa) actual vapour pressure, can be calculated by [atmos_VaporPress()]
-//' @param atmos_saturatVaporPress_hPa (hPa) saturation vapour pressure at `atmos_temperature_Cel`, can be calculated by [atmos_SaturatVaporPress()]
-//' @param atmos_windSpeed2m_m_s (m/s) wind speed at 2 m above ground surface
-//' @param atmos_relativeHumidity_1 <0, 1> relative humidity
-//' @param land_latitude_Degree (degree) average latitude
-//' @param land_elevation_m (m) average elevation
-//' @param land_albedo_1 <0, 1> albedo of the region
 //' @param param_evatrans_tur_k <0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea
 //' @return potential evapotranspiration (mm/m2)
 //' @export
@@ -140,6 +129,7 @@ NumericVector evatransPotential_FAO56(
 
 //' **actuall evapotranspiration**
 //' @name evatransActual
+//' @inheritParams all_vari
 //' @description
 //' \loadmathjax
 //' Under the concept of the conceptional HM, the actually ET is always consider as a part of potential ET:
@@ -153,9 +143,6 @@ NumericVector evatransPotential_FAO56(
 //' - evaporation in interception (landLy), `land_evatrans_mm`
 //' - transpiration in root
 //' - evaporation in soil (soilLy), `soil_evatrans_mm`
-//' @param atmos_potentialEvatrans_mm (mm/m2/TS) **potential / reference** evapotranspiration
-//' @param water_mm (mm/m2/TS) water volum in `soilLy` or interceptof `landLy`
-//' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
 //' @details
 //' - **_SupplyRatio**: the water content (the ratio to the maximal capacity) 
 //' is considered as th main factors for the ratio \mjseqn{f}.

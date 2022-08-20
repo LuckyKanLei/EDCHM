@@ -7,8 +7,7 @@ using namespace Rcpp;
 
 //' **baseflow**
 //' @name baseflow
-//' @param ground_water_mm (mm/m2) water volum in `groundLy`
-//' @param ground_capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
+//' @inheritParams all_vari
 //' @param param_baseflow_sup_k,param_baseflow_sup_gamma parameters for [baseflow_SupplyPow()]
 //' @export
 // [[Rcpp::export]]

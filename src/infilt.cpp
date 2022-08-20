@@ -6,9 +6,7 @@ using namespace Rcpp;
 
 //' **infiltration**
 //' @name infilt
-//' @param land_water_mm (mm/m2) water volum in `landLy`, different than `land_interceptWater_mm`
-//' @param soil_water_mm (mm/m2) water volum in `soilLy`
-//' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
+//' @inheritParams all_vari
 //' @param param_infilt_sur_k parameters for [infilt_SupplyRatio()]
 //' @return infilt_mm (mm/m2) 
 //' @export

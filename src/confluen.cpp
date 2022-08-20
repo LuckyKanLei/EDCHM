@@ -8,9 +8,8 @@ using namespace Rcpp;
 //' @description Routing methods with 
 //' - `IUH`: IUH (Instant Unit Hydrograph) with one watercourse, 
 //' - `IUH2S`; IUH with tweo watersource, those have the different IUH-vector, 
+//' @inheritParams all_vari
 //' @name confluen
-//' @param confluen_inputWater_mm,land_runoff_mm,ground_baseflow_mm (mm/m2) input water volum in every routeline
-//' @param confluen_iuh_1,confluen_iuhLand_1,confluen_iuhGround_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 //' @return confluenced water (mm/m2)
 //' @export
 // [[Rcpp::export]]

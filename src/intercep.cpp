@@ -6,9 +6,7 @@ using namespace Rcpp;
 
 //' **interception** water from land go into the soil.
 //' @name intercep
-//' @param atmos_rain_mm (mm/m2) preciptation in rain form
-//' @param land_interceptWater_mm (mm/m2) initial water volum that can be intercepted
-//' @param land_interceptCapacity_mm (mm/m2) average intercept Capacity (maximal storage capacity)
+//' @inheritParams all_vari
 //' @return intercept_water_mm (mm/m2) intercepted water in this timestep
 //' @export
 // [[Rcpp::export]]

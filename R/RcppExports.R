@@ -3,8 +3,7 @@
 
 #' caculate **snowfall**
 #' @name atmosSnow
-#' @param atmos_precipitation_mm (mm/m2/TS) precipitaion volum
-#' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
+#' @inheritParams all_vari
 #' @param param_atmos_thr_Ts (Cel) parameters for [atmosSnow_ThresholdT()]
 #' @return atmos_snow_mm (mm/m2/TS) snowfall volum
 #' @export
@@ -21,8 +20,7 @@ atmosSnow_UBC <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_a
 
 #' **baseflow**
 #' @name baseflow
-#' @param ground_water_mm (mm/m2) water volum in `groundLy`
-#' @param ground_capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
+#' @inheritParams all_vari
 #' @param param_baseflow_sup_k,param_baseflow_sup_gamma parameters for [baseflow_SupplyPow()]
 #' @export
 baseflow_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma) {
@@ -39,9 +37,7 @@ baseflow_SupplyRatio <- function(ground_water_mm, param_baseflow_sur_k) {
 
 #' **capilarise**
 #' @name capirise
-#' @param ground_water_mm (mm/m2) water volum in `groundLy`
-#' @param soil_water_mm (mm/m2) water volum in `soilLy`
-#' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
+#' @inheritParams all_vari
 #' @param param_capirise_sur_k parameters for[capirise_SupplyRatio()]
 #' @return  capilarise (mm/m2)
 #' @export
@@ -74,9 +70,8 @@ capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm,
 #' @description Routing methods with 
 #' - `IUH`: IUH (Instant Unit Hydrograph) with one watercourse, 
 #' - `IUH2S`; IUH with tweo watersource, those have the different IUH-vector, 
+#' @inheritParams all_vari
 #' @name confluen
-#' @param confluen_inputWater_mm,land_runoff_mm,ground_baseflow_mm (mm/m2) input water volum in every routeline
-#' @param confluen_iuh_1,confluen_iuhLand_1,confluen_iuhGround_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 #' @return confluenced water (mm/m2)
 #' @export
 confluen_IUH <- function(confluen_inputWater_mm, confluen_iuh_1) {
@@ -97,6 +92,7 @@ confluen_IUH2S <- function(land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_
 #' But we may don't have so many information and effective method, in order to get the truly potential ET.
 #' So there is the simplified method: reference ET, it define the ET-area with some fest charterers, e.g. [evatransPotential_FAO56()].
 #' In this situation we should give some factor for different ET-area.
+#' @inheritParams all_vari
 #' @details
 #' - **_TurcWendling**: consider only the radiation and temperature as the main factors. 
 #' \mjsdeqn{E_p = \frac{(100 R_s + 3.875 t_h k)\cdot(T + 22)}{150 (T + 123)}}
@@ -106,18 +102,6 @@ confluen_IUH2S <- function(land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_
 #'   - \mjseqn{t_h} is time step in hour, `time_step_h`
 #'   - \mjseqn{T} is average air temperature, `atmos_temperature_Cel`
 #'   - \mjseqn{k} is `param_evatrans_tur_k`
-#' @param time_step_h <1, 24> (h) time step in hour
-#' @param time_dayOfYear_ <1, 366> the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
-#' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
-#' @param atmos_solarRadiat_MJ (MJ/m2/TS) the solar radiation that actually reaches the earths surface
-#' @param atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
-#' @param atmos_vaporPress_hPa (hPa) actual vapour pressure, can be calculated by [atmos_VaporPress()]
-#' @param atmos_saturatVaporPress_hPa (hPa) saturation vapour pressure at `atmos_temperature_Cel`, can be calculated by [atmos_SaturatVaporPress()]
-#' @param atmos_windSpeed2m_m_s (m/s) wind speed at 2 m above ground surface
-#' @param atmos_relativeHumidity_1 <0, 1> relative humidity
-#' @param land_latitude_Degree (degree) average latitude
-#' @param land_elevation_m (m) average elevation
-#' @param land_albedo_1 <0, 1> albedo of the region
 #' @param param_evatrans_tur_k <0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea
 #' @return potential evapotranspiration (mm/m2)
 #' @export
@@ -160,6 +144,7 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 
 #' **actuall evapotranspiration**
 #' @name evatransActual
+#' @inheritParams all_vari
 #' @description
 #' \loadmathjax
 #' Under the concept of the conceptional HM, the actually ET is always consider as a part of potential ET:
@@ -173,9 +158,6 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 #' - evaporation in interception (landLy), `land_evatrans_mm`
 #' - transpiration in root
 #' - evaporation in soil (soilLy), `soil_evatrans_mm`
-#' @param atmos_potentialEvatrans_mm (mm/m2/TS) **potential / reference** evapotranspiration
-#' @param water_mm (mm/m2/TS) water volum in `soilLy` or interceptof `landLy`
-#' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`
 #' @details
 #' - **_SupplyRatio**: the water content (the ratio to the maximal capacity) 
 #' is considered as th main factors for the ratio \mjseqn{f}.
@@ -301,9 +283,7 @@ evatransSoil_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 
 #' **infiltration**
 #' @name infilt
-#' @param land_water_mm (mm/m2) water volum in `landLy`, different than `land_interceptWater_mm`
-#' @param soil_water_mm (mm/m2) water volum in `soilLy`
-#' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
+#' @inheritParams all_vari
 #' @param param_infilt_sur_k parameters for [infilt_SupplyRatio()]
 #' @return infilt_mm (mm/m2) 
 #' @export
@@ -369,9 +349,7 @@ infilt_XAJ <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 
 #' **interception** water from land go into the soil.
 #' @name intercep
-#' @param atmos_rain_mm (mm/m2) preciptation in rain form
-#' @param land_interceptWater_mm (mm/m2) initial water volum that can be intercepted
-#' @param land_interceptCapacity_mm (mm/m2) average intercept Capacity (maximal storage capacity)
+#' @inheritParams all_vari
 #' @return intercept_water_mm (mm/m2) intercepted water in this timestep
 #' @export
 intercep_Full <- function(atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm) {
@@ -380,8 +358,7 @@ intercep_Full <- function(atmos_rain_mm, land_interceptWater_mm, land_interceptC
 
 #' **percolation**
 #' @name percola
-#' @param soil_water_mm (mm/m2) water volum in `soilLy`
-#' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
+#' @inheritParams all_vari
 #' @param param_percola_gr4_k parameters
 #' @return percola_mm (mm/m2)
 #' @export
@@ -405,9 +382,7 @@ percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup
 
 #' **snow**
 #' @name snow
-#' @param snow_ice_mm (mm/m2) water equivalent of **ice** in snowpack
-#' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
-#' @param atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
+#' @inheritParams all_vari
 #' @param param_snow_kus_fE,param_snow_kus_fT parameters for [snowMelt_Kustas()]
 #' @return snow_melt_mm (mm/m2) melted snow
 #' @export

@@ -65,9 +65,9 @@ infilt_UBC(
 infilt_XAJ(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
 }
 \arguments{
-\item{land_water_mm}{(mm/m2) water volum in \code{landLy}, different than \code{land_interceptWater_mm}}
+\item{land_water_mm}{(mm/m2) \strong{pounded water} volume in \code{landLy} and there is no limit, different than \code{land_interceptWater_mm}}
 
-\item{soil_water_mm}{(mm/m2) water volum in \code{soilLy}}
+\item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 

@@ -43,9 +43,9 @@ evatransPotential_FAO56(
 
 \item{param_evatrans_tur_k}{<0.6, 1> parameter for \code{\link[=evatransPotential_TurcWendling]{evatransPotential_TurcWendling()}}, higher value when closer to the sea}
 
-\item{time_dayOfYear_}{<1, 366> the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
+\item{time_dayOfYear_}{<1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
 
-\item{atmos_relativeHumidity_1}{<0, 1> relative humidity}
+\item{atmos_relativeHumidity_1}{(0, 1) relative humidity}
 
 \item{land_latitude_Degree}{(degree) average latitude}
 

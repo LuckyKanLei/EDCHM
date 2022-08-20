@@ -74,9 +74,9 @@ evatransSoil_Liang(
 \arguments{
 \item{atmos_potentialEvatrans_mm}{(mm/m2/TS) \strong{potential / reference} evapotranspiration}
 
-\item{water_mm}{(mm/m2/TS) water volum in \code{soilLy} or interceptof \code{landLy}}
+\item{water_mm}{(mm/m2/TS) water volume in \code{soilLy} or interceptof \code{landLy}, same as \code{land_interceptWater_mm} or \code{soil_water_mm}}
 
-\item{capacity_mm}{(mm/m2) water storage capacity in \code{soilLy} or interceptof \code{landLy}}
+\item{capacity_mm}{(mm/m2) water storage capacity in \code{soilLy} or interceptof \code{landLy}, same as \code{land_interceptCapacity_mm} or \code{soil_capacity_mm}}
 
 \item{param_evatrans_sur_k}{<0.1, 1> parameter for \code{\link[=evatransActual_SupplyRatio]{evatransActual_SupplyRatio()}}, ratio of potential ET, that is estimated as actually ET}
 

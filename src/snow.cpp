@@ -6,9 +6,7 @@ using namespace Rcpp;
 
 //' **snow**
 //' @name snow
-//' @param snow_ice_mm (mm/m2) water equivalent of **ice** in snowpack
-//' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
-//' @param atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
+//' @inheritParams all_vari
 //' @param param_snow_kus_fE,param_snow_kus_fT parameters for [snowMelt_Kustas()]
 //' @return snow_melt_mm (mm/m2) melted snow
 //' @export

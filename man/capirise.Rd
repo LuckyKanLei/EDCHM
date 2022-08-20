@@ -39,9 +39,9 @@ capirise_AcceptPow(
 )
 }
 \arguments{
-\item{ground_water_mm}{(mm/m2) water volum in \code{groundLy}}
+\item{ground_water_mm}{(mm/m2) water volume in \code{groundLy}}
 
-\item{soil_water_mm}{(mm/m2) water volum in \code{soilLy}}
+\item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 

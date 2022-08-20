@@ -8,8 +8,7 @@ NumericVector vecpow(NumericVector base, NumericVector exp);
 
 //' **percolation**
 //' @name percola
-//' @param soil_water_mm (mm/m2) water volum in `soilLy`
-//' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
+//' @inheritParams all_vari
 //' @param param_percola_gr4_k parameters
 //' @return percola_mm (mm/m2)
 //' @export

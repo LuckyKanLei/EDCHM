@@ -1,16 +1,7 @@
 #' functions for **atmosphere**
 #' @description calculate some basic physical, meteorological variables
 #' @name atmos
-#' @param time_dayOfYear_ (1, 366) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
-#' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
-#' @param atmos_temperatureMax_Cel (Cel) the maximal air temperature in the time phase
-#' @param atmos_temperatureMin_Cel (Cel) the minimal air temperature in the time phase
-#' @param atmos_relativeHumidity_1 (0, 1) relative humidity
-#' @param atmos_solarRadiat_MJ (MJ/m2/TS) the solar radiation that actually reaches the earths surface
-#' @param atmos_windSpeed_m_s (m/s) measured wind speed at z m above ground surface
-#' @param atmos_windMeasureHeight_m (m) height of measurement above ground surface
-#' @param land_latitude_Degree (degree) average latitude
-#' @param land_elevation_m (m) average elevation
+#' @inheritParams all_vari
 #' @return atmos_netRadiat_MJ (MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
 #' @export
 atmos_NettoRadiat <- function(

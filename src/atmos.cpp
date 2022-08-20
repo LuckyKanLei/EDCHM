@@ -6,8 +6,7 @@ using namespace Rcpp;
 
 //' caculate **snowfall**
 //' @name atmosSnow
-//' @param atmos_precipitation_mm (mm/m2/TS) precipitaion volum
-//' @param atmos_temperature_Cel (Cel) the average air temperature in the time phase
+//' @inheritParams all_vari
 //' @param param_atmos_thr_Ts (Cel) parameters for [atmosSnow_ThresholdT()]
 //' @return atmos_snow_mm (mm/m2/TS) snowfall volum
 //' @export

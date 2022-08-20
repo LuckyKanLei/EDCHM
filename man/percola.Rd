@@ -19,7 +19,7 @@ percola_SupplyPow(
 )
 }
 \arguments{
-\item{soil_water_mm}{(mm/m2) water volum in \code{soilLy}}
+\item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 

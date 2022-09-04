@@ -41,4 +41,7 @@
 #' abbreviation in threee small letters of the Method, and the Parameter name in the original.
 #' 
 #' e.g. **param_processName_mtd_k**
+#' @useDynLib EDCHM, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
+#' @import mathjaxr
 NULL

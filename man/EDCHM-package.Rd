@@ -4,6 +4,10 @@
 \name{EDCHM-package}
 \alias{EDCHM-package}
 \title{basic concept of EDCHM}
+\description{
+EDCHM is a conceptional hydrologist modelling framework,
+with that we can easy assembly a new hydrologist model with difficult process-method (modular).
+}
 \section{Layer and Boundary}{
 Under EDCHM the \strong{Layer} is defined layer with vertical space, in that have some common characters.
 And the Layer always have top and bottom two \strong{Boundary},

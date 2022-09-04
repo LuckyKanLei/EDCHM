@@ -2,6 +2,8 @@
 #' @docType package
 #' @name EDCHM-package
 #' @description 
+#' EDCHM is a conceptional hydrologist modelling framework, 
+#' with that we can easy assembly a new hydrologist model with difficult process-method (modular).
 #' # Layer and Boundary
 #' Under EDCHM the **Layer** is defined layer with vertical space, in that have some common characters.
 #' And the Layer always have top and bottom two **Boundary**, 

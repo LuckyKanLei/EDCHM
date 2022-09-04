@@ -379,6 +379,74 @@ RcppExport SEXP _EDCHM_confluen_IUH2S(SEXP land_runoff_mmSEXP, SEXP ground_basef
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// confluenIUH_GR4J1
+NumericVector confluenIUH_GR4J1(double confluen_resposeTime);
+static SEXP _EDCHM_confluenIUH_GR4J1_try(SEXP confluen_resposeTimeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< double >::type confluen_resposeTime(confluen_resposeTimeSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_GR4J1(confluen_resposeTime));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_confluenIUH_GR4J1(SEXP confluen_resposeTimeSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_GR4J1_try(confluen_resposeTimeSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// confluenIUH_GR4J2
+NumericVector confluenIUH_GR4J2(double confluen_resposeTime);
+static SEXP _EDCHM_confluenIUH_GR4J2_try(SEXP confluen_resposeTimeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< double >::type confluen_resposeTime(confluen_resposeTimeSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_GR4J2(confluen_resposeTime));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_confluenIUH_GR4J2(SEXP confluen_resposeTimeSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_GR4J2_try(confluen_resposeTimeSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // evatransPotential_TurcWendling
 NumericVector evatransPotential_TurcWendling(NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector time_step_h, NumericVector param_evatrans_tur_k);
 static SEXP _EDCHM_evatransPotential_TurcWendling_try(SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP time_step_hSEXP, SEXP param_evatrans_tur_kSEXP) {
@@ -1397,6 +1465,8 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*capirise_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*confluen_IUH)(NumericVector,NumericVector)");
         signatures.insert("NumericVector(*confluen_IUH2S)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*confluenIUH_GR4J1)(double)");
+        signatures.insert("NumericVector(*confluenIUH_GR4J2)(double)");
         signatures.insert("NumericVector(*evatransPotential_TurcWendling)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_Linacre)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -1440,6 +1510,8 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_capirise_AcceptPow", (DL_FUNC)_EDCHM_capirise_AcceptPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluen_IUH", (DL_FUNC)_EDCHM_confluen_IUH_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluen_IUH2S", (DL_FUNC)_EDCHM_confluen_IUH2S_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_GR4J1", (DL_FUNC)_EDCHM_confluenIUH_GR4J1_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_GR4J2", (DL_FUNC)_EDCHM_confluenIUH_GR4J2_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransPotential_TurcWendling", (DL_FUNC)_EDCHM_evatransPotential_TurcWendling_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransPotential_Linacre", (DL_FUNC)_EDCHM_evatransPotential_Linacre_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransPotential_FAO56", (DL_FUNC)_EDCHM_evatransPotential_FAO56_try);
@@ -1482,6 +1554,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_capirise_AcceptPow", (DL_FUNC) &_EDCHM_capirise_AcceptPow, 5},
     {"_EDCHM_confluen_IUH", (DL_FUNC) &_EDCHM_confluen_IUH, 2},
     {"_EDCHM_confluen_IUH2S", (DL_FUNC) &_EDCHM_confluen_IUH2S, 4},
+    {"_EDCHM_confluenIUH_GR4J1", (DL_FUNC) &_EDCHM_confluenIUH_GR4J1, 1},
+    {"_EDCHM_confluenIUH_GR4J2", (DL_FUNC) &_EDCHM_confluenIUH_GR4J2, 1},
     {"_EDCHM_evatransPotential_TurcWendling", (DL_FUNC) &_EDCHM_evatransPotential_TurcWendling, 4},
     {"_EDCHM_evatransPotential_Linacre", (DL_FUNC) &_EDCHM_evatransPotential_Linacre, 6},
     {"_EDCHM_evatransPotential_FAO56", (DL_FUNC) &_EDCHM_evatransPotential_FAO56, 8},

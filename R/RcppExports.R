@@ -84,6 +84,21 @@ confluen_IUH2S <- function(land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_
     .Call(`_EDCHM_confluen_IUH2S`, land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhGround_1)
 }
 
+#' create **IUH** (Instant Unit Graphy)
+#' @name confluenIUH
+#' @param confluen_resposeTime (TS) input water volum in every routeline
+#' @return IUH (list of num vector) 
+#' @export
+confluenIUH_GR4J1 <- function(confluen_resposeTime) {
+    .Call(`_EDCHM_confluenIUH_GR4J1`, confluen_resposeTime)
+}
+
+#' @rdname confluenIUH
+#' @export
+confluenIUH_GR4J2 <- function(confluen_resposeTime) {
+    .Call(`_EDCHM_confluenIUH_GR4J2`, confluen_resposeTime)
+}
+
 #' **potential evapotranspiration**
 #' @name evatransPotential
 #' @description The concept potential ET estimate mainly the confluence from atmosphere, 

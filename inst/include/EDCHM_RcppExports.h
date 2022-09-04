@@ -234,6 +234,48 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
+    inline NumericVector confluenIUH_GR4J1(double confluen_resposeTime) {
+        typedef SEXP(*Ptr_confluenIUH_GR4J1)(SEXP);
+        static Ptr_confluenIUH_GR4J1 p_confluenIUH_GR4J1 = NULL;
+        if (p_confluenIUH_GR4J1 == NULL) {
+            validateSignature("NumericVector(*confluenIUH_GR4J1)(double)");
+            p_confluenIUH_GR4J1 = (Ptr_confluenIUH_GR4J1)R_GetCCallable("EDCHM", "_EDCHM_confluenIUH_GR4J1");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluenIUH_GR4J1(Shield<SEXP>(Rcpp::wrap(confluen_resposeTime)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector confluenIUH_GR4J2(double confluen_resposeTime) {
+        typedef SEXP(*Ptr_confluenIUH_GR4J2)(SEXP);
+        static Ptr_confluenIUH_GR4J2 p_confluenIUH_GR4J2 = NULL;
+        if (p_confluenIUH_GR4J2 == NULL) {
+            validateSignature("NumericVector(*confluenIUH_GR4J2)(double)");
+            p_confluenIUH_GR4J2 = (Ptr_confluenIUH_GR4J2)R_GetCCallable("EDCHM", "_EDCHM_confluenIUH_GR4J2");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluenIUH_GR4J2(Shield<SEXP>(Rcpp::wrap(confluen_resposeTime)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
     inline NumericVector evatransPotential_TurcWendling(NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector time_step_h, NumericVector param_evatrans_tur_k) {
         typedef SEXP(*Ptr_evatransPotential_TurcWendling)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransPotential_TurcWendling p_evatransPotential_TurcWendling = NULL;

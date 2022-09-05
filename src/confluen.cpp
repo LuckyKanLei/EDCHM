@@ -64,18 +64,18 @@ NumericVector confluen_IUH2S(
 
 //' create **IUH** (Instant Unit Graphy)
 //' @name confluenIUH
-//' @param confluen_resposeTime (TS) input water volum in every routeline
+//' @param confluen_resposeTime_TS (TS) respose time in every routeline
 //' @return IUH (list of num vector) 
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_GR4J1(
-    double confluen_resposeTime
+    double confluen_resposeTime_TS
 )
 {
-  double t_max = ceil(confluen_resposeTime);
+  double t_max = ceil(confluen_resposeTime_TS);
   IntegerVector seq_t = seq(1, t_max);
   NumericVector seq_t2 = as<NumericVector>(seq_t);
-  NumericVector SH_1 = pow(( seq_t2/ confluen_resposeTime), 2.5);
+  NumericVector SH_1 = pow(( seq_t2/ confluen_resposeTime_TS), 2.5);
   SH_1(t_max - 1) = 1;
   SH_1[Range(1, t_max - 1)] = diff(SH_1);
   return SH_1;
@@ -87,18 +87,18 @@ NumericVector confluenIUH_GR4J1(
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_GR4J2(
-    double confluen_resposeTime
+    double confluen_resposeTime_TS
 )
 {
-  double t_max_1 = ceil(confluen_resposeTime);
-  double t_max_2 = ceil(2 * confluen_resposeTime);
+  double t_max_1 = ceil(confluen_resposeTime_TS);
+  double t_max_2 = ceil(2 * confluen_resposeTime_TS);
   IntegerVector seq_t1 = seq(1, t_max_1 - 1);
   NumericVector seq_t12 = as<NumericVector>(seq_t1);
   IntegerVector seq_t2 = seq(t_max_1, (t_max_2 - 1));
   NumericVector seq_t22 = as<NumericVector>(seq_t2);
   
-  NumericVector SH_2_1 = .5 * pow((seq_t12 / confluen_resposeTime),2.5);
-  NumericVector SH_2_2 = 1 - .5 * pow((2 - seq_t22 / confluen_resposeTime),2.5);
+  NumericVector SH_2_1 = .5 * pow((seq_t12 / confluen_resposeTime_TS),2.5);
+  NumericVector SH_2_2 = 1 - .5 * pow((2 - seq_t22 / confluen_resposeTime_TS),2.5);
   NumericVector SH_2(t_max_2, 1);
   SH_2[Range(0, t_max_1 - 2)] = SH_2_1;
   SH_2[Range(t_max_1 - 1, t_max_2 - 2)] = SH_2_2;

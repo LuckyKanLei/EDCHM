@@ -6,12 +6,12 @@
 \alias{confluenIUH_GR4J2}
 \title{create \strong{IUH} (Instant Unit Graphy)}
 \usage{
-confluenIUH_GR4J1(confluen_resposeTime)
+confluenIUH_GR4J1(confluen_resposeTime_TS)
 
-confluenIUH_GR4J2(confluen_resposeTime)
+confluenIUH_GR4J2(confluen_resposeTime_TS)
 }
 \arguments{
-\item{confluen_resposeTime}{(TS) input water volum in every routeline}
+\item{confluen_resposeTime_TS}{(TS) respose time in every routeline}
 }
 \value{
 IUH (list of num vector)

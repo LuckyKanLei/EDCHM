@@ -183,7 +183,7 @@ NumericVector infilt_UBC(
   soil_diff_mm = soil_capacity_mm - soil_water_mm;
   limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
   
-  k_ = (1 - land_impermeableFrac_1 * vecpow10(- soil_diff_mm / param_infilt_ubc_P0AGEN));
+  k_ = (1 - land_impermeableFrac_1 * vecpow10(- soil_diff_mm / (soil_capacity_mm * param_infilt_ubc_P0AGEN)));
   infilt_water_mm = land_water_mm * k_;
   
   return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);

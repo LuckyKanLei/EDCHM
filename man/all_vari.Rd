@@ -56,9 +56,11 @@
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{soilLy} or interceptof \code{landLy}}
+\item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}
 
-\item{ground_water_mm}{(mm/m2) water volume in \code{groundLy}}
+\item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{groundLy}}
+
+\item{ground_lateral_mm}{(mm/m2/TS) lateral flow, exchange with outside region. It can be \strong{NEGATIV}}
 
 \item{confluen_inputWater_mm, land_runoff_mm, ground_baseflow_mm}{(mm/m2) input water volum in every routeline}
 

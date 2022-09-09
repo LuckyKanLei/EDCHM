@@ -39,7 +39,7 @@ capirise_AcceptPow(
 )
 }
 \arguments{
-\item{ground_water_mm}{(mm/m2) water volume in \code{groundLy}}
+\item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}
 
 \item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}
 

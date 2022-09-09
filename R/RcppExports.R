@@ -21,6 +21,7 @@ atmosSnow_UBC <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_a
 #' **baseflow**
 #' @name baseflow
 #' @inheritParams all_vari
+#' @return baseflow (mm/m2) 
 #' @param param_baseflow_sup_k,param_baseflow_sup_gamma parameters for [baseflow_SupplyPow()]
 #' @export
 baseflow_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma) {
@@ -29,10 +30,15 @@ baseflow_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_basefl
 
 #' @rdname baseflow
 #' @param param_baseflow_sur_k parameters for [baseflow_SupplyRatio()]
-#' @return baseflow (mm/m2) 
 #' @export
 baseflow_SupplyRatio <- function(ground_water_mm, param_baseflow_sur_k) {
     .Call(`_EDCHM_baseflow_SupplyRatio`, ground_water_mm, param_baseflow_sur_k)
+}
+
+#' @rdname baseflow
+#' @export
+baseflow_GR4J <- function(ground_water_mm, ground_capacity_mm) {
+    .Call(`_EDCHM_baseflow_GR4J`, ground_water_mm, ground_capacity_mm)
 }
 
 #' **capilarise**
@@ -369,6 +375,30 @@ infilt_XAJ <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 #' @export
 intercep_Full <- function(atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm) {
     .Call(`_EDCHM_intercep_Full`, atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm)
+}
+
+#' **lateral flux**
+#' @name lateral
+#' @inheritParams all_vari
+#' @param param_lateral_gr4_k parameters
+#' @return lateral_mm (mm/m2)
+#' @export
+lateral_GR4J <- function(ground_water_mm, ground_capacity_mm, param_lateral_gr4_k) {
+    .Call(`_EDCHM_lateral_GR4J`, ground_water_mm, ground_capacity_mm, param_lateral_gr4_k)
+}
+
+#' @rdname lateral
+#' @param param_lateral_sur_k parameters for [lateral_SupplyRatio()]
+#' @export
+lateral_SupplyRatio <- function(ground_water_mm, ground_capacity_mm, param_lateral_sur_k) {
+    .Call(`_EDCHM_lateral_SupplyRatio`, ground_water_mm, ground_capacity_mm, param_lateral_sur_k)
+}
+
+#' @rdname lateral
+#' @param param_lateral_sup_k,param_lateral_sup_gamma parameters for [lateral_SupplyPow()]
+#' @export
+lateral_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_lateral_sup_k, param_lateral_sup_gamma) {
+    .Call(`_EDCHM_lateral_SupplyPow`, ground_water_mm, ground_capacity_mm, param_lateral_sup_k, param_lateral_sup_gamma)
 }
 
 #' **percolation**

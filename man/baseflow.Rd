@@ -4,6 +4,7 @@
 \alias{baseflow}
 \alias{baseflow_SupplyPow}
 \alias{baseflow_SupplyRatio}
+\alias{baseflow_GR4J}
 \title{\strong{baseflow}}
 \usage{
 baseflow_SupplyPow(
@@ -14,11 +15,13 @@ baseflow_SupplyPow(
 )
 
 baseflow_SupplyRatio(ground_water_mm, param_baseflow_sur_k)
+
+baseflow_GR4J(ground_water_mm, ground_capacity_mm)
 }
 \arguments{
-\item{ground_water_mm}{(mm/m2) water volume in \code{groundLy}}
+\item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}
 
-\item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{soilLy} or interceptof \code{landLy}}
+\item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{groundLy}}
 
 \item{param_baseflow_sup_k, param_baseflow_sup_gamma}{parameters for \code{\link[=baseflow_SupplyPow]{baseflow_SupplyPow()}}}
 

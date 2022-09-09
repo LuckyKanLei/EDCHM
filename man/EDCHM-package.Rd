@@ -58,3 +58,34 @@ abbreviation in threee small letters of the Method, and the Parameter name in th
 e.g. \strong{param_processName_mtd_k}
 }
 
+\section{Process}{
+There are now 10 Process available:
+\itemize{
+\item atmos: caculate the basic variable (data) in the \code{atmosLy}, sometimes the variable komm directly from the original data
+\itemize{
+\item atmosSnow: rain and snoe to split
+}
+\item evatrans: evapotranspiration
+\itemize{
+\item evatransPotential: potential ET calculate
+\item evatransActual: actual ET calculate
+\item evatransLand: actual ET in \code{landLy} (evaporation from interception)
+\item evatransSoil: actual ET in \code{soilLy} (transpiration from root zone + evaporation from top soil)
+}
+\item snow: snow
+\itemize{
+\item snowMelt:
+}
+\item intercep: interception
+\item infilt: infiltration \code{landLy} to \code{soilLy}
+\item capirise: capital rise, \code{groundLy} to \code{soilLy}
+\item percola: percolation, \code{soilLy} to \code{groundLy}
+\item baseflow: interception, \code{groundLy}
+\item lateral: lateral flow, exchange with outside region, \code{groundLy}
+\item confluen: confluence to river
+\itemize{
+\item confluenIUH: IUH to calculate
+}
+}
+}
+

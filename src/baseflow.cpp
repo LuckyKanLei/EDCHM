@@ -8,6 +8,7 @@ using namespace Rcpp;
 //' **baseflow**
 //' @name baseflow
 //' @inheritParams all_vari
+//' @return baseflow (mm/m2) 
 //' @param param_baseflow_sup_k,param_baseflow_sup_gamma parameters for [baseflow_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
@@ -28,7 +29,6 @@ NumericVector baseflow_SupplyPow(
 
 //' @rdname baseflow
 //' @param param_baseflow_sur_k parameters for [baseflow_SupplyRatio()]
-//' @return baseflow (mm/m2) 
 //' @export
 // [[Rcpp::export]]
 NumericVector baseflow_SupplyRatio(
@@ -39,4 +39,21 @@ NumericVector baseflow_SupplyRatio(
   
   return param_baseflow_sur_k * ground_water_mm;
   
+}
+
+
+//' @rdname baseflow
+//' @export
+// [[Rcpp::export]]
+NumericVector baseflow_GR4J(
+    NumericVector ground_water_mm,
+    NumericVector ground_capacity_mm
+)
+{
+  NumericVector baseflow_, k_;
+  
+  k_ = 1 - pow((1 + pow(ground_water_mm / ground_capacity_mm, 4)), -0.25);
+  baseflow_ = k_ * ground_water_mm;
+  
+  return ifelse(baseflow_ > ground_water_mm, ground_water_mm, baseflow_) ;
 }

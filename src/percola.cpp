@@ -4,7 +4,6 @@ using namespace Rcpp;
 // [[Rcpp::interfaces(r, cpp)]]
 
 
-NumericVector vecpow(NumericVector base, NumericVector exp);
 
 //' **percolation**
 //' @name percola

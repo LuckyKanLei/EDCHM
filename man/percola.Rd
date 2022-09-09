@@ -2,12 +2,15 @@
 % Please edit documentation in R/RcppExports.R
 \name{percola}
 \alias{percola}
+\alias{percola_GR4Jfix}
 \alias{percola_GR4J}
 \alias{percola_SupplyRatio}
 \alias{percola_SupplyPow}
 \title{\strong{percolation}}
 \usage{
-percola_GR4J(soil_water_mm, soil_capacity_mm, param_percola_gr4_k)
+percola_GR4Jfix(soil_water_mm, soil_capacity_mm, param_percola_grf_k)
+
+percola_GR4J(soil_water_mm, soil_capacity_mm)
 
 percola_SupplyRatio(soil_water_mm, param_percola_sur_k)
 
@@ -23,7 +26,7 @@ percola_SupplyPow(
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{param_percola_gr4_k}{parameters}
+\item{param_percola_grf_k}{parameters}
 
 \item{param_percola_sur_k}{parameters for \code{\link[=percola_SupplyRatio]{percola_SupplyRatio()}}}
 

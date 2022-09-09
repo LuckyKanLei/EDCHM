@@ -3,11 +3,19 @@
 \name{lateral}
 \alias{lateral}
 \alias{lateral_GR4J}
+\alias{lateral_GR4Jfix}
 \alias{lateral_SupplyRatio}
 \alias{lateral_SupplyPow}
 \title{\strong{lateral flux}}
 \usage{
-lateral_GR4J(ground_water_mm, ground_capacity_mm, param_lateral_gr4_k)
+lateral_GR4J(ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm)
+
+lateral_GR4Jfix(
+  ground_water_mm,
+  ground_capacity_mm,
+  ground_lateralPotential_mm,
+  param_lateral_grf_gamma
+)
 
 lateral_SupplyRatio(ground_water_mm, ground_capacity_mm, param_lateral_sur_k)
 
@@ -23,7 +31,9 @@ lateral_SupplyPow(
 
 \item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{groundLy}}
 
-\item{param_lateral_gr4_k}{parameters}
+\item{ground_lateralPotential_mm}{parameters}
+
+\item{param_lateral_grf_gamma}{parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
 
 \item{param_lateral_sur_k}{parameters for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
 

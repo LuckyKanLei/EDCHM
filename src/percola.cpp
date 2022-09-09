@@ -1,6 +1,4 @@
-#include <Rcpp.h>
 #include "00utilis.h"
-using namespace Rcpp;
 // [[Rcpp::interfaces(r, cpp)]]
 
 
@@ -8,17 +6,29 @@ using namespace Rcpp;
 //' **percolation**
 //' @name percola
 //' @inheritParams all_vari
-//' @param param_percola_gr4_k parameters
+//' @param param_percola_grf_k parameters
 //' @return percola_mm (mm/m2)
+//' @export
+// [[Rcpp::export]]
+NumericVector percola_GR4Jfix(
+    NumericVector soil_water_mm,
+    NumericVector soil_capacity_mm,
+    NumericVector param_percola_grf_k
+) 
+{
+  return soil_water_mm * (1 - pow((1 + pow(param_percola_grf_k * soil_water_mm / soil_capacity_mm, 4)), -0.25));
+}
+
+
+//' @rdname percola
 //' @export
 // [[Rcpp::export]]
 NumericVector percola_GR4J(
     NumericVector soil_water_mm,
-    NumericVector soil_capacity_mm,
-    NumericVector param_percola_gr4_k
+    NumericVector soil_capacity_mm
 ) 
 {
-  return soil_water_mm * (1 - pow((1 + pow(param_percola_gr4_k * soil_water_mm / soil_capacity_mm, 4)), -0.25));
+  return soil_water_mm * (1 - pow((1 + pow(4.0/9.0 * soil_water_mm / soil_capacity_mm, 4)), -0.25));
 }
 
 //' @rdname percola

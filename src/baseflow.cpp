@@ -1,6 +1,4 @@
-#include <Rcpp.h>
 #include "00utilis.h"
-using namespace Rcpp;
 // [[Rcpp::interfaces(r, cpp)]]
 
 
@@ -53,6 +51,24 @@ NumericVector baseflow_GR4J(
   NumericVector baseflow_, k_;
   
   k_ = 1 - pow((1 + pow(ground_water_mm / ground_capacity_mm, 4)), -0.25);
+  baseflow_ = k_ * ground_water_mm;
+  
+  return ifelse(baseflow_ > ground_water_mm, ground_water_mm, baseflow_) ;
+}
+
+//' @rdname baseflow
+//' @param param_baseflow_grf_gamma parameters for [baseflow_GR4Jfix()]
+//' @export
+// [[Rcpp::export]]
+NumericVector baseflow_GR4Jfix(
+    NumericVector ground_water_mm,
+    NumericVector ground_capacity_mm,
+    NumericVector param_baseflow_grf_gamma
+)
+{
+  NumericVector baseflow_, k_;
+  
+  k_ = 1 - vecpow((1 + vecpow(ground_water_mm / ground_capacity_mm, param_baseflow_grf_gamma)), -1.0 / param_baseflow_grf_gamma);
   baseflow_ = k_ * ground_water_mm;
   
   return ifelse(baseflow_ > ground_water_mm, ground_water_mm, baseflow_) ;

@@ -41,6 +41,13 @@ baseflow_GR4J <- function(ground_water_mm, ground_capacity_mm) {
     .Call(`_EDCHM_baseflow_GR4J`, ground_water_mm, ground_capacity_mm)
 }
 
+#' @rdname baseflow
+#' @param param_baseflow_grf_gamma parameters for [baseflow_GR4Jfix()]
+#' @export
+baseflow_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, param_baseflow_grf_gamma) {
+    .Call(`_EDCHM_baseflow_GR4Jfix`, ground_water_mm, ground_capacity_mm, param_baseflow_grf_gamma)
+}
+
 #' **capilarise**
 #' @name capirise
 #' @inheritParams all_vari
@@ -380,11 +387,18 @@ intercep_Full <- function(atmos_rain_mm, land_interceptWater_mm, land_interceptC
 #' **lateral flux**
 #' @name lateral
 #' @inheritParams all_vari
-#' @param param_lateral_gr4_k parameters
+#' @param ground_lateralPotential_mm parameters
 #' @return lateral_mm (mm/m2)
 #' @export
-lateral_GR4J <- function(ground_water_mm, ground_capacity_mm, param_lateral_gr4_k) {
-    .Call(`_EDCHM_lateral_GR4J`, ground_water_mm, ground_capacity_mm, param_lateral_gr4_k)
+lateral_GR4J <- function(ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm) {
+    .Call(`_EDCHM_lateral_GR4J`, ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm)
+}
+
+#' @rdname lateral
+#' @param param_lateral_grf_gamma parameters for [lateral_SupplyPow()]
+#' @export
+lateral_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm, param_lateral_grf_gamma) {
+    .Call(`_EDCHM_lateral_GR4Jfix`, ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm, param_lateral_grf_gamma)
 }
 
 #' @rdname lateral
@@ -404,11 +418,17 @@ lateral_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_lateral
 #' **percolation**
 #' @name percola
 #' @inheritParams all_vari
-#' @param param_percola_gr4_k parameters
+#' @param param_percola_grf_k parameters
 #' @return percola_mm (mm/m2)
 #' @export
-percola_GR4J <- function(soil_water_mm, soil_capacity_mm, param_percola_gr4_k) {
-    .Call(`_EDCHM_percola_GR4J`, soil_water_mm, soil_capacity_mm, param_percola_gr4_k)
+percola_GR4Jfix <- function(soil_water_mm, soil_capacity_mm, param_percola_grf_k) {
+    .Call(`_EDCHM_percola_GR4Jfix`, soil_water_mm, soil_capacity_mm, param_percola_grf_k)
+}
+
+#' @rdname percola
+#' @export
+percola_GR4J <- function(soil_water_mm, soil_capacity_mm) {
+    .Call(`_EDCHM_percola_GR4J`, soil_water_mm, soil_capacity_mm)
 }
 
 #' @rdname percola

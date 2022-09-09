@@ -1,6 +1,4 @@
-#include <Rcpp.h>
-
-using namespace Rcpp;  
+#include "00utilis.h"
 
 NumericVector vecpow(NumericVector base, NumericVector exp) {
   NumericVector out(base.size());

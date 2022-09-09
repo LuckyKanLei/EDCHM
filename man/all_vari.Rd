@@ -62,6 +62,8 @@
 
 \item{ground_lateral_mm}{(mm/m2/TS) lateral flow, exchange with outside region. It can be \strong{NEGATIV}}
 
+\item{ground_lateralPotential_mm}{(mm/m2/TS) potential lateral flow, that will as parameter evaluated}
+
 \item{confluen_inputWater_mm, land_runoff_mm, ground_baseflow_mm}{(mm/m2) input water volum in every routeline}
 
 \item{confluen_iuh_1, confluen_iuhLand_1, confluen_iuhGround_1}{(vector of num, sume() = 1) the ratio in every timestep, can be calculated by \code{\link[=confluenIUH_GR4J1]{confluenIUH_GR4J1()}}, \code{\link[=confluenIUH_GR4J2]{confluenIUH_GR4J2()}}}

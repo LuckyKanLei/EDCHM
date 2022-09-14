@@ -62,18 +62,18 @@ NumericVector confluen_IUH2S(
 
 //' create **IUH** (Instant Unit Graphy)
 //' @name confluenIUH
-//' @param confluen_resposeTime_TS (TS) respose time in every routeline
+//' @inheritParams all_vari
 //' @return IUH (list of num vector) 
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_GR4J1(
-    double confluen_resposeTime_TS
+    double confluen_responseTime_TS
 )
 {
-  double t_max = ceil(confluen_resposeTime_TS);
+  double t_max = ceil(confluen_responseTime_TS);
   IntegerVector seq_t = seq(1, t_max);
   NumericVector seq_t2 = as<NumericVector>(seq_t);
-  NumericVector SH_1 = pow(( seq_t2/ confluen_resposeTime_TS), 2.5);
+  NumericVector SH_1 = pow(( seq_t2/ confluen_responseTime_TS), 2.5);
   SH_1(t_max - 1) = 1;
   SH_1[Range(1, t_max - 1)] = diff(SH_1);
   return SH_1;
@@ -85,22 +85,108 @@ NumericVector confluenIUH_GR4J1(
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_GR4J2(
-    double confluen_resposeTime_TS
+    double confluen_responseTime_TS
 )
 {
-  double t_max_1 = ceil(confluen_resposeTime_TS);
-  double t_max_2 = ceil(2 * confluen_resposeTime_TS);
+  double t_max_1 = ceil(confluen_responseTime_TS);
+  double t_max_2 = ceil(2 * confluen_responseTime_TS);
   IntegerVector seq_t1 = seq(1, t_max_1 - 1);
   NumericVector seq_t12 = as<NumericVector>(seq_t1);
   IntegerVector seq_t2 = seq(t_max_1, (t_max_2 - 1));
   NumericVector seq_t22 = as<NumericVector>(seq_t2);
   
-  NumericVector SH_2_1 = .5 * pow((seq_t12 / confluen_resposeTime_TS),2.5);
-  NumericVector SH_2_2 = 1 - .5 * pow((2 - seq_t22 / confluen_resposeTime_TS),2.5);
+  NumericVector SH_2_1 = .5 * pow((seq_t12 / confluen_responseTime_TS),2.5);
+  NumericVector SH_2_2 = 1 - .5 * pow((2 - seq_t22 / confluen_responseTime_TS),2.5);
   NumericVector SH_2(t_max_2, 1);
   SH_2[Range(0, t_max_1 - 2)] = SH_2_1;
   SH_2[Range(t_max_1 - 1, t_max_2 - 2)] = SH_2_2;
   SH_2[Range(1, t_max_2 - 1)] = diff(SH_2);
   
   return SH_2;
+}
+
+//' @rdname confluenIUH
+//' @export
+// [[Rcpp::export]]
+NumericVector confluenIUH_Clark(
+    double confluen_responseTime_TS
+)
+{
+  double t_max = ceil(- confluen_responseTime_TS * log(confluen_responseTime_TS * 0.005));
+  IntegerVector seq_t = seq(1, 20 * t_max);
+  NumericVector seq_t2 = as<NumericVector>(seq_t) / 20.0;
+  NumericVector iuh_ = 1 / confluen_responseTime_TS * exp(- seq_t2 / confluen_responseTime_TS);
+  NumericMatrix mat_iuh = NumericMatrix(20, t_max, iuh_.begin());
+  NumericVector vct_iuh = colMeans(mat_iuh);
+  return vct_iuh / sum(vct_iuh);
+}
+
+//' @rdname confluenIUH
+//' @export
+// [[Rcpp::export]]
+NumericVector confluenIUH_Kelly(
+    double confluen_responseTime_TS,
+    double confluen_concentratTime_TS
+)
+{
+  double num_temp_tc2 = (confluen_concentratTime_TS * confluen_concentratTime_TS);
+  double num_temp_12_34 = 4 * confluen_responseTime_TS  / num_temp_tc2 * 
+    (1 - 2 * exp(confluen_concentratTime_TS / confluen_responseTime_TS * 0.5));
+  double num_temp_12_35 = 4 * confluen_responseTime_TS  / num_temp_tc2 * 
+    (1 - 2 * exp(confluen_concentratTime_TS / confluen_responseTime_TS * 0.5) + exp(confluen_concentratTime_TS / confluen_responseTime_TS));
+  double t_max = ceil(std::max(confluen_concentratTime_TS, - confluen_responseTime_TS * log(0.002 / num_temp_12_35)));
+  NumericVector iuh_1, iuh_2, iuh_3, iuh_, vct_iuh, temp_etK;
+  IntegerVector seq_t = seq(1, 20 * t_max);
+  NumericVector seq_t2 = as<NumericVector>(seq_t) / 20.0;
+  temp_etK = exp(- seq_t2 / confluen_responseTime_TS);
+  iuh_1 = 4 / num_temp_tc2 * (seq_t2 + confluen_responseTime_TS * (temp_etK - 1));
+  iuh_2 = num_temp_12_34 * temp_etK - 4 / num_temp_tc2 * (seq_t2 - confluen_responseTime_TS - confluen_concentratTime_TS);
+  iuh_3 = num_temp_12_35 * temp_etK;
+  iuh_ = ifelse(seq_t2 > confluen_concentratTime_TS * 0.5, iuh_2, iuh_1);
+  iuh_ = ifelse(seq_t2 > confluen_concentratTime_TS, iuh_3, iuh_);
+  NumericMatrix mat_iuh = NumericMatrix(20, t_max, iuh_.begin());
+  vct_iuh = colMeans(mat_iuh);
+  return vct_iuh / sum(vct_iuh);
+}
+
+
+//' @rdname confluenIUH
+//' @param param_confluen_nas_n parameters for[confluenIUH_Nash()]
+//' @export
+// [[Rcpp::export]]
+NumericVector confluenIUH_Nash(
+    double confluen_responseTime_TS,
+    double param_confluen_nas_n
+)
+{
+  double t_max = ceil(std::max(4.0, param_confluen_nas_n) * 3 * confluen_responseTime_TS);
+  NumericVector iuh_, vct_iuh;
+  IntegerVector seq_t = seq(1, 20 * t_max);
+  NumericVector seq_t2 = as<NumericVector>(seq_t) / 20.0;
+  iuh_ = pow(seq_t2 / confluen_responseTime_TS, param_confluen_nas_n - 1) * exp(- seq_t2 / confluen_responseTime_TS) / 
+    confluen_responseTime_TS / tgamma(param_confluen_nas_n);
+  NumericMatrix mat_iuh = NumericMatrix(20, t_max, iuh_.begin());
+  vct_iuh = colMeans(mat_iuh);
+  return vct_iuh / sum(vct_iuh);
+}
+
+//' @rdname confluenIUH
+//' @param param_confluen_nak_b,param_confluen_nak_n parameters for[confluenIUH_NashKumar()]
+//' @export
+// [[Rcpp::export]]
+NumericVector confluenIUH_NashKumar(
+    double param_confluen_nak_b,
+    double param_confluen_nak_n
+)
+{
+  NumericVector iuh_, vct_iuh;
+  double confluen_responseTime_TS = param_confluen_nak_b * 1 / (param_confluen_nak_n - 1);
+  double t_max = ceil(std::max(4.0, param_confluen_nak_n) * 3 * confluen_responseTime_TS);
+  IntegerVector seq_t = seq(1, 20 * t_max);
+  NumericVector seq_t2 = as<NumericVector>(seq_t) / 20.0;
+  iuh_ = pow(seq_t2 / confluen_responseTime_TS, param_confluen_nak_n - 1) * exp(- seq_t2 / confluen_responseTime_TS) / 
+    confluen_responseTime_TS / tgamma(param_confluen_nak_n);
+  NumericMatrix mat_iuh = NumericMatrix(20, t_max, iuh_.begin());
+  vct_iuh = colMeans(mat_iuh);
+  return vct_iuh / sum(vct_iuh);
 }

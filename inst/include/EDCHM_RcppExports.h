@@ -276,7 +276,7 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector confluenIUH_GR4J1(double confluen_resposeTime_TS) {
+    inline NumericVector confluenIUH_GR4J1(double confluen_responseTime_TS) {
         typedef SEXP(*Ptr_confluenIUH_GR4J1)(SEXP);
         static Ptr_confluenIUH_GR4J1 p_confluenIUH_GR4J1 = NULL;
         if (p_confluenIUH_GR4J1 == NULL) {
@@ -286,7 +286,7 @@ namespace EDCHM {
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_confluenIUH_GR4J1(Shield<SEXP>(Rcpp::wrap(confluen_resposeTime_TS)));
+            rcpp_result_gen = p_confluenIUH_GR4J1(Shield<SEXP>(Rcpp::wrap(confluen_responseTime_TS)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -297,7 +297,7 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector confluenIUH_GR4J2(double confluen_resposeTime_TS) {
+    inline NumericVector confluenIUH_GR4J2(double confluen_responseTime_TS) {
         typedef SEXP(*Ptr_confluenIUH_GR4J2)(SEXP);
         static Ptr_confluenIUH_GR4J2 p_confluenIUH_GR4J2 = NULL;
         if (p_confluenIUH_GR4J2 == NULL) {
@@ -307,7 +307,91 @@ namespace EDCHM {
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_confluenIUH_GR4J2(Shield<SEXP>(Rcpp::wrap(confluen_resposeTime_TS)));
+            rcpp_result_gen = p_confluenIUH_GR4J2(Shield<SEXP>(Rcpp::wrap(confluen_responseTime_TS)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector confluenIUH_Clark(double confluen_responseTime_TS) {
+        typedef SEXP(*Ptr_confluenIUH_Clark)(SEXP);
+        static Ptr_confluenIUH_Clark p_confluenIUH_Clark = NULL;
+        if (p_confluenIUH_Clark == NULL) {
+            validateSignature("NumericVector(*confluenIUH_Clark)(double)");
+            p_confluenIUH_Clark = (Ptr_confluenIUH_Clark)R_GetCCallable("EDCHM", "_EDCHM_confluenIUH_Clark");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluenIUH_Clark(Shield<SEXP>(Rcpp::wrap(confluen_responseTime_TS)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector confluenIUH_Kelly(double confluen_responseTime_TS, double confluen_concentratTime_TS) {
+        typedef SEXP(*Ptr_confluenIUH_Kelly)(SEXP,SEXP);
+        static Ptr_confluenIUH_Kelly p_confluenIUH_Kelly = NULL;
+        if (p_confluenIUH_Kelly == NULL) {
+            validateSignature("NumericVector(*confluenIUH_Kelly)(double,double)");
+            p_confluenIUH_Kelly = (Ptr_confluenIUH_Kelly)R_GetCCallable("EDCHM", "_EDCHM_confluenIUH_Kelly");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluenIUH_Kelly(Shield<SEXP>(Rcpp::wrap(confluen_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(confluen_concentratTime_TS)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector confluenIUH_Nash(double confluen_responseTime_TS, double param_confluen_nas_n) {
+        typedef SEXP(*Ptr_confluenIUH_Nash)(SEXP,SEXP);
+        static Ptr_confluenIUH_Nash p_confluenIUH_Nash = NULL;
+        if (p_confluenIUH_Nash == NULL) {
+            validateSignature("NumericVector(*confluenIUH_Nash)(double,double)");
+            p_confluenIUH_Nash = (Ptr_confluenIUH_Nash)R_GetCCallable("EDCHM", "_EDCHM_confluenIUH_Nash");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluenIUH_Nash(Shield<SEXP>(Rcpp::wrap(confluen_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(param_confluen_nas_n)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector confluenIUH_NashKumar(double param_confluen_nak_b, double param_confluen_nak_n) {
+        typedef SEXP(*Ptr_confluenIUH_NashKumar)(SEXP,SEXP);
+        static Ptr_confluenIUH_NashKumar p_confluenIUH_NashKumar = NULL;
+        if (p_confluenIUH_NashKumar == NULL) {
+            validateSignature("NumericVector(*confluenIUH_NashKumar)(double,double)");
+            p_confluenIUH_NashKumar = (Ptr_confluenIUH_NashKumar)R_GetCCallable("EDCHM", "_EDCHM_confluenIUH_NashKumar");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_confluenIUH_NashKumar(Shield<SEXP>(Rcpp::wrap(param_confluen_nak_b)), Shield<SEXP>(Rcpp::wrap(param_confluen_nak_n)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

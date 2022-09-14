@@ -99,17 +99,43 @@ confluen_IUH2S <- function(land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_
 
 #' create **IUH** (Instant Unit Graphy)
 #' @name confluenIUH
-#' @param confluen_resposeTime_TS (TS) respose time in every routeline
+#' @inheritParams all_vari
 #' @return IUH (list of num vector) 
 #' @export
-confluenIUH_GR4J1 <- function(confluen_resposeTime_TS) {
-    .Call(`_EDCHM_confluenIUH_GR4J1`, confluen_resposeTime_TS)
+confluenIUH_GR4J1 <- function(confluen_responseTime_TS) {
+    .Call(`_EDCHM_confluenIUH_GR4J1`, confluen_responseTime_TS)
 }
 
 #' @rdname confluenIUH
 #' @export
-confluenIUH_GR4J2 <- function(confluen_resposeTime_TS) {
-    .Call(`_EDCHM_confluenIUH_GR4J2`, confluen_resposeTime_TS)
+confluenIUH_GR4J2 <- function(confluen_responseTime_TS) {
+    .Call(`_EDCHM_confluenIUH_GR4J2`, confluen_responseTime_TS)
+}
+
+#' @rdname confluenIUH
+#' @export
+confluenIUH_Clark <- function(confluen_responseTime_TS) {
+    .Call(`_EDCHM_confluenIUH_Clark`, confluen_responseTime_TS)
+}
+
+#' @rdname confluenIUH
+#' @export
+confluenIUH_Kelly <- function(confluen_responseTime_TS, confluen_concentratTime_TS) {
+    .Call(`_EDCHM_confluenIUH_Kelly`, confluen_responseTime_TS, confluen_concentratTime_TS)
+}
+
+#' @rdname confluenIUH
+#' @param param_confluen_nas_n parameters for[confluenIUH_Nash()]
+#' @export
+confluenIUH_Nash <- function(confluen_responseTime_TS, param_confluen_nas_n) {
+    .Call(`_EDCHM_confluenIUH_Nash`, confluen_responseTime_TS, param_confluen_nas_n)
+}
+
+#' @rdname confluenIUH
+#' @param param_confluen_nak_b,param_confluen_nak_n parameters for[confluenIUH_NashKumar()]
+#' @export
+confluenIUH_NashKumar <- function(param_confluen_nak_b, param_confluen_nak_n) {
+    .Call(`_EDCHM_confluenIUH_NashKumar`, param_confluen_nak_b, param_confluen_nak_n)
 }
 
 #' **potential evapotranspiration**

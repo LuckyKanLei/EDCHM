@@ -451,20 +451,20 @@ RcppExport SEXP _EDCHM_confluen_IUH2S(SEXP land_runoff_mmSEXP, SEXP ground_basef
     return rcpp_result_gen;
 }
 // confluenIUH_GR4J1
-NumericVector confluenIUH_GR4J1(double confluen_resposeTime_TS);
-static SEXP _EDCHM_confluenIUH_GR4J1_try(SEXP confluen_resposeTime_TSSEXP) {
+NumericVector confluenIUH_GR4J1(double confluen_responseTime_TS);
+static SEXP _EDCHM_confluenIUH_GR4J1_try(SEXP confluen_responseTime_TSSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< double >::type confluen_resposeTime_TS(confluen_resposeTime_TSSEXP);
-    rcpp_result_gen = Rcpp::wrap(confluenIUH_GR4J1(confluen_resposeTime_TS));
+    Rcpp::traits::input_parameter< double >::type confluen_responseTime_TS(confluen_responseTime_TSSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_GR4J1(confluen_responseTime_TS));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_confluenIUH_GR4J1(SEXP confluen_resposeTime_TSSEXP) {
+RcppExport SEXP _EDCHM_confluenIUH_GR4J1(SEXP confluen_responseTime_TSSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_GR4J1_try(confluen_resposeTime_TSSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_GR4J1_try(confluen_responseTime_TSSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -485,20 +485,159 @@ RcppExport SEXP _EDCHM_confluenIUH_GR4J1(SEXP confluen_resposeTime_TSSEXP) {
     return rcpp_result_gen;
 }
 // confluenIUH_GR4J2
-NumericVector confluenIUH_GR4J2(double confluen_resposeTime_TS);
-static SEXP _EDCHM_confluenIUH_GR4J2_try(SEXP confluen_resposeTime_TSSEXP) {
+NumericVector confluenIUH_GR4J2(double confluen_responseTime_TS);
+static SEXP _EDCHM_confluenIUH_GR4J2_try(SEXP confluen_responseTime_TSSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< double >::type confluen_resposeTime_TS(confluen_resposeTime_TSSEXP);
-    rcpp_result_gen = Rcpp::wrap(confluenIUH_GR4J2(confluen_resposeTime_TS));
+    Rcpp::traits::input_parameter< double >::type confluen_responseTime_TS(confluen_responseTime_TSSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_GR4J2(confluen_responseTime_TS));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_confluenIUH_GR4J2(SEXP confluen_resposeTime_TSSEXP) {
+RcppExport SEXP _EDCHM_confluenIUH_GR4J2(SEXP confluen_responseTime_TSSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_GR4J2_try(confluen_resposeTime_TSSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_GR4J2_try(confluen_responseTime_TSSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// confluenIUH_Clark
+NumericVector confluenIUH_Clark(double confluen_responseTime_TS);
+static SEXP _EDCHM_confluenIUH_Clark_try(SEXP confluen_responseTime_TSSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< double >::type confluen_responseTime_TS(confluen_responseTime_TSSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_Clark(confluen_responseTime_TS));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_confluenIUH_Clark(SEXP confluen_responseTime_TSSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_Clark_try(confluen_responseTime_TSSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// confluenIUH_Kelly
+NumericVector confluenIUH_Kelly(double confluen_responseTime_TS, double confluen_concentratTime_TS);
+static SEXP _EDCHM_confluenIUH_Kelly_try(SEXP confluen_responseTime_TSSEXP, SEXP confluen_concentratTime_TSSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< double >::type confluen_responseTime_TS(confluen_responseTime_TSSEXP);
+    Rcpp::traits::input_parameter< double >::type confluen_concentratTime_TS(confluen_concentratTime_TSSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_Kelly(confluen_responseTime_TS, confluen_concentratTime_TS));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_confluenIUH_Kelly(SEXP confluen_responseTime_TSSEXP, SEXP confluen_concentratTime_TSSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_Kelly_try(confluen_responseTime_TSSEXP, confluen_concentratTime_TSSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// confluenIUH_Nash
+NumericVector confluenIUH_Nash(double confluen_responseTime_TS, double param_confluen_nas_n);
+static SEXP _EDCHM_confluenIUH_Nash_try(SEXP confluen_responseTime_TSSEXP, SEXP param_confluen_nas_nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< double >::type confluen_responseTime_TS(confluen_responseTime_TSSEXP);
+    Rcpp::traits::input_parameter< double >::type param_confluen_nas_n(param_confluen_nas_nSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_Nash(confluen_responseTime_TS, param_confluen_nas_n));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_confluenIUH_Nash(SEXP confluen_responseTime_TSSEXP, SEXP param_confluen_nas_nSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_Nash_try(confluen_responseTime_TSSEXP, param_confluen_nas_nSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// confluenIUH_NashKumar
+NumericVector confluenIUH_NashKumar(double param_confluen_nak_b, double param_confluen_nak_n);
+static SEXP _EDCHM_confluenIUH_NashKumar_try(SEXP param_confluen_nak_bSEXP, SEXP param_confluen_nak_nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< double >::type param_confluen_nak_b(param_confluen_nak_bSEXP);
+    Rcpp::traits::input_parameter< double >::type param_confluen_nak_n(param_confluen_nak_nSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_NashKumar(param_confluen_nak_b, param_confluen_nak_n));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_confluenIUH_NashKumar(SEXP param_confluen_nak_bSEXP, SEXP param_confluen_nak_nSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_NashKumar_try(param_confluen_nak_bSEXP, param_confluen_nak_nSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1721,6 +1860,10 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*confluen_IUH2S)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*confluenIUH_GR4J1)(double)");
         signatures.insert("NumericVector(*confluenIUH_GR4J2)(double)");
+        signatures.insert("NumericVector(*confluenIUH_Clark)(double)");
+        signatures.insert("NumericVector(*confluenIUH_Kelly)(double,double)");
+        signatures.insert("NumericVector(*confluenIUH_Nash)(double,double)");
+        signatures.insert("NumericVector(*confluenIUH_NashKumar)(double,double)");
         signatures.insert("NumericVector(*evatransPotential_TurcWendling)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_Linacre)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -1773,6 +1916,10 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_confluen_IUH2S", (DL_FUNC)_EDCHM_confluen_IUH2S_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_GR4J1", (DL_FUNC)_EDCHM_confluenIUH_GR4J1_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_GR4J2", (DL_FUNC)_EDCHM_confluenIUH_GR4J2_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_Clark", (DL_FUNC)_EDCHM_confluenIUH_Clark_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_Kelly", (DL_FUNC)_EDCHM_confluenIUH_Kelly_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_Nash", (DL_FUNC)_EDCHM_confluenIUH_Nash_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_NashKumar", (DL_FUNC)_EDCHM_confluenIUH_NashKumar_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransPotential_TurcWendling", (DL_FUNC)_EDCHM_evatransPotential_TurcWendling_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransPotential_Linacre", (DL_FUNC)_EDCHM_evatransPotential_Linacre_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransPotential_FAO56", (DL_FUNC)_EDCHM_evatransPotential_FAO56_try);
@@ -1824,6 +1971,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_confluen_IUH2S", (DL_FUNC) &_EDCHM_confluen_IUH2S, 4},
     {"_EDCHM_confluenIUH_GR4J1", (DL_FUNC) &_EDCHM_confluenIUH_GR4J1, 1},
     {"_EDCHM_confluenIUH_GR4J2", (DL_FUNC) &_EDCHM_confluenIUH_GR4J2, 1},
+    {"_EDCHM_confluenIUH_Clark", (DL_FUNC) &_EDCHM_confluenIUH_Clark, 1},
+    {"_EDCHM_confluenIUH_Kelly", (DL_FUNC) &_EDCHM_confluenIUH_Kelly, 2},
+    {"_EDCHM_confluenIUH_Nash", (DL_FUNC) &_EDCHM_confluenIUH_Nash, 2},
+    {"_EDCHM_confluenIUH_NashKumar", (DL_FUNC) &_EDCHM_confluenIUH_NashKumar, 2},
     {"_EDCHM_evatransPotential_TurcWendling", (DL_FUNC) &_EDCHM_evatransPotential_TurcWendling, 4},
     {"_EDCHM_evatransPotential_Linacre", (DL_FUNC) &_EDCHM_evatransPotential_Linacre, 6},
     {"_EDCHM_evatransPotential_FAO56", (DL_FUNC) &_EDCHM_evatransPotential_FAO56, 8},

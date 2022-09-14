@@ -4,14 +4,30 @@
 \alias{confluenIUH}
 \alias{confluenIUH_GR4J1}
 \alias{confluenIUH_GR4J2}
+\alias{confluenIUH_Clark}
+\alias{confluenIUH_Kelly}
+\alias{confluenIUH_Nash}
+\alias{confluenIUH_NashKumar}
 \title{create \strong{IUH} (Instant Unit Graphy)}
 \usage{
-confluenIUH_GR4J1(confluen_resposeTime_TS)
+confluenIUH_GR4J1(confluen_responseTime_TS)
 
-confluenIUH_GR4J2(confluen_resposeTime_TS)
+confluenIUH_GR4J2(confluen_responseTime_TS)
+
+confluenIUH_Clark(confluen_responseTime_TS)
+
+confluenIUH_Kelly(confluen_responseTime_TS, confluen_concentratTime_TS)
+
+confluenIUH_Nash(confluen_responseTime_TS, param_confluen_nas_n)
+
+confluenIUH_NashKumar(param_confluen_nak_b, param_confluen_nak_n)
 }
 \arguments{
-\item{confluen_resposeTime_TS}{(TS) respose time in every routeline}
+\item{confluen_responseTime_TS, confluen_concentratTime_TS}{(TS) response or concentration time in every routeline}
+
+\item{param_confluen_nas_n}{parameters for\code{\link[=confluenIUH_Nash]{confluenIUH_Nash()}}}
+
+\item{param_confluen_nak_b, param_confluen_nak_n}{parameters for\code{\link[=confluenIUH_NashKumar]{confluenIUH_NashKumar()}}}
 }
 \value{
 IUH (list of num vector)

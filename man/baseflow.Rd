@@ -26,14 +26,16 @@ baseflow_GR4Jfix(ground_water_mm, ground_capacity_mm, param_baseflow_grf_gamma)
 
 \item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{groundLy}}
 
-\item{param_baseflow_sup_k, param_baseflow_sup_gamma}{parameters for \code{\link[=baseflow_SupplyPow]{baseflow_SupplyPow()}}}
+\item{param_baseflow_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=baseflow_SupplyPow]{baseflow_SupplyPow()}}}
 
-\item{param_baseflow_sur_k}{parameters for \code{\link[=baseflow_SupplyRatio]{baseflow_SupplyRatio()}}}
+\item{param_baseflow_sup_gamma}{<0.1, 5> exponential parameter for \code{\link[=baseflow_SupplyPow]{baseflow_SupplyPow()}}}
 
-\item{param_baseflow_grf_gamma}{parameters for \code{\link[=baseflow_GR4Jfix]{baseflow_GR4Jfix()}}}
+\item{param_baseflow_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=baseflow_SupplyRatio]{baseflow_SupplyRatio()}}}
+
+\item{param_baseflow_grf_gamma}{<2, 7> exponential parameter for \code{\link[=baseflow_GR4Jfix]{baseflow_GR4Jfix()}}}
 }
 \value{
-baseflow (mm/m2)
+ground_baseflow_mm (mm/m2/TS)
 }
 \description{
 \strong{baseflow}

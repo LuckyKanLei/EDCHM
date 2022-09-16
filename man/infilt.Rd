@@ -71,13 +71,17 @@ infilt_XAJ(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{param_infilt_sur_k}{parameters for \code{\link[=infilt_SupplyRatio]{infilt_SupplyRatio()}}}
+\item{param_infilt_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_SupplyRatio]{infilt_SupplyRatio()}}}
 
-\item{param_infilt_sup_k, param_infilt_sup_gamma}{parameters for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
+\item{param_infilt_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
 
-\item{param_infilt_acr_k}{parameters for \code{\link[=infilt_AcceptRatio]{infilt_AcceptRatio()}}}
+\item{param_infilt_sup_gamma}{parameters for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
 
-\item{param_infilt_acp_k, param_infilt_acp_gamma}{parameters for \code{\link[=infilt_AcceptPow]{infilt_AcceptPow()}}}
+\item{param_infilt_acr_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_AcceptRatio]{infilt_AcceptRatio()}}}
+
+\item{param_infilt_acp_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_AcceptPow]{infilt_AcceptPow()}}}
+
+\item{param_infilt_acp_gamma}{parameters for \code{\link[=infilt_AcceptPow]{infilt_AcceptPow()}}}
 
 \item{param_infilt_hbv_beta}{parameters for \code{\link[=infilt_HBV]{infilt_HBV()}}}
 
@@ -85,7 +89,7 @@ infilt_XAJ(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
 
 \item{land_impermeableFrac_1}{the maximum impermeable fraction when th soil is fully saturated}
 
-\item{param_infilt_ubc_P0AGEN}{parameters for \code{\link[=infilt_UBC]{infilt_UBC()}}}
+\item{param_infilt_ubc_P0AGEN}{<0.01, 1> coefficient parameter for \code{\link[=infilt_UBC]{infilt_UBC()}}}
 
 \item{param_infilt_xaj_B}{parameters for \code{\link[=infilt_XAJ]{infilt_XAJ()}}}
 }

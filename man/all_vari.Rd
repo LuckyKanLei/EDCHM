@@ -62,6 +62,8 @@
 
 \item{ground_lateral_mm}{(mm/m2/TS) lateral flow, exchange with outside region. It can be \strong{NEGATIV}}
 
+\item{ground_capillarise_mm}{(mm/m2/TS) capillary rise from \code{groundLy} to \code{soilLy}}
+
 \item{ground_lateralPotential_mm}{(mm/m2/TS) potential lateral flow, that will as parameter evaluated}
 
 \item{confluen_inputWater_mm, land_runoff_mm, ground_baseflow_mm}{(mm/m2) input water volum in every routeline}

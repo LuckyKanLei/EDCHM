@@ -6,7 +6,7 @@
 //' **percolation**
 //' @name percola
 //' @inheritParams all_vari
-//' @param param_percola_grf_k parameters
+//' @param param_percola_grf_k <0.01, 1> coefficient parameter for [percola_GR4Jfix()]
 //' @return percola_mm (mm/m2)
 //' @export
 // [[Rcpp::export]]
@@ -32,7 +32,7 @@ NumericVector percola_GR4J(
 }
 
 //' @rdname percola
-//' @param param_percola_sur_k parameters for [percola_SupplyRatio()]
+//' @param param_percola_sur_k <0.01, 1> coefficient parameter for [percola_SupplyRatio()]
 //' @export
 // [[Rcpp::export]]
 NumericVector percola_SupplyRatio(
@@ -45,7 +45,8 @@ NumericVector percola_SupplyRatio(
 }
 
 //' @rdname percola
-//' @param param_percola_sup_k,param_percola_sup_gamma parameters for [percola_SupplyPow()]
+//' @param param_percola_sup_k <0.01, 1> coefficient parameter for [percola_SupplyPow()]
+//' @param param_percola_sup_gamma parameters for [percola_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector percola_SupplyPow(

@@ -45,16 +45,20 @@ capirise_AcceptPow(
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{param_capirise_sur_k}{parameters for\code{\link[=capirise_SupplyRatio]{capirise_SupplyRatio()}}}
+\item{param_capirise_sur_k}{<0.01, 1> coefficient parameter for\code{\link[=capirise_SupplyRatio]{capirise_SupplyRatio()}}}
 
-\item{param_capirise_sup_k, param_capirise_sup_gamma}{parameters for \code{\link[=capirise_SupplyPow]{capirise_SupplyPow()}}}
+\item{param_capirise_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=capirise_SupplyPow]{capirise_SupplyPow()}}}
 
-\item{param_capirise_acr_k}{parameters \code{\link[=capirise_AcceptRatio]{capirise_AcceptRatio()}}}
+\item{param_capirise_sup_gamma}{<0.1, 5> exponential parameter for \code{\link[=capirise_SupplyPow]{capirise_SupplyPow()}}}
 
-\item{param_capirise_acp_k, param_capirise_acp_gamma}{parameters for \code{\link[=capirise_AcceptPow]{capirise_AcceptPow()}}}
+\item{param_capirise_acr_k}{<0.01, 1> coefficient parameter \code{\link[=capirise_AcceptRatio]{capirise_AcceptRatio()}}}
+
+\item{param_capirise_acp_k}{<0.01, 1> coefficient parameter for \code{\link[=capirise_AcceptPow]{capirise_AcceptPow()}}}
+
+\item{param_capirise_acp_gamma}{<0.1, 5> exponential parameter for \code{\link[=capirise_AcceptPow]{capirise_AcceptPow()}}}
 }
 \value{
-capilarise (mm/m2)
+ground_capillarise_mm (mm/m2/TS)
 }
 \description{
 \strong{capilarise}

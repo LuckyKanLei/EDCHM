@@ -43,7 +43,7 @@ NumericVector lateral_GR4Jfix(
 }
 
 //' @rdname lateral
-//' @param param_lateral_sur_k parameters for [lateral_SupplyRatio()]
+//' @param param_lateral_sur_k <0.01, 1> coefficient parameter for [lateral_SupplyRatio()]
 //' @export
 // [[Rcpp::export]]
 NumericVector lateral_SupplyRatio(
@@ -60,7 +60,8 @@ NumericVector lateral_SupplyRatio(
 }
 
 //' @rdname lateral
-//' @param param_lateral_sup_k,param_lateral_sup_gamma parameters for [lateral_SupplyPow()]
+//' @param param_lateral_sup_k <0.01, 1> coefficient parameter for [lateral_SupplyPow()]
+//' @param param_lateral_sup_gamma parameters for [lateral_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector lateral_SupplyPow(

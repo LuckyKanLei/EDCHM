@@ -26,11 +26,13 @@ percola_SupplyPow(
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{param_percola_grf_k}{parameters}
+\item{param_percola_grf_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_GR4Jfix]{percola_GR4Jfix()}}}
 
-\item{param_percola_sur_k}{parameters for \code{\link[=percola_SupplyRatio]{percola_SupplyRatio()}}}
+\item{param_percola_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_SupplyRatio]{percola_SupplyRatio()}}}
 
-\item{param_percola_sup_k, param_percola_sup_gamma}{parameters for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
+\item{param_percola_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
+
+\item{param_percola_sup_gamma}{parameters for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
 }
 \value{
 percola_mm (mm/m2)

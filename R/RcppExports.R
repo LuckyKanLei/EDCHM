@@ -4,15 +4,15 @@
 #' caculate **snowfall**
 #' @name atmosSnow
 #' @inheritParams all_vari
-#' @param param_atmos_thr_Ts (Cel) parameters for [atmosSnow_ThresholdT()]
 #' @return atmos_snow_mm (mm/m2/TS) snowfall volum
+#' @param param_atmos_thr_Ts <-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]
 #' @export
 atmosSnow_ThresholdT <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_atmos_thr_Ts) {
     .Call(`_EDCHM_atmosSnow_ThresholdT`, atmos_precipitation_mm, atmos_temperature_Cel, param_atmos_thr_Ts)
 }
 
 #' @rdname atmosSnow
-#' @param param_atmos_ubc_A0FORM (0, 3 Cel) parameters for [atmosSnow_UBC()]
+#' @param param_atmos_ubc_A0FORM <0.01, 3> (Cel) threshold air temperature that snow, it can not equal or small than 0, parameter for [atmosSnow_UBC()]
 #' @export
 atmosSnow_UBC <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_atmos_ubc_A0FORM) {
     .Call(`_EDCHM_atmosSnow_UBC`, atmos_precipitation_mm, atmos_temperature_Cel, param_atmos_ubc_A0FORM)
@@ -21,15 +21,16 @@ atmosSnow_UBC <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_a
 #' **baseflow**
 #' @name baseflow
 #' @inheritParams all_vari
-#' @return baseflow (mm/m2) 
-#' @param param_baseflow_sup_k,param_baseflow_sup_gamma parameters for [baseflow_SupplyPow()]
+#' @return ground_baseflow_mm (mm/m2/TS) 
+#' @param param_baseflow_sup_k <0.01, 1> coefficient parameter for [baseflow_SupplyPow()]
+#' @param param_baseflow_sup_gamma <0.1, 5> exponential parameter for [baseflow_SupplyPow()]
 #' @export
 baseflow_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma) {
     .Call(`_EDCHM_baseflow_SupplyPow`, ground_water_mm, ground_capacity_mm, param_baseflow_sup_k, param_baseflow_sup_gamma)
 }
 
 #' @rdname baseflow
-#' @param param_baseflow_sur_k parameters for [baseflow_SupplyRatio()]
+#' @param param_baseflow_sur_k <0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]
 #' @export
 baseflow_SupplyRatio <- function(ground_water_mm, param_baseflow_sur_k) {
     .Call(`_EDCHM_baseflow_SupplyRatio`, ground_water_mm, param_baseflow_sur_k)
@@ -42,7 +43,7 @@ baseflow_GR4J <- function(ground_water_mm, ground_capacity_mm) {
 }
 
 #' @rdname baseflow
-#' @param param_baseflow_grf_gamma parameters for [baseflow_GR4Jfix()]
+#' @param param_baseflow_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]
 #' @export
 baseflow_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, param_baseflow_grf_gamma) {
     .Call(`_EDCHM_baseflow_GR4Jfix`, ground_water_mm, ground_capacity_mm, param_baseflow_grf_gamma)
@@ -51,29 +52,31 @@ baseflow_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, param_baseflow
 #' **capilarise**
 #' @name capirise
 #' @inheritParams all_vari
-#' @param param_capirise_sur_k parameters for[capirise_SupplyRatio()]
-#' @return  capilarise (mm/m2)
+#' @param param_capirise_sur_k <0.01, 1> coefficient parameter for[capirise_SupplyRatio()]
+#' @return  ground_capillarise_mm (mm/m2/TS)
 #' @export
 capirise_SupplyRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sur_k) {
     .Call(`_EDCHM_capirise_SupplyRatio`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sur_k)
 }
 
 #' @rdname capirise
-#' @param param_capirise_sup_k,param_capirise_sup_gamma parameters for [capirise_SupplyPow()]
+#' @param param_capirise_sup_k <0.01, 1> coefficient parameter for [capirise_SupplyPow()]
+#' @param param_capirise_sup_gamma <0.1, 5> exponential parameter for [capirise_SupplyPow()]
 #' @export
 capirise_SupplyPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sup_k, param_capirise_sup_gamma) {
     .Call(`_EDCHM_capirise_SupplyPow`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sup_k, param_capirise_sup_gamma)
 }
 
 #' @rdname capirise
-#' @param param_capirise_acr_k parameters [capirise_AcceptRatio()]
+#' @param param_capirise_acr_k <0.01, 1> coefficient parameter [capirise_AcceptRatio()]
 #' @export
 capirise_AcceptRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acr_k) {
     .Call(`_EDCHM_capirise_AcceptRatio`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acr_k)
 }
 
 #' @rdname capirise
-#' @param param_capirise_acp_k,param_capirise_acp_gamma parameters for [capirise_AcceptPow()]
+#' @param param_capirise_acp_k <0.01, 1> coefficient parameter for [capirise_AcceptPow()]
+#' @param param_capirise_acp_gamma <0.1, 5> exponential parameter for [capirise_AcceptPow()]
 #' @export
 capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acp_k, param_capirise_acp_gamma) {
     .Call(`_EDCHM_capirise_AcceptPow`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acp_k, param_capirise_acp_gamma)
@@ -338,7 +341,7 @@ evatransSoil_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #' **infiltration**
 #' @name infilt
 #' @inheritParams all_vari
-#' @param param_infilt_sur_k parameters for [infilt_SupplyRatio()]
+#' @param param_infilt_sur_k <0.01, 1> coefficient parameter for [infilt_SupplyRatio()]
 #' @return infilt_mm (mm/m2) 
 #' @export
 infilt_SupplyRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sur_k) {
@@ -346,21 +349,23 @@ infilt_SupplyRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, p
 }
 
 #' @rdname infilt
-#' @param param_infilt_sup_k,param_infilt_sup_gamma parameters for [infilt_SupplyPow()]
+#' @param param_infilt_sup_k <0.01, 1> coefficient parameter for [infilt_SupplyPow()]
+#' @param param_infilt_sup_gamma parameters for [infilt_SupplyPow()]
 #' @export
 infilt_SupplyPow <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sup_k, param_infilt_sup_gamma) {
     .Call(`_EDCHM_infilt_SupplyPow`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sup_k, param_infilt_sup_gamma)
 }
 
 #' @rdname infilt
-#' @param param_infilt_acr_k parameters for [infilt_AcceptRatio()]
+#' @param param_infilt_acr_k <0.01, 1> coefficient parameter for [infilt_AcceptRatio()]
 #' @export
 infilt_AcceptRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k) {
     .Call(`_EDCHM_infilt_AcceptRatio`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k)
 }
 
 #' @rdname infilt
-#' @param param_infilt_acp_k,param_infilt_acp_gamma parameters for [infilt_AcceptPow()]
+#' @param param_infilt_acp_k <0.01, 1> coefficient parameter for [infilt_AcceptPow()]
+#' @param param_infilt_acp_gamma parameters for [infilt_AcceptPow()]
 #' @export
 infilt_AcceptPow <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acp_k, param_infilt_acp_gamma) {
     .Call(`_EDCHM_infilt_AcceptPow`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acp_k, param_infilt_acp_gamma)
@@ -388,7 +393,7 @@ infilt_SCS <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 
 #' @rdname infilt
 #' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
-#' @param param_infilt_ubc_P0AGEN parameters for [infilt_UBC()]
+#' @param param_infilt_ubc_P0AGEN <0.01, 1> coefficient parameter for [infilt_UBC()]
 #' @export
 infilt_UBC <- function(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN) {
     .Call(`_EDCHM_infilt_UBC`, land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN)
@@ -428,14 +433,15 @@ lateral_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, ground_lateralP
 }
 
 #' @rdname lateral
-#' @param param_lateral_sur_k parameters for [lateral_SupplyRatio()]
+#' @param param_lateral_sur_k <0.01, 1> coefficient parameter for [lateral_SupplyRatio()]
 #' @export
 lateral_SupplyRatio <- function(ground_water_mm, ground_capacity_mm, param_lateral_sur_k) {
     .Call(`_EDCHM_lateral_SupplyRatio`, ground_water_mm, ground_capacity_mm, param_lateral_sur_k)
 }
 
 #' @rdname lateral
-#' @param param_lateral_sup_k,param_lateral_sup_gamma parameters for [lateral_SupplyPow()]
+#' @param param_lateral_sup_k <0.01, 1> coefficient parameter for [lateral_SupplyPow()]
+#' @param param_lateral_sup_gamma parameters for [lateral_SupplyPow()]
 #' @export
 lateral_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_lateral_sup_k, param_lateral_sup_gamma) {
     .Call(`_EDCHM_lateral_SupplyPow`, ground_water_mm, ground_capacity_mm, param_lateral_sup_k, param_lateral_sup_gamma)
@@ -444,7 +450,7 @@ lateral_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_lateral
 #' **percolation**
 #' @name percola
 #' @inheritParams all_vari
-#' @param param_percola_grf_k parameters
+#' @param param_percola_grf_k <0.01, 1> coefficient parameter for [percola_GR4Jfix()]
 #' @return percola_mm (mm/m2)
 #' @export
 percola_GR4Jfix <- function(soil_water_mm, soil_capacity_mm, param_percola_grf_k) {
@@ -458,14 +464,15 @@ percola_GR4J <- function(soil_water_mm, soil_capacity_mm) {
 }
 
 #' @rdname percola
-#' @param param_percola_sur_k parameters for [percola_SupplyRatio()]
+#' @param param_percola_sur_k <0.01, 1> coefficient parameter for [percola_SupplyRatio()]
 #' @export
 percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
     .Call(`_EDCHM_percola_SupplyRatio`, soil_water_mm, param_percola_sur_k)
 }
 
 #' @rdname percola
-#' @param param_percola_sup_k,param_percola_sup_gamma parameters for [percola_SupplyPow()]
+#' @param param_percola_sup_k <0.01, 1> coefficient parameter for [percola_SupplyPow()]
+#' @param param_percola_sup_gamma parameters for [percola_SupplyPow()]
 #' @export
 percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma) {
     .Call(`_EDCHM_percola_SupplyPow`, soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma)

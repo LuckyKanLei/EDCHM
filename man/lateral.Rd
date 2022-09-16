@@ -35,9 +35,11 @@ lateral_SupplyPow(
 
 \item{param_lateral_grf_gamma}{parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
 
-\item{param_lateral_sur_k}{parameters for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
+\item{param_lateral_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
 
-\item{param_lateral_sup_k, param_lateral_sup_gamma}{parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
+\item{param_lateral_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
+
+\item{param_lateral_sup_gamma}{parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
 }
 \value{
 lateral_mm (mm/m2)

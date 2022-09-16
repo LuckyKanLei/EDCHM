@@ -23,9 +23,9 @@ atmosSnow_UBC(
 
 \item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
-\item{param_atmos_thr_Ts}{(Cel) parameters for \code{\link[=atmosSnow_ThresholdT]{atmosSnow_ThresholdT()}}}
+\item{param_atmos_thr_Ts}{<-1, 3> (Cel) threshold air temperature that snow, parameter for \code{\link[=atmosSnow_ThresholdT]{atmosSnow_ThresholdT()}}}
 
-\item{param_atmos_ubc_A0FORM}{(0, 3 Cel) parameters for \code{\link[=atmosSnow_UBC]{atmosSnow_UBC()}}}
+\item{param_atmos_ubc_A0FORM}{<0.01, 3> (Cel) threshold air temperature that snow, it can not equal or small than 0, parameter for \code{\link[=atmosSnow_UBC]{atmosSnow_UBC()}}}
 }
 \value{
 atmos_snow_mm (mm/m2/TS) snowfall volum

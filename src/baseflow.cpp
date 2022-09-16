@@ -6,8 +6,9 @@
 //' **baseflow**
 //' @name baseflow
 //' @inheritParams all_vari
-//' @return baseflow (mm/m2) 
-//' @param param_baseflow_sup_k,param_baseflow_sup_gamma parameters for [baseflow_SupplyPow()]
+//' @return ground_baseflow_mm (mm/m2/TS) 
+//' @param param_baseflow_sup_k <0.01, 1> coefficient parameter for [baseflow_SupplyPow()]
+//' @param param_baseflow_sup_gamma <0.1, 5> exponential parameter for [baseflow_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector baseflow_SupplyPow(
@@ -26,7 +27,7 @@ NumericVector baseflow_SupplyPow(
 }
 
 //' @rdname baseflow
-//' @param param_baseflow_sur_k parameters for [baseflow_SupplyRatio()]
+//' @param param_baseflow_sur_k <0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]
 //' @export
 // [[Rcpp::export]]
 NumericVector baseflow_SupplyRatio(
@@ -57,7 +58,7 @@ NumericVector baseflow_GR4J(
 }
 
 //' @rdname baseflow
-//' @param param_baseflow_grf_gamma parameters for [baseflow_GR4Jfix()]
+//' @param param_baseflow_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]
 //' @export
 // [[Rcpp::export]]
 NumericVector baseflow_GR4Jfix(

@@ -5,8 +5,8 @@
 //' caculate **snowfall**
 //' @name atmosSnow
 //' @inheritParams all_vari
-//' @param param_atmos_thr_Ts (Cel) parameters for [atmosSnow_ThresholdT()]
 //' @return atmos_snow_mm (mm/m2/TS) snowfall volum
+//' @param param_atmos_thr_Ts <-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]
 //' @export
 // [[Rcpp::export]]
 NumericVector atmosSnow_ThresholdT(
@@ -19,7 +19,7 @@ NumericVector atmosSnow_ThresholdT(
 }
 
 //' @rdname atmosSnow
-//' @param param_atmos_ubc_A0FORM (0, 3 Cel) parameters for [atmosSnow_UBC()]
+//' @param param_atmos_ubc_A0FORM <0.01, 3> (Cel) threshold air temperature that snow, it can not equal or small than 0, parameter for [atmosSnow_UBC()]
 //' @export
 // [[Rcpp::export]]
 NumericVector atmosSnow_UBC(
@@ -29,8 +29,8 @@ NumericVector atmosSnow_UBC(
 )
 {
   NumericVector atmos_snow_mm;
-  atmos_snow_mm = atmos_temperature_Cel / param_atmos_ubc_A0FORM * atmos_precipitation_mm;
-  atmos_snow_mm = ifelse(atmos_temperature_Cel < 0, atmos_precipitation_mm, atmos_snow_mm);
+  atmos_snow_mm = (1 - atmos_temperature_Cel / param_atmos_ubc_A0FORM) * atmos_precipitation_mm;
+  atmos_snow_mm = ifelse(atmos_temperature_Cel <= 0, atmos_precipitation_mm, atmos_snow_mm);
   return ifelse(atmos_temperature_Cel > param_atmos_ubc_A0FORM, 0, atmos_snow_mm);
 }
 

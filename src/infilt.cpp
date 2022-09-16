@@ -5,7 +5,7 @@
 //' **infiltration**
 //' @name infilt
 //' @inheritParams all_vari
-//' @param param_infilt_sur_k parameters for [infilt_SupplyRatio()]
+//' @param param_infilt_sur_k <0.01, 1> coefficient parameter for [infilt_SupplyRatio()]
 //' @return infilt_mm (mm/m2) 
 //' @export
 // [[Rcpp::export]]
@@ -27,7 +27,8 @@ NumericVector infilt_SupplyRatio(
 }
 
 //' @rdname infilt
-//' @param param_infilt_sup_k,param_infilt_sup_gamma parameters for [infilt_SupplyPow()]
+//' @param param_infilt_sup_k <0.01, 1> coefficient parameter for [infilt_SupplyPow()]
+//' @param param_infilt_sup_gamma parameters for [infilt_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_SupplyPow(
@@ -50,7 +51,7 @@ NumericVector infilt_SupplyPow(
 }
 
 //' @rdname infilt
-//' @param param_infilt_acr_k parameters for [infilt_AcceptRatio()]
+//' @param param_infilt_acr_k <0.01, 1> coefficient parameter for [infilt_AcceptRatio()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_AcceptRatio(
@@ -73,7 +74,8 @@ NumericVector infilt_AcceptRatio(
 
 
 //' @rdname infilt
-//' @param param_infilt_acp_k,param_infilt_acp_gamma parameters for [infilt_AcceptPow()]
+//' @param param_infilt_acp_k <0.01, 1> coefficient parameter for [infilt_AcceptPow()]
+//' @param param_infilt_acp_gamma parameters for [infilt_AcceptPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_AcceptPow(
@@ -165,7 +167,7 @@ NumericVector infilt_SCS(
 
 //' @rdname infilt
 //' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
-//' @param param_infilt_ubc_P0AGEN parameters for [infilt_UBC()]
+//' @param param_infilt_ubc_P0AGEN <0.01, 1> coefficient parameter for [infilt_UBC()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_UBC(

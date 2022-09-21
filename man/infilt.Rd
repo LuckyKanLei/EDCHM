@@ -75,7 +75,7 @@ infilt_VIC(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B)
 
 \item{param_infilt_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
 
-\item{param_infilt_sup_gamma}{<-5, 1> parameters for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
+\item{param_infilt_sup_gamma}{<0, 1> parameters for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
 
 \item{param_infilt_acr_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_AcceptRatio]{infilt_AcceptRatio()}}}
 
@@ -87,11 +87,11 @@ infilt_VIC(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B)
 
 \item{land_impermeableFrac_1}{the maximum impermeable fraction when th soil is fully saturated}
 
-\item{param_infilt_ubc_P0AGEN}{<0.01, 1> coefficient parameter for \code{\link[=infilt_UBC]{infilt_UBC()}}}
+\item{param_infilt_ubc_P0AGEN}{<0.1, 4> coefficient parameter for \code{\link[=infilt_UBC]{infilt_UBC()}}}
 
-\item{param_infilt_xaj_B}{parameters for \code{\link[=infilt_XAJ]{infilt_XAJ()}}}
+\item{param_infilt_xaj_B}{<0.01, 3> parameters for \code{\link[=infilt_XAJ]{infilt_XAJ()}}}
 
-\item{param_infilt_vic_B}{parameters for \code{\link[=infilt_VIC]{infilt_VIC()}}}
+\item{param_infilt_vic_B}{<0.01, 3> parameters for \code{\link[=infilt_VIC]{infilt_VIC()}}}
 }
 \value{
 infilt_mm (mm/m2)

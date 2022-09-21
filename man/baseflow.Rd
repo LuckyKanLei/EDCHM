@@ -2,37 +2,36 @@
 % Please edit documentation in R/RcppExports.R
 \name{baseflow}
 \alias{baseflow}
-\alias{baseflow_SupplyPow}
-\alias{baseflow_SupplyRatio}
 \alias{baseflow_GR4J}
 \alias{baseflow_GR4Jfix}
+\alias{baseflow_SupplyPow}
+\alias{baseflow_SupplyRatio}
 \title{\strong{baseflow}}
 \usage{
+baseflow_GR4J(ground_water_mm, ground_capacity_mm)
+
+baseflow_GR4Jfix(ground_water_mm, ground_capacity_mm, param_baseflow_grf_gamma)
+
 baseflow_SupplyPow(
   ground_water_mm,
-  ground_capacity_mm,
   param_baseflow_sup_k,
   param_baseflow_sup_gamma
 )
 
 baseflow_SupplyRatio(ground_water_mm, param_baseflow_sur_k)
-
-baseflow_GR4J(ground_water_mm, ground_capacity_mm)
-
-baseflow_GR4Jfix(ground_water_mm, ground_capacity_mm, param_baseflow_grf_gamma)
 }
 \arguments{
 \item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}
 
 \item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{groundLy}}
 
+\item{param_baseflow_grf_gamma}{<2, 7> exponential parameter for \code{\link[=baseflow_GR4Jfix]{baseflow_GR4Jfix()}}}
+
 \item{param_baseflow_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=baseflow_SupplyPow]{baseflow_SupplyPow()}}}
 
-\item{param_baseflow_sup_gamma}{<0.1, 5> exponential parameter for \code{\link[=baseflow_SupplyPow]{baseflow_SupplyPow()}}}
+\item{param_baseflow_sup_gamma}{<0, 1> exponential parameter for \code{\link[=baseflow_SupplyPow]{baseflow_SupplyPow()}}}
 
 \item{param_baseflow_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=baseflow_SupplyRatio]{baseflow_SupplyRatio()}}}
-
-\item{param_baseflow_grf_gamma}{<2, 7> exponential parameter for \code{\link[=baseflow_GR4Jfix]{baseflow_GR4Jfix()}}}
 }
 \value{
 ground_baseflow_mm (mm/m2/TS)

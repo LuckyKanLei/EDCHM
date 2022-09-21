@@ -193,54 +193,6 @@ NumericVector evatransActual_SupplyPow(
   return ifelse(AET > water_mm, water_mm, AET);
 }
 
-//' @rdname evatransActual
-//' @details
-//' - **_AcceptPow**: only the potential ET 
-//' is considered as th main factors for the ratio \mjseqn{f}.
-//' \mjsdeqn{f = k}
-//' where
-//'   - \mjseqn{k} is `param_evatrans_acr_k`
-//' @param param_evatrans_acr_k <0.1, 1> parameter for [evatransActual_AcceptRatio()]
-//' @export
-// [[Rcpp::export]]
-NumericVector evatransActual_AcceptRatio(
-    NumericVector atmos_potentialEvatrans_mm,
-    NumericVector water_mm,
-    NumericVector param_evatrans_acr_k
-)
-{
-  NumericVector AET;
-  
-  AET = atmos_potentialEvatrans_mm * param_evatrans_acr_k;
-  
-  return ifelse(AET > water_mm, water_mm, AET);
-}
-
-//' @rdname evatransActual
-//' @details
-//' - **_AcceptPow**: only the potential ET 
-//' is considered as th main factors for the ratio \mjseqn{f}.
-//' \mjsdeqn{E_a = k  E_p^\gamma}
-//' where
-//'   - \mjseqn{k} is `param_evatrans_acp_k`
-//'   - \mjseqn{\gamma} is `param_evatrans_acp_gamma`
-//' @param param_evatrans_acp_k <0.1, 1> parameter for [evatransActual_AcceptPow()], ratio of this method
-//' @param param_evatrans_acp_gamma <-3, 1> parameter for [evatransActual_AcceptPow()], exponent of this method
-//' @export
-// [[Rcpp::export]]
-NumericVector evatransActual_AcceptPow(
-    NumericVector atmos_potentialEvatrans_mm,
-    NumericVector water_mm,
-    NumericVector param_evatrans_acp_k,
-    NumericVector param_evatrans_acp_gamma
-)
-{
-  NumericVector AET, k_;
-  
-  AET = param_evatrans_acp_k * vecpow(atmos_potentialEvatrans_mm, param_evatrans_acp_gamma);
-  return ifelse(AET > water_mm, water_mm, AET);
-}
-
 
 
 //' @rdname evatransActual
@@ -313,7 +265,7 @@ NumericVector evatransActual_UBC(
   
   
   
-  k_ = vecpow10(- diff_mm / param_evatrans_ubc_gamma);
+  k_ = vecpow10(- diff_mm / (param_evatrans_ubc_gamma * capacity_mm));
   AET = atmos_potentialEvatrans_mm * k_;
   return ifelse(AET > water_mm, water_mm, AET);
 }
@@ -357,7 +309,7 @@ NumericVector evatransLand_Liang(
 //' \mjsdeqn{f = \int_{0}^{A_{s}} d A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} d A }
 //' where
 //'   - \mjseqn{B} is `param_evatrans_lia_B`
-//' @param param_evatrans_lia_B <0.3, 2> parameter for [evatransSoil_Liang()]
+//' @param param_evatrans_lia_B <0.01, 3> parameter for [evatransSoil_Liang()]
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransSoil_Liang(
@@ -372,9 +324,14 @@ NumericVector evatransSoil_Liang(
   i_m = capacity_mm * (param_evatrans_lia_B + 1);
   
   B_p_1 = (param_evatrans_lia_B + 1);
-  B_1 = 1 / param_evatrans_lia_B;
+  B_1 = 1 / B_p_1;
   
-  i_0 = i_m * (1 - vecpow(1 - water_mm * B_p_1 / i_m, B_1));
+  i_0 = i_m * (1 - vecpow(1 - water_mm / capacity_mm, B_1));
+  
+  // B_p_1 = (param_evatrans_lia_B + 1);
+  // B_1 = 1 / param_evatrans_lia_B;
+  // 
+  // i_0 = i_m * (1 - vecpow(1 - water_mm * B_p_1 / i_m, B_1));
   A_s = 1 - vecpow((1 - i_0 / i_m), param_evatrans_lia_B);
   A_s_1 = (1 - A_s);
   

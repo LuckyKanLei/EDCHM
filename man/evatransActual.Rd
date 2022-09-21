@@ -4,8 +4,6 @@
 \alias{evatransActual}
 \alias{evatransActual_SupplyRatio}
 \alias{evatransActual_SupplyPow}
-\alias{evatransActual_AcceptRatio}
-\alias{evatransActual_AcceptPow}
 \alias{evatransActual_VIC}
 \alias{evatransActual_GR4J}
 \alias{evatransActual_UBC}
@@ -26,19 +24,6 @@ evatransActual_SupplyPow(
   capacity_mm,
   param_evatrans_sup_k,
   param_evatrans_sup_gamma
-)
-
-evatransActual_AcceptRatio(
-  atmos_potentialEvatrans_mm,
-  water_mm,
-  param_evatrans_acr_k
-)
-
-evatransActual_AcceptPow(
-  atmos_potentialEvatrans_mm,
-  water_mm,
-  param_evatrans_acp_k,
-  param_evatrans_acp_gamma
 )
 
 evatransActual_VIC(
@@ -84,19 +69,13 @@ evatransSoil_Liang(
 
 \item{param_evatrans_sup_gamma}{<1, 5> parameter for \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, exponent of this method}
 
-\item{param_evatrans_acr_k}{<0.1, 1> parameter for \code{\link[=evatransActual_AcceptRatio]{evatransActual_AcceptRatio()}}}
-
-\item{param_evatrans_acp_k}{<0.1, 1> parameter for \code{\link[=evatransActual_AcceptPow]{evatransActual_AcceptPow()}}, ratio of this method}
-
-\item{param_evatrans_acp_gamma}{<-3, 1> parameter for \code{\link[=evatransActual_AcceptPow]{evatransActual_AcceptPow()}}, exponent of this method}
-
 \item{param_evatrans_vic_gamma}{<0.2, 5> parameter for \code{\link[=evatransActual_VIC]{evatransActual_VIC()}}}
 
 \item{param_evatrans_ubc_gamma}{<0.5, 2>parameter for \code{\link[=evatransActual_UBC]{evatransActual_UBC()}}}
 
 \item{param_evatrans_lia_gamma}{<0.4, 1> parameter for \code{\link[=evatransLand_Liang]{evatransLand_Liang()}}}
 
-\item{param_evatrans_lia_B}{<0.3, 2> parameter for \code{\link[=evatransSoil_Liang]{evatransSoil_Liang()}}}
+\item{param_evatrans_lia_B}{<0.01, 3> parameter for \code{\link[=evatransSoil_Liang]{evatransSoil_Liang()}}}
 }
 \value{
 actually ET in (mm/m2/TS)
@@ -139,27 +118,6 @@ where
 \itemize{
 \item \mjseqn{k} is \code{param_evatrans_sup_k}
 \item \mjseqn{\gamma} is \code{param_evatrans_sup_gamma}
-}
-}
-
-\itemize{
-\item \strong{_AcceptPow}: only the potential ET
-is considered as th main factors for the ratio \mjseqn{f}.
-\mjsdeqn{f = k}
-where
-\itemize{
-\item \mjseqn{k} is \code{param_evatrans_acr_k}
-}
-}
-
-\itemize{
-\item \strong{_AcceptPow}: only the potential ET
-is considered as th main factors for the ratio \mjseqn{f}.
-\mjsdeqn{E_a = k  E_p^\gamma}
-where
-\itemize{
-\item \mjseqn{k} is \code{param_evatrans_acp_k}
-\item \mjseqn{\gamma} is \code{param_evatrans_acp_gamma}
 }
 }
 

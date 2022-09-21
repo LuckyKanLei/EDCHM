@@ -29,7 +29,7 @@ NumericVector capirise_SupplyRatio(
 
 //' @rdname capirise
 //' @param param_capirise_sup_k <0.01, 1> coefficient parameter for [capirise_SupplyPow()]
-//' @param param_capirise_sup_gamma <0.1, 5> exponential parameter for [capirise_SupplyPow()]
+//' @param param_capirise_sup_gamma <0, 1> exponential parameter for [capirise_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector capirise_SupplyPow(
@@ -43,8 +43,10 @@ NumericVector capirise_SupplyPow(
   NumericVector soil_diff_mm, capirise_mm, k_, limit_mm;
   soil_diff_mm = soil_capacity_mm - soil_water_mm;
   
-  k_ = param_capirise_sup_k * vecpow((ground_water_mm / soil_capacity_mm), param_capirise_sup_gamma);
-  capirise_mm = k_ * ground_water_mm;
+  capirise_mm = param_capirise_sup_k * vecpow(ceil(ground_water_mm), param_capirise_sup_gamma);
+  
+  // k_ = param_capirise_sup_k * vecpow((ground_water_mm / soil_capacity_mm), param_capirise_sup_gamma);
+  // capirise_mm = k_ * ground_water_mm;
   
   limit_mm = ifelse(soil_diff_mm > ground_water_mm, ground_water_mm, soil_diff_mm) ;
   return ifelse(capirise_mm > limit_mm, limit_mm, capirise_mm) ;

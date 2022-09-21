@@ -52,6 +52,8 @@
 
 \item{land_actualEvatrans_mm}{(mm/m2/TS) \strong{actual} evapotranspiration from \code{landLy}}
 
+\item{land_infiltrat_mm}{(mm/m2/TS) infiltration from \code{landLy} to \code{soilLy}}
+
 \item{snow_ice_mm}{(mm/m2) water equivalent of \strong{ice} in snowpack}
 
 \item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}

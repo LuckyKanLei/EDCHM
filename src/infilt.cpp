@@ -28,7 +28,7 @@ NumericVector infilt_SupplyRatio(
 
 //' @rdname infilt
 //' @param param_infilt_sup_k <0.01, 1> coefficient parameter for [infilt_SupplyPow()]
-//' @param param_infilt_sup_gamma <-5, 1> parameters for [infilt_SupplyPow()]
+//' @param param_infilt_sup_gamma <0, 1> parameters for [infilt_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_SupplyPow(
@@ -90,7 +90,7 @@ NumericVector infilt_AcceptPow(
   soil_diff_mm = soil_capacity_mm - soil_water_mm;
   limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
   
-  k_ = param_infilt_acp_k * vecpow((soil_water_mm / soil_capacity_mm), param_infilt_acp_gamma);
+  k_ = param_infilt_acp_k * vecpow((soil_diff_mm / soil_capacity_mm), param_infilt_acp_gamma);
   infilt_water_mm = k_ * soil_diff_mm;
   return ifelse(infilt_water_mm > land_water_mm, land_water_mm, infilt_water_mm);
 }
@@ -141,7 +141,7 @@ NumericVector infilt_GR4J(
 
 //' @rdname infilt
 //' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
-//' @param param_infilt_ubc_P0AGEN <0.01, 1> coefficient parameter for [infilt_UBC()]
+//' @param param_infilt_ubc_P0AGEN <0.1, 4> coefficient parameter for [infilt_UBC()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_UBC(
@@ -164,7 +164,7 @@ NumericVector infilt_UBC(
 }
 
 //' @rdname infilt
-//' @param param_infilt_xaj_B parameters for [infilt_XAJ()]
+//' @param param_infilt_xaj_B <0.01, 3> parameters for [infilt_XAJ()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_XAJ(
@@ -198,7 +198,7 @@ NumericVector infilt_XAJ(
 }
 
 //' @rdname infilt
-//' @param param_infilt_vic_B parameters for [infilt_VIC()]
+//' @param param_infilt_vic_B <0.01, 3> parameters for [infilt_VIC()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_VIC(
@@ -213,14 +213,17 @@ NumericVector infilt_VIC(
   i_m = soil_capacity_mm * (param_infilt_vic_B + 1);
   
   B_p_1 = (param_infilt_vic_B + 1);
-  B_1 = 1 / param_infilt_vic_B;
+  B_1 = 1 / B_p_1;
   
-  i_0 = i_m * (1 - vecpow(1 - soil_water_mm * B_p_1 / i_m, B_1));
-  A_s = 1 - vecpow((1 - i_0 / i_m), param_infilt_vic_B);
-  infilt_water_mm = i_0 * (1 - A_s);
+  i_0 = i_m * (1 - vecpow(1 - soil_water_mm / soil_capacity_mm, B_1));
+  
   
   soil_diff_mm = soil_capacity_mm - soil_water_mm;
-  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm) ;
+  infilt_water_mm = ifelse((i_0 + land_water_mm) > i_m, soil_diff_mm, 
+                           soil_diff_mm - soil_capacity_mm * vecpow((1 - (i_0 + land_water_mm) / i_m), B_p_1)) ;
+  // A_s = 1 - vecpow((1 - i_0 / i_m), param_infilt_vic_B);
+  // infilt_water_mm = i_0 * (1 - A_s);
   
+  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm) ;
   return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
 }

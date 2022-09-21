@@ -49,7 +49,7 @@ capirise_AcceptPow(
 
 \item{param_capirise_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=capirise_SupplyPow]{capirise_SupplyPow()}}}
 
-\item{param_capirise_sup_gamma}{<0.1, 5> exponential parameter for \code{\link[=capirise_SupplyPow]{capirise_SupplyPow()}}}
+\item{param_capirise_sup_gamma}{<0, 1> exponential parameter for \code{\link[=capirise_SupplyPow]{capirise_SupplyPow()}}}
 
 \item{param_capirise_acr_k}{<0.01, 1> coefficient parameter \code{\link[=capirise_AcceptRatio]{capirise_AcceptRatio()}}}
 

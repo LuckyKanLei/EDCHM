@@ -238,7 +238,7 @@ evatransActual_SupplyRatio <- function(atmos_potentialEvatrans_mm, water_mm, cap
 #'   - \mjseqn{k} is `param_evatrans_sup_k`
 #'   - \mjseqn{\gamma} is `param_evatrans_sup_gamma`
 #' @param param_evatrans_sup_k <0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method
-#' @param param_evatrans_sup_gamma <-3, 5> parameter for [evatransActual_SupplyPow()], exponent of this method
+#' @param param_evatrans_sup_gamma <1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method
 #' @export
 evatransActual_SupplyPow <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k, param_evatrans_sup_gamma) {
     .Call(`_EDCHM_evatransActual_SupplyPow`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_sup_k, param_evatrans_sup_gamma)
@@ -291,8 +291,8 @@ evatransActual_VIC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #' And it need **no parameter**.
 #' \mjsdeqn{E_a = \frac{W\left(2-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}{1 + \left(1-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}}
 #' @export
-evatransActual_GR4J <- function(atmos_potentialEvatrans_mm, capacity_mm, water_mm) {
-    .Call(`_EDCHM_evatransActual_GR4J`, atmos_potentialEvatrans_mm, capacity_mm, water_mm)
+evatransActual_GR4J <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm) {
+    .Call(`_EDCHM_evatransActual_GR4J`, atmos_potentialEvatrans_mm, water_mm, capacity_mm)
 }
 
 #' @rdname evatransActual
@@ -350,7 +350,7 @@ infilt_SupplyRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, p
 
 #' @rdname infilt
 #' @param param_infilt_sup_k <0.01, 1> coefficient parameter for [infilt_SupplyPow()]
-#' @param param_infilt_sup_gamma parameters for [infilt_SupplyPow()]
+#' @param param_infilt_sup_gamma <-5, 1> parameters for [infilt_SupplyPow()]
 #' @export
 infilt_SupplyPow <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sup_k, param_infilt_sup_gamma) {
     .Call(`_EDCHM_infilt_SupplyPow`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_sup_k, param_infilt_sup_gamma)
@@ -365,14 +365,14 @@ infilt_AcceptRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, p
 
 #' @rdname infilt
 #' @param param_infilt_acp_k <0.01, 1> coefficient parameter for [infilt_AcceptPow()]
-#' @param param_infilt_acp_gamma parameters for [infilt_AcceptPow()]
+#' @param param_infilt_acp_gamma <0.001, 5> parameters for [infilt_AcceptPow()]
 #' @export
 infilt_AcceptPow <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acp_k, param_infilt_acp_gamma) {
     .Call(`_EDCHM_infilt_AcceptPow`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acp_k, param_infilt_acp_gamma)
 }
 
 #' @rdname infilt
-#' @param param_infilt_hbv_beta parameters for [infilt_HBV()]
+#' @param param_infilt_hbv_beta <0.001, 5> parameters for [infilt_HBV()]
 #' @export
 infilt_HBV <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_hbv_beta) {
     .Call(`_EDCHM_infilt_HBV`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_hbv_beta)
@@ -382,13 +382,6 @@ infilt_HBV <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 #' @export
 infilt_GR4J <- function(land_water_mm, soil_water_mm, soil_capacity_mm) {
     .Call(`_EDCHM_infilt_GR4J`, land_water_mm, soil_water_mm, soil_capacity_mm)
-}
-
-#' @rdname infilt
-#' @param param_infilt_scs_CN parameters for [infilt_SCS()]
-#' @export
-infilt_SCS <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN) {
-    .Call(`_EDCHM_infilt_SCS`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN)
 }
 
 #' @rdname infilt
@@ -404,6 +397,13 @@ infilt_UBC <- function(land_water_mm, land_impermeableFrac_1, soil_water_mm, soi
 #' @export
 infilt_XAJ <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B) {
     .Call(`_EDCHM_infilt_XAJ`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
+}
+
+#' @rdname infilt
+#' @param param_infilt_vic_B parameters for [infilt_VIC()]
+#' @export
+infilt_VIC <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B) {
+    .Call(`_EDCHM_infilt_VIC`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B)
 }
 
 #' **interception** water from land go into the soil.

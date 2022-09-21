@@ -48,7 +48,7 @@ evatransActual_VIC(
   param_evatrans_vic_gamma
 )
 
-evatransActual_GR4J(atmos_potentialEvatrans_mm, capacity_mm, water_mm)
+evatransActual_GR4J(atmos_potentialEvatrans_mm, water_mm, capacity_mm)
 
 evatransActual_UBC(
   atmos_potentialEvatrans_mm,
@@ -82,7 +82,7 @@ evatransSoil_Liang(
 
 \item{param_evatrans_sup_k}{<0.1, 1> parameter for \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, ratio of this method}
 
-\item{param_evatrans_sup_gamma}{<-3, 5> parameter for \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, exponent of this method}
+\item{param_evatrans_sup_gamma}{<1, 5> parameter for \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, exponent of this method}
 
 \item{param_evatrans_acr_k}{<0.1, 1> parameter for \code{\link[=evatransActual_AcceptRatio]{evatransActual_AcceptRatio()}}}
 

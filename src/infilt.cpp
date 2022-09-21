@@ -28,7 +28,7 @@ NumericVector infilt_SupplyRatio(
 
 //' @rdname infilt
 //' @param param_infilt_sup_k <0.01, 1> coefficient parameter for [infilt_SupplyPow()]
-//' @param param_infilt_sup_gamma parameters for [infilt_SupplyPow()]
+//' @param param_infilt_sup_gamma <-5, 1> parameters for [infilt_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_SupplyPow(
@@ -44,9 +44,8 @@ NumericVector infilt_SupplyPow(
   soil_diff_mm = soil_capacity_mm - soil_water_mm;
   limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
   
-  k_ = param_infilt_sup_k * vecpow((land_water_mm / soil_capacity_mm), param_infilt_sup_gamma);
-  infilt_water_mm = k_ * land_water_mm;
-  
+  infilt_water_mm = param_infilt_sup_k * vecpow(ceil(land_water_mm), param_infilt_sup_gamma);
+  infilt_water_mm = ifelse(infilt_water_mm > land_water_mm, land_water_mm, infilt_water_mm);
   return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
 }
 
@@ -75,7 +74,7 @@ NumericVector infilt_AcceptRatio(
 
 //' @rdname infilt
 //' @param param_infilt_acp_k <0.01, 1> coefficient parameter for [infilt_AcceptPow()]
-//' @param param_infilt_acp_gamma parameters for [infilt_AcceptPow()]
+//' @param param_infilt_acp_gamma <0.001, 5> parameters for [infilt_AcceptPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_AcceptPow(
@@ -93,12 +92,11 @@ NumericVector infilt_AcceptPow(
   
   k_ = param_infilt_acp_k * vecpow((soil_water_mm / soil_capacity_mm), param_infilt_acp_gamma);
   infilt_water_mm = k_ * soil_diff_mm;
-  
-  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
+  return ifelse(infilt_water_mm > land_water_mm, land_water_mm, infilt_water_mm);
 }
 
 //' @rdname infilt
-//' @param param_infilt_hbv_beta parameters for [infilt_HBV()]
+//' @param param_infilt_hbv_beta <0.001, 5> parameters for [infilt_HBV()]
 //' @export
 // [[Rcpp::export]]
 NumericVector infilt_HBV(
@@ -137,30 +135,6 @@ NumericVector infilt_GR4J(
   tanh_pn_x1 = tanh(land_water_mm / soil_capacity_mm);
   s_x1 = soil_water_mm / soil_capacity_mm;
   infilt_water_mm = soil_capacity_mm * (1 - (s_x1) * (s_x1)) * tanh_pn_x1 / (1 + s_x1 * tanh_pn_x1); //// Eq.3
-  
-  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
-}
-
-//' @rdname infilt
-//' @param param_infilt_scs_CN parameters for [infilt_SCS()]
-//' @export
-// [[Rcpp::export]]
-NumericVector infilt_SCS(
-    NumericVector land_water_mm, 
-    NumericVector soil_water_mm,
-    NumericVector soil_capacity_mm, 
-    NumericVector param_infilt_scs_CN
-)
-{
-  NumericVector soil_diff_mm, S_, k_, infilt_water_mm, limit_mm;
-  
-  soil_diff_mm = soil_capacity_mm - soil_water_mm;
-  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
-  
-  S_ = 25400 / param_infilt_scs_CN -254;
-  k_ = (1 - pow(land_water_mm - 0.2 * S_, 2) / (land_water_mm + 0.8 * S_));
-  k_ = ifelse(k_ > 0, k_, 0);
-  infilt_water_mm = land_water_mm * k_;
   
   return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
 }
@@ -221,4 +195,32 @@ NumericVector infilt_XAJ(
   infilt_water_mm = - MM_ * (vecpow(AU_L_MM, B_p_1) - vecpow(MM_AU, B_p_1)) / B_p_1;
   
   return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm) ;
+}
+
+//' @rdname infilt
+//' @param param_infilt_vic_B parameters for [infilt_VIC()]
+//' @export
+// [[Rcpp::export]]
+NumericVector infilt_VIC(
+    NumericVector land_water_mm, 
+    NumericVector soil_water_mm,
+    NumericVector soil_capacity_mm, 
+    NumericVector param_infilt_vic_B
+)
+{
+  NumericVector infilt_water_mm, limit_mm, soil_diff_mm, i_0, i_m, B_1, B_p_1, A_s;
+  
+  i_m = soil_capacity_mm * (param_infilt_vic_B + 1);
+  
+  B_p_1 = (param_infilt_vic_B + 1);
+  B_1 = 1 / param_infilt_vic_B;
+  
+  i_0 = i_m * (1 - vecpow(1 - soil_water_mm * B_p_1 / i_m, B_1));
+  A_s = 1 - vecpow((1 - i_0 / i_m), param_infilt_vic_B);
+  infilt_water_mm = i_0 * (1 - A_s);
+  
+  soil_diff_mm = soil_capacity_mm - soil_water_mm;
+  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm) ;
+  
+  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
 }

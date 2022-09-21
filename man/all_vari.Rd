@@ -50,11 +50,15 @@
 
 \item{land_interceptCapacity_mm}{(mm/m2) average intercept Capacity (maximal storage capacity)}
 
+\item{land_actualEvatrans_mm}{(mm/m2/TS) \strong{actual} evapotranspiration from \code{landLy}}
+
 \item{snow_ice_mm}{(mm/m2) water equivalent of \strong{ice} in snowpack}
 
 \item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
+
+\item{soil_actualEvatrans_mm}{(mm/m2/TS) \strong{actual} evapotranspiration from \code{soilLy}}
 
 \item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}
 

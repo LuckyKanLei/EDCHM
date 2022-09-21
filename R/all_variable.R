@@ -26,9 +26,11 @@
 #' @param land_water_mm (mm/m2) **pounded water** volume in `landLy` and there is no limit, different than `land_interceptWater_mm`
 #' @param land_interceptWater_mm (mm/m2) initial water volume that can be **intercepted**
 #' @param land_interceptCapacity_mm (mm/m2) average intercept Capacity (maximal storage capacity)
+#' @param land_actualEvatrans_mm (mm/m2/TS) **actual** evapotranspiration from `landLy`
 #' @param snow_ice_mm (mm/m2) water equivalent of **ice** in snowpack
 #' @param soil_water_mm (mm/m2) water volume in `soilLy`
 #' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
+#' @param soil_actualEvatrans_mm (mm/m2/TS) **actual** evapotranspiration from `soilLy`
 #' @param ground_water_mm (mm/m2/TS) water volume in `groundLy`
 #' @param ground_capacity_mm (mm/m2) water storage capacity in `groundLy`
 #' @param ground_lateral_mm (mm/m2/TS) lateral flow, exchange with outside region. It can be **NEGATIV**

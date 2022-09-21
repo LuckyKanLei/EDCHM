@@ -175,7 +175,7 @@ NumericVector evatransActual_SupplyRatio(
 //'   - \mjseqn{k} is `param_evatrans_sup_k`
 //'   - \mjseqn{\gamma} is `param_evatrans_sup_gamma`
 //' @param param_evatrans_sup_k <0.1, 1> parameter for [evatransActual_SupplyPow()], ratio of this method
-//' @param param_evatrans_sup_gamma <-3, 5> parameter for [evatransActual_SupplyPow()], exponent of this method
+//' @param param_evatrans_sup_gamma <1, 5> parameter for [evatransActual_SupplyPow()], exponent of this method
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransActual_SupplyPow(
@@ -237,8 +237,7 @@ NumericVector evatransActual_AcceptPow(
 {
   NumericVector AET, k_;
   
-  k_ = param_evatrans_acp_k * vecpow(atmos_potentialEvatrans_mm, param_evatrans_acp_gamma);
-  AET = atmos_potentialEvatrans_mm * k_;
+  AET = param_evatrans_acp_k * vecpow(atmos_potentialEvatrans_mm, param_evatrans_acp_gamma);
   return ifelse(AET > water_mm, water_mm, AET);
 }
 
@@ -280,8 +279,8 @@ NumericVector evatransActual_VIC(
 // [[Rcpp::export]]
 NumericVector evatransActual_GR4J(
     NumericVector atmos_potentialEvatrans_mm,
-    NumericVector capacity_mm,
-    NumericVector water_mm
+    NumericVector water_mm,
+    NumericVector capacity_mm
 )
 {
   NumericVector AET;

@@ -960,22 +960,22 @@ RcppExport SEXP _EDCHM_evatransActual_VIC(SEXP atmos_potentialEvatrans_mmSEXP, S
     return rcpp_result_gen;
 }
 // evatransActual_GR4J
-NumericVector evatransActual_GR4J(NumericVector atmos_potentialEvatrans_mm, NumericVector capacity_mm, NumericVector water_mm);
-static SEXP _EDCHM_evatransActual_GR4J_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP capacity_mmSEXP, SEXP water_mmSEXP) {
+NumericVector evatransActual_GR4J(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm);
+static SEXP _EDCHM_evatransActual_GR4J_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type water_mm(water_mmSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransActual_GR4J(atmos_potentialEvatrans_mm, capacity_mm, water_mm));
+    Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
+    rcpp_result_gen = Rcpp::wrap(evatransActual_GR4J(atmos_potentialEvatrans_mm, water_mm, capacity_mm));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransActual_GR4J(SEXP atmos_potentialEvatrans_mmSEXP, SEXP capacity_mmSEXP, SEXP water_mmSEXP) {
+RcppExport SEXP _EDCHM_evatransActual_GR4J(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_GR4J_try(atmos_potentialEvatrans_mmSEXP, capacity_mmSEXP, water_mmSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_GR4J_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1329,43 +1329,6 @@ RcppExport SEXP _EDCHM_infilt_GR4J(SEXP land_water_mmSEXP, SEXP soil_water_mmSEX
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// infilt_SCS
-NumericVector infilt_SCS(NumericVector land_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_scs_CN);
-static SEXP _EDCHM_infilt_SCS_try(SEXP land_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_infilt_scs_CNSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type land_water_mm(land_water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_infilt_scs_CN(param_infilt_scs_CNSEXP);
-    rcpp_result_gen = Rcpp::wrap(infilt_SCS(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _EDCHM_infilt_SCS(SEXP land_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_infilt_scs_CNSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_infilt_SCS_try(land_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, param_infilt_scs_CNSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
 // infilt_UBC
 NumericVector infilt_UBC(NumericVector land_water_mm, NumericVector land_impermeableFrac_1, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_ubc_P0AGEN);
 static SEXP _EDCHM_infilt_UBC_try(SEXP land_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_infilt_ubc_P0AGENSEXP) {
@@ -1422,6 +1385,43 @@ RcppExport SEXP _EDCHM_infilt_XAJ(SEXP land_water_mmSEXP, SEXP soil_water_mmSEXP
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
         rcpp_result_gen = PROTECT(_EDCHM_infilt_XAJ_try(land_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, param_infilt_xaj_BSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// infilt_VIC
+NumericVector infilt_VIC(NumericVector land_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_vic_B);
+static SEXP _EDCHM_infilt_VIC_try(SEXP land_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_infilt_vic_BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type land_water_mm(land_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_infilt_vic_B(param_infilt_vic_BSEXP);
+    rcpp_result_gen = Rcpp::wrap(infilt_VIC(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_infilt_VIC(SEXP land_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_infilt_vic_BSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_infilt_VIC_try(land_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, param_infilt_vic_BSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1882,9 +1882,9 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*infilt_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*infilt_HBV)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*infilt_GR4J)(NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*infilt_SCS)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*infilt_UBC)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*infilt_XAJ)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*infilt_VIC)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*intercep_Full)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*lateral_GR4J)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*lateral_GR4Jfix)(NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -1938,9 +1938,9 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_infilt_AcceptPow", (DL_FUNC)_EDCHM_infilt_AcceptPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_infilt_HBV", (DL_FUNC)_EDCHM_infilt_HBV_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_infilt_GR4J", (DL_FUNC)_EDCHM_infilt_GR4J_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_infilt_SCS", (DL_FUNC)_EDCHM_infilt_SCS_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_infilt_UBC", (DL_FUNC)_EDCHM_infilt_UBC_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_infilt_XAJ", (DL_FUNC)_EDCHM_infilt_XAJ_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_infilt_VIC", (DL_FUNC)_EDCHM_infilt_VIC_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_intercep_Full", (DL_FUNC)_EDCHM_intercep_Full_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_lateral_GR4J", (DL_FUNC)_EDCHM_lateral_GR4J_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_lateral_GR4Jfix", (DL_FUNC)_EDCHM_lateral_GR4Jfix_try);
@@ -1993,9 +1993,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_infilt_AcceptPow", (DL_FUNC) &_EDCHM_infilt_AcceptPow, 5},
     {"_EDCHM_infilt_HBV", (DL_FUNC) &_EDCHM_infilt_HBV, 4},
     {"_EDCHM_infilt_GR4J", (DL_FUNC) &_EDCHM_infilt_GR4J, 3},
-    {"_EDCHM_infilt_SCS", (DL_FUNC) &_EDCHM_infilt_SCS, 4},
     {"_EDCHM_infilt_UBC", (DL_FUNC) &_EDCHM_infilt_UBC, 5},
     {"_EDCHM_infilt_XAJ", (DL_FUNC) &_EDCHM_infilt_XAJ, 4},
+    {"_EDCHM_infilt_VIC", (DL_FUNC) &_EDCHM_infilt_VIC, 4},
     {"_EDCHM_intercep_Full", (DL_FUNC) &_EDCHM_intercep_Full, 3},
     {"_EDCHM_lateral_GR4J", (DL_FUNC) &_EDCHM_lateral_GR4J, 3},
     {"_EDCHM_lateral_GR4Jfix", (DL_FUNC) &_EDCHM_lateral_GR4Jfix, 4},

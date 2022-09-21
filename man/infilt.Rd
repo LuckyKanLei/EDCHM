@@ -8,9 +8,9 @@
 \alias{infilt_AcceptPow}
 \alias{infilt_HBV}
 \alias{infilt_GR4J}
-\alias{infilt_SCS}
 \alias{infilt_UBC}
 \alias{infilt_XAJ}
+\alias{infilt_VIC}
 \title{\strong{infiltration}}
 \usage{
 infilt_SupplyRatio(
@@ -52,8 +52,6 @@ infilt_HBV(
 
 infilt_GR4J(land_water_mm, soil_water_mm, soil_capacity_mm)
 
-infilt_SCS(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_scs_CN)
-
 infilt_UBC(
   land_water_mm,
   land_impermeableFrac_1,
@@ -63,6 +61,8 @@ infilt_UBC(
 )
 
 infilt_XAJ(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
+
+infilt_VIC(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B)
 }
 \arguments{
 \item{land_water_mm}{(mm/m2) \strong{pounded water} volume in \code{landLy} and there is no limit, different than \code{land_interceptWater_mm}}
@@ -75,23 +75,23 @@ infilt_XAJ(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B)
 
 \item{param_infilt_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
 
-\item{param_infilt_sup_gamma}{parameters for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
+\item{param_infilt_sup_gamma}{<-5, 1> parameters for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
 
 \item{param_infilt_acr_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_AcceptRatio]{infilt_AcceptRatio()}}}
 
 \item{param_infilt_acp_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_AcceptPow]{infilt_AcceptPow()}}}
 
-\item{param_infilt_acp_gamma}{parameters for \code{\link[=infilt_AcceptPow]{infilt_AcceptPow()}}}
+\item{param_infilt_acp_gamma}{<0.001, 5> parameters for \code{\link[=infilt_AcceptPow]{infilt_AcceptPow()}}}
 
-\item{param_infilt_hbv_beta}{parameters for \code{\link[=infilt_HBV]{infilt_HBV()}}}
-
-\item{param_infilt_scs_CN}{parameters for \code{\link[=infilt_SCS]{infilt_SCS()}}}
+\item{param_infilt_hbv_beta}{<0.001, 5> parameters for \code{\link[=infilt_HBV]{infilt_HBV()}}}
 
 \item{land_impermeableFrac_1}{the maximum impermeable fraction when th soil is fully saturated}
 
 \item{param_infilt_ubc_P0AGEN}{<0.01, 1> coefficient parameter for \code{\link[=infilt_UBC]{infilt_UBC()}}}
 
 \item{param_infilt_xaj_B}{parameters for \code{\link[=infilt_XAJ]{infilt_XAJ()}}}
+
+\item{param_infilt_vic_B}{parameters for \code{\link[=infilt_VIC]{infilt_VIC()}}}
 }
 \value{
 infilt_mm (mm/m2)

@@ -128,14 +128,15 @@ confluenIUH_Kelly <- function(confluen_responseTime_TS, confluen_concentratTime_
 }
 
 #' @rdname confluenIUH
-#' @param param_confluen_nas_n parameters for[confluenIUH_Nash()]
+#' @param param_confluen_nas_n <1, 8> parameter for[confluenIUH_Nash()]
 #' @export
 confluenIUH_Nash <- function(confluen_responseTime_TS, param_confluen_nas_n) {
     .Call(`_EDCHM_confluenIUH_Nash`, confluen_responseTime_TS, param_confluen_nas_n)
 }
 
 #' @rdname confluenIUH
-#' @param param_confluen_nak_b,param_confluen_nak_n parameters for[confluenIUH_NashKumar()]
+#' @param param_confluen_nak_b <1, 6> parameter for[confluenIUH_NashKumar()]
+#' @param param_confluen_nak_n <1, 8> parameter for[confluenIUH_NashKumar()]
 #' @export
 confluenIUH_NashKumar <- function(param_confluen_nak_b, param_confluen_nak_n) {
     .Call(`_EDCHM_confluenIUH_NashKumar`, param_confluen_nak_b, param_confluen_nak_n)
@@ -313,6 +314,20 @@ evatransSoil_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #' **infiltration**
 #' @name infilt
 #' @inheritParams all_vari
+#' @export
+infilt_GR4J <- function(land_water_mm, soil_water_mm, soil_capacity_mm) {
+    .Call(`_EDCHM_infilt_GR4J`, land_water_mm, soil_water_mm, soil_capacity_mm)
+}
+
+#' @rdname infilt
+#' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
+#' @param param_infilt_ubc_P0AGEN <0.1, 4> coefficient parameter for [infilt_UBC()]
+#' @export
+infilt_UBC <- function(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN) {
+    .Call(`_EDCHM_infilt_UBC`, land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN)
+}
+
+#' @rdname infilt
 #' @param param_infilt_sur_k <0.01, 1> coefficient parameter for [infilt_SupplyRatio()]
 #' @return infilt_mm (mm/m2) 
 #' @export
@@ -351,20 +366,6 @@ infilt_HBV <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 }
 
 #' @rdname infilt
-#' @export
-infilt_GR4J <- function(land_water_mm, soil_water_mm, soil_capacity_mm) {
-    .Call(`_EDCHM_infilt_GR4J`, land_water_mm, soil_water_mm, soil_capacity_mm)
-}
-
-#' @rdname infilt
-#' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
-#' @param param_infilt_ubc_P0AGEN <0.1, 4> coefficient parameter for [infilt_UBC()]
-#' @export
-infilt_UBC <- function(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN) {
-    .Call(`_EDCHM_infilt_UBC`, land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN)
-}
-
-#' @rdname infilt
 #' @param param_infilt_xaj_B <0.01, 3> parameters for [infilt_XAJ()]
 #' @export
 infilt_XAJ <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B) {
@@ -383,37 +384,36 @@ infilt_VIC <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 #' @inheritParams all_vari
 #' @return intercept_water_mm (mm/m2) intercepted water in this timestep
 #' @export
-intercep_Full <- function(atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm) {
-    .Call(`_EDCHM_intercep_Full`, atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm)
+intercep_Full <- function(atmos_precipitation_mm, land_interceptWater_mm, land_interceptCapacity_mm) {
+    .Call(`_EDCHM_intercep_Full`, atmos_precipitation_mm, land_interceptWater_mm, land_interceptCapacity_mm)
 }
 
 #' **lateral flux**
 #' @name lateral
 #' @inheritParams all_vari
-#' @param ground_lateralPotential_mm parameters
 #' @return lateral_mm (mm/m2)
 #' @export
-lateral_GR4J <- function(ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm) {
-    .Call(`_EDCHM_lateral_GR4J`, ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm)
+lateral_GR4J <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm) {
+    .Call(`_EDCHM_lateral_GR4J`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm)
 }
 
 #' @rdname lateral
-#' @param param_lateral_grf_gamma parameters for [lateral_SupplyPow()]
+#' @param param_lateral_grf_gamma <0.01, 5> parameter for [lateral_GR4Jfix()]
 #' @export
-lateral_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm, param_lateral_grf_gamma) {
-    .Call(`_EDCHM_lateral_GR4Jfix`, ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm, param_lateral_grf_gamma)
+lateral_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_grf_gamma) {
+    .Call(`_EDCHM_lateral_GR4Jfix`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_grf_gamma)
 }
 
 #' @rdname lateral
-#' @param param_lateral_sur_k <0.01, 1> coefficient parameter for [lateral_SupplyRatio()]
+#' @param param_lateral_sur_k <-1, 1> coefficient parameter for [lateral_SupplyRatio()]
 #' @export
 lateral_SupplyRatio <- function(ground_water_mm, ground_capacity_mm, param_lateral_sur_k) {
     .Call(`_EDCHM_lateral_SupplyRatio`, ground_water_mm, ground_capacity_mm, param_lateral_sur_k)
 }
 
 #' @rdname lateral
-#' @param param_lateral_sup_k <0.01, 1> coefficient parameter for [lateral_SupplyPow()]
-#' @param param_lateral_sup_gamma parameters for [lateral_SupplyPow()]
+#' @param param_lateral_sup_k <-1, 1> coefficient parameter for [lateral_SupplyPow()]
+#' @param param_lateral_sup_gamma <0.01, 5> parameters for [lateral_SupplyPow()]
 #' @export
 lateral_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_lateral_sup_k, param_lateral_sup_gamma) {
     .Call(`_EDCHM_lateral_SupplyPow`, ground_water_mm, ground_capacity_mm, param_lateral_sup_k, param_lateral_sup_gamma)
@@ -444,7 +444,7 @@ percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
 
 #' @rdname percola
 #' @param param_percola_sup_k <0.01, 1> coefficient parameter for [percola_SupplyPow()]
-#' @param param_percola_sup_gamma parameters for [percola_SupplyPow()]
+#' @param param_percola_sup_gamma <0, 5> parameter for [percola_SupplyPow()]
 #' @export
 percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma) {
     .Call(`_EDCHM_percola_SupplyPow`, soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma)
@@ -453,18 +453,20 @@ percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup
 #' **snow**
 #' @name snow
 #' @inheritParams all_vari
-#' @param param_snow_kus_fE,param_snow_kus_fT parameters for [snowMelt_Kustas()]
+#' @param param_snow_kus_fE <0.0005, 0.003> (mm/m2/MJ) snow melt temperature parameter for [snowMelt_Factor()]
+#' @param param_snow_kus_fT <0.05, 1> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 #' @return snow_melt_mm (mm/m2) melted snow
 #' @export
-snowMelt_Kustas <- function(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT) {
-    .Call(`_EDCHM_snowMelt_Kustas`, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT)
+snowMelt_Kustas <- function(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, time_step_h, param_snow_kus_fE, param_snow_kus_fT) {
+    .Call(`_EDCHM_snowMelt_Kustas`, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, time_step_h, param_snow_kus_fE, param_snow_kus_fT)
 }
 
 #' @rdname snow
-#' @param param_snow_fac_Tmelt,param_snow_fac_Tb,param_snow_fac_f parameters for [snowMelt_Factor()]
+#' @param param_snow_fac_Tmelt <0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]
+#' @param param_snow_fac_f <0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 #' @export
-snowMelt_Factor <- function(snow_ice_mm, param_snow_fac_Tmelt, param_snow_fac_Tb, param_snow_fac_f) {
-    .Call(`_EDCHM_snowMelt_Factor`, snow_ice_mm, param_snow_fac_Tmelt, param_snow_fac_Tb, param_snow_fac_f)
+snowMelt_Factor <- function(snow_ice_mm, atmos_temperature_Cel, time_step_h, param_snow_fac_f, param_snow_fac_Tmelt) {
+    .Call(`_EDCHM_snowMelt_Factor`, snow_ice_mm, atmos_temperature_Cel, time_step_h, param_snow_fac_f, param_snow_fac_Tmelt)
 }
 
 # Register entry points for exported C++ functions

@@ -25,9 +25,11 @@ confluenIUH_NashKumar(param_confluen_nak_b, param_confluen_nak_n)
 \arguments{
 \item{confluen_responseTime_TS, confluen_concentratTime_TS}{(TS) response or concentration time in every routeline}
 
-\item{param_confluen_nas_n}{parameters for\code{\link[=confluenIUH_Nash]{confluenIUH_Nash()}}}
+\item{param_confluen_nas_n}{<1, 8> parameter for\code{\link[=confluenIUH_Nash]{confluenIUH_Nash()}}}
 
-\item{param_confluen_nak_b, param_confluen_nak_n}{parameters for\code{\link[=confluenIUH_NashKumar]{confluenIUH_NashKumar()}}}
+\item{param_confluen_nak_b}{<1, 6> parameter for\code{\link[=confluenIUH_NashKumar]{confluenIUH_NashKumar()}}}
+
+\item{param_confluen_nak_n}{<1, 8> parameter for\code{\link[=confluenIUH_NashKumar]{confluenIUH_NashKumar()}}}
 }
 \value{
 IUH (list of num vector)

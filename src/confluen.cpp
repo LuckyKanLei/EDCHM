@@ -151,7 +151,7 @@ NumericVector confluenIUH_Kelly(
 
 
 //' @rdname confluenIUH
-//' @param param_confluen_nas_n parameters for[confluenIUH_Nash()]
+//' @param param_confluen_nas_n <1, 8> parameter for[confluenIUH_Nash()]
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_Nash(
@@ -171,7 +171,8 @@ NumericVector confluenIUH_Nash(
 }
 
 //' @rdname confluenIUH
-//' @param param_confluen_nak_b,param_confluen_nak_n parameters for[confluenIUH_NashKumar()]
+//' @param param_confluen_nak_b <1, 6> parameter for[confluenIUH_NashKumar()]
+//' @param param_confluen_nak_n <1, 8> parameter for[confluenIUH_NashKumar()]
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_NashKumar(

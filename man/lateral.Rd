@@ -8,12 +8,12 @@
 \alias{lateral_SupplyPow}
 \title{\strong{lateral flux}}
 \usage{
-lateral_GR4J(ground_water_mm, ground_capacity_mm, ground_lateralPotential_mm)
+lateral_GR4J(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm)
 
 lateral_GR4Jfix(
   ground_water_mm,
   ground_capacity_mm,
-  ground_lateralPotential_mm,
+  ground_potentialLateral_mm,
   param_lateral_grf_gamma
 )
 
@@ -31,15 +31,15 @@ lateral_SupplyPow(
 
 \item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{groundLy}}
 
-\item{ground_lateralPotential_mm}{parameters}
+\item{ground_potentialLateral_mm}{(mm/m2/TS) \strong{potential} lateral flow}
 
-\item{param_lateral_grf_gamma}{parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
+\item{param_lateral_grf_gamma}{<0.01, 5> parameter for \code{\link[=lateral_GR4Jfix]{lateral_GR4Jfix()}}}
 
-\item{param_lateral_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
+\item{param_lateral_sur_k}{<-1, 1> coefficient parameter for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
 
-\item{param_lateral_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
+\item{param_lateral_sup_k}{<-1, 1> coefficient parameter for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
 
-\item{param_lateral_sup_gamma}{parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
+\item{param_lateral_sup_gamma}{<0.01, 5> parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
 }
 \value{
 lateral_mm (mm/m2)

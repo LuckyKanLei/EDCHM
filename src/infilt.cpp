@@ -5,6 +5,51 @@
 //' **infiltration**
 //' @name infilt
 //' @inheritParams all_vari
+//' @export
+// [[Rcpp::export]]
+NumericVector infilt_GR4J(
+    NumericVector land_water_mm,
+    NumericVector soil_water_mm,
+    NumericVector soil_capacity_mm
+) 
+{
+  NumericVector soil_diff_mm, tanh_pn_x1, s_x1, infilt_water_mm, limit_mm;
+  
+  soil_diff_mm = soil_capacity_mm - soil_water_mm;
+  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
+  
+  tanh_pn_x1 = tanh(land_water_mm / soil_capacity_mm);
+  s_x1 = soil_water_mm / soil_capacity_mm;
+  infilt_water_mm = soil_capacity_mm * (1 - (s_x1) * (s_x1)) * tanh_pn_x1 / (1 + s_x1 * tanh_pn_x1); //// Eq.3
+  
+  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
+}
+
+//' @rdname infilt
+//' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
+//' @param param_infilt_ubc_P0AGEN <0.1, 4> coefficient parameter for [infilt_UBC()]
+//' @export
+// [[Rcpp::export]]
+NumericVector infilt_UBC(
+    NumericVector land_water_mm, 
+    NumericVector land_impermeableFrac_1, 
+    NumericVector soil_water_mm,
+    NumericVector soil_capacity_mm, 
+    NumericVector param_infilt_ubc_P0AGEN
+)
+{
+  NumericVector soil_diff_mm, k_, infilt_water_mm, limit_mm;
+  
+  soil_diff_mm = soil_capacity_mm - soil_water_mm;
+  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
+  
+  k_ = (1 - land_impermeableFrac_1 * vecpow10(- soil_diff_mm / (soil_capacity_mm * param_infilt_ubc_P0AGEN)));
+  infilt_water_mm = land_water_mm * k_;
+  
+  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
+}
+
+//' @rdname infilt
 //' @param param_infilt_sur_k <0.01, 1> coefficient parameter for [infilt_SupplyRatio()]
 //' @return infilt_mm (mm/m2) 
 //' @export
@@ -118,50 +163,7 @@ NumericVector infilt_HBV(
   return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
 }
 
-//' @rdname infilt
-//' @export
-// [[Rcpp::export]]
-NumericVector infilt_GR4J(
-    NumericVector land_water_mm,
-    NumericVector soil_water_mm,
-    NumericVector soil_capacity_mm
-) 
-{
-  NumericVector soil_diff_mm, tanh_pn_x1, s_x1, infilt_water_mm, limit_mm;
-  
-  soil_diff_mm = soil_capacity_mm - soil_water_mm;
-  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
-  
-  tanh_pn_x1 = tanh(land_water_mm / soil_capacity_mm);
-  s_x1 = soil_water_mm / soil_capacity_mm;
-  infilt_water_mm = soil_capacity_mm * (1 - (s_x1) * (s_x1)) * tanh_pn_x1 / (1 + s_x1 * tanh_pn_x1); //// Eq.3
-  
-  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
-}
 
-//' @rdname infilt
-//' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
-//' @param param_infilt_ubc_P0AGEN <0.1, 4> coefficient parameter for [infilt_UBC()]
-//' @export
-// [[Rcpp::export]]
-NumericVector infilt_UBC(
-    NumericVector land_water_mm, 
-    NumericVector land_impermeableFrac_1, 
-    NumericVector soil_water_mm,
-    NumericVector soil_capacity_mm, 
-    NumericVector param_infilt_ubc_P0AGEN
-)
-{
-  NumericVector soil_diff_mm, k_, infilt_water_mm, limit_mm;
-  
-  soil_diff_mm = soil_capacity_mm - soil_water_mm;
-  limit_mm = ifelse(soil_diff_mm > land_water_mm, land_water_mm, soil_diff_mm);
-  
-  k_ = (1 - land_impermeableFrac_1 * vecpow10(- soil_diff_mm / (soil_capacity_mm * param_infilt_ubc_P0AGEN)));
-  infilt_water_mm = land_water_mm * k_;
-  
-  return ifelse(infilt_water_mm > limit_mm, limit_mm, infilt_water_mm);
-}
 
 //' @rdname infilt
 //' @param param_infilt_xaj_B <0.01, 3> parameters for [infilt_XAJ()]

@@ -9,11 +9,11 @@
 //' @export
 // [[Rcpp::export]]
 NumericVector intercep_Full(
-    NumericVector atmos_rain_mm,
+    NumericVector atmos_precipitation_mm,
     NumericVector land_interceptWater_mm,
     NumericVector land_interceptCapacity_mm
 )
 {
   NumericVector water_diff_mm = land_interceptCapacity_mm - land_interceptWater_mm;
-  return ifelse(water_diff_mm > atmos_rain_mm, atmos_rain_mm, water_diff_mm) ;
+  return ifelse(water_diff_mm > atmos_precipitation_mm, atmos_precipitation_mm, water_diff_mm) ;
 }

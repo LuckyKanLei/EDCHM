@@ -70,7 +70,7 @@
 
 \item{ground_capillarise_mm}{(mm/m2/TS) capillary rise from \code{groundLy} to \code{soilLy}}
 
-\item{ground_lateralPotential_mm}{(mm/m2/TS) potential lateral flow, that will as parameter evaluated}
+\item{ground_potentialLateral_mm}{(mm/m2/TS) \strong{potential} lateral flow}
 
 \item{confluen_inputWater_mm, land_runoff_mm, ground_baseflow_mm}{(mm/m2) input water volum in every routeline}
 

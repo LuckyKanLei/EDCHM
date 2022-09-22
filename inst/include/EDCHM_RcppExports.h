@@ -612,6 +612,48 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
+    inline NumericVector infilt_GR4J(NumericVector land_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm) {
+        typedef SEXP(*Ptr_infilt_GR4J)(SEXP,SEXP,SEXP);
+        static Ptr_infilt_GR4J p_infilt_GR4J = NULL;
+        if (p_infilt_GR4J == NULL) {
+            validateSignature("NumericVector(*infilt_GR4J)(NumericVector,NumericVector,NumericVector)");
+            p_infilt_GR4J = (Ptr_infilt_GR4J)R_GetCCallable("EDCHM", "_EDCHM_infilt_GR4J");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_infilt_GR4J(Shield<SEXP>(Rcpp::wrap(land_water_mm)), Shield<SEXP>(Rcpp::wrap(soil_water_mm)), Shield<SEXP>(Rcpp::wrap(soil_capacity_mm)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector infilt_UBC(NumericVector land_water_mm, NumericVector land_impermeableFrac_1, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_ubc_P0AGEN) {
+        typedef SEXP(*Ptr_infilt_UBC)(SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_infilt_UBC p_infilt_UBC = NULL;
+        if (p_infilt_UBC == NULL) {
+            validateSignature("NumericVector(*infilt_UBC)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            p_infilt_UBC = (Ptr_infilt_UBC)R_GetCCallable("EDCHM", "_EDCHM_infilt_UBC");
+        }
+        RObject rcpp_result_gen;
+        {
+            RNGScope RCPP_rngScope_gen;
+            rcpp_result_gen = p_infilt_UBC(Shield<SEXP>(Rcpp::wrap(land_water_mm)), Shield<SEXP>(Rcpp::wrap(land_impermeableFrac_1)), Shield<SEXP>(Rcpp::wrap(soil_water_mm)), Shield<SEXP>(Rcpp::wrap(soil_capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_infilt_ubc_P0AGEN)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
     inline NumericVector infilt_SupplyRatio(NumericVector land_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_sur_k) {
         typedef SEXP(*Ptr_infilt_SupplyRatio)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_infilt_SupplyRatio p_infilt_SupplyRatio = NULL;
@@ -717,48 +759,6 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector infilt_GR4J(NumericVector land_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm) {
-        typedef SEXP(*Ptr_infilt_GR4J)(SEXP,SEXP,SEXP);
-        static Ptr_infilt_GR4J p_infilt_GR4J = NULL;
-        if (p_infilt_GR4J == NULL) {
-            validateSignature("NumericVector(*infilt_GR4J)(NumericVector,NumericVector,NumericVector)");
-            p_infilt_GR4J = (Ptr_infilt_GR4J)R_GetCCallable("EDCHM", "_EDCHM_infilt_GR4J");
-        }
-        RObject rcpp_result_gen;
-        {
-            RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_infilt_GR4J(Shield<SEXP>(Rcpp::wrap(land_water_mm)), Shield<SEXP>(Rcpp::wrap(soil_water_mm)), Shield<SEXP>(Rcpp::wrap(soil_capacity_mm)));
-        }
-        if (rcpp_result_gen.inherits("interrupted-error"))
-            throw Rcpp::internal::InterruptedException();
-        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
-            throw Rcpp::LongjumpException(rcpp_result_gen);
-        if (rcpp_result_gen.inherits("try-error"))
-            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
-        return Rcpp::as<NumericVector >(rcpp_result_gen);
-    }
-
-    inline NumericVector infilt_UBC(NumericVector land_water_mm, NumericVector land_impermeableFrac_1, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_ubc_P0AGEN) {
-        typedef SEXP(*Ptr_infilt_UBC)(SEXP,SEXP,SEXP,SEXP,SEXP);
-        static Ptr_infilt_UBC p_infilt_UBC = NULL;
-        if (p_infilt_UBC == NULL) {
-            validateSignature("NumericVector(*infilt_UBC)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-            p_infilt_UBC = (Ptr_infilt_UBC)R_GetCCallable("EDCHM", "_EDCHM_infilt_UBC");
-        }
-        RObject rcpp_result_gen;
-        {
-            RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_infilt_UBC(Shield<SEXP>(Rcpp::wrap(land_water_mm)), Shield<SEXP>(Rcpp::wrap(land_impermeableFrac_1)), Shield<SEXP>(Rcpp::wrap(soil_water_mm)), Shield<SEXP>(Rcpp::wrap(soil_capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_infilt_ubc_P0AGEN)));
-        }
-        if (rcpp_result_gen.inherits("interrupted-error"))
-            throw Rcpp::internal::InterruptedException();
-        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
-            throw Rcpp::LongjumpException(rcpp_result_gen);
-        if (rcpp_result_gen.inherits("try-error"))
-            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
-        return Rcpp::as<NumericVector >(rcpp_result_gen);
-    }
-
     inline NumericVector infilt_XAJ(NumericVector land_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_infilt_xaj_B) {
         typedef SEXP(*Ptr_infilt_XAJ)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_infilt_XAJ p_infilt_XAJ = NULL;
@@ -801,7 +801,7 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector intercep_Full(NumericVector atmos_rain_mm, NumericVector land_interceptWater_mm, NumericVector land_interceptCapacity_mm) {
+    inline NumericVector intercep_Full(NumericVector atmos_precipitation_mm, NumericVector land_interceptWater_mm, NumericVector land_interceptCapacity_mm) {
         typedef SEXP(*Ptr_intercep_Full)(SEXP,SEXP,SEXP);
         static Ptr_intercep_Full p_intercep_Full = NULL;
         if (p_intercep_Full == NULL) {
@@ -811,7 +811,7 @@ namespace EDCHM {
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_intercep_Full(Shield<SEXP>(Rcpp::wrap(atmos_rain_mm)), Shield<SEXP>(Rcpp::wrap(land_interceptWater_mm)), Shield<SEXP>(Rcpp::wrap(land_interceptCapacity_mm)));
+            rcpp_result_gen = p_intercep_Full(Shield<SEXP>(Rcpp::wrap(atmos_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(land_interceptWater_mm)), Shield<SEXP>(Rcpp::wrap(land_interceptCapacity_mm)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -822,7 +822,7 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector lateral_GR4J(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_lateralPotential_mm) {
+    inline NumericVector lateral_GR4J(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_potentialLateral_mm) {
         typedef SEXP(*Ptr_lateral_GR4J)(SEXP,SEXP,SEXP);
         static Ptr_lateral_GR4J p_lateral_GR4J = NULL;
         if (p_lateral_GR4J == NULL) {
@@ -832,7 +832,7 @@ namespace EDCHM {
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_lateral_GR4J(Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(ground_lateralPotential_mm)));
+            rcpp_result_gen = p_lateral_GR4J(Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(ground_potentialLateral_mm)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -843,7 +843,7 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector lateral_GR4Jfix(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_lateralPotential_mm, NumericVector param_lateral_grf_gamma) {
+    inline NumericVector lateral_GR4Jfix(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_potentialLateral_mm, NumericVector param_lateral_grf_gamma) {
         typedef SEXP(*Ptr_lateral_GR4Jfix)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_lateral_GR4Jfix p_lateral_GR4Jfix = NULL;
         if (p_lateral_GR4Jfix == NULL) {
@@ -853,7 +853,7 @@ namespace EDCHM {
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_lateral_GR4Jfix(Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(ground_lateralPotential_mm)), Shield<SEXP>(Rcpp::wrap(param_lateral_grf_gamma)));
+            rcpp_result_gen = p_lateral_GR4Jfix(Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(ground_potentialLateral_mm)), Shield<SEXP>(Rcpp::wrap(param_lateral_grf_gamma)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -990,17 +990,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector snowMelt_Kustas(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT) {
-        typedef SEXP(*Ptr_snowMelt_Kustas)(SEXP,SEXP,SEXP,SEXP,SEXP);
+    inline NumericVector snowMelt_Kustas(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector time_step_h, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT) {
+        typedef SEXP(*Ptr_snowMelt_Kustas)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_snowMelt_Kustas p_snowMelt_Kustas = NULL;
         if (p_snowMelt_Kustas == NULL) {
-            validateSignature("NumericVector(*snowMelt_Kustas)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*snowMelt_Kustas)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_snowMelt_Kustas = (Ptr_snowMelt_Kustas)R_GetCCallable("EDCHM", "_EDCHM_snowMelt_Kustas");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_snowMelt_Kustas(Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_netRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(param_snow_kus_fE)), Shield<SEXP>(Rcpp::wrap(param_snow_kus_fT)));
+            rcpp_result_gen = p_snowMelt_Kustas(Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_netRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(param_snow_kus_fE)), Shield<SEXP>(Rcpp::wrap(param_snow_kus_fT)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1011,17 +1011,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector snowMelt_Factor(NumericVector snow_ice_mm, NumericVector param_snow_fac_Tmelt, NumericVector param_snow_fac_Tb, NumericVector param_snow_fac_f) {
-        typedef SEXP(*Ptr_snowMelt_Factor)(SEXP,SEXP,SEXP,SEXP);
+    inline NumericVector snowMelt_Factor(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector time_step_h, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt) {
+        typedef SEXP(*Ptr_snowMelt_Factor)(SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_snowMelt_Factor p_snowMelt_Factor = NULL;
         if (p_snowMelt_Factor == NULL) {
-            validateSignature("NumericVector(*snowMelt_Factor)(NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*snowMelt_Factor)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_snowMelt_Factor = (Ptr_snowMelt_Factor)R_GetCCallable("EDCHM", "_EDCHM_snowMelt_Factor");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_snowMelt_Factor(Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tmelt)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tb)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_f)));
+            rcpp_result_gen = p_snowMelt_Factor(Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_f)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tmelt)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

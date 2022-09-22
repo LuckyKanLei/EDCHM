@@ -36,7 +36,7 @@
 #' @param ground_capacity_mm (mm/m2) water storage capacity in `groundLy`
 #' @param ground_lateral_mm (mm/m2/TS) lateral flow, exchange with outside region. It can be **NEGATIV**
 #' @param ground_capillarise_mm (mm/m2/TS) capillary rise from `groundLy` to `soilLy`
-#' @param ground_lateralPotential_mm (mm/m2/TS) potential lateral flow, that will as parameter evaluated
+#' @param ground_potentialLateral_mm (mm/m2/TS) **potential** lateral flow
 #' @param confluen_inputWater_mm,land_runoff_mm,ground_baseflow_mm (mm/m2) input water volum in every routeline
 #' @param confluen_iuh_1,confluen_iuhLand_1,confluen_iuhGround_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 #' @param confluen_responseTime_TS,confluen_concentratTime_TS (TS) response or concentration time in every routeline

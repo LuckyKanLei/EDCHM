@@ -46,7 +46,7 @@ NumericVector percola_SupplyRatio(
 
 //' @rdname percola
 //' @param param_percola_sup_k <0.01, 1> coefficient parameter for [percola_SupplyPow()]
-//' @param param_percola_sup_gamma parameters for [percola_SupplyPow()]
+//' @param param_percola_sup_gamma <0, 5> parameter for [percola_SupplyPow()]
 //' @export
 // [[Rcpp::export]]
 NumericVector percola_SupplyPow(

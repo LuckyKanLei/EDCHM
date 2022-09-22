@@ -5,10 +5,14 @@
 \alias{intercep_Full}
 \title{\strong{interception} water from land go into the soil.}
 \usage{
-intercep_Full(atmos_rain_mm, land_interceptWater_mm, land_interceptCapacity_mm)
+intercep_Full(
+  atmos_precipitation_mm,
+  land_interceptWater_mm,
+  land_interceptCapacity_mm
+)
 }
 \arguments{
-\item{atmos_rain_mm}{(mm/m2/TS) precipitation in rain form}
+\item{atmos_precipitation_mm}{(mm/m2/TS) precipitaion volum}
 
 \item{land_interceptWater_mm}{(mm/m2) initial water volume that can be \strong{intercepted}}
 

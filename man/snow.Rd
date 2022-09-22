@@ -10,15 +10,17 @@ snowMelt_Kustas(
   snow_ice_mm,
   atmos_temperature_Cel,
   atmos_netRadiat_MJ,
+  time_step_h,
   param_snow_kus_fE,
   param_snow_kus_fT
 )
 
 snowMelt_Factor(
   snow_ice_mm,
-  param_snow_fac_Tmelt,
-  param_snow_fac_Tb,
-  param_snow_fac_f
+  atmos_temperature_Cel,
+  time_step_h,
+  param_snow_fac_f,
+  param_snow_fac_Tmelt
 )
 }
 \arguments{
@@ -28,9 +30,15 @@ snowMelt_Factor(
 
 \item{atmos_netRadiat_MJ}{(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation}
 
-\item{param_snow_kus_fE, param_snow_kus_fT}{parameters for \code{\link[=snowMelt_Kustas]{snowMelt_Kustas()}}}
+\item{time_step_h}{<1, 24> (h) time step in hour}
 
-\item{param_snow_fac_Tmelt, param_snow_fac_Tb, param_snow_fac_f}{parameters for \code{\link[=snowMelt_Factor]{snowMelt_Factor()}}}
+\item{param_snow_kus_fE}{<0.0005, 0.003> (mm/m2/MJ) snow melt temperature parameter for \code{\link[=snowMelt_Factor]{snowMelt_Factor()}}}
+
+\item{param_snow_kus_fT}{<0.05, 1> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for \code{\link[=snowMelt_Factor]{snowMelt_Factor()}}}
+
+\item{param_snow_fac_f}{<0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for \code{\link[=snowMelt_Factor]{snowMelt_Factor()}}}
+
+\item{param_snow_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for \code{\link[=snowMelt_Factor]{snowMelt_Factor()}}}
 }
 \value{
 snow_melt_mm (mm/m2) melted snow

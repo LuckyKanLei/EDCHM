@@ -32,7 +32,7 @@ percola_SupplyPow(
 
 \item{param_percola_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
 
-\item{param_percola_sup_gamma}{parameters for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
+\item{param_percola_sup_gamma}{<0, 5> parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
 }
 \value{
 percola_mm (mm/m2)

@@ -19,8 +19,7 @@ NumericVector snowMelt_Kustas(
     NumericVector param_snow_kus_fT
 )
 {
-  
-  NumericVector snow_melt_mm = atmos_temperature_Cel * param_snow_kus_fT * time_step_h + param_snow_kus_fE * atmos_netRadiat_MJ;
+  NumericVector snow_melt_mm = ifelse(atmos_temperature_Cel < 0, 0, atmos_temperature_Cel) * param_snow_kus_fT * time_step_h + param_snow_kus_fE * atmos_netRadiat_MJ;
   return ifelse(snow_melt_mm > snow_ice_mm, snow_ice_mm, snow_melt_mm) ;
   
 }

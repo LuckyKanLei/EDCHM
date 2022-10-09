@@ -71,7 +71,7 @@ infilt_VIC(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B)
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{land_impermeableFrac_1}{the maximum impermeable fraction when th soil is fully saturated}
+\item{land_impermeableFrac_1}{<0, 1> the maximum impermeable fraction when th soil is fully saturated}
 
 \item{param_infilt_ubc_P0AGEN}{<0.1, 4> coefficient parameter for \code{\link[=infilt_UBC]{infilt_UBC()}}}
 

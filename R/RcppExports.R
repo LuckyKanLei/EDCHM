@@ -49,6 +49,29 @@ baseflow_SupplyRatio <- function(ground_water_mm, param_baseflow_sur_k) {
     .Call(`_EDCHM_baseflow_SupplyRatio`, ground_water_mm, param_baseflow_sur_k)
 }
 
+#' @rdname baseflow
+#' @param param_baseflow_map_gamma <0.1, 5> exponential parameter for [baseflow_MaxPow()]
+#' @export
+baseflow_MaxPow <- function(ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_map_gamma) {
+    .Call(`_EDCHM_baseflow_MaxPow`, ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_map_gamma)
+}
+
+#' @rdname baseflow
+#' @param param_baseflow_thp_thresh <0.1, 0.9> coefficient parameter for [baseflow_ThreshPow()]
+#' @param param_baseflow_thp_gamma <0.1, 5> exponential parameter for [baseflow_ThreshPow()]
+#' @export
+baseflow_ThreshPow <- function(ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_thp_thresh, param_baseflow_thp_gamma) {
+    .Call(`_EDCHM_baseflow_ThreshPow`, ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_thp_thresh, param_baseflow_thp_gamma)
+}
+
+#' @rdname baseflow
+#' @param param_baseflow_arn_thresh <0.1, 0.9> coefficient parameter for [baseflow_ThreshPow()]
+#' @param param_baseflow_arn_k <0.1, 1> exponential parameter for [baseflow_ThreshPow()]
+#' @export
+baseflow_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_arn_thresh, param_baseflow_arn_k) {
+    .Call(`_EDCHM_baseflow_Arno`, ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_arn_thresh, param_baseflow_arn_k)
+}
+
 #' **capilarise**
 #' @name capirise
 #' @inheritParams all_vari
@@ -320,7 +343,6 @@ infilt_GR4J <- function(land_water_mm, soil_water_mm, soil_capacity_mm) {
 }
 
 #' @rdname infilt
-#' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
 #' @param param_infilt_ubc_P0AGEN <0.1, 4> coefficient parameter for [infilt_UBC()]
 #' @export
 infilt_UBC <- function(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN) {
@@ -444,10 +466,39 @@ percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
 
 #' @rdname percola
 #' @param param_percola_sup_k <0.01, 1> coefficient parameter for [percola_SupplyPow()]
-#' @param param_percola_sup_gamma <0, 5> parameter for [percola_SupplyPow()]
+#' @param param_percola_sup_gamma <0, 7> parameter for [percola_SupplyPow()]
 #' @export
 percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma) {
     .Call(`_EDCHM_percola_SupplyPow`, soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma)
+}
+
+#' @rdname percola
+#' @param param_percola_map_gamma <0.1, 5> exponential parameter for [percola_MaxPow()]
+#' @export
+percola_MaxPow <- function(soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_map_gamma) {
+    .Call(`_EDCHM_percola_MaxPow`, soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_map_gamma)
+}
+
+#' @rdname percola
+#' @param param_percola_thp_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
+#' @param param_percola_thp_gamma <0.1, 5> exponential parameter for [percola_ThreshPow()]
+#' @export
+percola_ThreshPow <- function(soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_thp_thresh, param_percola_thp_gamma) {
+    .Call(`_EDCHM_percola_ThreshPow`, soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_thp_thresh, param_percola_thp_gamma)
+}
+
+#' @rdname percola
+#' @param param_percola_arn_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
+#' @param param_percola_arn_k <0.1, 1> exponential parameter for [percola_ThreshPow()]
+#' @export
+percola_Arno <- function(soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_arn_thresh, param_percola_arn_k) {
+    .Call(`_EDCHM_percola_Arno`, soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_arn_thresh, param_percola_arn_k)
+}
+
+#' @rdname percola
+#' @export
+percola_BevenWood <- function(soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialPercola_mm) {
+    .Call(`_EDCHM_percola_BevenWood`, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialPercola_mm)
 }
 
 #' **snow**

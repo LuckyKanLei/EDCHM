@@ -70,5 +70,6 @@
 #' 
 #' @useDynLib EDCHM, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
+#' @importFrom Rdpack reprompt
 #' @import mathjaxr
 NULL

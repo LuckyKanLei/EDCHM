@@ -26,7 +26,6 @@ NumericVector infilt_GR4J(
 }
 
 //' @rdname infilt
-//' @param land_impermeableFrac_1 the maximum impermeable fraction when th soil is fully saturated
 //' @param param_infilt_ubc_P0AGEN <0.1, 4> coefficient parameter for [infilt_UBC()]
 //' @export
 // [[Rcpp::export]]

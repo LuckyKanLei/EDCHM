@@ -227,6 +227,119 @@ RcppExport SEXP _EDCHM_baseflow_SupplyRatio(SEXP ground_water_mmSEXP, SEXP param
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// baseflow_MaxPow
+NumericVector baseflow_MaxPow(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_potentialBaseflow_mm, NumericVector param_baseflow_map_gamma);
+static SEXP _EDCHM_baseflow_MaxPow_try(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialBaseflow_mmSEXP, SEXP param_baseflow_map_gammaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_capacity_mm(ground_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_potentialBaseflow_mm(ground_potentialBaseflow_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_baseflow_map_gamma(param_baseflow_map_gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(baseflow_MaxPow(ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_map_gamma));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_baseflow_MaxPow(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialBaseflow_mmSEXP, SEXP param_baseflow_map_gammaSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_baseflow_MaxPow_try(ground_water_mmSEXP, ground_capacity_mmSEXP, ground_potentialBaseflow_mmSEXP, param_baseflow_map_gammaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// baseflow_ThreshPow
+NumericVector baseflow_ThreshPow(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_potentialBaseflow_mm, NumericVector param_baseflow_thp_thresh, NumericVector param_baseflow_thp_gamma);
+static SEXP _EDCHM_baseflow_ThreshPow_try(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialBaseflow_mmSEXP, SEXP param_baseflow_thp_threshSEXP, SEXP param_baseflow_thp_gammaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_capacity_mm(ground_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_potentialBaseflow_mm(ground_potentialBaseflow_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_baseflow_thp_thresh(param_baseflow_thp_threshSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_baseflow_thp_gamma(param_baseflow_thp_gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(baseflow_ThreshPow(ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_thp_thresh, param_baseflow_thp_gamma));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_baseflow_ThreshPow(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialBaseflow_mmSEXP, SEXP param_baseflow_thp_threshSEXP, SEXP param_baseflow_thp_gammaSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_baseflow_ThreshPow_try(ground_water_mmSEXP, ground_capacity_mmSEXP, ground_potentialBaseflow_mmSEXP, param_baseflow_thp_threshSEXP, param_baseflow_thp_gammaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// baseflow_Arno
+NumericVector baseflow_Arno(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_potentialBaseflow_mm, NumericVector param_baseflow_arn_thresh, NumericVector param_baseflow_arn_k);
+static SEXP _EDCHM_baseflow_Arno_try(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialBaseflow_mmSEXP, SEXP param_baseflow_arn_threshSEXP, SEXP param_baseflow_arn_kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_capacity_mm(ground_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_potentialBaseflow_mm(ground_potentialBaseflow_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_baseflow_arn_thresh(param_baseflow_arn_threshSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_baseflow_arn_k(param_baseflow_arn_kSEXP);
+    rcpp_result_gen = Rcpp::wrap(baseflow_Arno(ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_arn_thresh, param_baseflow_arn_k));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_baseflow_Arno(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialBaseflow_mmSEXP, SEXP param_baseflow_arn_threshSEXP, SEXP param_baseflow_arn_kSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_baseflow_Arno_try(ground_water_mmSEXP, ground_capacity_mmSEXP, ground_potentialBaseflow_mmSEXP, param_baseflow_arn_threshSEXP, param_baseflow_arn_kSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // capirise_SupplyRatio
 NumericVector capirise_SupplyRatio(NumericVector ground_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_capirise_sur_k);
 static SEXP _EDCHM_capirise_SupplyRatio_try(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_sur_kSEXP) {
@@ -1692,6 +1805,156 @@ RcppExport SEXP _EDCHM_percola_SupplyPow(SEXP soil_water_mmSEXP, SEXP soil_capac
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// percola_MaxPow
+NumericVector percola_MaxPow(NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector param_percola_map_gamma);
+static SEXP _EDCHM_percola_MaxPow_try(SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP param_percola_map_gammaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_potentialPercola_mm(soil_potentialPercola_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_percola_map_gamma(param_percola_map_gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(percola_MaxPow(soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_map_gamma));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_percola_MaxPow(SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP param_percola_map_gammaSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_percola_MaxPow_try(soil_water_mmSEXP, soil_capacity_mmSEXP, soil_potentialPercola_mmSEXP, param_percola_map_gammaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// percola_ThreshPow
+NumericVector percola_ThreshPow(NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector param_percola_thp_thresh, NumericVector param_percola_thp_gamma);
+static SEXP _EDCHM_percola_ThreshPow_try(SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP param_percola_thp_threshSEXP, SEXP param_percola_thp_gammaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_potentialPercola_mm(soil_potentialPercola_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_percola_thp_thresh(param_percola_thp_threshSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_percola_thp_gamma(param_percola_thp_gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(percola_ThreshPow(soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_thp_thresh, param_percola_thp_gamma));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_percola_ThreshPow(SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP param_percola_thp_threshSEXP, SEXP param_percola_thp_gammaSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_percola_ThreshPow_try(soil_water_mmSEXP, soil_capacity_mmSEXP, soil_potentialPercola_mmSEXP, param_percola_thp_threshSEXP, param_percola_thp_gammaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// percola_Arno
+NumericVector percola_Arno(NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector param_percola_arn_thresh, NumericVector param_percola_arn_k);
+static SEXP _EDCHM_percola_Arno_try(SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_percola_arn_kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_potentialPercola_mm(soil_potentialPercola_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_percola_arn_thresh(param_percola_arn_threshSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_percola_arn_k(param_percola_arn_kSEXP);
+    rcpp_result_gen = Rcpp::wrap(percola_Arno(soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_arn_thresh, param_percola_arn_k));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_percola_Arno(SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_percola_arn_kSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_percola_Arno_try(soil_water_mmSEXP, soil_capacity_mmSEXP, soil_potentialPercola_mmSEXP, param_percola_arn_threshSEXP, param_percola_arn_kSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// percola_BevenWood
+NumericVector percola_BevenWood(NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector soil_fieldCapacityPerc_1, NumericVector soil_potentialPercola_mm);
+static SEXP _EDCHM_percola_BevenWood_try(SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_fieldCapacityPerc_1SEXP, SEXP soil_potentialPercola_mmSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_fieldCapacityPerc_1(soil_fieldCapacityPerc_1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_potentialPercola_mm(soil_potentialPercola_mmSEXP);
+    rcpp_result_gen = Rcpp::wrap(percola_BevenWood(soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialPercola_mm));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_percola_BevenWood(SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_fieldCapacityPerc_1SEXP, SEXP soil_potentialPercola_mmSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_percola_BevenWood_try(soil_water_mmSEXP, soil_capacity_mmSEXP, soil_fieldCapacityPerc_1SEXP, soil_potentialPercola_mmSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
 // snowMelt_Kustas
 NumericVector snowMelt_Kustas(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector time_step_h, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT);
 static SEXP _EDCHM_snowMelt_Kustas_try(SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP time_step_hSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
@@ -1780,6 +2043,9 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*baseflow_GR4Jfix)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_SupplyPow)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_SupplyRatio)(NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*baseflow_MaxPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*baseflow_ThreshPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*baseflow_Arno)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*capirise_SupplyRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*capirise_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*capirise_AcceptRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -1820,6 +2086,10 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*percola_GR4J)(NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_SupplyRatio)(NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*percola_MaxPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*percola_ThreshPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*percola_Arno)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*percola_BevenWood)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*snowMelt_Kustas)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*snowMelt_Factor)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
     }
@@ -1834,6 +2104,9 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_GR4Jfix", (DL_FUNC)_EDCHM_baseflow_GR4Jfix_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_SupplyPow", (DL_FUNC)_EDCHM_baseflow_SupplyPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_SupplyRatio", (DL_FUNC)_EDCHM_baseflow_SupplyRatio_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_MaxPow", (DL_FUNC)_EDCHM_baseflow_MaxPow_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_ThreshPow", (DL_FUNC)_EDCHM_baseflow_ThreshPow_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_Arno", (DL_FUNC)_EDCHM_baseflow_Arno_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_capirise_SupplyRatio", (DL_FUNC)_EDCHM_capirise_SupplyRatio_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_capirise_SupplyPow", (DL_FUNC)_EDCHM_capirise_SupplyPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_capirise_AcceptRatio", (DL_FUNC)_EDCHM_capirise_AcceptRatio_try);
@@ -1874,6 +2147,10 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_percola_GR4J", (DL_FUNC)_EDCHM_percola_GR4J_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_percola_SupplyRatio", (DL_FUNC)_EDCHM_percola_SupplyRatio_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_percola_SupplyPow", (DL_FUNC)_EDCHM_percola_SupplyPow_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_percola_MaxPow", (DL_FUNC)_EDCHM_percola_MaxPow_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_percola_ThreshPow", (DL_FUNC)_EDCHM_percola_ThreshPow_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_percola_Arno", (DL_FUNC)_EDCHM_percola_Arno_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_percola_BevenWood", (DL_FUNC)_EDCHM_percola_BevenWood_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_snowMelt_Kustas", (DL_FUNC)_EDCHM_snowMelt_Kustas_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_snowMelt_Factor", (DL_FUNC)_EDCHM_snowMelt_Factor_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_RcppExport_validate", (DL_FUNC)_EDCHM_RcppExport_validate);
@@ -1887,6 +2164,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_baseflow_GR4Jfix", (DL_FUNC) &_EDCHM_baseflow_GR4Jfix, 3},
     {"_EDCHM_baseflow_SupplyPow", (DL_FUNC) &_EDCHM_baseflow_SupplyPow, 3},
     {"_EDCHM_baseflow_SupplyRatio", (DL_FUNC) &_EDCHM_baseflow_SupplyRatio, 2},
+    {"_EDCHM_baseflow_MaxPow", (DL_FUNC) &_EDCHM_baseflow_MaxPow, 4},
+    {"_EDCHM_baseflow_ThreshPow", (DL_FUNC) &_EDCHM_baseflow_ThreshPow, 5},
+    {"_EDCHM_baseflow_Arno", (DL_FUNC) &_EDCHM_baseflow_Arno, 5},
     {"_EDCHM_capirise_SupplyRatio", (DL_FUNC) &_EDCHM_capirise_SupplyRatio, 4},
     {"_EDCHM_capirise_SupplyPow", (DL_FUNC) &_EDCHM_capirise_SupplyPow, 5},
     {"_EDCHM_capirise_AcceptRatio", (DL_FUNC) &_EDCHM_capirise_AcceptRatio, 4},
@@ -1927,6 +2207,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_percola_GR4J", (DL_FUNC) &_EDCHM_percola_GR4J, 2},
     {"_EDCHM_percola_SupplyRatio", (DL_FUNC) &_EDCHM_percola_SupplyRatio, 2},
     {"_EDCHM_percola_SupplyPow", (DL_FUNC) &_EDCHM_percola_SupplyPow, 4},
+    {"_EDCHM_percola_MaxPow", (DL_FUNC) &_EDCHM_percola_MaxPow, 4},
+    {"_EDCHM_percola_ThreshPow", (DL_FUNC) &_EDCHM_percola_ThreshPow, 5},
+    {"_EDCHM_percola_Arno", (DL_FUNC) &_EDCHM_percola_Arno, 5},
+    {"_EDCHM_percola_BevenWood", (DL_FUNC) &_EDCHM_percola_BevenWood, 4},
     {"_EDCHM_snowMelt_Kustas", (DL_FUNC) &_EDCHM_snowMelt_Kustas, 6},
     {"_EDCHM_snowMelt_Factor", (DL_FUNC) &_EDCHM_snowMelt_Factor, 5},
     {"_EDCHM_RcppExport_registerCCallable", (DL_FUNC) &_EDCHM_RcppExport_registerCCallable, 0},

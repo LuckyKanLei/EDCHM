@@ -6,6 +6,9 @@
 \alias{baseflow_GR4Jfix}
 \alias{baseflow_SupplyPow}
 \alias{baseflow_SupplyRatio}
+\alias{baseflow_MaxPow}
+\alias{baseflow_ThreshPow}
+\alias{baseflow_Arno}
 \title{\strong{baseflow}}
 \usage{
 baseflow_GR4J(ground_water_mm, ground_capacity_mm)
@@ -19,6 +22,29 @@ baseflow_SupplyPow(
 )
 
 baseflow_SupplyRatio(ground_water_mm, param_baseflow_sur_k)
+
+baseflow_MaxPow(
+  ground_water_mm,
+  ground_capacity_mm,
+  ground_potentialBaseflow_mm,
+  param_baseflow_map_gamma
+)
+
+baseflow_ThreshPow(
+  ground_water_mm,
+  ground_capacity_mm,
+  ground_potentialBaseflow_mm,
+  param_baseflow_thp_thresh,
+  param_baseflow_thp_gamma
+)
+
+baseflow_Arno(
+  ground_water_mm,
+  ground_capacity_mm,
+  ground_potentialBaseflow_mm,
+  param_baseflow_arn_thresh,
+  param_baseflow_arn_k
+)
 }
 \arguments{
 \item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}
@@ -32,6 +58,18 @@ baseflow_SupplyRatio(ground_water_mm, param_baseflow_sur_k)
 \item{param_baseflow_sup_gamma}{<0, 1> exponential parameter for \code{\link[=baseflow_SupplyPow]{baseflow_SupplyPow()}}}
 
 \item{param_baseflow_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=baseflow_SupplyRatio]{baseflow_SupplyRatio()}}}
+
+\item{ground_potentialBaseflow_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} baseflow}
+
+\item{param_baseflow_map_gamma}{<0.1, 5> exponential parameter for \code{\link[=baseflow_MaxPow]{baseflow_MaxPow()}}}
+
+\item{param_baseflow_thp_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=baseflow_ThreshPow]{baseflow_ThreshPow()}}}
+
+\item{param_baseflow_thp_gamma}{<0.1, 5> exponential parameter for \code{\link[=baseflow_ThreshPow]{baseflow_ThreshPow()}}}
+
+\item{param_baseflow_arn_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=baseflow_ThreshPow]{baseflow_ThreshPow()}}}
+
+\item{param_baseflow_arn_k}{<0.1, 1> exponential parameter for \code{\link[=baseflow_ThreshPow]{baseflow_ThreshPow()}}}
 }
 \value{
 ground_baseflow_mm (mm/m2/TS)

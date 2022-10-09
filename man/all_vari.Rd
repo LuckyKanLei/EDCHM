@@ -44,6 +44,8 @@
 
 \item{land_elevation_m}{(m) average elevation}
 
+\item{land_impermeableFrac_1}{<0, 1> the maximum impermeable fraction when th soil is fully saturated}
+
 \item{land_water_mm}{(mm/m2) \strong{pounded water} volume in \code{landLy} and there is no limit, different than \code{land_interceptWater_mm}}
 
 \item{land_interceptWater_mm}{(mm/m2) initial water volume that can be \strong{intercepted}}
@@ -56,11 +58,15 @@
 
 \item{snow_ice_mm}{(mm/m2) water equivalent of \strong{ice} in snowpack}
 
+\item{soil_fieldCapacityPerc_1}{<0, 1> the relative ratio (\mjseqn{\theta_fc / \theta^*}) that the water content can drainage by gravity}
+
 \item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
 \item{soil_actualEvatrans_mm}{(mm/m2/TS) \strong{actual} evapotranspiration from \code{soilLy}}
+
+\item{soil_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} percolation}
 
 \item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}
 
@@ -70,7 +76,9 @@
 
 \item{ground_capillarise_mm}{(mm/m2/TS) capillary rise from \code{groundLy} to \code{soilLy}}
 
-\item{ground_potentialLateral_mm}{(mm/m2/TS) \strong{potential} lateral flow}
+\item{ground_potentialLateral_mm}{<-7, 7> (mm/m2/TS) \strong{potential} lateral flow}
+
+\item{ground_potentialBaseflow_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} baseflow}
 
 \item{confluen_inputWater_mm, land_runoff_mm, ground_baseflow_mm}{(mm/m2) input water volum in every routeline}
 

@@ -6,6 +6,10 @@
 \alias{percola_GR4J}
 \alias{percola_SupplyRatio}
 \alias{percola_SupplyPow}
+\alias{percola_MaxPow}
+\alias{percola_ThreshPow}
+\alias{percola_Arno}
+\alias{percola_BevenWood}
 \title{\strong{percolation}}
 \usage{
 percola_GR4Jfix(soil_water_mm, soil_capacity_mm, param_percola_grf_k)
@@ -20,6 +24,36 @@ percola_SupplyPow(
   param_percola_sup_k,
   param_percola_sup_gamma
 )
+
+percola_MaxPow(
+  soil_water_mm,
+  soil_capacity_mm,
+  soil_potentialPercola_mm,
+  param_percola_map_gamma
+)
+
+percola_ThreshPow(
+  soil_water_mm,
+  soil_capacity_mm,
+  soil_potentialPercola_mm,
+  param_percola_thp_thresh,
+  param_percola_thp_gamma
+)
+
+percola_Arno(
+  soil_water_mm,
+  soil_capacity_mm,
+  soil_potentialPercola_mm,
+  param_percola_arn_thresh,
+  param_percola_arn_k
+)
+
+percola_BevenWood(
+  soil_water_mm,
+  soil_capacity_mm,
+  soil_fieldCapacityPerc_1,
+  soil_potentialPercola_mm
+)
 }
 \arguments{
 \item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}
@@ -32,7 +66,21 @@ percola_SupplyPow(
 
 \item{param_percola_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
 
-\item{param_percola_sup_gamma}{<0, 5> parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
+\item{param_percola_sup_gamma}{<0, 7> parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
+
+\item{soil_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} percolation}
+
+\item{param_percola_map_gamma}{<0.1, 5> exponential parameter for \code{\link[=percola_MaxPow]{percola_MaxPow()}}}
+
+\item{param_percola_thp_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=percola_ThreshPow]{percola_ThreshPow()}}}
+
+\item{param_percola_thp_gamma}{<0.1, 5> exponential parameter for \code{\link[=percola_ThreshPow]{percola_ThreshPow()}}}
+
+\item{param_percola_arn_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=percola_ThreshPow]{percola_ThreshPow()}}}
+
+\item{param_percola_arn_k}{<0.1, 1> exponential parameter for \code{\link[=percola_ThreshPow]{percola_ThreshPow()}}}
+
+\item{soil_fieldCapacityPerc_1}{<0, 1> the relative ratio (\mjseqn{\theta_fc / \theta^*}) that the water content can drainage by gravity}
 }
 \value{
 percola_mm (mm/m2)

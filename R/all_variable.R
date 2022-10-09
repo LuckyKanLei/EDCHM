@@ -23,20 +23,24 @@
 #' @param land_albedo_1 <0, 1> albedo of the region
 #' @param land_latitude_Degree (degree) average latitude
 #' @param land_elevation_m (m) average elevation
+#' @param land_impermeableFrac_1 <0, 1> the maximum impermeable fraction when th soil is fully saturated
 #' @param land_water_mm (mm/m2) **pounded water** volume in `landLy` and there is no limit, different than `land_interceptWater_mm`
 #' @param land_interceptWater_mm (mm/m2) initial water volume that can be **intercepted**
 #' @param land_interceptCapacity_mm (mm/m2) average intercept Capacity (maximal storage capacity)
 #' @param land_actualEvatrans_mm (mm/m2/TS) **actual** evapotranspiration from `landLy`
 #' @param land_infiltrat_mm (mm/m2/TS) infiltration from `landLy` to `soilLy`
 #' @param snow_ice_mm (mm/m2) water equivalent of **ice** in snowpack
+#' @param soil_fieldCapacityPerc_1 <0, 1> the relative ratio (\mjseqn{\theta_fc / \theta^*}) that the water content can drainage by gravity
 #' @param soil_water_mm (mm/m2) water volume in `soilLy`
 #' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
 #' @param soil_actualEvatrans_mm (mm/m2/TS) **actual** evapotranspiration from `soilLy`
+#' @param soil_potentialPercola_mm <0.01, 7> (mm/m2/TS) **potential** percolation 
 #' @param ground_water_mm (mm/m2/TS) water volume in `groundLy`
 #' @param ground_capacity_mm (mm/m2) water storage capacity in `groundLy`
 #' @param ground_lateral_mm (mm/m2/TS) lateral flow, exchange with outside region. It can be **NEGATIV**
 #' @param ground_capillarise_mm (mm/m2/TS) capillary rise from `groundLy` to `soilLy`
-#' @param ground_potentialLateral_mm (mm/m2/TS) **potential** lateral flow
+#' @param ground_potentialLateral_mm <-7, 7> (mm/m2/TS) **potential** lateral flow
+#' @param ground_potentialBaseflow_mm <0.01, 7> (mm/m2/TS) **potential** baseflow 
 #' @param confluen_inputWater_mm,land_runoff_mm,ground_baseflow_mm (mm/m2) input water volum in every routeline
 #' @param confluen_iuh_1,confluen_iuhLand_1,confluen_iuhGround_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 #' @param confluen_responseTime_TS,confluen_concentratTime_TS (TS) response or concentration time in every routeline

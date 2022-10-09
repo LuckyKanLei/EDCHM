@@ -31,7 +31,7 @@ lateral_SupplyPow(
 
 \item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{groundLy}}
 
-\item{ground_potentialLateral_mm}{(mm/m2/TS) \strong{potential} lateral flow}
+\item{ground_potentialLateral_mm}{<-7, 7> (mm/m2/TS) \strong{potential} lateral flow}
 
 \item{param_lateral_grf_gamma}{<0.01, 5> parameter for \code{\link[=lateral_GR4Jfix]{lateral_GR4Jfix()}}}
 

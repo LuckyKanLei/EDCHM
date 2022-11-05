@@ -64,6 +64,8 @@
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
+\item{soil_subflow_mm}{(mm/m2/TS) subsurface flow directly to the river}
+
 \item{soil_actualEvatrans_mm}{(mm/m2/TS) \strong{actual} evapotranspiration from \code{soilLy}}
 
 \item{soil_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} percolation}
@@ -82,9 +84,9 @@
 
 \item{confluen_inputWater_mm, land_runoff_mm, ground_baseflow_mm}{(mm/m2) input water volum in every routeline}
 
-\item{confluen_iuh_1, confluen_iuhLand_1, confluen_iuhGround_1}{(vector of num, sume() = 1) the ratio in every timestep, can be calculated by \code{\link[=confluenIUH_GR4J1]{confluenIUH_GR4J1()}}, \code{\link[=confluenIUH_GR4J2]{confluenIUH_GR4J2()}}}
+\item{confluen_iuh_1, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1}{(vector of num, sume() = 1) the ratio in every timestep, can be calculated by \code{\link[=confluenIUH_GR4J1]{confluenIUH_GR4J1()}}, \code{\link[=confluenIUH_GR4J2]{confluenIUH_GR4J2()}}}
 
-\item{confluen_responseTime_TS, confluen_concentratTime_TS}{(TS) response or concentration time in every routeline}
+\item{confluen_responseTime_TS}{(TS) response or concentration time in every routeline}
 
 \item{water_mm}{(mm/m2/TS) water volume in \code{soilLy} or interceptof \code{landLy}, same as \code{land_interceptWater_mm} or \code{soil_water_mm}}
 

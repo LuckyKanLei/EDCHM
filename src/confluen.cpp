@@ -59,6 +59,37 @@ NumericVector confluen_IUH2S(
   
 }
 
+//' @rdname confluen
+//' @export
+// [[Rcpp::export]]
+NumericVector confluen_IUH3S(
+    NumericVector land_runoff_mm,
+    NumericVector soil_subflow_mm, 
+    NumericVector ground_baseflow_mm, 
+    NumericVector confluen_iuhLand_1,
+    NumericVector confluen_iuhSoil_1,
+    NumericVector confluen_iuhGround_1
+)
+{
+  NumericVector confluen_runoff_mm (land_runoff_mm.size()), confluen_subflow_mm (soil_subflow_mm.size()), confluen_baseflow_mm (ground_baseflow_mm.size());
+  confluen_runoff_mm = confluen_IUH(
+    land_runoff_mm, 
+    confluen_iuhLand_1
+  );
+  confluen_subflow_mm = confluen_IUH(
+    soil_subflow_mm, 
+    confluen_iuhSoil_1
+  );
+  confluen_baseflow_mm = confluen_IUH(
+    ground_baseflow_mm, 
+    confluen_iuhGround_1
+  );
+  
+  
+  return confluen_runoff_mm + confluen_subflow_mm + confluen_baseflow_mm;
+  
+}
+
 
 //' create **IUH** (Instant Unit Graphy)
 //' @name confluenIUH
@@ -122,13 +153,15 @@ NumericVector confluenIUH_Clark(
 }
 
 //' @rdname confluenIUH
+//' @param param_confluen_kel_k <1, 4> parameter for[confluenIUH_Kelly()]
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_Kelly(
     double confluen_responseTime_TS,
-    double confluen_concentratTime_TS
+    double param_confluen_kel_k
 )
 {
+  double confluen_concentratTime_TS = confluen_responseTime_TS * param_confluen_kel_k;
   double num_temp_tc2 = (confluen_concentratTime_TS * confluen_concentratTime_TS);
   double num_temp_12_34 = 4 * confluen_responseTime_TS  / num_temp_tc2 * 
     (1 - 2 * exp(confluen_concentratTime_TS / confluen_responseTime_TS * 0.5));
@@ -171,17 +204,16 @@ NumericVector confluenIUH_Nash(
 }
 
 //' @rdname confluenIUH
-//' @param param_confluen_nak_b <1, 6> parameter for[confluenIUH_NashKumar()]
 //' @param param_confluen_nak_n <1, 8> parameter for[confluenIUH_NashKumar()]
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_NashKumar(
-    double param_confluen_nak_b,
+    double confluen_responseTime_TS,
     double param_confluen_nak_n
 )
 {
   NumericVector iuh_, vct_iuh;
-  double confluen_responseTime_TS = param_confluen_nak_b * 1 / (param_confluen_nak_n - 1);
+  confluen_responseTime_TS = confluen_responseTime_TS * 1 / (param_confluen_nak_n - 1);
   double t_max = ceil(std::max(4.0, param_confluen_nak_n) * 3 * confluen_responseTime_TS);
   IntegerVector seq_t = seq(1, 20 * t_max);
   NumericVector seq_t2 = as<NumericVector>(seq_t) / 20.0;

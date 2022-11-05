@@ -16,18 +16,18 @@ confluenIUH_GR4J2(confluen_responseTime_TS)
 
 confluenIUH_Clark(confluen_responseTime_TS)
 
-confluenIUH_Kelly(confluen_responseTime_TS, confluen_concentratTime_TS)
+confluenIUH_Kelly(confluen_responseTime_TS, param_confluen_kel_k)
 
 confluenIUH_Nash(confluen_responseTime_TS, param_confluen_nas_n)
 
-confluenIUH_NashKumar(param_confluen_nak_b, param_confluen_nak_n)
+confluenIUH_NashKumar(confluen_responseTime_TS, param_confluen_nak_n)
 }
 \arguments{
-\item{confluen_responseTime_TS, confluen_concentratTime_TS}{(TS) response or concentration time in every routeline}
+\item{confluen_responseTime_TS}{(TS) response or concentration time in every routeline}
+
+\item{param_confluen_kel_k}{<1, 4> parameter for\code{\link[=confluenIUH_Kelly]{confluenIUH_Kelly()}}}
 
 \item{param_confluen_nas_n}{<1, 8> parameter for\code{\link[=confluenIUH_Nash]{confluenIUH_Nash()}}}
-
-\item{param_confluen_nak_b}{<1, 6> parameter for\code{\link[=confluenIUH_NashKumar]{confluenIUH_NashKumar()}}}
 
 \item{param_confluen_nak_n}{<1, 8> parameter for\code{\link[=confluenIUH_NashKumar]{confluenIUH_NashKumar()}}}
 }

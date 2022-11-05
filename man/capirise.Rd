@@ -2,31 +2,15 @@
 % Please edit documentation in R/RcppExports.R
 \name{capirise}
 \alias{capirise}
-\alias{capirise_SupplyRatio}
-\alias{capirise_SupplyPow}
 \alias{capirise_AcceptRatio}
 \alias{capirise_AcceptPow}
 \title{\strong{capilarise}}
 \usage{
-capirise_SupplyRatio(
-  ground_water_mm,
-  soil_water_mm,
-  soil_capacity_mm,
-  param_capirise_sur_k
-)
-
-capirise_SupplyPow(
-  ground_water_mm,
-  soil_water_mm,
-  soil_capacity_mm,
-  param_capirise_sup_k,
-  param_capirise_sup_gamma
-)
-
 capirise_AcceptRatio(
   ground_water_mm,
   soil_water_mm,
   soil_capacity_mm,
+  soil_fieldCapacityPerc_1,
   param_capirise_acr_k
 )
 
@@ -34,6 +18,7 @@ capirise_AcceptPow(
   ground_water_mm,
   soil_water_mm,
   soil_capacity_mm,
+  soil_fieldCapacityPerc_1,
   param_capirise_acp_k,
   param_capirise_acp_gamma
 )
@@ -45,20 +30,13 @@ capirise_AcceptPow(
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{param_capirise_sur_k}{<0.01, 1> coefficient parameter for\code{\link[=capirise_SupplyRatio]{capirise_SupplyRatio()}}}
-
-\item{param_capirise_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=capirise_SupplyPow]{capirise_SupplyPow()}}}
-
-\item{param_capirise_sup_gamma}{<0, 1> exponential parameter for \code{\link[=capirise_SupplyPow]{capirise_SupplyPow()}}}
+\item{soil_fieldCapacityPerc_1}{<0, 1> the relative ratio (\mjseqn{\theta_fc / \theta^*}) that the water content can drainage by gravity}
 
 \item{param_capirise_acr_k}{<0.01, 1> coefficient parameter \code{\link[=capirise_AcceptRatio]{capirise_AcceptRatio()}}}
 
 \item{param_capirise_acp_k}{<0.01, 1> coefficient parameter for \code{\link[=capirise_AcceptPow]{capirise_AcceptPow()}}}
 
-\item{param_capirise_acp_gamma}{<0.1, 5> exponential parameter for \code{\link[=capirise_AcceptPow]{capirise_AcceptPow()}}}
-}
-\value{
-ground_capillarise_mm (mm/m2/TS)
+\item{param_capirise_acp_gamma}{<0.01, 1> exponential parameter for \code{\link[=capirise_AcceptPow]{capirise_AcceptPow()}}}
 }
 \description{
 \strong{capilarise}

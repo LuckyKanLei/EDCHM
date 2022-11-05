@@ -75,34 +75,18 @@ baseflow_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialB
 #' **capilarise**
 #' @name capirise
 #' @inheritParams all_vari
-#' @param param_capirise_sur_k <0.01, 1> coefficient parameter for[capirise_SupplyRatio()]
-#' @return  ground_capillarise_mm (mm/m2/TS)
-#' @export
-capirise_SupplyRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sur_k) {
-    .Call(`_EDCHM_capirise_SupplyRatio`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sur_k)
-}
-
-#' @rdname capirise
-#' @param param_capirise_sup_k <0.01, 1> coefficient parameter for [capirise_SupplyPow()]
-#' @param param_capirise_sup_gamma <0, 1> exponential parameter for [capirise_SupplyPow()]
-#' @export
-capirise_SupplyPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sup_k, param_capirise_sup_gamma) {
-    .Call(`_EDCHM_capirise_SupplyPow`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sup_k, param_capirise_sup_gamma)
-}
-
-#' @rdname capirise
 #' @param param_capirise_acr_k <0.01, 1> coefficient parameter [capirise_AcceptRatio()]
 #' @export
-capirise_AcceptRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acr_k) {
-    .Call(`_EDCHM_capirise_AcceptRatio`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acr_k)
+capirise_AcceptRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, param_capirise_acr_k) {
+    .Call(`_EDCHM_capirise_AcceptRatio`, ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, param_capirise_acr_k)
 }
 
 #' @rdname capirise
 #' @param param_capirise_acp_k <0.01, 1> coefficient parameter for [capirise_AcceptPow()]
-#' @param param_capirise_acp_gamma <0.1, 5> exponential parameter for [capirise_AcceptPow()]
+#' @param param_capirise_acp_gamma <0.01, 1> exponential parameter for [capirise_AcceptPow()]
 #' @export
-capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acp_k, param_capirise_acp_gamma) {
-    .Call(`_EDCHM_capirise_AcceptPow`, ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acp_k, param_capirise_acp_gamma)
+capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, param_capirise_acp_k, param_capirise_acp_gamma) {
+    .Call(`_EDCHM_capirise_AcceptPow`, ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, param_capirise_acp_k, param_capirise_acp_gamma)
 }
 
 #' **confluence**
@@ -121,6 +105,12 @@ confluen_IUH <- function(confluen_inputWater_mm, confluen_iuh_1) {
 #' @export
 confluen_IUH2S <- function(land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhGround_1) {
     .Call(`_EDCHM_confluen_IUH2S`, land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhGround_1)
+}
+
+#' @rdname confluen
+#' @export
+confluen_IUH3S <- function(land_runoff_mm, soil_subflow_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1) {
+    .Call(`_EDCHM_confluen_IUH3S`, land_runoff_mm, soil_subflow_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1)
 }
 
 #' create **IUH** (Instant Unit Graphy)
@@ -145,9 +135,10 @@ confluenIUH_Clark <- function(confluen_responseTime_TS) {
 }
 
 #' @rdname confluenIUH
+#' @param param_confluen_kel_k <1, 4> parameter for[confluenIUH_Kelly()]
 #' @export
-confluenIUH_Kelly <- function(confluen_responseTime_TS, confluen_concentratTime_TS) {
-    .Call(`_EDCHM_confluenIUH_Kelly`, confluen_responseTime_TS, confluen_concentratTime_TS)
+confluenIUH_Kelly <- function(confluen_responseTime_TS, param_confluen_kel_k) {
+    .Call(`_EDCHM_confluenIUH_Kelly`, confluen_responseTime_TS, param_confluen_kel_k)
 }
 
 #' @rdname confluenIUH
@@ -158,11 +149,10 @@ confluenIUH_Nash <- function(confluen_responseTime_TS, param_confluen_nas_n) {
 }
 
 #' @rdname confluenIUH
-#' @param param_confluen_nak_b <1, 6> parameter for[confluenIUH_NashKumar()]
 #' @param param_confluen_nak_n <1, 8> parameter for[confluenIUH_NashKumar()]
 #' @export
-confluenIUH_NashKumar <- function(param_confluen_nak_b, param_confluen_nak_n) {
-    .Call(`_EDCHM_confluenIUH_NashKumar`, param_confluen_nak_b, param_confluen_nak_n)
+confluenIUH_NashKumar <- function(confluen_responseTime_TS, param_confluen_nak_n) {
+    .Call(`_EDCHM_confluenIUH_NashKumar`, confluen_responseTime_TS, param_confluen_nak_n)
 }
 
 #' **potential evapotranspiration**
@@ -427,10 +417,10 @@ lateral_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, ground_potentia
 }
 
 #' @rdname lateral
-#' @param param_lateral_sur_k <-1, 1> coefficient parameter for [lateral_SupplyRatio()]
+#' @param param_lateral_sur_k <-2, 1> coefficient parameter for [lateral_SupplyRatio()]
 #' @export
-lateral_SupplyRatio <- function(ground_water_mm, ground_capacity_mm, param_lateral_sur_k) {
-    .Call(`_EDCHM_lateral_SupplyRatio`, ground_water_mm, ground_capacity_mm, param_lateral_sur_k)
+lateral_SupplyRatio <- function(ground_water_mm, param_lateral_sur_k) {
+    .Call(`_EDCHM_lateral_SupplyRatio`, ground_water_mm, param_lateral_sur_k)
 }
 
 #' @rdname lateral
@@ -439,6 +429,29 @@ lateral_SupplyRatio <- function(ground_water_mm, ground_capacity_mm, param_later
 #' @export
 lateral_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_lateral_sup_k, param_lateral_sup_gamma) {
     .Call(`_EDCHM_lateral_SupplyPow`, ground_water_mm, ground_capacity_mm, param_lateral_sup_k, param_lateral_sup_gamma)
+}
+
+#' @rdname lateral
+#' @param param_lateral_map_gamma <0.1, 5> exponential parameter for [lateral_MaxPow()]
+#' @export
+lateral_MaxPow <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_map_gamma) {
+    .Call(`_EDCHM_lateral_MaxPow`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_map_gamma)
+}
+
+#' @rdname lateral
+#' @param param_lateral_thp_thresh <0.1, 0.9> coefficient parameter for [lateral_ThreshPow()]
+#' @param param_lateral_thp_gamma <0.1, 5> exponential parameter for [lateral_ThreshPow()]
+#' @export
+lateral_ThreshPow <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_thp_thresh, param_lateral_thp_gamma) {
+    .Call(`_EDCHM_lateral_ThreshPow`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_thp_thresh, param_lateral_thp_gamma)
+}
+
+#' @rdname lateral
+#' @param param_lateral_arn_thresh <0.1, 0.9> coefficient parameter for [lateral_ThreshPow()]
+#' @param param_lateral_arn_k <0.1, 1> exponential parameter for [lateral_ThreshPow()]
+#' @export
+lateral_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_arn_thresh, param_lateral_arn_k) {
+    .Call(`_EDCHM_lateral_Arno`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_arn_thresh, param_lateral_arn_k)
 }
 
 #' **percolation**

@@ -6,6 +6,9 @@
 \alias{lateral_GR4Jfix}
 \alias{lateral_SupplyRatio}
 \alias{lateral_SupplyPow}
+\alias{lateral_MaxPow}
+\alias{lateral_ThreshPow}
+\alias{lateral_Arno}
 \title{\strong{lateral flux}}
 \usage{
 lateral_GR4J(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm)
@@ -17,13 +20,36 @@ lateral_GR4Jfix(
   param_lateral_grf_gamma
 )
 
-lateral_SupplyRatio(ground_water_mm, ground_capacity_mm, param_lateral_sur_k)
+lateral_SupplyRatio(ground_water_mm, param_lateral_sur_k)
 
 lateral_SupplyPow(
   ground_water_mm,
   ground_capacity_mm,
   param_lateral_sup_k,
   param_lateral_sup_gamma
+)
+
+lateral_MaxPow(
+  ground_water_mm,
+  ground_capacity_mm,
+  ground_potentialLateral_mm,
+  param_lateral_map_gamma
+)
+
+lateral_ThreshPow(
+  ground_water_mm,
+  ground_capacity_mm,
+  ground_potentialLateral_mm,
+  param_lateral_thp_thresh,
+  param_lateral_thp_gamma
+)
+
+lateral_Arno(
+  ground_water_mm,
+  ground_capacity_mm,
+  ground_potentialLateral_mm,
+  param_lateral_arn_thresh,
+  param_lateral_arn_k
 )
 }
 \arguments{
@@ -35,11 +61,21 @@ lateral_SupplyPow(
 
 \item{param_lateral_grf_gamma}{<0.01, 5> parameter for \code{\link[=lateral_GR4Jfix]{lateral_GR4Jfix()}}}
 
-\item{param_lateral_sur_k}{<-1, 1> coefficient parameter for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
+\item{param_lateral_sur_k}{<-2, 1> coefficient parameter for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
 
 \item{param_lateral_sup_k}{<-1, 1> coefficient parameter for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
 
 \item{param_lateral_sup_gamma}{<0.01, 5> parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
+
+\item{param_lateral_map_gamma}{<0.1, 5> exponential parameter for \code{\link[=lateral_MaxPow]{lateral_MaxPow()}}}
+
+\item{param_lateral_thp_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=lateral_ThreshPow]{lateral_ThreshPow()}}}
+
+\item{param_lateral_thp_gamma}{<0.1, 5> exponential parameter for \code{\link[=lateral_ThreshPow]{lateral_ThreshPow()}}}
+
+\item{param_lateral_arn_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=lateral_ThreshPow]{lateral_ThreshPow()}}}
+
+\item{param_lateral_arn_k}{<0.1, 1> exponential parameter for \code{\link[=lateral_ThreshPow]{lateral_ThreshPow()}}}
 }
 \value{
 lateral_mm (mm/m2)

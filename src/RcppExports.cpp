@@ -340,99 +340,25 @@ RcppExport SEXP _EDCHM_baseflow_Arno(SEXP ground_water_mmSEXP, SEXP ground_capac
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// capirise_SupplyRatio
-NumericVector capirise_SupplyRatio(NumericVector ground_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_capirise_sur_k);
-static SEXP _EDCHM_capirise_SupplyRatio_try(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_sur_kSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_capirise_sur_k(param_capirise_sur_kSEXP);
-    rcpp_result_gen = Rcpp::wrap(capirise_SupplyRatio(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sur_k));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _EDCHM_capirise_SupplyRatio(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_sur_kSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_capirise_SupplyRatio_try(ground_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, param_capirise_sur_kSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
-// capirise_SupplyPow
-NumericVector capirise_SupplyPow(NumericVector ground_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_capirise_sup_k, NumericVector param_capirise_sup_gamma);
-static SEXP _EDCHM_capirise_SupplyPow_try(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_sup_kSEXP, SEXP param_capirise_sup_gammaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_capirise_sup_k(param_capirise_sup_kSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type param_capirise_sup_gamma(param_capirise_sup_gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(capirise_SupplyPow(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_sup_k, param_capirise_sup_gamma));
-    return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _EDCHM_capirise_SupplyPow(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_sup_kSEXP, SEXP param_capirise_sup_gammaSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_capirise_SupplyPow_try(ground_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, param_capirise_sup_kSEXP, param_capirise_sup_gammaSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
-}
 // capirise_AcceptRatio
-NumericVector capirise_AcceptRatio(NumericVector ground_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_capirise_acr_k);
-static SEXP _EDCHM_capirise_AcceptRatio_try(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_acr_kSEXP) {
+NumericVector capirise_AcceptRatio(NumericVector ground_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector soil_fieldCapacityPerc_1, NumericVector param_capirise_acr_k);
+static SEXP _EDCHM_capirise_AcceptRatio_try(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_fieldCapacityPerc_1SEXP, SEXP param_capirise_acr_kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_fieldCapacityPerc_1(soil_fieldCapacityPerc_1SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_capirise_acr_k(param_capirise_acr_kSEXP);
-    rcpp_result_gen = Rcpp::wrap(capirise_AcceptRatio(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acr_k));
+    rcpp_result_gen = Rcpp::wrap(capirise_AcceptRatio(ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, param_capirise_acr_k));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_capirise_AcceptRatio(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_acr_kSEXP) {
+RcppExport SEXP _EDCHM_capirise_AcceptRatio(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_fieldCapacityPerc_1SEXP, SEXP param_capirise_acr_kSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_capirise_AcceptRatio_try(ground_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, param_capirise_acr_kSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_capirise_AcceptRatio_try(ground_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, soil_fieldCapacityPerc_1SEXP, param_capirise_acr_kSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -453,24 +379,25 @@ RcppExport SEXP _EDCHM_capirise_AcceptRatio(SEXP ground_water_mmSEXP, SEXP soil_
     return rcpp_result_gen;
 }
 // capirise_AcceptPow
-NumericVector capirise_AcceptPow(NumericVector ground_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector param_capirise_acp_k, NumericVector param_capirise_acp_gamma);
-static SEXP _EDCHM_capirise_AcceptPow_try(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_acp_kSEXP, SEXP param_capirise_acp_gammaSEXP) {
+NumericVector capirise_AcceptPow(NumericVector ground_water_mm, NumericVector soil_water_mm, NumericVector soil_capacity_mm, NumericVector soil_fieldCapacityPerc_1, NumericVector param_capirise_acp_k, NumericVector param_capirise_acp_gamma);
+static SEXP _EDCHM_capirise_AcceptPow_try(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_fieldCapacityPerc_1SEXP, SEXP param_capirise_acp_kSEXP, SEXP param_capirise_acp_gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type soil_water_mm(soil_water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type soil_capacity_mm(soil_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_fieldCapacityPerc_1(soil_fieldCapacityPerc_1SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_capirise_acp_k(param_capirise_acp_kSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_capirise_acp_gamma(param_capirise_acp_gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(capirise_AcceptPow(ground_water_mm, soil_water_mm, soil_capacity_mm, param_capirise_acp_k, param_capirise_acp_gamma));
+    rcpp_result_gen = Rcpp::wrap(capirise_AcceptPow(ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, param_capirise_acp_k, param_capirise_acp_gamma));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_capirise_AcceptPow(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP param_capirise_acp_kSEXP, SEXP param_capirise_acp_gammaSEXP) {
+RcppExport SEXP _EDCHM_capirise_AcceptPow(SEXP ground_water_mmSEXP, SEXP soil_water_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_fieldCapacityPerc_1SEXP, SEXP param_capirise_acp_kSEXP, SEXP param_capirise_acp_gammaSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_capirise_AcceptPow_try(ground_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, param_capirise_acp_kSEXP, param_capirise_acp_gammaSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_capirise_AcceptPow_try(ground_water_mmSEXP, soil_water_mmSEXP, soil_capacity_mmSEXP, soil_fieldCapacityPerc_1SEXP, param_capirise_acp_kSEXP, param_capirise_acp_gammaSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -543,6 +470,45 @@ RcppExport SEXP _EDCHM_confluen_IUH2S(SEXP land_runoff_mmSEXP, SEXP ground_basef
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
         rcpp_result_gen = PROTECT(_EDCHM_confluen_IUH2S_try(land_runoff_mmSEXP, ground_baseflow_mmSEXP, confluen_iuhLand_1SEXP, confluen_iuhGround_1SEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// confluen_IUH3S
+NumericVector confluen_IUH3S(NumericVector land_runoff_mm, NumericVector soil_subflow_mm, NumericVector ground_baseflow_mm, NumericVector confluen_iuhLand_1, NumericVector confluen_iuhSoil_1, NumericVector confluen_iuhGround_1);
+static SEXP _EDCHM_confluen_IUH3S_try(SEXP land_runoff_mmSEXP, SEXP soil_subflow_mmSEXP, SEXP ground_baseflow_mmSEXP, SEXP confluen_iuhLand_1SEXP, SEXP confluen_iuhSoil_1SEXP, SEXP confluen_iuhGround_1SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type land_runoff_mm(land_runoff_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type soil_subflow_mm(soil_subflow_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_baseflow_mm(ground_baseflow_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type confluen_iuhLand_1(confluen_iuhLand_1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type confluen_iuhSoil_1(confluen_iuhSoil_1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type confluen_iuhGround_1(confluen_iuhGround_1SEXP);
+    rcpp_result_gen = Rcpp::wrap(confluen_IUH3S(land_runoff_mm, soil_subflow_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_confluen_IUH3S(SEXP land_runoff_mmSEXP, SEXP soil_subflow_mmSEXP, SEXP ground_baseflow_mmSEXP, SEXP confluen_iuhLand_1SEXP, SEXP confluen_iuhSoil_1SEXP, SEXP confluen_iuhGround_1SEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_confluen_IUH3S_try(land_runoff_mmSEXP, soil_subflow_mmSEXP, ground_baseflow_mmSEXP, confluen_iuhLand_1SEXP, confluen_iuhSoil_1SEXP, confluen_iuhGround_1SEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -665,21 +631,21 @@ RcppExport SEXP _EDCHM_confluenIUH_Clark(SEXP confluen_responseTime_TSSEXP) {
     return rcpp_result_gen;
 }
 // confluenIUH_Kelly
-NumericVector confluenIUH_Kelly(double confluen_responseTime_TS, double confluen_concentratTime_TS);
-static SEXP _EDCHM_confluenIUH_Kelly_try(SEXP confluen_responseTime_TSSEXP, SEXP confluen_concentratTime_TSSEXP) {
+NumericVector confluenIUH_Kelly(double confluen_responseTime_TS, double param_confluen_kel_k);
+static SEXP _EDCHM_confluenIUH_Kelly_try(SEXP confluen_responseTime_TSSEXP, SEXP param_confluen_kel_kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< double >::type confluen_responseTime_TS(confluen_responseTime_TSSEXP);
-    Rcpp::traits::input_parameter< double >::type confluen_concentratTime_TS(confluen_concentratTime_TSSEXP);
-    rcpp_result_gen = Rcpp::wrap(confluenIUH_Kelly(confluen_responseTime_TS, confluen_concentratTime_TS));
+    Rcpp::traits::input_parameter< double >::type param_confluen_kel_k(param_confluen_kel_kSEXP);
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_Kelly(confluen_responseTime_TS, param_confluen_kel_k));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_confluenIUH_Kelly(SEXP confluen_responseTime_TSSEXP, SEXP confluen_concentratTime_TSSEXP) {
+RcppExport SEXP _EDCHM_confluenIUH_Kelly(SEXP confluen_responseTime_TSSEXP, SEXP param_confluen_kel_kSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_Kelly_try(confluen_responseTime_TSSEXP, confluen_concentratTime_TSSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_Kelly_try(confluen_responseTime_TSSEXP, param_confluen_kel_kSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -735,21 +701,21 @@ RcppExport SEXP _EDCHM_confluenIUH_Nash(SEXP confluen_responseTime_TSSEXP, SEXP 
     return rcpp_result_gen;
 }
 // confluenIUH_NashKumar
-NumericVector confluenIUH_NashKumar(double param_confluen_nak_b, double param_confluen_nak_n);
-static SEXP _EDCHM_confluenIUH_NashKumar_try(SEXP param_confluen_nak_bSEXP, SEXP param_confluen_nak_nSEXP) {
+NumericVector confluenIUH_NashKumar(double confluen_responseTime_TS, double param_confluen_nak_n);
+static SEXP _EDCHM_confluenIUH_NashKumar_try(SEXP confluen_responseTime_TSSEXP, SEXP param_confluen_nak_nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< double >::type param_confluen_nak_b(param_confluen_nak_bSEXP);
+    Rcpp::traits::input_parameter< double >::type confluen_responseTime_TS(confluen_responseTime_TSSEXP);
     Rcpp::traits::input_parameter< double >::type param_confluen_nak_n(param_confluen_nak_nSEXP);
-    rcpp_result_gen = Rcpp::wrap(confluenIUH_NashKumar(param_confluen_nak_b, param_confluen_nak_n));
+    rcpp_result_gen = Rcpp::wrap(confluenIUH_NashKumar(confluen_responseTime_TS, param_confluen_nak_n));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_confluenIUH_NashKumar(SEXP param_confluen_nak_bSEXP, SEXP param_confluen_nak_nSEXP) {
+RcppExport SEXP _EDCHM_confluenIUH_NashKumar(SEXP confluen_responseTime_TSSEXP, SEXP param_confluen_nak_nSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_NashKumar_try(param_confluen_nak_bSEXP, param_confluen_nak_nSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_confluenIUH_NashKumar_try(confluen_responseTime_TSSEXP, param_confluen_nak_nSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1590,22 +1556,21 @@ RcppExport SEXP _EDCHM_lateral_GR4Jfix(SEXP ground_water_mmSEXP, SEXP ground_cap
     return rcpp_result_gen;
 }
 // lateral_SupplyRatio
-NumericVector lateral_SupplyRatio(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector param_lateral_sur_k);
-static SEXP _EDCHM_lateral_SupplyRatio_try(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP param_lateral_sur_kSEXP) {
+NumericVector lateral_SupplyRatio(NumericVector ground_water_mm, NumericVector param_lateral_sur_k);
+static SEXP _EDCHM_lateral_SupplyRatio_try(SEXP ground_water_mmSEXP, SEXP param_lateral_sur_kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type ground_capacity_mm(ground_capacity_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_lateral_sur_k(param_lateral_sur_kSEXP);
-    rcpp_result_gen = Rcpp::wrap(lateral_SupplyRatio(ground_water_mm, ground_capacity_mm, param_lateral_sur_k));
+    rcpp_result_gen = Rcpp::wrap(lateral_SupplyRatio(ground_water_mm, param_lateral_sur_k));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_lateral_SupplyRatio(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP param_lateral_sur_kSEXP) {
+RcppExport SEXP _EDCHM_lateral_SupplyRatio(SEXP ground_water_mmSEXP, SEXP param_lateral_sur_kSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_lateral_SupplyRatio_try(ground_water_mmSEXP, ground_capacity_mmSEXP, param_lateral_sur_kSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_lateral_SupplyRatio_try(ground_water_mmSEXP, param_lateral_sur_kSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1643,6 +1608,119 @@ RcppExport SEXP _EDCHM_lateral_SupplyPow(SEXP ground_water_mmSEXP, SEXP ground_c
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
         rcpp_result_gen = PROTECT(_EDCHM_lateral_SupplyPow_try(ground_water_mmSEXP, ground_capacity_mmSEXP, param_lateral_sup_kSEXP, param_lateral_sup_gammaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// lateral_MaxPow
+NumericVector lateral_MaxPow(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_potentialLateral_mm, NumericVector param_lateral_map_gamma);
+static SEXP _EDCHM_lateral_MaxPow_try(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialLateral_mmSEXP, SEXP param_lateral_map_gammaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_capacity_mm(ground_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_potentialLateral_mm(ground_potentialLateral_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_lateral_map_gamma(param_lateral_map_gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(lateral_MaxPow(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_map_gamma));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_lateral_MaxPow(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialLateral_mmSEXP, SEXP param_lateral_map_gammaSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_lateral_MaxPow_try(ground_water_mmSEXP, ground_capacity_mmSEXP, ground_potentialLateral_mmSEXP, param_lateral_map_gammaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// lateral_ThreshPow
+NumericVector lateral_ThreshPow(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_potentialLateral_mm, NumericVector param_lateral_thp_thresh, NumericVector param_lateral_thp_gamma);
+static SEXP _EDCHM_lateral_ThreshPow_try(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialLateral_mmSEXP, SEXP param_lateral_thp_threshSEXP, SEXP param_lateral_thp_gammaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_capacity_mm(ground_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_potentialLateral_mm(ground_potentialLateral_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_lateral_thp_thresh(param_lateral_thp_threshSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_lateral_thp_gamma(param_lateral_thp_gammaSEXP);
+    rcpp_result_gen = Rcpp::wrap(lateral_ThreshPow(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_thp_thresh, param_lateral_thp_gamma));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_lateral_ThreshPow(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialLateral_mmSEXP, SEXP param_lateral_thp_threshSEXP, SEXP param_lateral_thp_gammaSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_lateral_ThreshPow_try(ground_water_mmSEXP, ground_capacity_mmSEXP, ground_potentialLateral_mmSEXP, param_lateral_thp_threshSEXP, param_lateral_thp_gammaSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
+}
+// lateral_Arno
+NumericVector lateral_Arno(NumericVector ground_water_mm, NumericVector ground_capacity_mm, NumericVector ground_potentialLateral_mm, NumericVector param_lateral_arn_thresh, NumericVector param_lateral_arn_k);
+static SEXP _EDCHM_lateral_Arno_try(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialLateral_mmSEXP, SEXP param_lateral_arn_threshSEXP, SEXP param_lateral_arn_kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type ground_water_mm(ground_water_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_capacity_mm(ground_capacity_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ground_potentialLateral_mm(ground_potentialLateral_mmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_lateral_arn_thresh(param_lateral_arn_threshSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type param_lateral_arn_k(param_lateral_arn_kSEXP);
+    rcpp_result_gen = Rcpp::wrap(lateral_Arno(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_arn_thresh, param_lateral_arn_k));
+    return rcpp_result_gen;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _EDCHM_lateral_Arno(SEXP ground_water_mmSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_potentialLateral_mmSEXP, SEXP param_lateral_arn_threshSEXP, SEXP param_lateral_arn_kSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_EDCHM_lateral_Arno_try(ground_water_mmSEXP, ground_capacity_mmSEXP, ground_potentialLateral_mmSEXP, param_lateral_arn_threshSEXP, param_lateral_arn_kSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2046,12 +2124,11 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*baseflow_MaxPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_ThreshPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_Arno)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*capirise_SupplyRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*capirise_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*capirise_AcceptRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*capirise_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*capirise_AcceptRatio)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*capirise_AcceptPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*confluen_IUH)(NumericVector,NumericVector)");
         signatures.insert("NumericVector(*confluen_IUH2S)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*confluen_IUH3S)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*confluenIUH_GR4J1)(double)");
         signatures.insert("NumericVector(*confluenIUH_GR4J2)(double)");
         signatures.insert("NumericVector(*confluenIUH_Clark)(double)");
@@ -2080,8 +2157,11 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*intercep_Full)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*lateral_GR4J)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*lateral_GR4Jfix)(NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*lateral_SupplyRatio)(NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*lateral_SupplyRatio)(NumericVector,NumericVector)");
         signatures.insert("NumericVector(*lateral_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*lateral_MaxPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*lateral_ThreshPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*lateral_Arno)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_GR4Jfix)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_GR4J)(NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_SupplyRatio)(NumericVector,NumericVector)");
@@ -2107,12 +2187,11 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_MaxPow", (DL_FUNC)_EDCHM_baseflow_MaxPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_ThreshPow", (DL_FUNC)_EDCHM_baseflow_ThreshPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_baseflow_Arno", (DL_FUNC)_EDCHM_baseflow_Arno_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_capirise_SupplyRatio", (DL_FUNC)_EDCHM_capirise_SupplyRatio_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_capirise_SupplyPow", (DL_FUNC)_EDCHM_capirise_SupplyPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_capirise_AcceptRatio", (DL_FUNC)_EDCHM_capirise_AcceptRatio_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_capirise_AcceptPow", (DL_FUNC)_EDCHM_capirise_AcceptPow_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluen_IUH", (DL_FUNC)_EDCHM_confluen_IUH_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluen_IUH2S", (DL_FUNC)_EDCHM_confluen_IUH2S_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_confluen_IUH3S", (DL_FUNC)_EDCHM_confluen_IUH3S_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_GR4J1", (DL_FUNC)_EDCHM_confluenIUH_GR4J1_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_GR4J2", (DL_FUNC)_EDCHM_confluenIUH_GR4J2_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_confluenIUH_Clark", (DL_FUNC)_EDCHM_confluenIUH_Clark_try);
@@ -2143,6 +2222,9 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_lateral_GR4Jfix", (DL_FUNC)_EDCHM_lateral_GR4Jfix_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_lateral_SupplyRatio", (DL_FUNC)_EDCHM_lateral_SupplyRatio_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_lateral_SupplyPow", (DL_FUNC)_EDCHM_lateral_SupplyPow_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_lateral_MaxPow", (DL_FUNC)_EDCHM_lateral_MaxPow_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_lateral_ThreshPow", (DL_FUNC)_EDCHM_lateral_ThreshPow_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_lateral_Arno", (DL_FUNC)_EDCHM_lateral_Arno_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_percola_GR4Jfix", (DL_FUNC)_EDCHM_percola_GR4Jfix_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_percola_GR4J", (DL_FUNC)_EDCHM_percola_GR4J_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_percola_SupplyRatio", (DL_FUNC)_EDCHM_percola_SupplyRatio_try);
@@ -2167,12 +2249,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_baseflow_MaxPow", (DL_FUNC) &_EDCHM_baseflow_MaxPow, 4},
     {"_EDCHM_baseflow_ThreshPow", (DL_FUNC) &_EDCHM_baseflow_ThreshPow, 5},
     {"_EDCHM_baseflow_Arno", (DL_FUNC) &_EDCHM_baseflow_Arno, 5},
-    {"_EDCHM_capirise_SupplyRatio", (DL_FUNC) &_EDCHM_capirise_SupplyRatio, 4},
-    {"_EDCHM_capirise_SupplyPow", (DL_FUNC) &_EDCHM_capirise_SupplyPow, 5},
-    {"_EDCHM_capirise_AcceptRatio", (DL_FUNC) &_EDCHM_capirise_AcceptRatio, 4},
-    {"_EDCHM_capirise_AcceptPow", (DL_FUNC) &_EDCHM_capirise_AcceptPow, 5},
+    {"_EDCHM_capirise_AcceptRatio", (DL_FUNC) &_EDCHM_capirise_AcceptRatio, 5},
+    {"_EDCHM_capirise_AcceptPow", (DL_FUNC) &_EDCHM_capirise_AcceptPow, 6},
     {"_EDCHM_confluen_IUH", (DL_FUNC) &_EDCHM_confluen_IUH, 2},
     {"_EDCHM_confluen_IUH2S", (DL_FUNC) &_EDCHM_confluen_IUH2S, 4},
+    {"_EDCHM_confluen_IUH3S", (DL_FUNC) &_EDCHM_confluen_IUH3S, 6},
     {"_EDCHM_confluenIUH_GR4J1", (DL_FUNC) &_EDCHM_confluenIUH_GR4J1, 1},
     {"_EDCHM_confluenIUH_GR4J2", (DL_FUNC) &_EDCHM_confluenIUH_GR4J2, 1},
     {"_EDCHM_confluenIUH_Clark", (DL_FUNC) &_EDCHM_confluenIUH_Clark, 1},
@@ -2201,8 +2282,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_intercep_Full", (DL_FUNC) &_EDCHM_intercep_Full, 3},
     {"_EDCHM_lateral_GR4J", (DL_FUNC) &_EDCHM_lateral_GR4J, 3},
     {"_EDCHM_lateral_GR4Jfix", (DL_FUNC) &_EDCHM_lateral_GR4Jfix, 4},
-    {"_EDCHM_lateral_SupplyRatio", (DL_FUNC) &_EDCHM_lateral_SupplyRatio, 3},
+    {"_EDCHM_lateral_SupplyRatio", (DL_FUNC) &_EDCHM_lateral_SupplyRatio, 2},
     {"_EDCHM_lateral_SupplyPow", (DL_FUNC) &_EDCHM_lateral_SupplyPow, 4},
+    {"_EDCHM_lateral_MaxPow", (DL_FUNC) &_EDCHM_lateral_MaxPow, 4},
+    {"_EDCHM_lateral_ThreshPow", (DL_FUNC) &_EDCHM_lateral_ThreshPow, 5},
+    {"_EDCHM_lateral_Arno", (DL_FUNC) &_EDCHM_lateral_Arno, 5},
     {"_EDCHM_percola_GR4Jfix", (DL_FUNC) &_EDCHM_percola_GR4Jfix, 3},
     {"_EDCHM_percola_GR4J", (DL_FUNC) &_EDCHM_percola_GR4J, 2},
     {"_EDCHM_percola_SupplyRatio", (DL_FUNC) &_EDCHM_percola_SupplyRatio, 2},

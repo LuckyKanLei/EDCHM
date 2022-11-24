@@ -7,8 +7,8 @@
 \alias{evatransActual_VIC}
 \alias{evatransActual_GR4J}
 \alias{evatransActual_UBC}
-\alias{evatransLand_Liang}
-\alias{evatransSoil_Liang}
+\alias{evatransActual_LiangLand}
+\alias{evatransActual_LiangSoil}
 \title{\strong{actuall evapotranspiration}}
 \usage{
 evatransActual_SupplyRatio(
@@ -42,14 +42,14 @@ evatransActual_UBC(
   param_evatrans_ubc_gamma
 )
 
-evatransLand_Liang(
+evatransActual_LiangLand(
   atmos_potentialEvatrans_mm,
   water_mm,
   capacity_mm,
   param_evatrans_lia_gamma
 )
 
-evatransSoil_Liang(
+evatransActual_LiangSoil(
   atmos_potentialEvatrans_mm,
   water_mm,
   capacity_mm,

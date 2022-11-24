@@ -1037,24 +1037,24 @@ RcppExport SEXP _EDCHM_evatransActual_UBC(SEXP atmos_potentialEvatrans_mmSEXP, S
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// evatransLand_Liang
-NumericVector evatransLand_Liang(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_gamma);
-static SEXP _EDCHM_evatransLand_Liang_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_gammaSEXP) {
+// evatransActual_LiangLand
+NumericVector evatransActual_LiangLand(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_gamma);
+static SEXP _EDCHM_evatransActual_LiangLand_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_gammaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type water_mm(water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_lia_gamma(param_evatrans_lia_gammaSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransLand_Liang(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma));
+    rcpp_result_gen = Rcpp::wrap(evatransActual_LiangLand(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransLand_Liang(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_gammaSEXP) {
+RcppExport SEXP _EDCHM_evatransActual_LiangLand(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_gammaSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransLand_Liang_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_lia_gammaSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_LiangLand_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_lia_gammaSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1074,24 +1074,24 @@ RcppExport SEXP _EDCHM_evatransLand_Liang(SEXP atmos_potentialEvatrans_mmSEXP, S
     UNPROTECT(1);
     return rcpp_result_gen;
 }
-// evatransSoil_Liang
-NumericVector evatransSoil_Liang(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_B);
-static SEXP _EDCHM_evatransSoil_Liang_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_BSEXP) {
+// evatransActual_LiangSoil
+NumericVector evatransActual_LiangSoil(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_B);
+static SEXP _EDCHM_evatransActual_LiangSoil_try(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< NumericVector >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type water_mm(water_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type capacity_mm(capacity_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_lia_B(param_evatrans_lia_BSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransSoil_Liang(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B));
+    rcpp_result_gen = Rcpp::wrap(evatransActual_LiangSoil(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransSoil_Liang(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_BSEXP) {
+RcppExport SEXP _EDCHM_evatransActual_LiangSoil(SEXP atmos_potentialEvatrans_mmSEXP, SEXP water_mmSEXP, SEXP capacity_mmSEXP, SEXP param_evatrans_lia_BSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransSoil_Liang_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_lia_BSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransActual_LiangSoil_try(atmos_potentialEvatrans_mmSEXP, water_mmSEXP, capacity_mmSEXP, param_evatrans_lia_BSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2143,8 +2143,8 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*evatransActual_VIC)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_GR4J)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_UBC)(NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*evatransLand_Liang)(NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*evatransSoil_Liang)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*evatransActual_LiangLand)(NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*evatransActual_LiangSoil)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*infilt_GR4J)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*infilt_UBC)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*infilt_SupplyRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -2206,8 +2206,8 @@ RcppExport SEXP _EDCHM_RcppExport_registerCCallable() {
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_VIC", (DL_FUNC)_EDCHM_evatransActual_VIC_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_GR4J", (DL_FUNC)_EDCHM_evatransActual_GR4J_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_UBC", (DL_FUNC)_EDCHM_evatransActual_UBC_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_evatransLand_Liang", (DL_FUNC)_EDCHM_evatransLand_Liang_try);
-    R_RegisterCCallable("EDCHM", "_EDCHM_evatransSoil_Liang", (DL_FUNC)_EDCHM_evatransSoil_Liang_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_LiangLand", (DL_FUNC)_EDCHM_evatransActual_LiangLand_try);
+    R_RegisterCCallable("EDCHM", "_EDCHM_evatransActual_LiangSoil", (DL_FUNC)_EDCHM_evatransActual_LiangSoil_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_infilt_GR4J", (DL_FUNC)_EDCHM_infilt_GR4J_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_infilt_UBC", (DL_FUNC)_EDCHM_infilt_UBC_try);
     R_RegisterCCallable("EDCHM", "_EDCHM_infilt_SupplyRatio", (DL_FUNC)_EDCHM_infilt_SupplyRatio_try);
@@ -2268,8 +2268,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_evatransActual_VIC", (DL_FUNC) &_EDCHM_evatransActual_VIC, 4},
     {"_EDCHM_evatransActual_GR4J", (DL_FUNC) &_EDCHM_evatransActual_GR4J, 3},
     {"_EDCHM_evatransActual_UBC", (DL_FUNC) &_EDCHM_evatransActual_UBC, 4},
-    {"_EDCHM_evatransLand_Liang", (DL_FUNC) &_EDCHM_evatransLand_Liang, 4},
-    {"_EDCHM_evatransSoil_Liang", (DL_FUNC) &_EDCHM_evatransSoil_Liang, 4},
+    {"_EDCHM_evatransActual_LiangLand", (DL_FUNC) &_EDCHM_evatransActual_LiangLand, 4},
+    {"_EDCHM_evatransActual_LiangSoil", (DL_FUNC) &_EDCHM_evatransActual_LiangSoil, 4},
     {"_EDCHM_infilt_GR4J", (DL_FUNC) &_EDCHM_infilt_GR4J, 3},
     {"_EDCHM_infilt_UBC", (DL_FUNC) &_EDCHM_infilt_UBC, 5},
     {"_EDCHM_infilt_SupplyRatio", (DL_FUNC) &_EDCHM_infilt_SupplyRatio, 4},

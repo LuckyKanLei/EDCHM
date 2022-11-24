@@ -284,7 +284,7 @@ NumericVector evatransActual_UBC(
 //' @param param_evatrans_lia_gamma <0.4, 1> parameter for [evatransLand_Liang()]
 //' @export
 // [[Rcpp::export]]
-NumericVector evatransLand_Liang(
+NumericVector evatransActual_LiangLand(
     NumericVector atmos_potentialEvatrans_mm,
     NumericVector water_mm,
     NumericVector capacity_mm,
@@ -312,7 +312,7 @@ NumericVector evatransLand_Liang(
 //' @param param_evatrans_lia_B <0.01, 3> parameter for [evatransSoil_Liang()]
 //' @export
 // [[Rcpp::export]]
-NumericVector evatransSoil_Liang(
+NumericVector evatransActual_LiangSoil(
     NumericVector atmos_potentialEvatrans_mm,
     NumericVector water_mm,
     NumericVector capacity_mm,

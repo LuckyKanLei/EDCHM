@@ -612,17 +612,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector evatransLand_Liang(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_gamma) {
-        typedef SEXP(*Ptr_evatransLand_Liang)(SEXP,SEXP,SEXP,SEXP);
-        static Ptr_evatransLand_Liang p_evatransLand_Liang = NULL;
-        if (p_evatransLand_Liang == NULL) {
-            validateSignature("NumericVector(*evatransLand_Liang)(NumericVector,NumericVector,NumericVector,NumericVector)");
-            p_evatransLand_Liang = (Ptr_evatransLand_Liang)R_GetCCallable("EDCHM", "_EDCHM_evatransLand_Liang");
+    inline NumericVector evatransActual_LiangLand(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_gamma) {
+        typedef SEXP(*Ptr_evatransActual_LiangLand)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_evatransActual_LiangLand p_evatransActual_LiangLand = NULL;
+        if (p_evatransActual_LiangLand == NULL) {
+            validateSignature("NumericVector(*evatransActual_LiangLand)(NumericVector,NumericVector,NumericVector,NumericVector)");
+            p_evatransActual_LiangLand = (Ptr_evatransActual_LiangLand)R_GetCCallable("EDCHM", "_EDCHM_evatransActual_LiangLand");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_evatransLand_Liang(Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_evatrans_lia_gamma)));
+            rcpp_result_gen = p_evatransActual_LiangLand(Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_evatrans_lia_gamma)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -633,17 +633,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector evatransSoil_Liang(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_B) {
-        typedef SEXP(*Ptr_evatransSoil_Liang)(SEXP,SEXP,SEXP,SEXP);
-        static Ptr_evatransSoil_Liang p_evatransSoil_Liang = NULL;
-        if (p_evatransSoil_Liang == NULL) {
-            validateSignature("NumericVector(*evatransSoil_Liang)(NumericVector,NumericVector,NumericVector,NumericVector)");
-            p_evatransSoil_Liang = (Ptr_evatransSoil_Liang)R_GetCCallable("EDCHM", "_EDCHM_evatransSoil_Liang");
+    inline NumericVector evatransActual_LiangSoil(NumericVector atmos_potentialEvatrans_mm, NumericVector water_mm, NumericVector capacity_mm, NumericVector param_evatrans_lia_B) {
+        typedef SEXP(*Ptr_evatransActual_LiangSoil)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_evatransActual_LiangSoil p_evatransActual_LiangSoil = NULL;
+        if (p_evatransActual_LiangSoil == NULL) {
+            validateSignature("NumericVector(*evatransActual_LiangSoil)(NumericVector,NumericVector,NumericVector,NumericVector)");
+            p_evatransActual_LiangSoil = (Ptr_evatransActual_LiangSoil)R_GetCCallable("EDCHM", "_EDCHM_evatransActual_LiangSoil");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_evatransSoil_Liang(Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_evatrans_lia_B)));
+            rcpp_result_gen = p_evatransActual_LiangSoil(Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(water_mm)), Shield<SEXP>(Rcpp::wrap(capacity_mm)), Shield<SEXP>(Rcpp::wrap(param_evatrans_lia_B)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

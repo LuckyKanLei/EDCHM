@@ -307,8 +307,8 @@ evatransActual_UBC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #'   - \mjseqn{\gamma} is `param_evatrans_lia_gamma`
 #' @param param_evatrans_lia_gamma <0.4, 1> parameter for [evatransLand_Liang()]
 #' @export
-evatransLand_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma) {
-    .Call(`_EDCHM_evatransLand_Liang`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma)
+evatransActual_LiangLand <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma) {
+    .Call(`_EDCHM_evatransActual_LiangLand`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma)
 }
 
 #' @rdname evatransActual
@@ -320,8 +320,8 @@ evatransLand_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #'   - \mjseqn{B} is `param_evatrans_lia_B`
 #' @param param_evatrans_lia_B <0.01, 3> parameter for [evatransSoil_Liang()]
 #' @export
-evatransSoil_Liang <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B) {
-    .Call(`_EDCHM_evatransSoil_Liang`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B)
+evatransActual_LiangSoil <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B) {
+    .Call(`_EDCHM_evatransActual_LiangSoil`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B)
 }
 
 #' **infiltration**

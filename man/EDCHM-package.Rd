@@ -31,6 +31,8 @@ So for EDCHM there are five basic Layers (now one additional snowLy) and six Bou
 \item btmBd
 }
 }
+
+\figure{edchm_layer.pdf}{options: width=165mm}
 }
 
 \section{Variable define}{
@@ -47,6 +49,48 @@ But the time units part will not appear in the name.
 And also all the variable meant they are homogeneous in the area, so all the variable will not give the square meter (m2) in the name.
 }
 
+For the formulas symbols there are also some conventions:
+\itemize{
+\item \mjseqn{W}: water volume in one Layer (mm/m2)
+\itemize{
+\item \mjseqn{W_{land}}: pounded water in \code{landLy}
+\item \mjseqn{W_{itcp}}: intercepted water in \code{landLy}
+\item \mjseqn{W_{snow}}: equal water volume in \code{snowLy}
+\item \mjseqn{W_{soil}}: storage in \code{soilLy}
+\item \mjseqn{W_{grnd}}: storage in \code{groundLy}
+}
+\item \mjseqn{C}: maximal capacity of water volume in one Layer (mm/m2)
+\itemize{
+\item \mjseqn{C_{itcp}}: intercepted water capacity in \code{landLy}
+\item \mjseqn{C_{soil}}: storage capacity in \code{soilLy}
+\item \mjseqn{C_{grnd}}: storage capacity in \code{groundLy}
+}
+\item \mjseqn{P}: flux of precipitation (mm/m2/TS)
+\itemize{
+\item \mjseqn{P_r}: rain fall
+\item \mjseqn{P_s}: snow fall
+}
+\item \mjseqn{E}: flux of evapotranspiration (mm/m2/TS)
+\itemize{
+\item \mjseqn{E_p}: potential evapotranspiration
+\item \mjseqn{E_a}: actual evapotranspiration from one specific Layer (e.g. \code{soilLy} or \code{landLy})
+}
+\item \mjseqn{I}: flux of infiltration (mm/m2/TS)
+\item \mjseqn{M}: flux or snow melt (mm/m2/TS)
+\item \mjseqn{R}: flux of runoff (mm/m2/TS), that from precipitation travels over the soil surface to the nearest stream channel
+\item \mjseqn{S}: flux of subsurface flow (mm/m2/TS), that from \code{soilLy} travels over the soil subsurface to the nearest stream channel
+\item \mjseqn{B}: flux of baseflow (mm/m2/TS), that from \code{groundLy} travels groundwater to the nearest stream channel
+\item \mjseqn{A}: flux of capillary rise (mm/m2/TS) (A from German Aufstieg)
+\item \mjseqn{V}: flux of percolation (mm/m2/TS) (V from German Versinkung)
+\item \mjseqn{L}: flux of lateral flow (mm/m2/TS), the exchange with the other catchment, it can be positive (into) or negative (go out)
+\item \mjseqn{Q}: streamflow in the river section (mm/m2/TS) (PS: \strong{the results from EDCHM has't transform the unit from flux (mm/m2/TS) to the streamflow (m3/TS) or (m3/s)})
+\itemize{
+\item \mjseqn{Q_r}: proportion of \mjseqn{Q} from runoff (\mjseqn{R})
+\item \mjseqn{Q_s}: proportion of \mjseqn{Q} from subsurface flow (\mjseqn{S})
+\item \mjseqn{Q_b}: proportion of \mjseqn{Q} from baseflow (\mjseqn{B})
+}
+}
+
 e.g. \strong{group_variableName_unit}
 }
 
@@ -60,6 +104,8 @@ e.g. \strong{param_processName_mtd_k}
 
 \section{Process}{
 There are now 10 Process available:
+
+\figure{hydro_modula_structure.pdf}{options: width=165mm}
 \itemize{
 \item atmos: caculate the basic variable (data) in the \code{atmosLy}, sometimes the variable komm directly from the original data
 \itemize{
@@ -69,8 +115,6 @@ There are now 10 Process available:
 \itemize{
 \item evatransPotential: potential ET calculate
 \item evatransActual: actual ET calculate
-\item evatransLand: actual ET in \code{landLy} (evaporation from interception)
-\item evatransSoil: actual ET in \code{soilLy} (transpiration from root zone + evaporation from top soil)
 }
 \item snow: snow
 \itemize{
@@ -82,10 +126,13 @@ There are now 10 Process available:
 \item percola: percolation, \code{soilLy} to \code{groundLy}
 \item baseflow: interception, \code{groundLy}
 \item lateral: lateral flow, exchange with outside region, \code{groundLy}
-\item confluen: confluence to river
+\item confluen: confluence from catchment (or subcatchment) to river
 \itemize{
 \item confluenIUH: IUH to calculate
 }
 }
 }
 
+\references{
+\insertAllCited{}
+}

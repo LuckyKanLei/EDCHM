@@ -7,10 +7,7 @@ Maintainer: Kan Lei <kan.lei@tu-dresden.de>
 Description: A colletion of some hydrological models (processes). 
   In order to improve the model efficency, the processes are in c++ implemented.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.7),
-  RcppArmadillo,
-  mathjaxr,
-  Rdpack
+Imports: Rcpp (>= 1.0.7), RcppArmadillo, mathjaxr, Rdpack
 LinkingTo: Rcpp
 RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)

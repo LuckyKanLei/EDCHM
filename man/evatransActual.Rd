@@ -122,7 +122,7 @@ where
 }
 
 \itemize{
-\item \strong{_VIC}: is similar with \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, estimate the water content in the storage.
+\item \strong{_VIC} \insertCite{VIC_Wood_1992}{EDCHM}: is similar with \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, estimate the water content in the storage.
 \mjsdeqn{f = 1-\left(1-\frac{W}{C}\right)^{\gamma}}
 where
 \itemize{
@@ -131,14 +131,14 @@ where
 }
 
 \itemize{
-\item \strong{_GR4J}: is a little different than other method, it estimate not the ratio \mjseqn{f},
+\item \strong{_GR4J} \insertCite{GR4J_Perrin_2003}{EDCHM}: is a little different than other method, it estimate not the ratio \mjseqn{f},
 rather dieectly a equation with potential ET and water content.
 And it need \strong{no parameter}.
 \mjsdeqn{E_a = \frac{W\left(2-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}{1 + \left(1-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}}
 }
 
 \itemize{
-\item \strong{_UBC}: estimate the water content in the storage.
+\item \strong{_UBC} \insertCite{VIC_Wood_1992}{EDCHM}: estimate the water content in the storage.
 (This is a little different than original, the parameter \code{P0AGEN} is replaced by \mjseqn{\frac{C}{\gamma}}.)
 \mjsdeqn{f = 10^{\gamma \frac{W-C}{C}}}
 where
@@ -148,7 +148,7 @@ where
 }
 
 \itemize{
-\item \strong{Land_Liang}: is also a similar method like \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}},
+\item \strong{Land_Liang} \insertCite{VIC2_Liang_1994}{EDCHM}: is also a similar method like \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}},
 but it will estimate the supply ability agian, whwn the water is still not enough.
 \mjsdeqn{E_l^* = \left(\frac{W}{C}\right)^\gamma E_p}
 \mjsdeqn{E_l = \min \left(1, \frac{W}{E_l^*}\right) E_l^*}
@@ -161,7 +161,7 @@ where
 }
 
 \itemize{
-\item \strong{Soil_Liang}: estimate the water content in the storage.
+\item \strong{Soil_Liang} \insertCite{VIC2_Liang_1994}{EDCHM}: estimate the water content in the storage.
 (This is a little different than original, the parameter \code{P0AGEN} is replaced by \mjseqn{\frac{C}{\gamma}}.)
 \mjsdeqn{f = \int_{0}^{A_{s}} d A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} d A }
 where
@@ -169,4 +169,7 @@ where
 \item \mjseqn{B} is \code{param_evatrans_lia_B}
 }
 }
+}
+\references{
+\insertAllCited{}
 }

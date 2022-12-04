@@ -74,7 +74,7 @@ In this situation we should give some factor for different ET-area.
 }
 \details{
 \itemize{
-\item \strong{_TurcWendling}: consider only the radiation and temperature as the main factors.
+\item \strong{_TurcWendling} \insertCite{ET_TurcWendling_1991}{EDCHM}: consider only the radiation and temperature as the main factors.
 \mjsdeqn{E_p = \frac{(100 R_s + 3.875 t_h k)\cdot(T + 22)}{150 (T + 123)}}
 where
 \itemize{
@@ -87,7 +87,7 @@ where
 }
 
 \itemize{
-\item \strong{_Linacre}: consider only the temperature as the main factors.
+\item \strong{_Linacre} \insertCite{ET_Linacre_1977}{EDCHM}: consider only the temperature as the main factors.
 \mjsdeqn{E_p = \frac{\frac{100(0.75 - \alpha)(T + 0.006 z)}{100 - \phi} + 15(T - T_d)}{80 - T}}
 \mjsdeqn{T_d = T - 20 (1-H_R)}
 where
@@ -100,7 +100,7 @@ where
 }
 
 \itemize{
-\item \strong{_FAO56}: consider not only radiation and temperature but also other variable like wind speed
+\item \strong{_FAO56} \insertCite{ET_FAO56_1998}{EDCHM}: consider not only radiation and temperature but also other variable like wind speed
 as the main factors.
 \mjsdeqn{E_p =\frac{0.408 \Delta\left(R_n - G\right)+\gamma \frac{900}{T+273} {u}_{2}\left({e}_{{s}}-{e}_{{a}}\right)}{\Delta+\gamma\left(1+0.34 {u}_{2}\right)}}
 where
@@ -114,4 +114,7 @@ where
 \item \mjseqn{\gamma} is psychrometric constant
 }
 }
+}
+\references{
+\insertAllCited{}
 }

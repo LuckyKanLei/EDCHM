@@ -163,9 +163,11 @@ confluenIUH_NashKumar <- function(confluen_responseTime_TS, param_confluen_nak_n
 #' But we may don't have so many information and effective method, in order to get the truly potential ET.
 #' So there is the simplified method: reference ET, it define the ET-area with some fest charterers, e.g. [evatransPotential_FAO56()].
 #' In this situation we should give some factor for different ET-area.
+#' @references
+#' \insertAllCited{}
 #' @inheritParams all_vari
 #' @details
-#' - **_TurcWendling**: consider only the radiation and temperature as the main factors. 
+#' - **_TurcWendling** \insertCite{ET_TurcWendling_1991}{EDCHM}: consider only the radiation and temperature as the main factors. 
 #' \mjsdeqn{E_p = \frac{(100 R_s + 3.875 t_h k)\cdot(T + 22)}{150 (T + 123)}}
 #' where
 #'   - \mjseqn{E_p} is potential ET, `atmos_potentialEvatrans_mm`
@@ -182,7 +184,7 @@ evatransPotential_TurcWendling <- function(atmos_temperature_Cel, atmos_solarRad
 
 #' @rdname evatransPotential
 #' @details
-#' - **_Linacre**: consider only the temperature as the main factors. 
+#' - **_Linacre** \insertCite{ET_Linacre_1977}{EDCHM}: consider only the temperature as the main factors. 
 #' \mjsdeqn{E_p = \frac{\frac{100(0.75 - \alpha)(T + 0.006 z)}{100 - \phi} + 15(T - T_d)}{80 - T}}
 #' \mjsdeqn{T_d = T - 20 (1-H_R)}
 #' where
@@ -197,7 +199,7 @@ evatransPotential_Linacre <- function(time_dayOfYear_, atmos_temperature_Cel, at
 
 #' @rdname evatransPotential
 #' @details
-#' - **_FAO56**: consider not only radiation and temperature but also other variable like wind speed
+#' - **_FAO56** \insertCite{ET_FAO56_1998}{EDCHM}: consider not only radiation and temperature but also other variable like wind speed
 #' as the main factors. 
 #' \mjsdeqn{E_p =\frac{0.408 \Delta\left(R_n - G\right)+\gamma \frac{900}{T+273} {u}_{2}\left({e}_{{s}}-{e}_{{a}}\right)}{\Delta+\gamma\left(1+0.34 {u}_{2}\right)}}
 #' where
@@ -225,6 +227,8 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 #' - \mjseqn{E_p} is `atmos_potentialEvatrans_mm`
 #' - \mjseqn{f} is estimated ratio.
 #' Then the different `evatransActual` methods will estimate the ratio \mjseqn{f}.
+#' @references
+#' \insertAllCited{}
 #' @return actually ET in (mm/m2/TS)
 #' - evaporation in interception (landLy), `land_evatrans_mm`
 #' - transpiration in root
@@ -260,7 +264,7 @@ evatransActual_SupplyPow <- function(atmos_potentialEvatrans_mm, water_mm, capac
 
 #' @rdname evatransActual
 #' @details
-#' - **_VIC**: is similar with [evatransActual_SupplyPow()], estimate the water content in the storage.
+#' - **_VIC** \insertCite{VIC_Wood_1992}{EDCHM}: is similar with [evatransActual_SupplyPow()], estimate the water content in the storage.
 #' \mjsdeqn{f = 1-\left(1-\frac{W}{C}\right)^{\gamma}}
 #' where
 #'   - \mjseqn{\gamma} is `param_evatrans_vic_gamma`
@@ -272,7 +276,7 @@ evatransActual_VIC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 
 #' @rdname evatransActual
 #' @details
-#' - **_GR4J**: is a little different than other method, it estimate not the ratio \mjseqn{f},
+#' - **_GR4J** \insertCite{GR4J_Perrin_2003}{EDCHM}: is a little different than other method, it estimate not the ratio \mjseqn{f},
 #' rather dieectly a equation with potential ET and water content.
 #' And it need **no parameter**.
 #' \mjsdeqn{E_a = \frac{W\left(2-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}{1 + \left(1-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}}
@@ -283,7 +287,7 @@ evatransActual_GR4J <- function(atmos_potentialEvatrans_mm, water_mm, capacity_m
 
 #' @rdname evatransActual
 #' @details
-#' - **_UBC**: estimate the water content in the storage. 
+#' - **_UBC** \insertCite{VIC_Wood_1992}{EDCHM}: estimate the water content in the storage. 
 #' (This is a little different than original, the parameter `P0AGEN` is replaced by \mjseqn{\frac{C}{\gamma}}.)
 #' \mjsdeqn{f = 10^{\gamma \frac{W-C}{C}}}
 #' where
@@ -297,7 +301,7 @@ evatransActual_UBC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #' @rdname evatransActual
 #' 
 #' @details
-#' - **Land_Liang**: is also a similar method like [evatransActual_SupplyPow()], 
+#' - **Land_Liang** \insertCite{VIC2_Liang_1994}{EDCHM}: is also a similar method like [evatransActual_SupplyPow()], 
 #' but it will estimate the supply ability agian, whwn the water is still not enough.
 #' \mjsdeqn{E_l^* = \left(\frac{W}{C}\right)^\gamma E_p}
 #' \mjsdeqn{E_l = \min \left(1, \frac{W}{E_l^*}\right) E_l^*}
@@ -313,7 +317,7 @@ evatransActual_LiangLand <- function(atmos_potentialEvatrans_mm, water_mm, capac
 
 #' @rdname evatransActual
 #' @details
-#' - **Soil_Liang**: estimate the water content in the storage. 
+#' - **Soil_Liang** \insertCite{VIC2_Liang_1994}{EDCHM}: estimate the water content in the storage. 
 #' (This is a little different than original, the parameter `P0AGEN` is replaced by \mjseqn{\frac{C}{\gamma}}.)
 #' \mjsdeqn{f = \int_{0}^{A_{s}} d A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} d A }
 #' where

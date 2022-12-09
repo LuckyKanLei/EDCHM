@@ -2,28 +2,19 @@
 % Please edit documentation in R/RcppExports.R
 \name{percola}
 \alias{percola}
-\alias{percola_GR4Jfix}
 \alias{percola_GR4J}
-\alias{percola_SupplyRatio}
-\alias{percola_SupplyPow}
+\alias{percola_GR4Jfix}
 \alias{percola_MaxPow}
 \alias{percola_ThreshPow}
 \alias{percola_Arno}
 \alias{percola_BevenWood}
+\alias{percola_SupplyPow}
+\alias{percola_SupplyRatio}
 \title{\strong{percolation}}
 \usage{
-percola_GR4Jfix(soil_water_mm, soil_capacity_mm, param_percola_grf_k)
-
 percola_GR4J(soil_water_mm, soil_capacity_mm)
 
-percola_SupplyRatio(soil_water_mm, param_percola_sur_k)
-
-percola_SupplyPow(
-  soil_water_mm,
-  soil_capacity_mm,
-  param_percola_sup_k,
-  param_percola_sup_gamma
-)
+percola_GR4Jfix(soil_water_mm, soil_capacity_mm, param_percola_grf_k)
 
 percola_MaxPow(
   soil_water_mm,
@@ -54,6 +45,15 @@ percola_BevenWood(
   soil_fieldCapacityPerc_1,
   soil_potentialPercola_mm
 )
+
+percola_SupplyPow(
+  soil_water_mm,
+  soil_capacity_mm,
+  param_percola_sup_k,
+  param_percola_sup_gamma
+)
+
+percola_SupplyRatio(soil_water_mm, param_percola_sur_k)
 }
 \arguments{
 \item{soil_water_mm}{(mm/m2) water volume in \code{soilLy}}
@@ -61,12 +61,6 @@ percola_BevenWood(
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
 \item{param_percola_grf_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_GR4Jfix]{percola_GR4Jfix()}}}
-
-\item{param_percola_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_SupplyRatio]{percola_SupplyRatio()}}}
-
-\item{param_percola_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
-
-\item{param_percola_sup_gamma}{<0, 7> parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
 
 \item{soil_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} percolation}
 
@@ -81,10 +75,146 @@ percola_BevenWood(
 \item{param_percola_arn_k}{<0.1, 1> exponential parameter for \code{\link[=percola_ThreshPow]{percola_ThreshPow()}}}
 
 \item{soil_fieldCapacityPerc_1}{<0, 1> the relative ratio (\mjseqn{\theta_fc / \theta^*}) that the water content can drainage by gravity}
+
+\item{param_percola_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
+
+\item{param_percola_sup_gamma}{<0, 7> parameter for \code{\link[=percola_SupplyPow]{percola_SupplyPow()}}}
+
+\item{param_percola_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=percola_SupplyRatio]{percola_SupplyRatio()}}}
 }
 \value{
 percola_mm (mm/m2)
 }
 \description{
-\strong{percolation}
+\loadmathjax
+Under the concept of the conceptional HM, the flux of capillary rise always
+be calculated by the water in the soil layer \mjseqn{W_{soil}},
+it can also be tread as the part of the \mjseqn{W_{soil}}.
+So we can give the function from:
+
+\mjsdeqn{F_{prcl} = f_{percola}(D_{grnd}, D_{soil})}
+
+to:
+
+\mjsdeqn{F_{prcl} = f_{percola}(W_{soil}, C_{soil}, W_{grnd}, C_{grnd}, ...) = k^* W_{soil}}
+\mjsdeqn{F_{prcl} \leq W_{soil}}
+\mjsdeqn{F_{prcl} \leq C_{grnd} - W_{grnd}}
+
+where
+\itemize{
+\item \mjseqn{F_{prcl}} is \code{soil_percola_mm}
+\item \mjseqn{W_{soil}} is \code{water_soil_mm}
+\item \mjseqn{C_{soil}} is \code{capacity_soil_mm}
+\item \mjseqn{W_{grnd}} is \code{ground_water_mm}
+\item \mjseqn{C_{grnd}} is \code{capacity_water_mm}
+\item \mjseqn{k^*} is estimated ratio
+}
+
+The output density distribution from 8 methods:
+
+\if{html}{\figure{mdl_percola.svg}}
+\if{latex}{\figure{mdl_percola.pdf}{options: width=140mm}}
+}
+\section{\strong{_GR4J} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_percola_gr4.svg}}
+\if{latex}{\figure{mdl_percola_gr4.pdf}{options: width=140mm}}
+
+\mjsdeqn{k^* = 1 - \left[ 1 + \left(\frac{4}{9} \frac{W_{soil}}{C_{soil}} \right)^4 \right]^{-1/4}}
+where
+\itemize{
+\item \mjseqn{k^*} is estimated ratio
+}
+}
+
+\section{\strong{_GR4Jfix} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_percola_grf.svg}}
+\if{latex}{\figure{mdl_percola_grf.pdf}{options: width=140mm}}
+
+\mjsdeqn{k^* = 1 - \left[ 1 + \left(k \frac{W_{soil}}{C_{soil}} \right)^4 \right]^{-1/4}}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_percola_grf_k}
+}
+}
+
+\section{\strong{_MaxPow}:}{
+\if{html}{\figure{mdl_percola_map.svg}}
+\if{latex}{\figure{mdl_percola_map.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{prcl} = M_{prcl} \left(\frac{W_{soil}}{C_{soil}} \right)^\gamma}
+where
+\itemize{
+\item \mjseqn{M_{prcl}} is \code{soil_potentialPercola_mm}
+\item \mjseqn{\gamma} is \code{param_baseflow_map_gamma}
+}
+}
+
+\section{\strong{_ThreshPow}}{
+\if{html}{\figure{mdl_percola_thp.svg}}
+\if{latex}{\figure{mdl_percola_thp.pdf}{options: width=140mm}}
+
+based on the \verb{_MaxPow} and add the one threshold \mjseqn{\phi_b}:
+\mjsdeqn{F_{prcl} = 0, \quad \frac{W_{soil}}{C_{soil}} < \phi_b}
+\mjsdeqn{F_{prcl} = M_{prcl} \left(\frac{\frac{W_{soil}}{C_{soil}} - \phi_b}{1-\phi_b} \right)^\gamma, \quad \frac{W_{soil}}{C_{soil}} \geq \phi_b}
+where
+\itemize{
+\item \mjseqn{\phi_b} is \code{param_percola_thp_thresh}
+\item \mjseqn{\gamma} is \code{param_percola_thp_gamma}
+}
+}
+
+\section{\strong{_Arno} \insertCite{baseflow_Arno_1991,VIC2_Liang_1994}{EDCHM}}{
+\if{html}{\figure{mdl_percola_arn.svg}}
+\if{latex}{\figure{mdl_percola_arn.pdf}{options: width=140mm}}
+
+has also in two cases divided by a threshold water content \mjseqn{\phi_b}:
+(\emph{This method is actually not the original method, but an analogy with \code{baseflow_Arno}})
+\mjsdeqn{F_{prcl} = k M_{prcl} \frac{W_{soil}}{C_{soil}}, \quad \frac{W_{soil}}{C_{soil}} < \phi_b}
+\mjsdeqn{F_{prcl} = k M_{prcl} \frac{W_{soil}}{C_{soil}} + (1-k) M_{prcl} \left(\frac{W_{soil} - W_s}{C_{soil} - W_s} \right)^2, \quad \frac{W_{soil}}{C_{soil}} \geq \phi_b}
+\mjsdeqn{W_s = k C_{soil}}
+where
+\itemize{
+\item \mjseqn{\phi_b} is \code{param_percola_arn_thresh}
+\item \mjseqn{k} is \code{param_percola_arn_k}
+}
+}
+
+\section{\strong{_BevenWood} \insertCite{percola_BevenWood_1983,TOPMODEL_Beven_1995}{EDCHM}:}{
+\if{html}{\figure{mdl_percola_bew.svg}}
+\if{latex}{\figure{mdl_percola_bew.pdf}{options: width=140mm}}
+
+\mjsdeqn{k =  \frac{W_{soil}}{C_{soil} - W_{soil}} \quad {\rm and} \quad k \leq 1}
+\mjsdeqn{F_{prcl} = k M_{prcl}}
+where
+\itemize{
+\item \mjseqn{k_{fc}} is \code{soil_fieldCapacityPerc_1}
+\item \mjseqn{\gamma} is \code{param_percola_sup_gamma}
+}
+}
+
+\section{\strong{_SupplyPow} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_percola_sup.svg}}
+\if{latex}{\figure{mdl_percola_sup.pdf}{options: width=140mm}}
+
+\mjsdeqn{k^* = k \left(\frac{W_{soil}}{C_{soil}} \right)^\gamma}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_percola_sup_k}
+\item \mjseqn{\gamma} is \code{param_percola_sup_gamma}
+}
+}
+
+\section{\strong{_SupplyRatio} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_percola_sur.svg}}
+\if{latex}{\figure{mdl_percola_sur.pdf}{options: width=140mm}}
+
+\mjsdeqn{k^* = k}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_percola_sur_k}
+}
+}
+
+\references{
+\insertAllCited{}
 }

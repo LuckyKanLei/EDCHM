@@ -71,11 +71,11 @@ evatransActual_LiangSoil(
 
 \item{param_evatrans_vic_gamma}{<0.2, 5> parameter for \code{\link[=evatransActual_VIC]{evatransActual_VIC()}}}
 
-\item{param_evatrans_ubc_gamma}{<0.5, 2>parameter for \code{\link[=evatransActual_UBC]{evatransActual_UBC()}}}
+\item{param_evatrans_ubc_gamma}{<0.5, 2> parameter for \code{\link[=evatransActual_UBC]{evatransActual_UBC()}}}
 
-\item{param_evatrans_lia_gamma}{<0.4, 1> parameter for \code{\link[=evatransLand_Liang]{evatransLand_Liang()}}}
+\item{param_evatrans_lia_gamma}{<0.4, 1> parameter for \code{\link[=evatransActual_LiangLand]{evatransActual_LiangLand()}}}
 
-\item{param_evatrans_lia_B}{<0.01, 3> parameter for \code{\link[=evatransSoil_Liang]{evatransSoil_Liang()}}}
+\item{param_evatrans_lia_B}{<0.01, 3> parameter for \code{\link[=evatransActual_LiangSoil]{evatransActual_LiangSoil()}}}
 }
 \value{
 actually ET in (mm/m2/TS)
@@ -87,21 +87,39 @@ actually ET in (mm/m2/TS)
 }
 \description{
 \loadmathjax
-Under the concept of the conceptional HM, the actually ET is always consider as a part of potential ET:
-\mjsdeqn{E_a = f E_p}
+Under the concept of the conceptional HM, the actually ET is always calculated by the potential ET \mjseqn{E_p},
+which evaluate the meteorological situation and the landuse (vegetation) situation.
+The second point is the water availability of the land.
+
+So we can give the function from:
+
+\mjsdeqn{E_a = f_{evatransActual}(D_{atms}, D_{lssg})}
+
+to:
+
+\mjsdeqn{E_a = f_{evatransActual}(E_p, W_{lssg}, ...) = k^* E_p}
+
 where
 \itemize{
 \item \mjseqn{E_a} is \code{land_evatrans_mm} or \code{soil_evatrans_mm}
 \item \mjseqn{E_p} is \code{atmos_potentialEvatrans_mm}
-\item \mjseqn{f} is estimated ratio.
-Then the different \code{evatransActual} methods will estimate the ratio \mjseqn{f}.
+\item \mjseqn{k^*} is estimated ratio.
 }
+
+Then the different \code{evatransActual} methods will estimate the ratio \mjseqn{k^*}.
+
+The output density distribution from 7 methods:
+
+\if{html}{\figure{mdl_evatransActual.svg}}
+\if{latex}{\figure{mdl_evatransActual.pdf}{options: width=140mm}}
 }
-\details{
-\itemize{
-\item \strong{_SupplyRatio}: the water content (the ratio to the maximal capacity)
-is considered as th main factors for the ratio \mjseqn{f}.
-\mjsdeqn{f = k  \frac{W}{C}}
+\section{\strong{_SupplyRatio}:}{
+\if{html}{\figure{mdl_evatransActual_sur.svg}}
+\if{latex}{\figure{mdl_evatransActual_sur.pdf}{options: width=140mm}}
+
+The water content (the ratio to the maximal capacity)
+is considered as th main factors for the ratio \mjseqn{k^*}.
+\mjsdeqn{k^* = k  \frac{W}{C}}
 where
 \itemize{
 \item \mjseqn{W} is water volume in (mm/m2/TS), \code{water_mm}, \code{land_interceptWater_mm}, \code{soil_water_mm}
@@ -110,10 +128,13 @@ where
 }
 }
 
-\itemize{
-\item \strong{_SupplyPow}: the water content (the ratio to the maximal capacity)
-is considered as th main factors for the ratio \mjseqn{f}.
-\mjsdeqn{f = k  \left(\frac{W}{C}\right)^\gamma}
+\section{\strong{_SupplyPow}:}{
+\if{html}{\figure{mdl_evatransActual_sup.svg}}
+\if{latex}{\figure{mdl_evatransActual_sup.pdf}{options: width=140mm}}
+
+The water content (the ratio to the maximal capacity)
+is considered as th main factors for the ratio \mjseqn{k^*}.
+\mjsdeqn{k^* = k  \left(\frac{W}{C}\right)^\gamma}
 where
 \itemize{
 \item \mjseqn{k} is \code{param_evatrans_sup_k}
@@ -121,37 +142,49 @@ where
 }
 }
 
-\itemize{
-\item \strong{_VIC} \insertCite{VIC_Wood_1992}{EDCHM}: is similar with \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, estimate the water content in the storage.
-\mjsdeqn{f = 1-\left(1-\frac{W}{C}\right)^{\gamma}}
+\section{\strong{_VIC} \insertCite{VIC_Wood_1992}{EDCHM}:}{
+\if{html}{\figure{mdl_evatransActual_vic.svg}}
+\if{latex}{\figure{mdl_evatransActual_vic.pdf}{options: width=140mm}}
+
+This method is similar with \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}}, estimate the water content in the storage.
+\mjsdeqn{k^* = 1-\left(1-\frac{W}{C}\right)^{\gamma}}
 where
 \itemize{
 \item \mjseqn{\gamma} is \code{param_evatrans_vic_gamma}
 }
 }
 
-\itemize{
-\item \strong{_GR4J} \insertCite{GR4J_Perrin_2003}{EDCHM}: is a little different than other method, it estimate not the ratio \mjseqn{f},
+\section{\strong{_GR4J} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_evatransActual_gr4.svg}}
+\if{latex}{\figure{mdl_evatransActual_gr4.pdf}{options: width=140mm}}
+
+It is a little different than other method, it estimate not the ratio \mjseqn{f},
 rather dieectly a equation with potential ET and water content.
 And it need \strong{no parameter}.
 \mjsdeqn{E_a = \frac{W\left(2-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}{1 + \left(1-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}}
 }
 
-\itemize{
-\item \strong{_UBC} \insertCite{VIC_Wood_1992}{EDCHM}: estimate the water content in the storage.
+\section{\strong{_UBC} \insertCite{UBC_Quick_1977}{EDCHM}:}{
+\if{html}{\figure{mdl_evatransActual_ubc.svg}}
+\if{latex}{\figure{mdl_evatransActual_ubc.pdf}{options: width=140mm}}
+
+It estimates the water content in the storage.
 (This is a little different than original, the parameter \code{P0AGEN} is replaced by \mjseqn{\frac{C}{\gamma}}.)
-\mjsdeqn{f = 10^{\gamma \frac{W-C}{C}}}
+\mjsdeqn{k^* = 10^{\gamma \frac{W-C}{C}}}
 where
 \itemize{
 \item \mjseqn{\gamma} is \code{param_evatrans_ubc_gamma}
 }
 }
 
-\itemize{
-\item \strong{Land_Liang} \insertCite{VIC2_Liang_1994}{EDCHM}: is also a similar method like \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}},
+\section{\strong{Land_Liang} \insertCite{VIC2_Liang_1994}{EDCHM}:}{
+\if{html}{\figure{mdl_evatransActual_lia.svg}}
+\if{latex}{\figure{mdl_evatransActual_lia.pdf}{options: width=140mm}}
+
+It is also a similar method like \code{\link[=evatransActual_SupplyPow]{evatransActual_SupplyPow()}},
 but it will estimate the supply ability agian, whwn the water is still not enough.
-\mjsdeqn{E_l^* = \left(\frac{W}{C}\right)^\gamma E_p}
-\mjsdeqn{E_l = \min \left(1, \frac{W}{E_l^*}\right) E_l^*}
+\mjsdeqn{E_a^* = \left(\frac{W}{C}\right)^\gamma E_p}
+\mjsdeqn{E_a = \min \left(1, \frac{W}{E_a^*}\right) E_a^*}
 where
 \itemize{
 \item \mjseqn{E_l^*} is the first estimated actuall ET
@@ -160,16 +193,22 @@ where
 }
 }
 
-\itemize{
-\item \strong{Soil_Liang} \insertCite{VIC2_Liang_1994}{EDCHM}: estimate the water content in the storage.
+\section{\strong{_LiangSoil} \insertCite{VIC2_Liang_1994}{EDCHM}:}{
+\if{html}{\figure{mdl_evatransActual_sia.svg}}
+\if{latex}{\figure{mdl_evatransActual_sia.pdf}{options: width=140mm}}
+
+It estimates the water content in the storage.
 (This is a little different than original, the parameter \code{P0AGEN} is replaced by \mjseqn{\frac{C}{\gamma}}.)
-\mjsdeqn{f = \int_{0}^{A_{s}} d A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} d A }
+\mjsdeqn{k^* = \int_{0}^{A_{s}} {\rm d} A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} {\rm d} A }
 where
 \itemize{
 \item \mjseqn{B} is \code{param_evatrans_lia_B}
+\item \mjseqn{A} is fraction of area
 }
+
+\figure{liang_evatransSoil.png}
 }
-}
+
 \references{
 \insertAllCited{}
 }

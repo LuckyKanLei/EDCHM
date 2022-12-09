@@ -44,5 +44,65 @@ snowMelt_Factor(
 snow_melt_mm (mm/m2) melted snow
 }
 \description{
-\strong{snow}
+\loadmathjax
+Under the concept of the conceptional HM, the melt of snowpack is always calculated by
+the energy availability (the state-variable temperature \mjseqn{T} or flux-variable (nett-) radiation \mjseqn{Rn})
+and the solid water (snow or ice) availability \mjseqn{W_{snow}} of the snowpack.
+
+Some more complex processes will be ignored, some like refrozen and residual water.
+Due to the simplify the layer \code{snowLy} will store only the solid water
+and the solid water will also be melted as possible when the energy is enough.
+
+So we can give the function from:
+
+\mjsdeqn{F_{melt} = f_{snowMelt}(D_{atms}, D_{snow})}
+
+to:
+\mjsdeqn{F_{melt}  = f_{snowMelt}(T, ...)}
+\mjsdeqn{F_{melt} \leq W_{snow} }
+
+where
+\itemize{
+\item \mjseqn{F_{melt}} is \code{snow_melt_mm}
+\item \mjseqn{W_{snow}} is \code{snow_ice_mm}
+\item \mjseqn{T} is average temperature
+}
+
+Then the different \code{snowMelt} methods will estimate the maximal snow melt \mjseqn{M_{max}}.
+
+The output density distribution from 2 methods:
+
+\if{html}{\figure{mdl_snowMelt.svg}}
+\if{latex}{\figure{mdl_snowMelt.pdf}{options: width=140mm}}
+}
+\section{\strong{_Kustas} \insertCite{snow_kustas_1994}{EDCHM}:}{
+\if{html}{\figure{mdl_snowMelt_kus.svg}}
+\if{latex}{\figure{mdl_snowMelt_kus.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{melt}  = m_T T + m_E R_n}
+but due to the temperature is one energy-state-variable,
+in order to adjust to subday scale we need to add a new time interval \mjseqn{t_h} from 1 to 24 hour
+\mjsdeqn{F_{melt}  = m_T T t_h + m_E R_n}
+where
+\itemize{
+\item \mjseqn{m_T} is \code{param_snow_kus_fT}
+\item \mjseqn{m_E} is \code{param_snow_kus_fE}
+\item \mjseqn{R_n} is daily net radiation
+}
+}
+
+\section{\strong{_Factor} \insertCite{phyHydro_dingman_2014}{EDCHM}:}{
+\if{html}{\figure{mdl_snowMelt_fac.svg}}
+\if{latex}{\figure{mdl_snowMelt_fac.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{melt}  = m_T (T-T_b), \quad T > T_b}
+where
+\itemize{
+\item \mjseqn{m_T} is \code{param_snow_fac_f}
+\item \mjseqn{T_b} is \code{param_snow_fac_Tmelt}
+}
+}
+
+\references{
+\insertAllCited{}
 }

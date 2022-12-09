@@ -33,9 +33,10 @@
 #' @param soil_fieldCapacityPerc_1 <0, 1> the relative ratio (\mjseqn{\theta_fc / \theta^*}) that the water content can drainage by gravity
 #' @param soil_water_mm (mm/m2) water volume in `soilLy`
 #' @param soil_capacity_mm (mm/m2) average soil Capacity (maximal storage capacity)
-#' @param soil_subflow_mm (mm/m2/TS) subsurface flow directly to the river
+#' @param soil_interflow_mm (mm/m2/TS) subsurface flow directly to the river
 #' @param soil_actualEvatrans_mm (mm/m2/TS) **actual** evapotranspiration from `soilLy`
 #' @param soil_potentialPercola_mm <0.01, 7> (mm/m2/TS) **potential** percolation 
+#' @param soil_potentialCapirise_mm <0.01, 7> (mm/m2/TS) **potential** capillary rise 
 #' @param ground_water_mm (mm/m2/TS) water volume in `groundLy`
 #' @param ground_capacity_mm (mm/m2) water storage capacity in `groundLy`
 #' @param ground_lateral_mm (mm/m2/TS) lateral flow, exchange with outside region. It can be **NEGATIV**

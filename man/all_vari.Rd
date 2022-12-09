@@ -64,11 +64,13 @@
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
-\item{soil_subflow_mm}{(mm/m2/TS) subsurface flow directly to the river}
+\item{soil_interflow_mm}{(mm/m2/TS) subsurface flow directly to the river}
 
 \item{soil_actualEvatrans_mm}{(mm/m2/TS) \strong{actual} evapotranspiration from \code{soilLy}}
 
 \item{soil_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} percolation}
+
+\item{soil_potentialCapirise_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} capillary rise}
 
 \item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}
 

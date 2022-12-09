@@ -5,8 +5,8 @@
 \alias{infilt_GR4J}
 \alias{infilt_UBC}
 \alias{infilt_SupplyRatio}
-\alias{infilt_SupplyPow}
 \alias{infilt_AcceptRatio}
+\alias{infilt_SupplyPow}
 \alias{infilt_AcceptPow}
 \alias{infilt_HBV}
 \alias{infilt_XAJ}
@@ -30,19 +30,19 @@ infilt_SupplyRatio(
   param_infilt_sur_k
 )
 
+infilt_AcceptRatio(
+  land_water_mm,
+  soil_water_mm,
+  soil_capacity_mm,
+  param_infilt_acr_k
+)
+
 infilt_SupplyPow(
   land_water_mm,
   soil_water_mm,
   soil_capacity_mm,
   param_infilt_sup_k,
   param_infilt_sup_gamma
-)
-
-infilt_AcceptRatio(
-  land_water_mm,
-  soil_water_mm,
-  soil_capacity_mm,
-  param_infilt_acr_k
 )
 
 infilt_AcceptPow(
@@ -77,11 +77,11 @@ infilt_VIC(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B)
 
 \item{param_infilt_sur_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_SupplyRatio]{infilt_SupplyRatio()}}}
 
+\item{param_infilt_acr_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_AcceptRatio]{infilt_AcceptRatio()}}}
+
 \item{param_infilt_sup_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
 
 \item{param_infilt_sup_gamma}{<0, 1> parameters for \code{\link[=infilt_SupplyPow]{infilt_SupplyPow()}}}
-
-\item{param_infilt_acr_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_AcceptRatio]{infilt_AcceptRatio()}}}
 
 \item{param_infilt_acp_k}{<0.01, 1> coefficient parameter for \code{\link[=infilt_AcceptPow]{infilt_AcceptPow()}}}
 
@@ -94,8 +94,149 @@ infilt_VIC(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B)
 \item{param_infilt_vic_B}{<0.01, 3> parameters for \code{\link[=infilt_VIC]{infilt_VIC()}}}
 }
 \value{
+flux of infiltration from land surface to soil layer
+
 infilt_mm (mm/m2)
 }
 \description{
-\strong{infiltration}
+\loadmathjax
+Under the concept of the conceptional HM, the flux of infiltration always be calculated by the pounded water on the land \mjseqn{W_{land}},
+which can be precipitation, precipitation after interception or precipitation with sonow melt and so on.
+The second point is the water acceptability of the soil layer (\mjseqn{C_{soil} - W_{soil}}).
+
+So we can give the function from:
+
+\mjsdeqn{F_{iflt} = f_{infilt}(D_{land}, D_{soil})}
+
+to:
+
+\mjsdeqn{F_{iflt} = f_{infilt}(W_{land}, W_{soil}, C_{soil}, ...)}
+
+some methods will tread the infiltartion as the part of th pounded water so there is also:
+
+\mjsdeqn{F_{iflt} = k^* W_{land}}
+
+where
+\itemize{
+\item \mjseqn{F_{iflt}} is \code{infilt_mm}
+\item \mjseqn{W_{land}} is \code{land_water_mm}
+\item \mjseqn{W_{soil}} is \code{soil_water_mm}
+\item \mjseqn{C_{soil}} is \code{soil_capacity_mm}
+\item \mjseqn{k^*} is estimated ratio.
+}
+
+The output density distribution from 9 methods:
+
+\if{html}{\figure{mdl_infilt.svg}}
+\if{latex}{\figure{mdl_infilt.pdf}{options: width=140mm}}
+}
+\section{\strong{_GR4J} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_infilt_gr4.svg}}
+\if{latex}{\figure{mdl_infilt_gr4.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{iflt}=\frac{C_{soil}\left(1-\left(\frac{W_{soil}}{C_{soil}}\right)^{2}\right) \tanh \left(\frac{W_{land}}{C_{soil}}\right)}{1+\frac{W_{soil}}{C_{soil}} \tanh \left(\frac{W_{land}}{C_{soil}}\right)}}
+}
+
+\section{\strong{_UBC} \insertCite{UBC_Quick_1977}{EDCHM}:}{
+\if{html}{\figure{mdl_infilt_ubc.svg}}
+\if{latex}{\figure{mdl_infilt_ubc.pdf}{options: width=140mm}}
+
+estimate the ratio \mjseqn{k^*} as:
+\mjsdeqn{k^* = p_{imper} 10^{\frac{W_{soil}-C_{soil}}{p_{AGEN}}}}
+where
+\itemize{
+\item \mjseqn{p_{imper}} is \code{land_impermeableFrac_1}
+\item \mjseqn{p_{AGEN}} is \code{param_infilt_ubc_P0AGEN}
+}
+}
+
+\section{\strong{_SupplyRatio}:}{
+\if{html}{\figure{mdl_infilt_sur.svg}}
+\if{latex}{\figure{mdl_infilt_sur.pdf}{options: width=140mm}}
+
+is a very simple method, which estimate only the pounded water:
+\mjsdeqn{k^* = k}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_infilt_sur_k}
+}
+}
+
+\section{\strong{_AcceptRatio}:}{
+\if{html}{\figure{mdl_infilt_acr.svg}}
+\if{latex}{\figure{mdl_infilt_acr.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{iflt} = k (C_{soil} - W_{soil})}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_infilt_acr_k}
+}
+}
+
+\section{\strong{_SupplyPow}:}{
+\if{html}{\figure{mdl_infilt_sup.svg}}
+\if{latex}{\figure{mdl_infilt_sup.pdf}{options: width=140mm}}
+
+is a very simple method, which estimate only the pounded water:
+\mjsdeqn{F_{iflt} = kW_{land}^{\gamma}}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_infilt_sup_k}
+\item \mjseqn{\gamma} is \code{param_infilt_sup_gamma}
+}
+}
+
+\section{\strong{_AcceptPow}:}{
+\if{html}{\figure{mdl_infilt_acp.svg}}
+\if{latex}{\figure{mdl_infilt_acp.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{iflt} = k \left(\frac{C_{soil} - W_{soil}}{C_{soil}} \right)^{\gamma}}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_infilt_acp_k}
+\item \mjseqn{\gamma} is \code{param_infilt_acp_gamma}
+}
+}
+
+\section{\strong{_HBV} \insertCite{HBV_Lindstrom_1997}{EDCHM}:}{
+\if{html}{\figure{mdl_infilt_hbv.svg}}
+\if{latex}{\figure{mdl_infilt_hbv.pdf}{options: width=140mm}}
+
+estimate the ratio \mjseqn{k^*} as:
+\mjsdeqn{k^* = 1-\left(\frac{W_{soil}}{C_{soil}}\right)^{\beta}}
+where
+\itemize{
+\item \mjseqn{\beta} is \code{param_infilt_hbv_beta}
+}
+}
+
+\section{\strong{_XAJ} \insertCite{XAJ_Zhao_1992}{EDCHM}:}{
+\if{html}{\figure{mdl_infilt_xaj.svg}}
+\if{latex}{\figure{mdl_infilt_xaj.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{iflt} = MM  \frac{\left( \frac{MM - AU}{MM} \right)^{B+1} - \left( \frac{MM - AU - W_{land}}{MM} \right)^{B+1}}{B+1}}
+\mjsdeqn{AU = MM - \left( \frac{(1 - W_{soil})(B+1)}{MM} \right)^{1 / B - 1}  }
+\mjsdeqn{MM = C_{soil}(B+1)  }
+where
+\itemize{
+\item \mjseqn{B} is \code{param_infilt_xaj_B}
+}
+
+\figure{xaj_infilt.png}
+}
+
+\section{\strong{_VIC} \insertCite{VIC_Wood_1992}{EDCHM}:}{
+\if{html}{\figure{mdl_infilt_vic.svg}}
+\if{latex}{\figure{mdl_infilt_vic.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{infilt} = \int_{i_{0}}^{i_{0}+P} A(i) {\rm d} i}
+\mjsdeqn{i = C_{soil}(B+1) \left[ 1 - (1-A)^{1/B} \right]}
+where
+\itemize{
+\item \mjseqn{B} is \code{param_infilt_vic_B}
+}
+}
+
+\references{
+\insertAllCited{}
 }

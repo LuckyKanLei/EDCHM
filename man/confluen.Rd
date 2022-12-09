@@ -18,7 +18,7 @@ confluen_IUH2S(
 
 confluen_IUH3S(
   land_runoff_mm,
-  soil_subflow_mm,
+  soil_interflow_mm,
   ground_baseflow_mm,
   confluen_iuhLand_1,
   confluen_iuhSoil_1,
@@ -30,15 +30,35 @@ confluen_IUH3S(
 
 \item{confluen_iuh_1, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1}{(vector of num, sume() = 1) the ratio in every timestep, can be calculated by \code{\link[=confluenIUH_GR4J1]{confluenIUH_GR4J1()}}, \code{\link[=confluenIUH_GR4J2]{confluenIUH_GR4J2()}}}
 
-\item{soil_subflow_mm}{(mm/m2/TS) subsurface flow directly to the river}
+\item{soil_interflow_mm}{(mm/m2/TS) subsurface flow directly to the river}
 }
 \value{
 confluenced water (mm/m2)
 }
 \description{
-Routing methods with
+\loadmathjax
+\code{confluence} is just a calculate function, that make the water resource confluent to the gauge point.
 \itemize{
 \item \code{IUH}: IUH (Instant Unit Hydrograph) with one watercourse,
-\item \code{IUH2S}; IUH with tweo watersource, those have the different IUH-vector,
+\item \code{IUH2S}; IUH with two water resource, those have the two different IUH-vector,
+\item \code{IUH3S}; IUH with three water resource, those have the three different IUH-vector,
+Under the concept of the conceptional HM, the water from flux to the water flow will by the \code{confluen} process calculated.
+This process will not calculate the water balance, but the time varying.
+And the "Instant Unit Hydrograph" is the most effective method to deal with the time varying.
+In the first stage will also only \code{confluenIUH} supported.
 }
+
+So we can give the function:
+
+\mjsdeqn{Q = f_{confluen}(F, u)}
+
+where
+\itemize{
+\item \mjseqn{Q} is stream flow, but still in mm/TS not m3/TS or m3/S
+\item \mjseqn{F} is flux that will into river conflen, e.g.\code{land_runoff_mm}, \code{soil_interflow_mm} or \code{ground_baseflow_mm}
+\item \mjseqn{u} is Instant Unit Hydrograph series
+}
+}
+\references{
+\insertAllCited{}
 }

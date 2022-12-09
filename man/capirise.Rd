@@ -2,10 +2,27 @@
 % Please edit documentation in R/RcppExports.R
 \name{capirise}
 \alias{capirise}
+\alias{capirise_HBV}
+\alias{capirise_HBVfix}
 \alias{capirise_AcceptRatio}
 \alias{capirise_AcceptPow}
 \title{\strong{capilarise}}
 \usage{
+capirise_HBV(
+  ground_water_mm,
+  soil_water_mm,
+  soil_capacity_mm,
+  soil_potentialCapirise_mm
+)
+
+capirise_HBVfix(
+  ground_water_mm,
+  soil_water_mm,
+  soil_capacity_mm,
+  soil_fieldCapacityPerc_1,
+  soil_potentialCapirise_mm
+)
+
 capirise_AcceptRatio(
   ground_water_mm,
   soil_water_mm,
@@ -30,6 +47,8 @@ capirise_AcceptPow(
 
 \item{soil_capacity_mm}{(mm/m2) average soil Capacity (maximal storage capacity)}
 
+\item{soil_potentialCapirise_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} capillary rise}
+
 \item{soil_fieldCapacityPerc_1}{<0, 1> the relative ratio (\mjseqn{\theta_fc / \theta^*}) that the water content can drainage by gravity}
 
 \item{param_capirise_acr_k}{<0.01, 1> coefficient parameter \code{\link[=capirise_AcceptRatio]{capirise_AcceptRatio()}}}
@@ -38,6 +57,83 @@ capirise_AcceptPow(
 
 \item{param_capirise_acp_gamma}{<0.01, 1> exponential parameter for \code{\link[=capirise_AcceptPow]{capirise_AcceptPow()}}}
 }
+\value{
+ground_capirise_mm (mm/m2/TS) capillary rise
+}
 \description{
-\strong{capilarise}
+\loadmathjax
+Under the concept of the conceptional HM, the flux of capillary rise always be calculated (only) by the water in the ground layer \mjseqn{W_{grnd}},
+it can also be tread as the part of the \mjseqn{W_{grnd}}.
+There are also not so many methods to describe this process. the most HM ignore this process,
+maybe because in the most situation it's not so significant,
+or maybe because the process \code{percola} can deal with this process in the same time.
+So we can give the function from:
+
+\mjsdeqn{F_{capi} = f_{capirise}(D_{grnd}, D_{soil})}
+
+to:
+
+\mjsdeqn{F_{capi} = f_{capirise}(W_{grnd}, W_{soil}, C_{soil}, ...)}
+\mjsdeqn{F_{capi} \leq W_{grnd}}
+\mjsdeqn{F_{capi} \leq C_{soil} - W_{soil}}
+
+where
+\itemize{
+\item \mjseqn{F_{capi}} is \code{ground_capirise_mm}
+\item \mjseqn{W_{grnd}} is \code{ground_water_mm}
+\item \mjseqn{W_{soil}} is \code{water_soil_mm}
+\item \mjseqn{C_{soil}} is \code{capacity_soil_mm}
+}
+
+The output density distribution from 4 methods:
+
+\if{html}{\figure{mdl_capirise.svg}}
+\if{latex}{\figure{mdl_capirise.pdf}{options: width=140mm}}
+}
+\section{\strong{_HBV} \insertCite{HBV_Lindstrom_1997}{EDCHM}:}{
+\if{html}{\figure{mdl_capirise_hbv.svg}}
+\if{latex}{\figure{mdl_capirise_hbv.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{capi} = M_{capi} \left( 1 - \frac{W_{soil}}{C_{soil}} \right)}
+where
+\itemize{
+\item \mjseqn{M_{capi}} is \code{soil_potentialCapirise_mm}
+}
+}
+
+\section{\strong{_HBVfix} \insertCite{HBV_Lindstrom_1997}{EDCHM}:}{
+\if{html}{\figure{mdl_capirise_hbf.svg}}
+\if{latex}{\figure{mdl_capirise_hbf.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{capi} = M_{capi} \left( 1 - \frac{W_{soil}}{k_{fc}C_{soil}} \right), \quad W_{soil} < k_{fc}C_{soil}}
+where
+\itemize{
+\item \mjseqn{k_{fc}} is \code{soil_fieldCapacityPerc_1}
+}
+}
+
+\section{\strong{_AcceptRatio}:}{
+\if{html}{\figure{mdl_capirise_acr.svg}}
+\if{latex}{\figure{mdl_capirise_acr.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{capi} = k \left( W_{soil} - k_{fc}C_{soil} \right), \quad W_{soil} < k_{fc}C_{soil}}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_capirise_acr_k}
+\item \mjseqn{k_{fc}} is \code{soil_fieldCapacityPerc_1}
+}
+
+\if{html}{\figure{mdl_capirise_acp.svg}}
+\if{latex}{\figure{mdl_capirise_acp.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{capi} = k \left( W_{soil} - k_{fc}C_{soil} \right)^\gamma, \quad W_{soil} < k_{fc}C_{soil}}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_capirise_acp_k}
+\item \mjseqn{\gamma} is \code{param_capirise_acp_gamma}
+}
+}
+
+\references{
+\insertAllCited{}
 }

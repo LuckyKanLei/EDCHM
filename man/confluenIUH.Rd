@@ -4,23 +4,20 @@
 \alias{confluenIUH}
 \alias{confluenIUH_GR4J1}
 \alias{confluenIUH_GR4J2}
-\alias{confluenIUH_Clark}
 \alias{confluenIUH_Kelly}
 \alias{confluenIUH_Nash}
-\alias{confluenIUH_NashKumar}
-\title{create \strong{IUH} (Instant Unit Graphy)}
+\alias{confluenIUH_Clark}
+\title{create \strong{IUH} (Instant Unit Hydrograph)}
 \usage{
 confluenIUH_GR4J1(confluen_responseTime_TS)
 
 confluenIUH_GR4J2(confluen_responseTime_TS)
 
-confluenIUH_Clark(confluen_responseTime_TS)
-
 confluenIUH_Kelly(confluen_responseTime_TS, param_confluen_kel_k)
 
 confluenIUH_Nash(confluen_responseTime_TS, param_confluen_nas_n)
 
-confluenIUH_NashKumar(confluen_responseTime_TS, param_confluen_nak_n)
+confluenIUH_Clark(confluen_responseTime_TS)
 }
 \arguments{
 \item{confluen_responseTime_TS}{(TS) response or concentration time in every routeline}
@@ -28,12 +25,88 @@ confluenIUH_NashKumar(confluen_responseTime_TS, param_confluen_nak_n)
 \item{param_confluen_kel_k}{<1, 4> parameter for\code{\link[=confluenIUH_Kelly]{confluenIUH_Kelly()}}}
 
 \item{param_confluen_nas_n}{<1, 8> parameter for\code{\link[=confluenIUH_Nash]{confluenIUH_Nash()}}}
-
-\item{param_confluen_nak_n}{<1, 8> parameter for\code{\link[=confluenIUH_NashKumar]{confluenIUH_NashKumar()}}}
 }
 \value{
 IUH (list of num vector)
 }
 \description{
-create \strong{IUH} (Instant Unit Graphy)
+\loadmathjax
+The process \code{confluenIUH} return a series of portions, that means how many flux water will
+in those moment into the river.
+The sum of this series will always in 1.
+So we can give the function:
+
+\mjsdeqn{u = f_{confluenIUH}(t_r, ...)}
+
+where
+\itemize{
+\item \mjseqn{u} is series of portions
+\item \mjseqn{t_r} is  \code{confluen_responseTime_TS}
+}
+}
+\section{\strong{_GR4J1} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_iuh_gr1.svg}}
+\if{latex}{\figure{mdl_iuh_gr1.pdf}{options: width=100mm}}
+
+\mjsdeqn{u(i) = S(i) - S(i-1)}
+\mjsdeqn{S(i) = \left( \frac{i}{t_r} \right)^{2.5}, \quad 0 \leq i \leq t_r}
+where
+\itemize{
+\item \mjseqn{u} is IUH series
+\item \mjseqn{i} is index
+}
+}
+
+\section{\strong{_GR4J2} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_iuh_gr2.svg}}
+\if{latex}{\figure{mdl_iuh_gr2.pdf}{options: width=100mm}}
+
+\mjsdeqn{u(i) = S(i) - S(i-1)}
+\mjsdeqn{S(i) = 0.5\left( \frac{i}{t_r} \right)^{2.5}, \quad 0 \leq i \leq t_r}
+\mjsdeqn{S(i) = 1 - 0.5\left(2 - \frac{i}{t_r} \right)^{2.5}, \quad t_r < i < 2t_r}
+\mjsdeqn{S(i) = 0, \quad i = 2t_r}
+where
+\itemize{
+\item \mjseqn{u} is IUH series
+\item \mjseqn{i} is index
+}
+}
+
+\section{\strong{_Kelly} \insertCite{iuh_Kelly_1955}{EDCHM}:}{
+\if{html}{\figure{mdl_iuh_kel.svg}}
+\if{latex}{\figure{mdl_iuh_kel.pdf}{options: width=100mm}}
+
+\mjsdeqn{u(i) = \frac{4}{t_r^2} \left( i + k \left( e^{-i/k} \right) \right), \quad i \leq t_r / 2 }
+\mjsdeqn{u(i) = - \frac{4}{t_r^2}(i - k - t_r) + \frac{4ke^{-i/k}}{t_r^2} (1 - 2 e^{t_r/(2k)}), \quad t_r / 2 < i \leq t_r }
+\mjsdeqn{u(i) =  \frac{4ke^{-i/k}}{t_r^2} (1 - 2 e^{t_r/(2k)} +  e^{t_r/k}), \quad i > t_r }
+where
+\itemize{
+\item \mjseqn{k} is \code{param_confluen_kel_k}
+}
+}
+
+\section{\strong{_Nash} \insertCite{iuh_Nash_1957}{EDCHM}:}{
+\if{html}{\figure{mdl_iuh_nas.svg}}
+\if{latex}{\figure{mdl_iuh_nas.pdf}{options: width=100mm}}
+
+\mjsdeqn{u(i) = \frac{1}{t_r\Gamma(n)} \left(\frac{4}{t_r^2}\right)^{n -1}e^{-i/t_r}}
+where
+\itemize{
+\item \mjseqn{n} is \code{param_confluen_nas_n}
+}
+}
+
+\section{\strong{_Clark} \insertCite{iuh_Clark_1945}{EDCHM}:}{
+\if{html}{\figure{mdl_iuh_cla.svg}}
+\if{latex}{\figure{mdl_iuh_cla.pdf}{options: width=100mm}}
+
+\mjsdeqn{u(i) = \frac{1}{t_r} e^{-i/t_r} }
+where
+\itemize{
+\item \mjseqn{t_r} is \code{confluen_responseTime_TS}
+}
+}
+
+\references{
+\insertAllCited{}
 }

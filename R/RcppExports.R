@@ -4,7 +4,47 @@
 #' caculate **snowfall**
 #' @name atmosSnow
 #' @inheritParams all_vari
-#' @return atmos_snow_mm (mm/m2/TS) snowfall volum
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the snowfall is always calculated by 
+#' the temperature \mjseqn{T} and 
+#' the precipitation availability, the portion of snowfall is always decided by the air tempature.
+#' 
+#' So we can give the function from:
+#' 
+#' \mjsdeqn{P_s = f_{atmosSnow}(D_{atms})}
+#' 
+#' 
+#' to:
+#' 
+#' \mjsdeqn{P_s = f_{atmosSnow}(P, T) = k^*P}
+#' \mjsdeqn{0 \leq k^* \leq 1}
+#' where
+#'   - \mjseqn{P} is `atmos_precpitation_mm`
+#'   - \mjseqn{T} is `atmos_teperature_Cel`
+#' - \mjseqn{k^*} is estimated portion
+#' 
+#' Then the different `atmosSnow` methods will estimate the portion \mjseqn{k^*}.
+#' 
+#' 
+#' The output density distribution from 2 methods:
+#' 
+#' \if{html}{\figure{mdl_atmosSnow.svg}}
+#' \if{latex}{\figure{mdl_atmosSnow.pdf}{options: width=140mm}}
+#' @references
+#' \insertAllCited{}
+#' @return atmos_snow_mm (mm/m2/TS) snowfall volume
+#' @details
+#' # **_ThresholdT**: 
+#' 
+#' \if{html}{\figure{mdl_atmosSnow_thr.svg}}
+#' \if{latex}{\figure{mdl_atmosSnow_thr.pdf}{options: width=140mm}}
+#' 
+#' Only a temperature is as the threshold defined, so estimate the portion \mjseqn{k^*} as: 
+#' \mjsdeqn{k^{*}=1, \quad T \leq T_s}
+#' where
+#'   - \mjseqn{T_s} is `param_atmos_thr_Ts`
+#' 
 #' @param param_atmos_thr_Ts <-1, 3> (Cel) threshold air temperature that snow, parameter for [atmosSnow_ThresholdT()]
 #' @export
 atmosSnow_ThresholdT <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_atmos_thr_Ts) {
@@ -12,6 +52,18 @@ atmosSnow_ThresholdT <- function(atmos_precipitation_mm, atmos_temperature_Cel, 
 }
 
 #' @rdname atmosSnow
+#' @details
+#' # **_UBC** \insertCite{UBC_Quick_1977}{EDCHM}: 
+#' 
+#' \if{html}{\figure{mdl_atmosSnow_ubc.svg}}
+#' \if{latex}{\figure{mdl_atmosSnow_ubc.pdf}{options: width=140mm}}
+#' 
+#' estimate the portion \mjseqn{k^*}{} as:
+#' \mjsdeqn{k^* = 1- \frac{T}{T_0}}
+#' \mjsdeqn{k^* \geq 0}
+#' where
+#'   - \mjseqn{T_0} is `param_atmos_ubc_A0FORM`
+#' 
 #' @param param_atmos_ubc_A0FORM <0.01, 3> (Cel) threshold air temperature that snow, it can not equal or small than 0, parameter for [atmosSnow_UBC()]
 #' @export
 atmosSnow_UBC <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_atmos_ubc_A0FORM) {
@@ -21,13 +73,63 @@ atmosSnow_UBC <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_a
 #' **baseflow**
 #' @name baseflow
 #' @inheritParams all_vari
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the flux of baseflow always be calculated (only) by the water in the ground layer \mjseqn{W_{grnd}},
+#' it can also be tread as the part of the \mjseqn{W_{grnd}}.
+#' But the impact with other RU (response unit) in route to the river will be ignored.
+#' So we can give the function from:
+#' 
+#' \mjsdeqn{F_{base} = f_{baseflow}(D_{grnd})}
+#' 
+#' 
+#' to:
+#' 
+#' \mjsdeqn{F_{base} = f_{baseflow}(W_{grnd}, C_{grnd}, M_{base}, ...)}
+#' \mjsdeqn{F_{base} = k^* W_{grnd} \quad {\rm or} \quad F_{base} = k^* M_{base}}
+#' \mjsdeqn{0 \leq k^* \leq 1}
+#' 
+#' 
+#' where
+#' - \mjseqn{W_{grnd}} is `ground_water_mm`
+#' - \mjseqn{M_{base}} is `ground_potentialBaseflow_mm`
+#' - \mjseqn{C_{grnd}} is `ground_capacity_mm`, but not all the methods need the \mjseqn{C_{grnd}}
+#' - \mjseqn{k^*} is estimated ratio
+#' 
+#' The output density distribution from 7 methods:
+#'
+#' \if{html}{\figure{mdl_baseflow.svg}}
+#' \if{latex}{\figure{mdl_baseflow.pdf}{options: width=140mm}}
+#' @references
+#' \insertAllCited{}
 #' @return ground_baseflow_mm (mm/m2/TS) 
+#' @details
+#' # **_GR4J** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_baseflow_gr4.svg}}
+#' \if{latex}{\figure{mdl_baseflow_gr4.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{base} = k^* W_{grnd}}
+#' \mjsdeqn{k^* = 1 - \left[ 1 + \left(\frac{W_{grnd}}{C_{grnd}} \right)^4 \right]^{-1/4}}
+#' where
+#'   - \mjseqn{k^*} is estimated ratio
 #' @export
 baseflow_GR4J <- function(ground_water_mm, ground_capacity_mm) {
     .Call(`_EDCHM_baseflow_GR4J`, ground_water_mm, ground_capacity_mm)
 }
 
 #' @rdname baseflow
+#' @details
+#' # **_GR4Jfix** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_baseflow_grf.svg}}
+#' \if{latex}{\figure{mdl_baseflow_grf.pdf}{options: width=140mm}}
+#' 
+#' This method based on `_GR4J` use a new parameter to replace the numer 4:
+#' \mjsdeqn{F_{base} = k^* W_{grnd}}
+#' \mjsdeqn{k^* = 1 - \left[ 1 + \left(\frac{W_{grnd}}{C_{grnd}} \right)^\gamma \right]^{-1/\gamma}}
+#' where
+#'   - \mjseqn{\gamma} is `param_baseflow_grf_gamma`
 #' @param param_baseflow_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]
 #' @export
 baseflow_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, param_baseflow_grf_gamma) {
@@ -35,6 +137,32 @@ baseflow_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, param_baseflow
 }
 
 #' @rdname baseflow
+#' @details
+#' # **_SupplyRatio**: 
+#'
+#' \if{html}{\figure{mdl_baseflow_sur.svg}}
+#' \if{latex}{\figure{mdl_baseflow_sur.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{base} = k W_{grnd}}
+#' where
+#'   - \mjseqn{k} is `param_baseflow_sur_k`
+#' @param param_baseflow_sur_k <0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]
+#' @export
+baseflow_SupplyRatio <- function(ground_water_mm, param_baseflow_sur_k) {
+    .Call(`_EDCHM_baseflow_SupplyRatio`, ground_water_mm, param_baseflow_sur_k)
+}
+
+#' @rdname baseflow
+#' @details
+#' # **_SupplyPow**: 
+#'
+#' \if{html}{\figure{mdl_baseflow_sup.svg}}
+#' \if{latex}{\figure{mdl_baseflow_sup.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{base} = k(W_{grnd})^\gamma}
+#' where
+#'   - \mjseqn{k} is `param_baseflow_sup_k`
+#'   - \mjseqn{\gamma} is `param_baseflow_sup_gamma`
 #' @param param_baseflow_sup_k <0.01, 1> coefficient parameter for [baseflow_SupplyPow()]
 #' @param param_baseflow_sup_gamma <0, 1> exponential parameter for [baseflow_SupplyPow()]
 #' @export
@@ -43,13 +171,16 @@ baseflow_SupplyPow <- function(ground_water_mm, param_baseflow_sup_k, param_base
 }
 
 #' @rdname baseflow
-#' @param param_baseflow_sur_k <0.01, 1> coefficient parameter for [baseflow_SupplyRatio()]
-#' @export
-baseflow_SupplyRatio <- function(ground_water_mm, param_baseflow_sur_k) {
-    .Call(`_EDCHM_baseflow_SupplyRatio`, ground_water_mm, param_baseflow_sur_k)
-}
-
-#' @rdname baseflow
+#' @details
+#' # **_MaxPow**: 
+#'
+#' \if{html}{\figure{mdl_baseflow_map.svg}}
+#' \if{latex}{\figure{mdl_baseflow_map.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{base} = M_{base} \left(\frac{W_{grnd}}{C_{grnd}} \right)^\gamma}
+#' where
+#'   - \mjseqn{M_{base}} is `ground_potentialBaseflow_mm`
+#'   - \mjseqn{\gamma} is `param_baseflow_map_gamma`
 #' @param param_baseflow_map_gamma <0.1, 5> exponential parameter for [baseflow_MaxPow()]
 #' @export
 baseflow_MaxPow <- function(ground_water_mm, ground_capacity_mm, ground_potentialBaseflow_mm, param_baseflow_map_gamma) {
@@ -57,6 +188,18 @@ baseflow_MaxPow <- function(ground_water_mm, ground_capacity_mm, ground_potentia
 }
 
 #' @rdname baseflow
+#' @details
+#' # **_ThreshPow** 
+#'
+#' \if{html}{\figure{mdl_baseflow_thp.svg}}
+#' \if{latex}{\figure{mdl_baseflow_thp.pdf}{options: width=140mm}}
+#' 
+#' This method based on the `_MaxPow` and add the one threshold \mjseqn{\phi_b}: 
+#' \mjsdeqn{F_{base} = 0, \quad \frac{W_{grnd}}{C_{grnd}} < \phi_b}
+#' \mjsdeqn{F_{base} = M_{base} \left(\frac{\frac{W_{grnd}}{C_{grnd}} - \phi_b}{1-\phi_b} \right)^\gamma, \quad \frac{W_{grnd}}{C_{grnd}} \geq \phi_b}
+#' where
+#'   - \mjseqn{\phi_b} is `param_baseflow_thp_thresh`
+#'   - \mjseqn{\gamma} is `param_baseflow_thp_gamma`
 #' @param param_baseflow_thp_thresh <0.1, 0.9> coefficient parameter for [baseflow_ThreshPow()]
 #' @param param_baseflow_thp_gamma <0.1, 5> exponential parameter for [baseflow_ThreshPow()]
 #' @export
@@ -65,6 +208,19 @@ baseflow_ThreshPow <- function(ground_water_mm, ground_capacity_mm, ground_poten
 }
 
 #' @rdname baseflow
+#' @details
+#' # **_Arno** \insertCite{baseflow_Arno_1991,VIC2_Liang_1994}{EDCHM}:
+#'
+#' \if{html}{\figure{mdl_baseflow_arn.svg}}
+#' \if{latex}{\figure{mdl_baseflow_arn.pdf}{options: width=140mm}}
+#' 
+#' This method has also in two cases divided by a threshold water content \mjseqn{\phi_b}: 
+#' \mjsdeqn{F_{base} = k M_{base} \frac{W_{grnd}}{C_{grnd}}, \quad \frac{W_{grnd}}{C_{grnd}} < \phi_b}
+#' \mjsdeqn{F_{base} = k M_{base} \frac{W_{grnd}}{C_{grnd}} + (1-k) M_{base} \left(\frac{W_{grnd} - W_s}{C_{grnd} - W_s} \right)^2, \quad \frac{W_{grnd}}{C_{grnd}} \geq \phi_b}
+#' \mjsdeqn{W_s = k C_{grnd}}
+#' where
+#'   - \mjseqn{\phi_b} is `param_baseflow_arn_thresh`
+#'   - \mjseqn{k} is `param_baseflow_arn_k`
 #' @param param_baseflow_arn_thresh <0.1, 0.9> coefficient parameter for [baseflow_ThreshPow()]
 #' @param param_baseflow_arn_k <0.1, 1> exponential parameter for [baseflow_ThreshPow()]
 #' @export
@@ -75,6 +231,79 @@ baseflow_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialB
 #' **capilarise**
 #' @name capirise
 #' @inheritParams all_vari
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the flux of capillary rise always be calculated (only) by the water in the ground layer \mjseqn{W_{grnd}},
+#' it can also be tread as the part of the \mjseqn{W_{grnd}}.
+#' There are also not so many methods to describe this process. the most HM ignore this process, 
+#' maybe because in the most situation it's not so significant, 
+#' or maybe because the process `percola` can deal with this process in the same time.
+#' So we can give the function from:
+#' 
+#' \mjsdeqn{F_{capi} = f_{capirise}(D_{grnd}, D_{soil})}
+#' 
+#' 
+#' to:
+#' 
+#' \mjsdeqn{F_{capi} = f_{capirise}(W_{grnd}, W_{soil}, C_{soil}, ...)}
+#' \mjsdeqn{F_{capi} \leq W_{grnd}}
+#' \mjsdeqn{F_{capi} \leq C_{soil} - W_{soil}}
+#' 
+#' 
+#' where
+#' - \mjseqn{F_{capi}} is `ground_capirise_mm`
+#' - \mjseqn{W_{grnd}} is `ground_water_mm`
+#' - \mjseqn{W_{soil}} is `water_soil_mm`
+#' - \mjseqn{C_{soil}} is `capacity_soil_mm`
+#' 
+#' The output density distribution from 4 methods:
+#'
+#' \if{html}{\figure{mdl_capirise.svg}}
+#' \if{latex}{\figure{mdl_capirise.pdf}{options: width=140mm}}
+#' @references
+#' \insertAllCited{}
+#' @return ground_capirise_mm (mm/m2/TS) capillary rise
+#' 
+#' @details
+#' # **_HBV** \insertCite{HBV_Lindstrom_1997}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_capirise_hbv.svg}}
+#' \if{latex}{\figure{mdl_capirise_hbv.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{capi} = M_{capi} \left( 1 - \frac{W_{soil}}{C_{soil}} \right)}
+#' where
+#'   - \mjseqn{M_{capi}} is `soil_potentialCapirise_mm`
+#' @export
+capirise_HBV <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, soil_potentialCapirise_mm) {
+    .Call(`_EDCHM_capirise_HBV`, ground_water_mm, soil_water_mm, soil_capacity_mm, soil_potentialCapirise_mm)
+}
+
+#' @rdname capirise
+#' @details
+#' # **_HBVfix** \insertCite{HBV_Lindstrom_1997}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_capirise_hbf.svg}}
+#' \if{latex}{\figure{mdl_capirise_hbf.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{capi} = M_{capi} \left( 1 - \frac{W_{soil}}{k_{fc}C_{soil}} \right), \quad W_{soil} < k_{fc}C_{soil}}
+#' where
+#'   - \mjseqn{k_{fc}} is `soil_fieldCapacityPerc_1`
+#' @export
+capirise_HBVfix <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialCapirise_mm) {
+    .Call(`_EDCHM_capirise_HBVfix`, ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialCapirise_mm)
+}
+
+#' @rdname capirise
+#' @details
+#' # **_AcceptRatio**: 
+#'
+#' \if{html}{\figure{mdl_capirise_acr.svg}}
+#' \if{latex}{\figure{mdl_capirise_acr.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{capi} = k \left( W_{soil} - k_{fc}C_{soil} \right), \quad W_{soil} < k_{fc}C_{soil}}
+#' where
+#'   - \mjseqn{k} is `param_capirise_acr_k`
+#'   - \mjseqn{k_{fc}} is `soil_fieldCapacityPerc_1`
 #' @param param_capirise_acr_k <0.01, 1> coefficient parameter [capirise_AcceptRatio()]
 #' @export
 capirise_AcceptRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, param_capirise_acr_k) {
@@ -82,6 +311,16 @@ capirise_AcceptRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_m
 }
 
 #' @rdname capirise
+#' @details
+#' # **_AcceptRatio**: 
+#'
+#' \if{html}{\figure{mdl_capirise_acp.svg}}
+#' \if{latex}{\figure{mdl_capirise_acp.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{capi} = k \left( W_{soil} - k_{fc}C_{soil} \right)^\gamma, \quad W_{soil} < k_{fc}C_{soil}}
+#' where
+#'   - \mjseqn{k} is `param_capirise_acp_k`
+#'   - \mjseqn{\gamma} is `param_capirise_acp_gamma`
 #' @param param_capirise_acp_k <0.01, 1> coefficient parameter for [capirise_AcceptPow()]
 #' @param param_capirise_acp_gamma <0.01, 1> exponential parameter for [capirise_AcceptPow()]
 #' @export
@@ -90,9 +329,30 @@ capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm,
 }
 
 #' **confluence**
-#' @description Routing methods with 
+#' @description 
+#' \loadmathjax
+#' `confluence` is just a calculate function, that make the water resource confluent to the gauge point.
 #' - `IUH`: IUH (Instant Unit Hydrograph) with one watercourse, 
-#' - `IUH2S`; IUH with tweo watersource, those have the different IUH-vector, 
+#' - `IUH2S`; IUH with two water resource, those have the two different IUH-vector, 
+#' - `IUH3S`; IUH with three water resource, those have the three different IUH-vector, 
+#' Under the concept of the conceptional HM, the water from flux to the water flow will by the `confluen` process calculated.
+#' This process will not calculate the water balance, but the time varying. 
+#' And the "Instant Unit Hydrograph" is the most effective method to deal with the time varying.
+#' In the first stage will also only `confluenIUH` supported.
+#' 
+#' So we can give the function:
+#' 
+#' \mjsdeqn{Q = f_{confluen}(F, u)}
+#' 
+#' 
+#' 
+#' where
+#' - \mjseqn{Q} is stream flow, but still in mm/TS not m3/TS or m3/S
+#' - \mjseqn{F} is flux that will into river conflen, e.g.`land_runoff_mm`, `soil_interflow_mm` or `ground_baseflow_mm`
+#' - \mjseqn{u} is Instant Unit Hydrograph series
+#' 
+#' @references
+#' \insertAllCited{}
 #' @inheritParams all_vari
 #' @name confluen
 #' @return confluenced water (mm/m2)
@@ -109,32 +369,78 @@ confluen_IUH2S <- function(land_runoff_mm, ground_baseflow_mm, confluen_iuhLand_
 
 #' @rdname confluen
 #' @export
-confluen_IUH3S <- function(land_runoff_mm, soil_subflow_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1) {
-    .Call(`_EDCHM_confluen_IUH3S`, land_runoff_mm, soil_subflow_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1)
+confluen_IUH3S <- function(land_runoff_mm, soil_interflow_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1) {
+    .Call(`_EDCHM_confluen_IUH3S`, land_runoff_mm, soil_interflow_mm, ground_baseflow_mm, confluen_iuhLand_1, confluen_iuhSoil_1, confluen_iuhGround_1)
 }
 
-#' create **IUH** (Instant Unit Graphy)
+#' create **IUH** (Instant Unit Hydrograph)
 #' @name confluenIUH
 #' @inheritParams all_vari
+#' @description
+#' \loadmathjax
+#' The process `confluenIUH` return a series of portions, that means how many flux water will
+#' in those moment into the river.
+#' The sum of this series will always in 1.
+#' So we can give the function:
+#' 
+#' \mjsdeqn{u = f_{confluenIUH}(t_r, ...)}
+#' 
+#' 
+#' 
+#' where
+#' - \mjseqn{u} is series of portions
+#' - \mjseqn{t_r} is  `confluen_responseTime_TS`
+#' 
+#' @references
+#' \insertAllCited{}
 #' @return IUH (list of num vector) 
+#' @details
+#' # **_GR4J1** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_iuh_gr1.svg}}
+#' \if{latex}{\figure{mdl_iuh_gr1.pdf}{options: width=100mm}}
+#' 
+#' \mjsdeqn{u(i) = S(i) - S(i-1)}
+#' \mjsdeqn{S(i) = \left( \frac{i}{t_r} \right)^{2.5}, \quad 0 \leq i \leq t_r}
+#' where
+#'   - \mjseqn{u} is IUH series
+#'   - \mjseqn{i} is index
 #' @export
 confluenIUH_GR4J1 <- function(confluen_responseTime_TS) {
     .Call(`_EDCHM_confluenIUH_GR4J1`, confluen_responseTime_TS)
 }
 
 #' @rdname confluenIUH
+#' @details
+#' # **_GR4J2** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_iuh_gr2.svg}}
+#' \if{latex}{\figure{mdl_iuh_gr2.pdf}{options: width=100mm}}
+#' 
+#' \mjsdeqn{u(i) = S(i) - S(i-1)}
+#' \mjsdeqn{S(i) = 0.5\left( \frac{i}{t_r} \right)^{2.5}, \quad 0 \leq i \leq t_r}
+#' \mjsdeqn{S(i) = 1 - 0.5\left(2 - \frac{i}{t_r} \right)^{2.5}, \quad t_r < i < 2t_r}
+#' \mjsdeqn{S(i) = 0, \quad i = 2t_r}
+#' where
+#'   - \mjseqn{u} is IUH series
+#'   - \mjseqn{i} is index
 #' @export
 confluenIUH_GR4J2 <- function(confluen_responseTime_TS) {
     .Call(`_EDCHM_confluenIUH_GR4J2`, confluen_responseTime_TS)
 }
 
 #' @rdname confluenIUH
-#' @export
-confluenIUH_Clark <- function(confluen_responseTime_TS) {
-    .Call(`_EDCHM_confluenIUH_Clark`, confluen_responseTime_TS)
-}
-
-#' @rdname confluenIUH
+#' @details
+#' # **_Kelly** \insertCite{iuh_Kelly_1955}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_iuh_kel.svg}}
+#' \if{latex}{\figure{mdl_iuh_kel.pdf}{options: width=100mm}}
+#' 
+#' \mjsdeqn{u(i) = \frac{4}{t_r^2} \left( i + k \left( e^{-i/k} \right) \right), \quad i \leq t_r / 2 }
+#' \mjsdeqn{u(i) = - \frac{4}{t_r^2}(i - k - t_r) + \frac{4ke^{-i/k}}{t_r^2} (1 - 2 e^{t_r/(2k)}), \quad t_r / 2 < i \leq t_r }
+#' \mjsdeqn{u(i) =  \frac{4ke^{-i/k}}{t_r^2} (1 - 2 e^{t_r/(2k)} +  e^{t_r/k}), \quad i > t_r }
+#' where
+#'   - \mjseqn{k} is `param_confluen_kel_k`
 #' @param param_confluen_kel_k <1, 4> parameter for[confluenIUH_Kelly()]
 #' @export
 confluenIUH_Kelly <- function(confluen_responseTime_TS, param_confluen_kel_k) {
@@ -142,6 +448,15 @@ confluenIUH_Kelly <- function(confluen_responseTime_TS, param_confluen_kel_k) {
 }
 
 #' @rdname confluenIUH
+#' @details
+#' # **_Nash** \insertCite{iuh_Nash_1957}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_iuh_nas.svg}}
+#' \if{latex}{\figure{mdl_iuh_nas.pdf}{options: width=100mm}}
+#' 
+#' \mjsdeqn{u(i) = \frac{1}{t_r\Gamma(n)} \left(\frac{4}{t_r^2}\right)^{n -1}e^{-i/t_r}}
+#' where
+#'   - \mjseqn{n} is `param_confluen_nas_n`
 #' @param param_confluen_nas_n <1, 8> parameter for[confluenIUH_Nash()]
 #' @export
 confluenIUH_Nash <- function(confluen_responseTime_TS, param_confluen_nas_n) {
@@ -149,10 +464,18 @@ confluenIUH_Nash <- function(confluen_responseTime_TS, param_confluen_nas_n) {
 }
 
 #' @rdname confluenIUH
-#' @param param_confluen_nak_n <1, 8> parameter for[confluenIUH_NashKumar()]
+#' @details
+#' # **_Clark** \insertCite{iuh_Clark_1945}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_iuh_cla.svg}}
+#' \if{latex}{\figure{mdl_iuh_cla.pdf}{options: width=100mm}}
+#' 
+#' \mjsdeqn{u(i) = \frac{1}{t_r} e^{-i/t_r} }
+#' where
+#'   - \mjseqn{t_r} is `confluen_responseTime_TS`
 #' @export
-confluenIUH_NashKumar <- function(confluen_responseTime_TS, param_confluen_nak_n) {
-    .Call(`_EDCHM_confluenIUH_NashKumar`, confluen_responseTime_TS, param_confluen_nak_n)
+confluenIUH_Clark <- function(confluen_responseTime_TS) {
+    .Call(`_EDCHM_confluenIUH_Clark`, confluen_responseTime_TS)
 }
 
 #' **potential evapotranspiration**
@@ -220,13 +543,30 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the actually ET is always consider as a part of potential ET:
-#' \mjsdeqn{E_a = f E_p}
+#' Under the concept of the conceptional HM, the actually ET is always calculated by the potential ET \mjseqn{E_p}, 
+#' which evaluate the meteorological situation and the landuse (vegetation) situation. 
+#' The second point is the water availability of the land.
+#' 
+#' So we can give the function from:
+#' 
+#' \mjsdeqn{E_a = f_{evatransActual}(D_{atms}, D_{lssg})}
+#' 
+#' 
+#' to:
+#' 
+#' \mjsdeqn{E_a = f_{evatransActual}(E_p, W_{lssg}, ...) = k^* E_p}
+#' 
 #' where
 #' - \mjseqn{E_a} is `land_evatrans_mm` or `soil_evatrans_mm`
 #' - \mjseqn{E_p} is `atmos_potentialEvatrans_mm`
-#' - \mjseqn{f} is estimated ratio.
-#' Then the different `evatransActual` methods will estimate the ratio \mjseqn{f}.
+#' - \mjseqn{k^*} is estimated ratio.
+#' 
+#' Then the different `evatransActual` methods will estimate the ratio \mjseqn{k^*}.
+#' 
+#' The output density distribution from 7 methods:
+#'
+#' \if{html}{\figure{mdl_evatransActual.svg}}
+#' \if{latex}{\figure{mdl_evatransActual.pdf}{options: width=140mm}}
 #' @references
 #' \insertAllCited{}
 #' @return actually ET in (mm/m2/TS)
@@ -234,9 +574,14 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 #' - transpiration in root
 #' - evaporation in soil (soilLy), `soil_evatrans_mm`
 #' @details
-#' - **_SupplyRatio**: the water content (the ratio to the maximal capacity) 
-#' is considered as th main factors for the ratio \mjseqn{f}.
-#' \mjsdeqn{f = k  \frac{W}{C}}
+#' # **_SupplyRatio**: 
+#'
+#' \if{html}{\figure{mdl_evatransActual_sur.svg}}
+#' \if{latex}{\figure{mdl_evatransActual_sur.pdf}{options: width=140mm}}
+#' 
+#' The water content (the ratio to the maximal capacity) 
+#' is considered as th main factors for the ratio \mjseqn{k^*}.
+#' \mjsdeqn{k^* = k  \frac{W}{C}}
 #' where
 #'   - \mjseqn{W} is water volume in (mm/m2/TS), `water_mm`, `land_interceptWater_mm`, `soil_water_mm`
 #'   - \mjseqn{C} is water capacity in (mm/m2), `capacity_mm`, `land_interceptCapacity_mm`, `soil_capacity_mm`
@@ -249,9 +594,14 @@ evatransActual_SupplyRatio <- function(atmos_potentialEvatrans_mm, water_mm, cap
 
 #' @rdname evatransActual
 #' @details
-#' - **_SupplyPow**: the water content (the ratio to the maximal capacity) 
-#' is considered as th main factors for the ratio \mjseqn{f}.
-#' \mjsdeqn{f = k  \left(\frac{W}{C}\right)^\gamma}
+#' # **_SupplyPow**: 
+#'
+#' \if{html}{\figure{mdl_evatransActual_sup.svg}}
+#' \if{latex}{\figure{mdl_evatransActual_sup.pdf}{options: width=140mm}}
+#' 
+#' The water content (the ratio to the maximal capacity) 
+#' is considered as th main factors for the ratio \mjseqn{k^*}.
+#' \mjsdeqn{k^* = k  \left(\frac{W}{C}\right)^\gamma}
 #' where
 #'   - \mjseqn{k} is `param_evatrans_sup_k`
 #'   - \mjseqn{\gamma} is `param_evatrans_sup_gamma`
@@ -264,8 +614,13 @@ evatransActual_SupplyPow <- function(atmos_potentialEvatrans_mm, water_mm, capac
 
 #' @rdname evatransActual
 #' @details
-#' - **_VIC** \insertCite{VIC_Wood_1992}{EDCHM}: is similar with [evatransActual_SupplyPow()], estimate the water content in the storage.
-#' \mjsdeqn{f = 1-\left(1-\frac{W}{C}\right)^{\gamma}}
+#' # **_VIC** \insertCite{VIC_Wood_1992}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_evatransActual_vic.svg}}
+#' \if{latex}{\figure{mdl_evatransActual_vic.pdf}{options: width=140mm}}
+#' 
+#' This method is similar with [evatransActual_SupplyPow()], estimate the water content in the storage.
+#' \mjsdeqn{k^* = 1-\left(1-\frac{W}{C}\right)^{\gamma}}
 #' where
 #'   - \mjseqn{\gamma} is `param_evatrans_vic_gamma`
 #' @param param_evatrans_vic_gamma <0.2, 5> parameter for [evatransActual_VIC()]
@@ -276,7 +631,12 @@ evatransActual_VIC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 
 #' @rdname evatransActual
 #' @details
-#' - **_GR4J** \insertCite{GR4J_Perrin_2003}{EDCHM}: is a little different than other method, it estimate not the ratio \mjseqn{f},
+#' # **_GR4J** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_evatransActual_gr4.svg}}
+#' \if{latex}{\figure{mdl_evatransActual_gr4.pdf}{options: width=140mm}}
+#' 
+#' It is a little different than other method, it estimate not the ratio \mjseqn{f},
 #' rather dieectly a equation with potential ET and water content.
 #' And it need **no parameter**.
 #' \mjsdeqn{E_a = \frac{W\left(2-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}{1 + \left(1-\frac{W}{C}\right)\tanh \left(\frac{E_p}{C}\right)}}
@@ -287,12 +647,17 @@ evatransActual_GR4J <- function(atmos_potentialEvatrans_mm, water_mm, capacity_m
 
 #' @rdname evatransActual
 #' @details
-#' - **_UBC** \insertCite{VIC_Wood_1992}{EDCHM}: estimate the water content in the storage. 
+#' # **_UBC** \insertCite{UBC_Quick_1977}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_evatransActual_ubc.svg}}
+#' \if{latex}{\figure{mdl_evatransActual_ubc.pdf}{options: width=140mm}}
+#' 
+#' It estimates the water content in the storage. 
 #' (This is a little different than original, the parameter `P0AGEN` is replaced by \mjseqn{\frac{C}{\gamma}}.)
-#' \mjsdeqn{f = 10^{\gamma \frac{W-C}{C}}}
+#' \mjsdeqn{k^* = 10^{\gamma \frac{W-C}{C}}}
 #' where
 #'   - \mjseqn{\gamma} is `param_evatrans_ubc_gamma`
-#' @param param_evatrans_ubc_gamma <0.5, 2>parameter for [evatransActual_UBC()]
+#' @param param_evatrans_ubc_gamma <0.5, 2> parameter for [evatransActual_UBC()]
 #' @export
 evatransActual_UBC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_ubc_gamma) {
     .Call(`_EDCHM_evatransActual_UBC`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_ubc_gamma)
@@ -301,15 +666,20 @@ evatransActual_UBC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #' @rdname evatransActual
 #' 
 #' @details
-#' - **Land_Liang** \insertCite{VIC2_Liang_1994}{EDCHM}: is also a similar method like [evatransActual_SupplyPow()], 
+#' # **Land_Liang** \insertCite{VIC2_Liang_1994}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_evatransActual_lia.svg}}
+#' \if{latex}{\figure{mdl_evatransActual_lia.pdf}{options: width=140mm}}
+#' 
+#' It is also a similar method like [evatransActual_SupplyPow()], 
 #' but it will estimate the supply ability agian, whwn the water is still not enough.
-#' \mjsdeqn{E_l^* = \left(\frac{W}{C}\right)^\gamma E_p}
-#' \mjsdeqn{E_l = \min \left(1, \frac{W}{E_l^*}\right) E_l^*}
+#' \mjsdeqn{E_a^* = \left(\frac{W}{C}\right)^\gamma E_p}
+#' \mjsdeqn{E_a = \min \left(1, \frac{W}{E_a^*}\right) E_a^*}
 #' where
 #'   - \mjseqn{E_l^*} is the first estimated actuall ET
 #'   - \mjseqn{E_l} is actuall ET from land, `land_evatrans_mm`
 #'   - \mjseqn{\gamma} is `param_evatrans_lia_gamma`
-#' @param param_evatrans_lia_gamma <0.4, 1> parameter for [evatransLand_Liang()]
+#' @param param_evatrans_lia_gamma <0.4, 1> parameter for [evatransActual_LiangLand()]
 #' @export
 evatransActual_LiangLand <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma) {
     .Call(`_EDCHM_evatransActual_LiangLand`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_gamma)
@@ -317,12 +687,20 @@ evatransActual_LiangLand <- function(atmos_potentialEvatrans_mm, water_mm, capac
 
 #' @rdname evatransActual
 #' @details
-#' - **Soil_Liang** \insertCite{VIC2_Liang_1994}{EDCHM}: estimate the water content in the storage. 
+#' # **_LiangSoil** \insertCite{VIC2_Liang_1994}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_evatransActual_sia.svg}}
+#' \if{latex}{\figure{mdl_evatransActual_sia.pdf}{options: width=140mm}}
+#' 
+#' It estimates the water content in the storage. 
 #' (This is a little different than original, the parameter `P0AGEN` is replaced by \mjseqn{\frac{C}{\gamma}}.)
-#' \mjsdeqn{f = \int_{0}^{A_{s}} d A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} d A }
+#' \mjsdeqn{k^* = \int_{0}^{A_{s}} {\rm d} A + \int_{A_{s}}^{1} \frac{i_{0}}{i_{m} [1-(1-A)^{1 / B} ]} {\rm d} A }
 #' where
 #'   - \mjseqn{B} is `param_evatrans_lia_B`
-#' @param param_evatrans_lia_B <0.01, 3> parameter for [evatransSoil_Liang()]
+#'   - \mjseqn{A} is fraction of area
+#' 
+#' ![](liang_evatransSoil.png)
+#' @param param_evatrans_lia_B <0.01, 3> parameter for [evatransActual_LiangSoil()]
 #' @export
 evatransActual_LiangSoil <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B) {
     .Call(`_EDCHM_evatransActual_LiangSoil`, atmos_potentialEvatrans_mm, water_mm, capacity_mm, param_evatrans_lia_B)
@@ -331,6 +709,48 @@ evatransActual_LiangSoil <- function(atmos_potentialEvatrans_mm, water_mm, capac
 #' **infiltration**
 #' @name infilt
 #' @inheritParams all_vari
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the flux of infiltration always be calculated by the pounded water on the land \mjseqn{W_{land}}, 
+#' which can be precipitation, precipitation after interception or precipitation with sonow melt and so on. 
+#' The second point is the water acceptability of the soil layer (\mjseqn{C_{soil} - W_{soil}}).
+#' 
+#' So we can give the function from:
+#' 
+#' \mjsdeqn{F_{iflt} = f_{infilt}(D_{land}, D_{soil})}
+#' 
+#' 
+#' to:
+#' 
+#' \mjsdeqn{F_{iflt} = f_{infilt}(W_{land}, W_{soil}, C_{soil}, ...)}
+#' 
+#' some methods will tread the infiltartion as the part of th pounded water so there is also:
+#' 
+#' \mjsdeqn{F_{iflt} = k^* W_{land}}
+#' 
+#' 
+#' where
+#' - \mjseqn{F_{iflt}} is `infilt_mm`
+#' - \mjseqn{W_{land}} is `land_water_mm`
+#' - \mjseqn{W_{soil}} is `soil_water_mm`
+#' - \mjseqn{C_{soil}} is `soil_capacity_mm`
+#' - \mjseqn{k^*} is estimated ratio.
+#' 
+#' The output density distribution from 9 methods:
+#'
+#' \if{html}{\figure{mdl_infilt.svg}}
+#' \if{latex}{\figure{mdl_infilt.pdf}{options: width=140mm}}
+#' @references
+#' \insertAllCited{}
+#' @return flux of infiltration from land surface to soil layer
+#' 
+#' @details
+#' # **_GR4J** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_infilt_gr4.svg}}
+#' \if{latex}{\figure{mdl_infilt_gr4.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{iflt}=\frac{C_{soil}\left(1-\left(\frac{W_{soil}}{C_{soil}}\right)^{2}\right) \tanh \left(\frac{W_{land}}{C_{soil}}\right)}{1+\frac{W_{soil}}{C_{soil}} \tanh \left(\frac{W_{land}}{C_{soil}}\right)}}
 #' @export
 infilt_GR4J <- function(land_water_mm, soil_water_mm, soil_capacity_mm) {
     .Call(`_EDCHM_infilt_GR4J`, land_water_mm, soil_water_mm, soil_capacity_mm)
@@ -338,12 +758,33 @@ infilt_GR4J <- function(land_water_mm, soil_water_mm, soil_capacity_mm) {
 
 #' @rdname infilt
 #' @param param_infilt_ubc_P0AGEN <0.1, 4> coefficient parameter for [infilt_UBC()]
+#' @details
+#' # **_UBC** \insertCite{UBC_Quick_1977}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_infilt_ubc.svg}}
+#' \if{latex}{\figure{mdl_infilt_ubc.pdf}{options: width=140mm}}
+#' 
+#' estimate the ratio \mjseqn{k^*} as:
+#' \mjsdeqn{k^* = p_{imper} 10^{\frac{W_{soil}-C_{soil}}{p_{AGEN}}}}
+#' where
+#'   - \mjseqn{p_{imper}} is `land_impermeableFrac_1`
+#'   - \mjseqn{p_{AGEN}} is `param_infilt_ubc_P0AGEN`
 #' @export
 infilt_UBC <- function(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN) {
     .Call(`_EDCHM_infilt_UBC`, land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN)
 }
 
 #' @rdname infilt
+#' @details
+#' # **_SupplyRatio**: 
+#'
+#' \if{html}{\figure{mdl_infilt_sur.svg}}
+#' \if{latex}{\figure{mdl_infilt_sur.pdf}{options: width=140mm}}
+#' 
+#' is a very simple method, which estimate only the pounded water:
+#' \mjsdeqn{k^* = k}
+#' where
+#'   - \mjseqn{k} is `param_infilt_sur_k`
 #' @param param_infilt_sur_k <0.01, 1> coefficient parameter for [infilt_SupplyRatio()]
 #' @return infilt_mm (mm/m2) 
 #' @export
@@ -352,6 +793,33 @@ infilt_SupplyRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, p
 }
 
 #' @rdname infilt
+#' @details
+#' # **_AcceptRatio**: 
+#'
+#' \if{html}{\figure{mdl_infilt_acr.svg}}
+#' \if{latex}{\figure{mdl_infilt_acr.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{iflt} = k (C_{soil} - W_{soil})}
+#' where
+#'   - \mjseqn{k} is `param_infilt_acr_k`
+#' @param param_infilt_acr_k <0.01, 1> coefficient parameter for [infilt_AcceptRatio()]
+#' @export
+infilt_AcceptRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k) {
+    .Call(`_EDCHM_infilt_AcceptRatio`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k)
+}
+
+#' @rdname infilt
+#' @details
+#' # **_SupplyPow**: 
+#'
+#' \if{html}{\figure{mdl_infilt_sup.svg}}
+#' \if{latex}{\figure{mdl_infilt_sup.pdf}{options: width=140mm}}
+#' 
+#' is a very simple method, which estimate only the pounded water:
+#' \mjsdeqn{F_{iflt} = kW_{land}^{\gamma}}
+#' where
+#'   - \mjseqn{k} is `param_infilt_sup_k`
+#'   - \mjseqn{\gamma} is `param_infilt_sup_gamma`
 #' @param param_infilt_sup_k <0.01, 1> coefficient parameter for [infilt_SupplyPow()]
 #' @param param_infilt_sup_gamma <0, 1> parameters for [infilt_SupplyPow()]
 #' @export
@@ -360,13 +828,16 @@ infilt_SupplyPow <- function(land_water_mm, soil_water_mm, soil_capacity_mm, par
 }
 
 #' @rdname infilt
-#' @param param_infilt_acr_k <0.01, 1> coefficient parameter for [infilt_AcceptRatio()]
-#' @export
-infilt_AcceptRatio <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k) {
-    .Call(`_EDCHM_infilt_AcceptRatio`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k)
-}
-
-#' @rdname infilt
+#' @details
+#' # **_AcceptPow**: 
+#'
+#' \if{html}{\figure{mdl_infilt_acp.svg}}
+#' \if{latex}{\figure{mdl_infilt_acp.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{iflt} = k \left(\frac{C_{soil} - W_{soil}}{C_{soil}} \right)^{\gamma}}
+#' where
+#'   - \mjseqn{k} is `param_infilt_acp_k`
+#'   - \mjseqn{\gamma} is `param_infilt_acp_gamma`
 #' @param param_infilt_acp_k <0.01, 1> coefficient parameter for [infilt_AcceptPow()]
 #' @param param_infilt_acp_gamma <0.001, 5> parameters for [infilt_AcceptPow()]
 #' @export
@@ -375,6 +846,16 @@ infilt_AcceptPow <- function(land_water_mm, soil_water_mm, soil_capacity_mm, par
 }
 
 #' @rdname infilt
+#' @details
+#' # **_HBV** \insertCite{HBV_Lindstrom_1997}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_infilt_hbv.svg}}
+#' \if{latex}{\figure{mdl_infilt_hbv.pdf}{options: width=140mm}}
+#' 
+#' estimate the ratio \mjseqn{k^*} as:
+#' \mjsdeqn{k^* = 1-\left(\frac{W_{soil}}{C_{soil}}\right)^{\beta}}
+#' where
+#'   - \mjseqn{\beta} is `param_infilt_hbv_beta`
 #' @param param_infilt_hbv_beta <0.001, 5> parameters for [infilt_HBV()]
 #' @export
 infilt_HBV <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_hbv_beta) {
@@ -382,6 +863,20 @@ infilt_HBV <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 }
 
 #' @rdname infilt
+#' @details
+#' # **_XAJ** \insertCite{XAJ_Zhao_1992}{EDCHM}:
+#'
+#' \if{html}{\figure{mdl_infilt_xaj.svg}}
+#' \if{latex}{\figure{mdl_infilt_xaj.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{iflt} = MM  \frac{\left( \frac{MM - AU}{MM} \right)^{B+1} - \left( \frac{MM - AU - W_{land}}{MM} \right)^{B+1}}{B+1}}
+#' \mjsdeqn{AU = MM - \left( \frac{(1 - W_{soil})(B+1)}{MM} \right)^{1 / B - 1}  }
+#' \mjsdeqn{MM = C_{soil}(B+1)  }
+#' where
+#'   - \mjseqn{B} is `param_infilt_xaj_B`
+#' 
+#' ![](xaj_infilt.png)
+#' 
 #' @param param_infilt_xaj_B <0.01, 3> parameters for [infilt_XAJ()]
 #' @export
 infilt_XAJ <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_xaj_B) {
@@ -389,6 +884,16 @@ infilt_XAJ <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 }
 
 #' @rdname infilt
+#' @details
+#' # **_VIC** \insertCite{VIC_Wood_1992}{EDCHM}:
+#'
+#' \if{html}{\figure{mdl_infilt_vic.svg}}
+#' \if{latex}{\figure{mdl_infilt_vic.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{infilt} = \int_{i_{0}}^{i_{0}+P} A(i) {\rm d} i}
+#' \mjsdeqn{i = C_{soil}(B+1) \left[ 1 - (1-A)^{1/B} \right]}
+#' where
+#'   - \mjseqn{B} is `param_infilt_vic_B`
 #' @param param_infilt_vic_B <0.01, 3> parameters for [infilt_VIC()]
 #' @export
 infilt_VIC <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B) {
@@ -398,6 +903,24 @@ infilt_VIC <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 #' **interception** water from land go into the soil.
 #' @name intercep
 #' @inheritParams all_vari
+#' @description 
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the interception will simply be calculated with the maximal interception of the land.
+#' The maximal Interception of the canopy is maybe difficult to estimate 
+#' but the process is really simple and there is also not so many method to describe it. 
+#' @details
+#' # **_Full** : 
+#' 
+#'
+#' \if{html}{\figure{mdl_intercep_ful.svg}}
+#' \if{latex}{\figure{mdl_intercep_ful.pdf}{options: width=140mm}}
+#' 
+#' consider only the radiation and temperature as the main factors. 
+#' \mjsdeqn{F_{itcp} = C_{icpt} - W_{icpt}}
+#' where
+#'   - \mjseqn{F_{icp}} is `intercept_water_mm`
+#'   - \mjseqn{C_{icpt}} is `land_intercepCapaciy_mm`
+#'   - \mjseqn{W_{icpt}} is `land_intercepWater_mm`
 #' @return intercept_water_mm (mm/m2) intercepted water in this timestep
 #' @export
 intercep_Full <- function(atmos_precipitation_mm, land_interceptWater_mm, land_interceptCapacity_mm) {
@@ -407,27 +930,49 @@ intercep_Full <- function(atmos_precipitation_mm, land_interceptWater_mm, land_i
 #' **lateral flux**
 #' @name lateral
 #' @inheritParams all_vari
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the flux of lateral exchange always be calculated (only) 
+#' by the water in the ground layer \mjseqn{W_{grnd}}.
+#' Compare to other fluxes the lateral exchange can be positive or negative, 
+#' positive means the supply from other region
+#' and negative means distribution to the other region.
+#' 
+#' This process is so flexible that we must carefully use it, 
+#' because it can easily destroy the waster balance in the research catchment.
+#' 
+#' \mjsdeqn{F_{ltrl} = f_{lateral}(D_{grnd})}
+#' 
+#' 
+#' to:
+#' 
+#' \mjsdeqn{F_{ltrl} = f_{lateral}(W_{grnd}, C_{grnd}, ...)}
+#' 
+#' 
+#' where
+#' - \mjseqn{W_{grnd}} is `ground_water_mm`
+#' - \mjseqn{C_{grnd}} is `ground_capacity_mm`, but not all the methods need the \mjseqn{C_{grnd}}
+#' 
+#' The output density distribution from 6 methods:
+#'
+#' \if{html}{\figure{mdl_lateral.svg}}
+#' \if{latex}{\figure{mdl_lateral.pdf}{options: width=140mm}}
+#' @references
+#' \insertAllCited{}
 #' @return lateral_mm (mm/m2)
-#' @export
-lateral_GR4J <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm) {
-    .Call(`_EDCHM_lateral_GR4J`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm)
-}
-
-#' @rdname lateral
-#' @param param_lateral_grf_gamma <0.01, 5> parameter for [lateral_GR4Jfix()]
-#' @export
-lateral_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_grf_gamma) {
-    .Call(`_EDCHM_lateral_GR4Jfix`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_grf_gamma)
-}
-
-#' @rdname lateral
-#' @param param_lateral_sur_k <-2, 1> coefficient parameter for [lateral_SupplyRatio()]
-#' @export
-lateral_SupplyRatio <- function(ground_water_mm, param_lateral_sur_k) {
-    .Call(`_EDCHM_lateral_SupplyRatio`, ground_water_mm, param_lateral_sur_k)
-}
-
-#' @rdname lateral
+#' 
+#' 
+#' 
+#' @details
+#' # **_SupplyPow**: 
+#'
+#' \if{html}{\figure{mdl_latral_sup.svg}}
+#' \if{latex}{\figure{mdl_lateral_sup.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{ltrl} = k \left( \frac{W_{grnd}}{C_{grnd}} \right)^\gamma  W_{grnd}}
+#' where
+#'   - \mjseqn{k} is `param_lateral_sup_k`
+#'   - \mjseqn{\gamma} is `param_lateral_sup_gamma`
 #' @param param_lateral_sup_k <-1, 1> coefficient parameter for [lateral_SupplyPow()]
 #' @param param_lateral_sup_gamma <0.01, 5> parameters for [lateral_SupplyPow()]
 #' @export
@@ -436,13 +981,66 @@ lateral_SupplyPow <- function(ground_water_mm, ground_capacity_mm, param_lateral
 }
 
 #' @rdname lateral
-#' @param param_lateral_map_gamma <0.1, 5> exponential parameter for [lateral_MaxPow()]
+#' @details
+#' # **_SupplyRatio**: 
+#'
+#' \if{html}{\figure{mdl_latral_sur.svg}}
+#' \if{latex}{\figure{mdl_lateral_sur.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{ltrl} = k * W_{grnd}}
+#' where
+#'   - \mjseqn{k} is `param_lateral_sur_k`
+#' @param param_lateral_sur_k <-2, 1> coefficient parameter for [lateral_SupplyRatio()]
 #' @export
-lateral_MaxPow <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_map_gamma) {
-    .Call(`_EDCHM_lateral_MaxPow`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_map_gamma)
+lateral_SupplyRatio <- function(ground_water_mm, param_lateral_sur_k) {
+    .Call(`_EDCHM_lateral_SupplyRatio`, ground_water_mm, param_lateral_sur_k)
 }
 
 #' @rdname lateral
+#' @details
+#' # **_GR4J** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_latral_gr4.svg}}
+#' \if{latex}{\figure{mdl_lateral_gr4.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{ltrl} = M_{ltrl} \left( \frac{W_{grnd}}{C_{grnd}} \right)^{7/2}  }
+#' where
+#'   - \mjseqn{M_{ltrl}} is `ground_potentialLateral_mm`
+#' @export
+lateral_GR4J <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm) {
+    .Call(`_EDCHM_lateral_GR4J`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm)
+}
+
+#' @rdname lateral
+#' @details
+#' # **_GR4Jfix** \insertCite{GR4J_Perrin_2003}{EDCHM} 
+#'
+#' \if{html}{\figure{mdl_latral_grf.svg}}
+#' \if{latex}{\figure{mdl_lateral_grf.pdf}{options: width=140mm}}
+#' 
+#' based on `_GR4J` use a new parameter to replace the numer 4: 
+#' \mjsdeqn{F_{ltrl} = M_{ltrl} \left( \frac{W_{grnd}}{C_{grnd}} \right)^\gamma  }
+#' where
+#'   - \mjseqn{\gamma} is `param_lateral_grf_gamma`
+#' @param param_lateral_grf_gamma <0.01, 5> parameter for [lateral_GR4Jfix()]
+#' @export
+lateral_GR4Jfix <- function(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_grf_gamma) {
+    .Call(`_EDCHM_lateral_GR4Jfix`, ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_grf_gamma)
+}
+
+#' @rdname lateral
+#' @details
+#' # **_ThreshPow** 
+#'
+#' \if{html}{\figure{mdl_latral_thp.svg}}
+#' \if{latex}{\figure{mdl_lateral_thp.pdf}{options: width=140mm}}
+#' 
+#' based on the `_GR4Jfix` and add the one threshold \mjseqn{\phi_b}: 
+#' \mjsdeqn{F_{ltrl} = 0, \quad \frac{W_{grnd}}{C_{grnd}} < \phi_b}
+#' \mjsdeqn{F_{ltrl} = M_{ltrl} \left(\frac{\frac{W_{grnd}}{C_{grnd}} - \phi_b}{1-\phi_b} \right)^\gamma, \quad \frac{W_{grnd}}{C_{grnd}} \geq \phi_b}
+#' where
+#'   - \mjseqn{\phi_b} is `param_lateral_thp_thresh`
+#'   - \mjseqn{\gamma} is `param_lateral_thp_gamma`
 #' @param param_lateral_thp_thresh <0.1, 0.9> coefficient parameter for [lateral_ThreshPow()]
 #' @param param_lateral_thp_gamma <0.1, 5> exponential parameter for [lateral_ThreshPow()]
 #' @export
@@ -451,6 +1049,19 @@ lateral_ThreshPow <- function(ground_water_mm, ground_capacity_mm, ground_potent
 }
 
 #' @rdname lateral
+#' @details
+#' # **_Arno** \insertCite{baseflow_Arno_1991,VIC2_Liang_1994}{EDCHM} 
+#'
+#' \if{html}{\figure{mdl_latral_arn.svg}}
+#' \if{latex}{\figure{mdl_lateral_arn.pdf}{options: width=140mm}}
+#' 
+#' has also in two cases divided by a threshold water content \mjseqn{\phi_b}: 
+#' \mjsdeqn{F_{ltrl} = k M_{ltrl} \frac{W_{grnd}}{C_{grnd}}, \quad \frac{W_{grnd}}{C_{grnd}} < \phi_b}
+#' \mjsdeqn{F_{ltrl} = k M_{ltrl} \frac{W_{grnd}}{C_{grnd}} + (1-k) M_{ltrl} \left(\frac{W_{grnd} - W_s}{C_{grnd} - W_s} \right)^2, \quad \frac{W_{grnd}}{C_{grnd}} \geq \phi_b}
+#' \mjsdeqn{W_s = k C_{grnd}}
+#' where
+#'   - \mjseqn{\phi_b} is `param_lateral_arn_thresh`
+#'   - \mjseqn{k} is `param_lateral_arn_k`
 #' @param param_lateral_arn_thresh <0.1, 0.9> coefficient parameter for [lateral_ThreshPow()]
 #' @param param_lateral_arn_k <0.1, 1> exponential parameter for [lateral_ThreshPow()]
 #' @export
@@ -461,35 +1072,79 @@ lateral_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialLa
 #' **percolation**
 #' @name percola
 #' @inheritParams all_vari
-#' @param param_percola_grf_k <0.01, 1> coefficient parameter for [percola_GR4Jfix()]
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the flux of capillary rise always 
+#' be calculated by the water in the soil layer \mjseqn{W_{soil}},
+#' it can also be tread as the part of the \mjseqn{W_{soil}}.
+#' So we can give the function from:
+#' 
+#' \mjsdeqn{F_{prcl} = f_{percola}(D_{grnd}, D_{soil})}
+#' 
+#' 
+#' to:
+#' 
+#' \mjsdeqn{F_{prcl} = f_{percola}(W_{soil}, C_{soil}, W_{grnd}, C_{grnd}, ...) = k^* W_{soil}}
+#' \mjsdeqn{F_{prcl} \leq W_{soil}}
+#' \mjsdeqn{F_{prcl} \leq C_{grnd} - W_{grnd}}
+#' 
+#' 
+#' where
+#' - \mjseqn{F_{prcl}} is `soil_percola_mm`
+#' - \mjseqn{W_{soil}} is `water_soil_mm`
+#' - \mjseqn{C_{soil}} is `capacity_soil_mm`
+#' - \mjseqn{W_{grnd}} is `ground_water_mm`
+#' - \mjseqn{C_{grnd}} is `capacity_water_mm`
+#' - \mjseqn{k^*} is estimated ratio
+#' 
+#' The output density distribution from 8 methods:
+#'
+#' \if{html}{\figure{mdl_percola.svg}}
+#' \if{latex}{\figure{mdl_percola.pdf}{options: width=140mm}}
+#' @references
+#' \insertAllCited{}
 #' @return percola_mm (mm/m2)
-#' @export
-percola_GR4Jfix <- function(soil_water_mm, soil_capacity_mm, param_percola_grf_k) {
-    .Call(`_EDCHM_percola_GR4Jfix`, soil_water_mm, soil_capacity_mm, param_percola_grf_k)
-}
-
-#' @rdname percola
+#' @details
+#' # **_GR4J** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_percola_gr4.svg}}
+#' \if{latex}{\figure{mdl_percola_gr4.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k^* = 1 - \left[ 1 + \left(\frac{4}{9} \frac{W_{soil}}{C_{soil}} \right)^4 \right]^{-1/4}}
+#' where
+#'   - \mjseqn{k^*} is estimated ratio
 #' @export
 percola_GR4J <- function(soil_water_mm, soil_capacity_mm) {
     .Call(`_EDCHM_percola_GR4J`, soil_water_mm, soil_capacity_mm)
 }
 
 #' @rdname percola
-#' @param param_percola_sur_k <0.01, 1> coefficient parameter for [percola_SupplyRatio()]
+#' @details
+#' # **_GR4Jfix** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_percola_grf.svg}}
+#' \if{latex}{\figure{mdl_percola_grf.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k^* = 1 - \left[ 1 + \left(k \frac{W_{soil}}{C_{soil}} \right)^4 \right]^{-1/4}}
+#' where
+#'   - \mjseqn{k} is `param_percola_grf_k`
+#' @param param_percola_grf_k <0.01, 1> coefficient parameter for [percola_GR4Jfix()]
 #' @export
-percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
-    .Call(`_EDCHM_percola_SupplyRatio`, soil_water_mm, param_percola_sur_k)
+percola_GR4Jfix <- function(soil_water_mm, soil_capacity_mm, param_percola_grf_k) {
+    .Call(`_EDCHM_percola_GR4Jfix`, soil_water_mm, soil_capacity_mm, param_percola_grf_k)
 }
 
 #' @rdname percola
-#' @param param_percola_sup_k <0.01, 1> coefficient parameter for [percola_SupplyPow()]
-#' @param param_percola_sup_gamma <0, 7> parameter for [percola_SupplyPow()]
-#' @export
-percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma) {
-    .Call(`_EDCHM_percola_SupplyPow`, soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma)
-}
-
-#' @rdname percola
+#' @details
+#' # **_MaxPow**: 
+#'
+#' \if{html}{\figure{mdl_percola_map.svg}}
+#' \if{latex}{\figure{mdl_percola_map.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{prcl} = M_{prcl} \left(\frac{W_{soil}}{C_{soil}} \right)^\gamma}
+#' where
+#'   - \mjseqn{M_{prcl}} is `soil_potentialPercola_mm`
+#'   - \mjseqn{\gamma} is `param_baseflow_map_gamma`
 #' @param param_percola_map_gamma <0.1, 5> exponential parameter for [percola_MaxPow()]
 #' @export
 percola_MaxPow <- function(soil_water_mm, soil_capacity_mm, soil_potentialPercola_mm, param_percola_map_gamma) {
@@ -497,6 +1152,18 @@ percola_MaxPow <- function(soil_water_mm, soil_capacity_mm, soil_potentialPercol
 }
 
 #' @rdname percola
+#' @details
+#' # **_ThreshPow** 
+#'
+#' \if{html}{\figure{mdl_percola_thp.svg}}
+#' \if{latex}{\figure{mdl_percola_thp.pdf}{options: width=140mm}}
+#' 
+#' based on the `_MaxPow` and add the one threshold \mjseqn{\phi_b}: 
+#' \mjsdeqn{F_{prcl} = 0, \quad \frac{W_{soil}}{C_{soil}} < \phi_b}
+#' \mjsdeqn{F_{prcl} = M_{prcl} \left(\frac{\frac{W_{soil}}{C_{soil}} - \phi_b}{1-\phi_b} \right)^\gamma, \quad \frac{W_{soil}}{C_{soil}} \geq \phi_b}
+#' where
+#'   - \mjseqn{\phi_b} is `param_percola_thp_thresh`
+#'   - \mjseqn{\gamma} is `param_percola_thp_gamma`
 #' @param param_percola_thp_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
 #' @param param_percola_thp_gamma <0.1, 5> exponential parameter for [percola_ThreshPow()]
 #' @export
@@ -505,6 +1172,20 @@ percola_ThreshPow <- function(soil_water_mm, soil_capacity_mm, soil_potentialPer
 }
 
 #' @rdname percola
+#' @details
+#' # **_Arno** \insertCite{baseflow_Arno_1991,VIC2_Liang_1994}{EDCHM} 
+#'
+#' \if{html}{\figure{mdl_percola_arn.svg}}
+#' \if{latex}{\figure{mdl_percola_arn.pdf}{options: width=140mm}}
+#' 
+#' has also in two cases divided by a threshold water content \mjseqn{\phi_b}:
+#' (*This method is actually not the original method, but an analogy with `baseflow_Arno`*) 
+#' \mjsdeqn{F_{prcl} = k M_{prcl} \frac{W_{soil}}{C_{soil}}, \quad \frac{W_{soil}}{C_{soil}} < \phi_b}
+#' \mjsdeqn{F_{prcl} = k M_{prcl} \frac{W_{soil}}{C_{soil}} + (1-k) M_{prcl} \left(\frac{W_{soil} - W_s}{C_{soil} - W_s} \right)^2, \quad \frac{W_{soil}}{C_{soil}} \geq \phi_b}
+#' \mjsdeqn{W_s = k C_{soil}}
+#' where
+#'   - \mjseqn{\phi_b} is `param_percola_arn_thresh`
+#'   - \mjseqn{k} is `param_percola_arn_k`
 #' @param param_percola_arn_thresh <0.1, 0.9> coefficient parameter for [percola_ThreshPow()]
 #' @param param_percola_arn_k <0.1, 1> exponential parameter for [percola_ThreshPow()]
 #' @export
@@ -513,23 +1194,128 @@ percola_Arno <- function(soil_water_mm, soil_capacity_mm, soil_potentialPercola_
 }
 
 #' @rdname percola
+#' @details
+#' # **_BevenWood** \insertCite{percola_BevenWood_1983,TOPMODEL_Beven_1995}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_percola_bew.svg}}
+#' \if{latex}{\figure{mdl_percola_bew.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k =  \frac{W_{soil}}{C_{soil} - W_{soil}} \quad {\rm and} \quad k \leq 1}
+#' \mjsdeqn{F_{prcl} = k M_{prcl}}
+#' where
+#'   - \mjseqn{k_{fc}} is `soil_fieldCapacityPerc_1`
+#'   - \mjseqn{\gamma} is `param_percola_sup_gamma`
 #' @export
 percola_BevenWood <- function(soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialPercola_mm) {
     .Call(`_EDCHM_percola_BevenWood`, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialPercola_mm)
 }
 
+#' @rdname percola
+#' @details
+#' # **_SupplyPow** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_percola_sup.svg}}
+#' \if{latex}{\figure{mdl_percola_sup.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k^* = k \left(\frac{W_{soil}}{C_{soil}} \right)^\gamma}
+#' where
+#'   - \mjseqn{k} is `param_percola_sup_k`
+#'   - \mjseqn{\gamma} is `param_percola_sup_gamma`
+#' @param param_percola_sup_k <0.01, 1> coefficient parameter for [percola_SupplyPow()]
+#' @param param_percola_sup_gamma <0, 7> parameter for [percola_SupplyPow()]
+#' @export
+percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma) {
+    .Call(`_EDCHM_percola_SupplyPow`, soil_water_mm, soil_capacity_mm, param_percola_sup_k, param_percola_sup_gamma)
+}
+
+#' @rdname percola
+#' @details
+#' # **_SupplyRatio** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_percola_sur.svg}}
+#' \if{latex}{\figure{mdl_percola_sur.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k^* = k}
+#' where
+#'   - \mjseqn{k} is `param_percola_sur_k`
+#' @param param_percola_sur_k <0.01, 1> coefficient parameter for [percola_SupplyRatio()]
+#' @export
+percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
+    .Call(`_EDCHM_percola_SupplyRatio`, soil_water_mm, param_percola_sur_k)
+}
+
 #' **snow**
 #' @name snow
 #' @inheritParams all_vari
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the melt of snowpack is always calculated by 
+#' the energy availability (the state-variable temperature \mjseqn{T} or flux-variable (nett-) radiation \mjseqn{Rn})
+#' and the solid water (snow or ice) availability \mjseqn{W_{snow}} of the snowpack.
+#' 
+#' Some more complex processes will be ignored, some like refrozen and residual water.
+#' Due to the simplify the layer `snowLy` will store only the solid water 
+#' and the solid water will also be melted as possible when the energy is enough.
+#' 
+#' So we can give the function from:
+#' 
+#' \mjsdeqn{F_{melt} = f_{snowMelt}(D_{atms}, D_{snow})}
+#' 
+#' 
+#' to:
+#' \mjsdeqn{F_{melt}  = f_{snowMelt}(T, ...)}
+#' \mjsdeqn{F_{melt} \leq W_{snow} }
+#' 
+#' where
+#'   - \mjseqn{F_{melt}} is `snow_melt_mm`
+#'   - \mjseqn{W_{snow}} is `snow_ice_mm`
+#'   - \mjseqn{T} is average temperature
+#' 
+#' Then the different `snowMelt` methods will estimate the maximal snow melt \mjseqn{M_{max}}.
+#' 
+#' The output density distribution from 2 methods:
+#'
+#' \if{html}{\figure{mdl_snowMelt.svg}}
+#' \if{latex}{\figure{mdl_snowMelt.pdf}{options: width=140mm}}
+#' @references
+#' \insertAllCited{}
+#' @return snow_melt_mm (mm/m2) melted snow
+#' 
+#' @details
+#' # **_Kustas** \insertCite{snow_kustas_1994}{EDCHM}: 
+#' 
+#'
+#' \if{html}{\figure{mdl_snowMelt_kus.svg}}
+#' \if{latex}{\figure{mdl_snowMelt_kus.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{melt}  = m_T T + m_E R_n}
+#' but due to the temperature is one energy-state-variable, 
+#' in order to adjust to subday scale we need to add a new time interval \mjseqn{t_h} from 1 to 24 hour
+#' \mjsdeqn{F_{melt}  = m_T T t_h + m_E R_n}
+#' where
+#'   - \mjseqn{m_T} is `param_snow_kus_fT`
+#'   - \mjseqn{m_E} is `param_snow_kus_fE`
+#'   - \mjseqn{R_n} is daily net radiation
+#' 
 #' @param param_snow_kus_fE <0.0005, 0.003> (mm/m2/MJ) snow melt temperature parameter for [snowMelt_Factor()]
 #' @param param_snow_kus_fT <0.05, 1> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
-#' @return snow_melt_mm (mm/m2) melted snow
 #' @export
 snowMelt_Kustas <- function(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, time_step_h, param_snow_kus_fE, param_snow_kus_fT) {
     .Call(`_EDCHM_snowMelt_Kustas`, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, time_step_h, param_snow_kus_fE, param_snow_kus_fT)
 }
 
 #' @rdname snow
+#' @details
+#' # **_Factor** \insertCite{phyHydro_dingman_2014}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_snowMelt_fac.svg}}
+#' \if{latex}{\figure{mdl_snowMelt_fac.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{melt}  = m_T (T-T_b), \quad T > T_b}
+#' where
+#'   - \mjseqn{m_T} is `param_snow_fac_f`
+#'   - \mjseqn{T_b} is `param_snow_fac_Tmelt`
+#' 
 #' @param param_snow_fac_Tmelt <0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]
 #' @param param_snow_fac_f <0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 #' @export

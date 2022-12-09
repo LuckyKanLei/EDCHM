@@ -2,26 +2,14 @@
 % Please edit documentation in R/RcppExports.R
 \name{lateral}
 \alias{lateral}
+\alias{lateral_SupplyPow}
+\alias{lateral_SupplyRatio}
 \alias{lateral_GR4J}
 \alias{lateral_GR4Jfix}
-\alias{lateral_SupplyRatio}
-\alias{lateral_SupplyPow}
-\alias{lateral_MaxPow}
 \alias{lateral_ThreshPow}
 \alias{lateral_Arno}
 \title{\strong{lateral flux}}
 \usage{
-lateral_GR4J(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm)
-
-lateral_GR4Jfix(
-  ground_water_mm,
-  ground_capacity_mm,
-  ground_potentialLateral_mm,
-  param_lateral_grf_gamma
-)
-
-lateral_SupplyRatio(ground_water_mm, param_lateral_sur_k)
-
 lateral_SupplyPow(
   ground_water_mm,
   ground_capacity_mm,
@@ -29,11 +17,15 @@ lateral_SupplyPow(
   param_lateral_sup_gamma
 )
 
-lateral_MaxPow(
+lateral_SupplyRatio(ground_water_mm, param_lateral_sur_k)
+
+lateral_GR4J(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm)
+
+lateral_GR4Jfix(
   ground_water_mm,
   ground_capacity_mm,
   ground_potentialLateral_mm,
-  param_lateral_map_gamma
+  param_lateral_grf_gamma
 )
 
 lateral_ThreshPow(
@@ -57,17 +49,15 @@ lateral_Arno(
 
 \item{ground_capacity_mm}{(mm/m2) water storage capacity in \code{groundLy}}
 
-\item{ground_potentialLateral_mm}{<-7, 7> (mm/m2/TS) \strong{potential} lateral flow}
-
-\item{param_lateral_grf_gamma}{<0.01, 5> parameter for \code{\link[=lateral_GR4Jfix]{lateral_GR4Jfix()}}}
-
-\item{param_lateral_sur_k}{<-2, 1> coefficient parameter for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
-
 \item{param_lateral_sup_k}{<-1, 1> coefficient parameter for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
 
 \item{param_lateral_sup_gamma}{<0.01, 5> parameters for \code{\link[=lateral_SupplyPow]{lateral_SupplyPow()}}}
 
-\item{param_lateral_map_gamma}{<0.1, 5> exponential parameter for \code{\link[=lateral_MaxPow]{lateral_MaxPow()}}}
+\item{param_lateral_sur_k}{<-2, 1> coefficient parameter for \code{\link[=lateral_SupplyRatio]{lateral_SupplyRatio()}}}
+
+\item{ground_potentialLateral_mm}{<-7, 7> (mm/m2/TS) \strong{potential} lateral flow}
+
+\item{param_lateral_grf_gamma}{<0.01, 5> parameter for \code{\link[=lateral_GR4Jfix]{lateral_GR4Jfix()}}}
 
 \item{param_lateral_thp_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=lateral_ThreshPow]{lateral_ThreshPow()}}}
 
@@ -81,5 +71,108 @@ lateral_Arno(
 lateral_mm (mm/m2)
 }
 \description{
-\strong{lateral flux}
+\loadmathjax
+Under the concept of the conceptional HM, the flux of lateral exchange always be calculated (only)
+by the water in the ground layer \mjseqn{W_{grnd}}.
+Compare to other fluxes the lateral exchange can be positive or negative,
+positive means the supply from other region
+and negative means distribution to the other region.
+
+This process is so flexible that we must carefully use it,
+because it can easily destroy the waster balance in the research catchment.
+
+\mjsdeqn{F_{ltrl} = f_{lateral}(D_{grnd})}
+
+to:
+
+\mjsdeqn{F_{ltrl} = f_{lateral}(W_{grnd}, C_{grnd}, ...)}
+
+where
+\itemize{
+\item \mjseqn{W_{grnd}} is \code{ground_water_mm}
+\item \mjseqn{C_{grnd}} is \code{ground_capacity_mm}, but not all the methods need the \mjseqn{C_{grnd}}
+}
+
+The output density distribution from 6 methods:
+
+\if{html}{\figure{mdl_lateral.svg}}
+\if{latex}{\figure{mdl_lateral.pdf}{options: width=140mm}}
+}
+\section{\strong{_SupplyPow}:}{
+\if{html}{\figure{mdl_latral_sup.svg}}
+\if{latex}{\figure{mdl_lateral_sup.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{ltrl} = k \left( \frac{W_{grnd}}{C_{grnd}} \right)^\gamma  W_{grnd}}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_lateral_sup_k}
+\item \mjseqn{\gamma} is \code{param_lateral_sup_gamma}
+}
+}
+
+\section{\strong{_SupplyRatio}:}{
+\if{html}{\figure{mdl_latral_sur.svg}}
+\if{latex}{\figure{mdl_lateral_sur.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{ltrl} = k * W_{grnd}}
+where
+\itemize{
+\item \mjseqn{k} is \code{param_lateral_sur_k}
+}
+}
+
+\section{\strong{_GR4J} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\if{html}{\figure{mdl_latral_gr4.svg}}
+\if{latex}{\figure{mdl_lateral_gr4.pdf}{options: width=140mm}}
+
+\mjsdeqn{F_{ltrl} = M_{ltrl} \left( \frac{W_{grnd}}{C_{grnd}} \right)^{7/2}  }
+where
+\itemize{
+\item \mjseqn{M_{ltrl}} is \code{ground_potentialLateral_mm}
+}
+}
+
+\section{\strong{_GR4Jfix} \insertCite{GR4J_Perrin_2003}{EDCHM}}{
+\if{html}{\figure{mdl_latral_grf.svg}}
+\if{latex}{\figure{mdl_lateral_grf.pdf}{options: width=140mm}}
+
+based on \verb{_GR4J} use a new parameter to replace the numer 4:
+\mjsdeqn{F_{ltrl} = M_{ltrl} \left( \frac{W_{grnd}}{C_{grnd}} \right)^\gamma  }
+where
+\itemize{
+\item \mjseqn{\gamma} is \code{param_lateral_grf_gamma}
+}
+}
+
+\section{\strong{_ThreshPow}}{
+\if{html}{\figure{mdl_latral_thp.svg}}
+\if{latex}{\figure{mdl_lateral_thp.pdf}{options: width=140mm}}
+
+based on the \verb{_GR4Jfix} and add the one threshold \mjseqn{\phi_b}:
+\mjsdeqn{F_{ltrl} = 0, \quad \frac{W_{grnd}}{C_{grnd}} < \phi_b}
+\mjsdeqn{F_{ltrl} = M_{ltrl} \left(\frac{\frac{W_{grnd}}{C_{grnd}} - \phi_b}{1-\phi_b} \right)^\gamma, \quad \frac{W_{grnd}}{C_{grnd}} \geq \phi_b}
+where
+\itemize{
+\item \mjseqn{\phi_b} is \code{param_lateral_thp_thresh}
+\item \mjseqn{\gamma} is \code{param_lateral_thp_gamma}
+}
+}
+
+\section{\strong{_Arno} \insertCite{baseflow_Arno_1991,VIC2_Liang_1994}{EDCHM}}{
+\if{html}{\figure{mdl_latral_arn.svg}}
+\if{latex}{\figure{mdl_lateral_arn.pdf}{options: width=140mm}}
+
+has also in two cases divided by a threshold water content \mjseqn{\phi_b}:
+\mjsdeqn{F_{ltrl} = k M_{ltrl} \frac{W_{grnd}}{C_{grnd}}, \quad \frac{W_{grnd}}{C_{grnd}} < \phi_b}
+\mjsdeqn{F_{ltrl} = k M_{ltrl} \frac{W_{grnd}}{C_{grnd}} + (1-k) M_{ltrl} \left(\frac{W_{grnd} - W_s}{C_{grnd} - W_s} \right)^2, \quad \frac{W_{grnd}}{C_{grnd}} \geq \phi_b}
+\mjsdeqn{W_s = k C_{grnd}}
+where
+\itemize{
+\item \mjseqn{\phi_b} is \code{param_lateral_arn_thresh}
+\item \mjseqn{k} is \code{param_lateral_arn_k}
+}
+}
+
+\references{
+\insertAllCited{}
 }

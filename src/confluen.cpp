@@ -3,9 +3,30 @@
 
 
 //' **confluence**
-//' @description Routing methods with 
+//' @description 
+//' \loadmathjax
+//' `confluence` is just a calculate function, that make the water resource confluent to the gauge point.
 //' - `IUH`: IUH (Instant Unit Hydrograph) with one watercourse, 
-//' - `IUH2S`; IUH with tweo watersource, those have the different IUH-vector, 
+//' - `IUH2S`; IUH with two water resource, those have the two different IUH-vector, 
+//' - `IUH3S`; IUH with three water resource, those have the three different IUH-vector, 
+//' Under the concept of the conceptional HM, the water from flux to the water flow will by the `confluen` process calculated.
+//' This process will not calculate the water balance, but the time varying. 
+//' And the "Instant Unit Hydrograph" is the most effective method to deal with the time varying.
+//' In the first stage will also only `confluenIUH` supported.
+//' 
+//' So we can give the function:
+//' 
+//' \mjsdeqn{Q = f_{confluen}(F, u)}
+//' 
+//' 
+//' 
+//' where
+//' - \mjseqn{Q} is stream flow, but still in mm/TS not m3/TS or m3/S
+//' - \mjseqn{F} is flux that will into river conflen, e.g.`land_runoff_mm`, `soil_interflow_mm` or `ground_baseflow_mm`
+//' - \mjseqn{u} is Instant Unit Hydrograph series
+//' 
+//' @references
+//' \insertAllCited{}
 //' @inheritParams all_vari
 //' @name confluen
 //' @return confluenced water (mm/m2)
@@ -64,20 +85,20 @@ NumericVector confluen_IUH2S(
 // [[Rcpp::export]]
 NumericVector confluen_IUH3S(
     NumericVector land_runoff_mm,
-    NumericVector soil_subflow_mm, 
+    NumericVector soil_interflow_mm, 
     NumericVector ground_baseflow_mm, 
     NumericVector confluen_iuhLand_1,
     NumericVector confluen_iuhSoil_1,
     NumericVector confluen_iuhGround_1
 )
 {
-  NumericVector confluen_runoff_mm (land_runoff_mm.size()), confluen_subflow_mm (soil_subflow_mm.size()), confluen_baseflow_mm (ground_baseflow_mm.size());
+  NumericVector confluen_runoff_mm (land_runoff_mm.size()), confluen_interflow_mm (soil_interflow_mm.size()), confluen_baseflow_mm (ground_baseflow_mm.size());
   confluen_runoff_mm = confluen_IUH(
     land_runoff_mm, 
     confluen_iuhLand_1
   );
-  confluen_subflow_mm = confluen_IUH(
-    soil_subflow_mm, 
+  confluen_interflow_mm = confluen_IUH(
+    soil_interflow_mm, 
     confluen_iuhSoil_1
   );
   confluen_baseflow_mm = confluen_IUH(
@@ -86,15 +107,43 @@ NumericVector confluen_IUH3S(
   );
   
   
-  return confluen_runoff_mm + confluen_subflow_mm + confluen_baseflow_mm;
+  return confluen_runoff_mm + confluen_interflow_mm + confluen_baseflow_mm;
   
 }
 
 
-//' create **IUH** (Instant Unit Graphy)
+//' create **IUH** (Instant Unit Hydrograph)
 //' @name confluenIUH
 //' @inheritParams all_vari
+//' @description
+//' \loadmathjax
+//' The process `confluenIUH` return a series of portions, that means how many flux water will
+//' in those moment into the river.
+//' The sum of this series will always in 1.
+//' So we can give the function:
+//' 
+//' \mjsdeqn{u = f_{confluenIUH}(t_r, ...)}
+//' 
+//' 
+//' 
+//' where
+//' - \mjseqn{u} is series of portions
+//' - \mjseqn{t_r} is  `confluen_responseTime_TS`
+//' 
+//' @references
+//' \insertAllCited{}
 //' @return IUH (list of num vector) 
+//' @details
+//' # **_GR4J1** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+//'
+//' \if{html}{\figure{mdl_iuh_gr1.svg}}
+//' \if{latex}{\figure{mdl_iuh_gr1.pdf}{options: width=100mm}}
+//' 
+//' \mjsdeqn{u(i) = S(i) - S(i-1)}
+//' \mjsdeqn{S(i) = \left( \frac{i}{t_r} \right)^{2.5}, \quad 0 \leq i \leq t_r}
+//' where
+//'   - \mjseqn{u} is IUH series
+//'   - \mjseqn{i} is index
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_GR4J1(
@@ -113,6 +162,19 @@ NumericVector confluenIUH_GR4J1(
 
 
 //' @rdname confluenIUH
+//' @details
+//' # **_GR4J2** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+//'
+//' \if{html}{\figure{mdl_iuh_gr2.svg}}
+//' \if{latex}{\figure{mdl_iuh_gr2.pdf}{options: width=100mm}}
+//' 
+//' \mjsdeqn{u(i) = S(i) - S(i-1)}
+//' \mjsdeqn{S(i) = 0.5\left( \frac{i}{t_r} \right)^{2.5}, \quad 0 \leq i \leq t_r}
+//' \mjsdeqn{S(i) = 1 - 0.5\left(2 - \frac{i}{t_r} \right)^{2.5}, \quad t_r < i < 2t_r}
+//' \mjsdeqn{S(i) = 0, \quad i = 2t_r}
+//' where
+//'   - \mjseqn{u} is IUH series
+//'   - \mjseqn{i} is index
 //' @export
 // [[Rcpp::export]]
 NumericVector confluenIUH_GR4J2(
@@ -136,23 +198,19 @@ NumericVector confluenIUH_GR4J2(
   return SH_2;
 }
 
-//' @rdname confluenIUH
-//' @export
-// [[Rcpp::export]]
-NumericVector confluenIUH_Clark(
-    double confluen_responseTime_TS
-)
-{
-  double t_max = ceil(- confluen_responseTime_TS * log(confluen_responseTime_TS * 0.005));
-  IntegerVector seq_t = seq(1, 20 * t_max);
-  NumericVector seq_t2 = as<NumericVector>(seq_t) / 20.0;
-  NumericVector iuh_ = 1 / confluen_responseTime_TS * exp(- seq_t2 / confluen_responseTime_TS);
-  NumericMatrix mat_iuh = NumericMatrix(20, t_max, iuh_.begin());
-  NumericVector vct_iuh = colMeans(mat_iuh);
-  return vct_iuh / sum(vct_iuh);
-}
 
 //' @rdname confluenIUH
+//' @details
+//' # **_Kelly** \insertCite{iuh_Kelly_1955}{EDCHM}: 
+//'
+//' \if{html}{\figure{mdl_iuh_kel.svg}}
+//' \if{latex}{\figure{mdl_iuh_kel.pdf}{options: width=100mm}}
+//' 
+//' \mjsdeqn{u(i) = \frac{4}{t_r^2} \left( i + k \left( e^{-i/k} \right) \right), \quad i \leq t_r / 2 }
+//' \mjsdeqn{u(i) = - \frac{4}{t_r^2}(i - k - t_r) + \frac{4ke^{-i/k}}{t_r^2} (1 - 2 e^{t_r/(2k)}), \quad t_r / 2 < i \leq t_r }
+//' \mjsdeqn{u(i) =  \frac{4ke^{-i/k}}{t_r^2} (1 - 2 e^{t_r/(2k)} +  e^{t_r/k}), \quad i > t_r }
+//' where
+//'   - \mjseqn{k} is `param_confluen_kel_k`
 //' @param param_confluen_kel_k <1, 4> parameter for[confluenIUH_Kelly()]
 //' @export
 // [[Rcpp::export]]
@@ -184,6 +242,15 @@ NumericVector confluenIUH_Kelly(
 
 
 //' @rdname confluenIUH
+//' @details
+//' # **_Nash** \insertCite{iuh_Nash_1957}{EDCHM}: 
+//'
+//' \if{html}{\figure{mdl_iuh_nas.svg}}
+//' \if{latex}{\figure{mdl_iuh_nas.pdf}{options: width=100mm}}
+//' 
+//' \mjsdeqn{u(i) = \frac{1}{t_r\Gamma(n)} \left(\frac{4}{t_r^2}\right)^{n -1}e^{-i/t_r}}
+//' where
+//'   - \mjseqn{n} is `param_confluen_nas_n`
 //' @param param_confluen_nas_n <1, 8> parameter for[confluenIUH_Nash()]
 //' @export
 // [[Rcpp::export]]
@@ -204,22 +271,26 @@ NumericVector confluenIUH_Nash(
 }
 
 //' @rdname confluenIUH
-//' @param param_confluen_nak_n <1, 8> parameter for[confluenIUH_NashKumar()]
+//' @details
+//' # **_Clark** \insertCite{iuh_Clark_1945}{EDCHM}: 
+//'
+//' \if{html}{\figure{mdl_iuh_cla.svg}}
+//' \if{latex}{\figure{mdl_iuh_cla.pdf}{options: width=100mm}}
+//' 
+//' \mjsdeqn{u(i) = \frac{1}{t_r} e^{-i/t_r} }
+//' where
+//'   - \mjseqn{t_r} is `confluen_responseTime_TS`
 //' @export
 // [[Rcpp::export]]
-NumericVector confluenIUH_NashKumar(
-    double confluen_responseTime_TS,
-    double param_confluen_nak_n
+NumericVector confluenIUH_Clark(
+    double confluen_responseTime_TS
 )
 {
-  NumericVector iuh_, vct_iuh;
-  confluen_responseTime_TS = confluen_responseTime_TS * 1 / (param_confluen_nak_n - 1);
-  double t_max = ceil(std::max(4.0, param_confluen_nak_n) * 3 * confluen_responseTime_TS);
+  double t_max = ceil(- confluen_responseTime_TS * log(confluen_responseTime_TS * 0.005));
   IntegerVector seq_t = seq(1, 20 * t_max);
   NumericVector seq_t2 = as<NumericVector>(seq_t) / 20.0;
-  iuh_ = pow(seq_t2 / confluen_responseTime_TS, param_confluen_nak_n - 1) * exp(- seq_t2 / confluen_responseTime_TS) / 
-    confluen_responseTime_TS / tgamma(param_confluen_nak_n);
+  NumericVector iuh_ = 1 / confluen_responseTime_TS * exp(- seq_t2 / confluen_responseTime_TS);
   NumericMatrix mat_iuh = NumericMatrix(20, t_max, iuh_.begin());
-  vct_iuh = colMeans(mat_iuh);
+  NumericVector vct_iuh = colMeans(mat_iuh);
   return vct_iuh / sum(vct_iuh);
 }

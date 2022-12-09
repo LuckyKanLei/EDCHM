@@ -12,11 +12,13 @@
 #' one Boundary in the same time the top Boundary of one Layer but also the bottom Layer of other Layer, that on the above.
 #' 
 #' So for EDCHM there are five basic Layers (now one additional snowLy) and six Boundaries:
+#' 
 #' - Layer:
 #'    - atmosLy
 #'    - landLy (snowLy)
 #'    - soilLy
 #'    - groundLy
+#'    
 #' - Boundary:
 #'   - topBd
 #'   - atmosBd
@@ -24,8 +26,8 @@
 #'   - groundBd
 #'   - btmBd
 #'   
-#' ![](edchm_layer.pdf){options: width=165mm}
-#' 
+#' \if{html}{\figure{edchm_layer.svg}}
+#' \if{latex}{\figure{edchm_layer.pdf}{options: width=165mm}}
 #'   
 #' # Variable define
 #' 
@@ -40,48 +42,6 @@
 #' But the time units part will not appear in the name. 
 #' And also all the variable meant they are homogeneous in the area, so all the variable will not give the square meter (m2) in the name.
 #' 
-#' For the formulas symbols there are also some conventions:
-#' 
-#' - \mjseqn{W}: water volume in one Layer (mm/m2)
-#' 
-#'    - \mjseqn{W_{land}}: pounded water in `landLy` 
-#'    - \mjseqn{W_{itcp}}: intercepted water in `landLy`
-#'    - \mjseqn{W_{snow}}: equal water volume in `snowLy`
-#'    - \mjseqn{W_{soil}}: storage in `soilLy`
-#'    - \mjseqn{W_{grnd}}: storage in `groundLy`
-#'    
-#' - \mjseqn{C}: maximal capacity of water volume in one Layer (mm/m2)
-#' 
-#'    - \mjseqn{C_{itcp}}: intercepted water capacity in `landLy`
-#'    - \mjseqn{C_{soil}}: storage capacity in `soilLy`
-#'    - \mjseqn{C_{grnd}}: storage capacity in `groundLy`
-#' 
-#' - \mjseqn{P}: flux of precipitation (mm/m2/TS)
-#' 
-#'    - \mjseqn{P_r}: rain fall
-#'    - \mjseqn{P_s}: snow fall
-#'    
-#' - \mjseqn{E}: flux of evapotranspiration (mm/m2/TS)
-#' 
-#'    - \mjseqn{E_p}: potential evapotranspiration
-#'    - \mjseqn{E_a}: actual evapotranspiration from one specific Layer (e.g. `soilLy` or `landLy`)
-#'    
-#' - \mjseqn{I}: flux of infiltration (mm/m2/TS)
-#' - \mjseqn{M}: flux or snow melt (mm/m2/TS) 
-#' - \mjseqn{R}: flux of runoff (mm/m2/TS), that from precipitation travels over the soil surface to the nearest stream channel
-#' - \mjseqn{S}: flux of subsurface flow (mm/m2/TS), that from `soilLy` travels over the soil subsurface to the nearest stream channel
-#' - \mjseqn{B}: flux of baseflow (mm/m2/TS), that from `groundLy` travels groundwater to the nearest stream channel
-#' 
-#' - \mjseqn{A}: flux of capillary rise (mm/m2/TS) (A from German Aufstieg)
-#' - \mjseqn{V}: flux of percolation (mm/m2/TS) (V from German Versinkung)
-#' - \mjseqn{L}: flux of lateral flow (mm/m2/TS), the exchange with the other catchment, it can be positive (into) or negative (go out)
-#' 
-#' - \mjseqn{Q}: streamflow in the river section (mm/m2/TS) (PS: **the results from EDCHM has't transform the unit from flux (mm/m2/TS) to the streamflow (m3/TS) or (m3/s)**)
-#' 
-#'    - \mjseqn{Q_r}: proportion of \mjseqn{Q} from runoff (\mjseqn{R})
-#'    - \mjseqn{Q_s}: proportion of \mjseqn{Q} from subsurface flow (\mjseqn{S})
-#'    - \mjseqn{Q_b}: proportion of \mjseqn{Q} from baseflow (\mjseqn{B})
-#' 
 #' e.g. **group_variableName_unit**
 #' # Parameter define
 #' The Parameter will defined in every function topic, but there will define the naming regulation:
@@ -90,10 +50,84 @@
 #' 
 #' e.g. **param_processName_mtd_k**
 #' 
+#' \loadmathjax
+#' 
+#' The tables show the collection model variables and the formula symbols:
+#' 
+#' - some state variables:
+#' 
+#' | **Variable**                  | **Symbol**        | **Unit** | **Description**                            |
+#' |-------------------------------|-------------------|----------|--------------------------------------------|
+#' | `water_mm`                    | \mjseqn{W}        | mm/m2    | water volume in one `Layer`                |
+#' | `land_water_mm`               | \mjseqn{W_{land}} | mm/m2    | .. in `landLy`                             |
+#' | `land_interceptWater_mm`      | \mjseqn{W_{itcp}} | mm/m2    | .. in `landLy` (intercepted)               |
+#' | `snow_ice_mm`                 | \mjseqn{W_{snow}} | mm/m2    | .. in `snowLy` (equal water)               |
+#' | `soil_water_mm`               | \mjseqn{W_{soil}} | mm/m2    | .. in `soilLy`                             |
+#' | `ground_water_mm`             | \mjseqn{W_{grnd}} | mm/m2    | .. in `groundLy`                           |
+#' | `capacity_mm`                 | \mjseqn{C}        | mm/m2    | maximal capacity of storage in one `Layer` |
+#' | `land_interceptCapacity_mm`   | \mjseqn{C_{itcp}} | mm/m2    | .. in `landLy` (intercepted)               |
+#' | `soil_capacity_mm`            | \mjseqn{C_{soil}} | mm/m2    | .. in `soilLy`                             |
+#' | `ground_capacity_mm`          | \mjseqn{C_{grnd}} | mm/m2    | . in `groundLy`                            |
+#' 
+#' - some flux variables:
+#' 
+#' | **Variable**                  | **Symbol**        | **Unit** | **Description**                            |
+#' |-------------------------------|-------------------|----------|--------------------------------------------|
+#' | `flux_mm`                     | \mjseqn{F}        | mm/m2/TS | flux or flow in unit area                  |
+#' | `atmos_precipitation_mm`      | \mjseqn{P}        | mm/m2/TS | .. of precipitation                        |
+#' | `atmos_rain_mm`               | \mjseqn{P_r}      | mm/m2/TS | .. of rain fall                            |
+#' | `atmos_snow_mm`               | \mjseqn{P_s}      | mm/m2/TS | .. of snow fall                            |
+#' | `atmos_evatrans_mm`           | \mjseqn{E_a}      | mm/m2/TS | .. of evapotranspiration                   |
+#' | `land_intercept_mm`           | \mjseqn{F_{iflt}} | mm/m2/TS | .. of interception                         |
+#' | `land_infilt_mm`              | \mjseqn{F_{iflt}} | mm/m2/TS | .. of infiltration                         |
+#' | `land_runof_mm`               | \mjseqn{F_{roff}} | mm/m2/TS | .. of runoff                               |
+#' | `snow_melt_mm`                | \mjseqn{F_{melt}} | mm/m2/TS | .. of snow melt                            |
+#' | `soil_percola_mm`             | \mjseqn{F_{pecl}} | mm/m2/TS | .. of percolation                          |
+#' | `soil_interflow_mm`           | \mjseqn{F_{intf}} | mm/m2/TS | .. of interflow                            |
+#' | `ground_baseflow_mm`          | \mjseqn{F_{base}} | mm/m2/TS | .. of baseflow                             |
+#' | `ground_capillarise_mm`       | \mjseqn{F_{capi}} | mm/m2/TS | .. of capillary rise                       |
+#' | `ground_lateral_mm`           | \mjseqn{F_{ltrl}} | mm/m2/TS | .. of lateral flow                         |
+#' | `potentialFlux_mm`            | \mjseqn{M}        | mm/m2/TS | potential (maximal) flux or flow           |
+#' | `atmos_evatrans_mm`           | \mjseqn{E_p}      | mm/m2/TS | .. of evapotranspiration                   |
+#' | `land_potentialInfilt_mm`     | \mjseqn{M_{iflt}} | mm/m2/TS | .. of infiltration                         |
+#' | `soil_potentialPercola_mm`    | \mjseqn{M_{pecl}} | mm/m2/TS | .. of percolation                          |
+#' | `soil_potentialInterflow_mm`  | \mjseqn{M_{intf}} | mm/m2/TS | .. of subsurface flow                      |
+#' | `ground_potentialBaseflow_mm` | \mjseqn{M_{base}} | mm/m2/TS | .. of baseflow                             |
+#' | `soil_potentialCapirise_mm`   | \mjseqn{M_{capi}} | mm/m2/TS | .. of capillary rise                       |
+#' | `ground_potentialLateral_mm`  | \mjseqn{M_{ltrl}} | mm/m2/TS | .. of lateral flow                         |
+#' 
+#' - the stream flow will not in m3/TS or m3/s but also in flux dimension:
+#' 
+#' | **Variable**                  | **Symbol**        | **Unit** | **Description**                            |
+#' |-------------------------------|-------------------|----------|--------------------------------------------|
+#' | `streamflow_mm`               | \mjseqn{Q}        | mm/m2/TS | streamflow in flux dimension               |
+#' | `flow_runoff_mm`              | \mjseqn{Q_{roff}} | mm/m2/TS | .. from runoff                             |
+#' | `flow_interflow_mm`           | \mjseqn{Q_{itfl}} | mm/m2/TS | .. from interflow                          |
+#' | `flow_baseflow_mm`            | \mjseqn{Q_{base}} | mm/m2/TS | .. from baseflow                           |
+#' 
+#' 
+#'    
+#' 
+#' Additional there are also some symbols from the program-view:
+#' 
+#' - \mjseqn{D}: the collection of all data of one group or layer
+#' 
+#'    - \mjseqn{D_{atms}}: data in `atmosLy`
+#'    - \mjseqn{D_{land}}: data in `landLy` 
+#'    - \mjseqn{D_{snow}}: data in `snowLy`
+#'    - \mjseqn{D_{soil}}: data in `soilLy`
+#'    - \mjseqn{D_{grnd}}: data in `groundLy`
+#'    - \mjseqn{D_{lssg}}: data in any (but the one) `landLy`, `snowLy`, `soilLy` or `groundLy`
+#' 
+#' - \mjseqn{f}: function or modular e.g. \mjseqn{f_{atmosSnow}} or \mjseqn{f_{inflt}}
+#' 
+#' 
+#' 
 #' # Process
 #' There are now 10 Process available:
 #' 
-#' ![](hydro_modula_structure.pdf){options: width=165mm}
+#' \if{html}{\figure{hydro_modula_structure.svg}}
+#' \if{latex}{\figure{hydro_modula_structure.pdf}{options: width=165mm}}
 #' 
 #' - atmos: caculate the basic variable (data) in the `atmosLy`, sometimes the variable komm directly from the original data
 #'    - atmosSnow: rain and snoe to split

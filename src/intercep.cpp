@@ -5,6 +5,24 @@
 //' **interception** water from land go into the soil.
 //' @name intercep
 //' @inheritParams all_vari
+//' @description 
+//' \loadmathjax
+//' Under the concept of the conceptional HM, the interception will simply be calculated with the maximal interception of the land.
+//' The maximal Interception of the canopy is maybe difficult to estimate 
+//' but the process is really simple and there is also not so many method to describe it. 
+//' @details
+//' # **_Full** : 
+//' 
+//'
+//' \if{html}{\figure{mdl_intercep_ful.svg}}
+//' \if{latex}{\figure{mdl_intercep_ful.pdf}{options: width=140mm}}
+//' 
+//' consider only the radiation and temperature as the main factors. 
+//' \mjsdeqn{F_{itcp} = C_{icpt} - W_{icpt}}
+//' where
+//'   - \mjseqn{F_{icp}} is `intercept_water_mm`
+//'   - \mjseqn{C_{icpt}} is `land_intercepCapaciy_mm`
+//'   - \mjseqn{W_{icpt}} is `land_intercepWater_mm`
 //' @return intercept_water_mm (mm/m2) intercepted water in this timestep
 //' @export
 // [[Rcpp::export]]

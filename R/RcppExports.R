@@ -900,6 +900,183 @@ infilt_VIC <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
     .Call(`_EDCHM_infilt_VIC`, land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_vic_B)
 }
 
+#' **interflow**
+#' @name inteflow
+#' @inheritParams all_vari
+#' @description
+#' \loadmathjax
+#' Under the concept of the conceptional HM, the flux of capillary rise always 
+#' be calculated by the water in the soil layer \mjseqn{W_{soil}},
+#' it can also be tread as the part of the \mjseqn{W_{soil}}.
+#' So we can give the function from:
+#' 
+#' \mjsdeqn{F_{itfl} = f_{inteflow}(D_{grnd}, D_{soil})}
+#' 
+#' 
+#' to:
+#' 
+#' \mjsdeqn{F_{itfl} = f_{inteflow}(W_{soil}, C_{soil}, ...) = k^* W_{soil}}
+#' \mjsdeqn{F_{itfl} \leq W_{soil}}
+#' 
+#' 
+#' where
+#' - \mjseqn{F_{itfl}} is `soil_inteflow_mm`
+#' - \mjseqn{W_{soil}} is `water_soil_mm`
+#' - \mjseqn{C_{soil}} is `capacity_soil_mm`
+#' - \mjseqn{k^*} is estimated ratio
+#' 
+#' The output density distribution from 8 methods:
+#'
+#' \if{html}{\figure{mdl_inteflow.svg}}
+#' \if{latex}{\figure{mdl_inteflow.pdf}{options: width=140mm}}
+#' @references
+#' \insertAllCited{}
+#' @return inteflow_mm (mm/m2)
+#' @details
+#' # **_GR4Jfix** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_inteflow_grf.svg}}
+#' \if{latex}{\figure{mdl_inteflow_grf.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k^* = 1 - \left[ 1 + \left(k \frac{W_{soil}}{C_{soil}} \right)^\gamma \right]^{-1/\gamma}}
+#' where
+#'   - \mjseqn{k} is `param_inteflow_grf_k`
+#'   - \mjseqn{\gamma} is `param_baseflow_grf_gamma`
+#' @param param_inteflow_grf_k <0.01, 1> coefficient parameter for [inteflow_GR4Jfix()]
+#' @param param_inteflow_grf_gamma <2, 7> exponential parameter for [baseflow_GR4Jfix()]
+#' @export
+inteflow_GR4Jfix <- function(soil_water_mm, soil_capacity_mm, param_inteflow_grf_k, param_inteflow_grf_gamma) {
+    .Call(`_EDCHM_inteflow_GR4Jfix`, soil_water_mm, soil_capacity_mm, param_inteflow_grf_k, param_inteflow_grf_gamma)
+}
+
+#' @rdname inteflow
+#' @details
+#' # **_MaxPow**: 
+#'
+#' \if{html}{\figure{mdl_inteflow_map.svg}}
+#' \if{latex}{\figure{mdl_inteflow_map.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{itfl} = M_{itfl} \left(\frac{W_{soil}}{C_{soil}} \right)^\gamma}
+#' where
+#'   - \mjseqn{M_{itfl}} is `soil_potentialInteflow_mm`
+#'   - \mjseqn{\gamma} is `param_inteflow_map_gamma`
+#' @param param_inteflow_map_gamma <0.1, 5> exponential parameter for [inteflow_MaxPow()]
+#' @export
+inteflow_MaxPow <- function(soil_water_mm, soil_capacity_mm, soil_potentialInteflow_mm, param_inteflow_map_gamma) {
+    .Call(`_EDCHM_inteflow_MaxPow`, soil_water_mm, soil_capacity_mm, soil_potentialInteflow_mm, param_inteflow_map_gamma)
+}
+
+#' @rdname inteflow
+#' @details
+#' # **_ThreshPow** 
+#'
+#' \if{html}{\figure{mdl_inteflow_thp.svg}}
+#' \if{latex}{\figure{mdl_inteflow_thp.pdf}{options: width=140mm}}
+#' 
+#' based on the `_MaxPow` and add the one threshold \mjseqn{\phi_b}: 
+#' \mjsdeqn{F_{itfl} = 0, \quad \frac{W_{soil}}{C_{soil}} < \phi_b}
+#' \mjsdeqn{F_{itfl} = M_{itfl} \left(\frac{\frac{W_{soil}}{C_{soil}} - \phi_b}{1-\phi_b} \right)^\gamma, \quad \frac{W_{soil}}{C_{soil}} \geq \phi_b}
+#' where
+#'   - \mjseqn{\phi_b} is `param_inteflow_thp_thresh`
+#'   - \mjseqn{\gamma} is `param_inteflow_thp_gamma`
+#' @param param_inteflow_thp_thresh <0.1, 0.9> coefficient parameter for [inteflow_ThreshPow()]
+#' @param param_inteflow_thp_gamma <0.1, 5> exponential parameter for [inteflow_ThreshPow()]
+#' @export
+inteflow_ThreshPow <- function(soil_water_mm, soil_capacity_mm, soil_potentialInteflow_mm, param_inteflow_thp_thresh, param_inteflow_thp_gamma) {
+    .Call(`_EDCHM_inteflow_ThreshPow`, soil_water_mm, soil_capacity_mm, soil_potentialInteflow_mm, param_inteflow_thp_thresh, param_inteflow_thp_gamma)
+}
+
+#' @rdname inteflow
+#' @details
+#' # **_Arno** \insertCite{baseflow_Arno_1991,VIC2_Liang_1994}{EDCHM} 
+#'
+#' \if{html}{\figure{mdl_inteflow_arn.svg}}
+#' \if{latex}{\figure{mdl_inteflow_arn.pdf}{options: width=140mm}}
+#' 
+#' has also in two cases divided by a threshold water content \mjseqn{\phi_b}:
+#' (*This method is actually not the original method, but an analogy with `inteflow_Arno`*) 
+#' \mjsdeqn{F_{itfl} = k M_{itfl} \frac{W_{soil}}{C_{soil}}, \quad \frac{W_{soil}}{C_{soil}} < \phi_b}
+#' \mjsdeqn{F_{itfl} = k M_{itfl} \frac{W_{soil}}{C_{soil}} + (1-k) M_{itfl} \left(\frac{W_{soil} - W_s}{C_{soil} - W_s} \right)^2, \quad \frac{W_{soil}}{C_{soil}} \geq \phi_b}
+#' \mjsdeqn{W_s = k C_{soil}}
+#' where
+#'   - \mjseqn{\phi_b} is `param_inteflow_arn_thresh`
+#'   - \mjseqn{k} is `param_inteflow_arn_k`
+#' @param param_inteflow_arn_thresh <0.1, 0.9> coefficient parameter for [inteflow_ThreshPow()]
+#' @param param_inteflow_arn_k <0.1, 1> exponential parameter for [inteflow_ThreshPow()]
+#' @export
+inteflow_Arno <- function(soil_water_mm, soil_capacity_mm, soil_potentialInteflow_mm, param_inteflow_arn_thresh, param_inteflow_arn_k) {
+    .Call(`_EDCHM_inteflow_Arno`, soil_water_mm, soil_capacity_mm, soil_potentialInteflow_mm, param_inteflow_arn_thresh, param_inteflow_arn_k)
+}
+
+#' @rdname inteflow
+#' @details
+#' # **_BevenWood** \insertCite{percola_BevenWood_1983,TOPMODEL_Beven_1995}{EDCHM}: 
+#'
+#' \if{html}{\figure{mdl_inteflow_bew.svg}}
+#' \if{latex}{\figure{mdl_inteflow_bew.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k =  \frac{W_{soil}}{C_{soil} - W_{soil}} \quad {\rm and} \quad k \leq 1}
+#' \mjsdeqn{F_{itfl} = k M_{itfl}}
+#' where
+#'   - \mjseqn{k_{fc}} is `soil_fieldCapacityPerc_1`
+#'   - \mjseqn{\gamma} is `param_inteflow_sup_gamma`
+#' @export
+inteflow_BevenWood <- function(soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialInteflow_mm) {
+    .Call(`_EDCHM_inteflow_BevenWood`, soil_water_mm, soil_capacity_mm, soil_fieldCapacityPerc_1, soil_potentialInteflow_mm)
+}
+
+#' @rdname inteflow
+#' @details
+#' # **_SupplyPow0**: 
+#'
+#' \if{html}{\figure{mdl_inteflow_sp0.svg}}
+#' \if{latex}{\figure{mdl_inteflow_sp0.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{F_{base} = k(W_{grnd})^\gamma}
+#' where
+#'   - \mjseqn{k} is `param_inteflow_sup_k`
+#'   - \mjseqn{\gamma} is `param_inteflow_sup_gamma`
+#' @param param_inteflow_sp0_k <0.01, 1> coefficient parameter for [inteflow_SupplyPow0()]
+#' @param param_inteflow_sp0_gamma <0, 1> exponential parameter for [inteflow_SupplyPow0()]
+#' @export
+inteflow_SupplyPow0 <- function(soil_water_mm, param_inteflow_sp0_k, param_inteflow_sp0_gamma) {
+    .Call(`_EDCHM_inteflow_SupplyPow0`, soil_water_mm, param_inteflow_sp0_k, param_inteflow_sp0_gamma)
+}
+
+#' @rdname inteflow
+#' @details
+#' # **_SupplyPow**: 
+#'
+#' \if{html}{\figure{mdl_inteflow_sup.svg}}
+#' \if{latex}{\figure{mdl_inteflow_sup.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k^* = k \left(\frac{W_{soil}}{C_{soil}} \right)^\gamma}
+#' where
+#'   - \mjseqn{k} is `param_inteflow_sup_k`
+#'   - \mjseqn{\gamma} is `param_inteflow_sup_gamma`
+#' @param param_inteflow_sup_k <0.01, 1> coefficient parameter for [inteflow_SupplyPow()]
+#' @param param_inteflow_sup_gamma <0, 7> parameter for [inteflow_SupplyPow()]
+#' @export
+inteflow_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_inteflow_sup_k, param_inteflow_sup_gamma) {
+    .Call(`_EDCHM_inteflow_SupplyPow`, soil_water_mm, soil_capacity_mm, param_inteflow_sup_k, param_inteflow_sup_gamma)
+}
+
+#' @rdname inteflow
+#' @details
+#' # **_SupplyRatio**: 
+#'
+#' \if{html}{\figure{mdl_inteflow_sur.svg}}
+#' \if{latex}{\figure{mdl_inteflow_sur.pdf}{options: width=140mm}}
+#' 
+#' \mjsdeqn{k^* = k}
+#' where
+#'   - \mjseqn{k} is `param_inteflow_sur_k`
+#' @param param_inteflow_sur_k <0.01, 1> coefficient parameter for [inteflow_SupplyRatio()]
+#' @export
+inteflow_SupplyRatio <- function(soil_water_mm, param_inteflow_sur_k) {
+    .Call(`_EDCHM_inteflow_SupplyRatio`, soil_water_mm, param_inteflow_sur_k)
+}
+
 #' **interception** water from land go into the soil.
 #' @name intercep
 #' @inheritParams all_vari
@@ -1212,7 +1389,7 @@ percola_BevenWood <- function(soil_water_mm, soil_capacity_mm, soil_fieldCapacit
 
 #' @rdname percola
 #' @details
-#' # **_SupplyPow** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#' # **_SupplyPow**: 
 #'
 #' \if{html}{\figure{mdl_percola_sup.svg}}
 #' \if{latex}{\figure{mdl_percola_sup.pdf}{options: width=140mm}}
@@ -1230,7 +1407,7 @@ percola_SupplyPow <- function(soil_water_mm, soil_capacity_mm, param_percola_sup
 
 #' @rdname percola
 #' @details
-#' # **_SupplyRatio** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#' # **_SupplyRatio**: 
 #'
 #' \if{html}{\figure{mdl_percola_sur.svg}}
 #' \if{latex}{\figure{mdl_percola_sur.pdf}{options: width=140mm}}

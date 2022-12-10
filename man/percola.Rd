@@ -192,7 +192,7 @@ where
 }
 }
 
-\section{\strong{_SupplyPow} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\section{\strong{_SupplyPow}:}{
 \if{html}{\figure{mdl_percola_sup.svg}}
 \if{latex}{\figure{mdl_percola_sup.pdf}{options: width=140mm}}
 
@@ -204,7 +204,7 @@ where
 }
 }
 
-\section{\strong{_SupplyRatio} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+\section{\strong{_SupplyRatio}:}{
 \if{html}{\figure{mdl_percola_sur.svg}}
 \if{latex}{\figure{mdl_percola_sur.pdf}{options: width=140mm}}
 

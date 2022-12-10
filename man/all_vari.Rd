@@ -70,6 +70,8 @@
 
 \item{soil_potentialPercola_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} percolation}
 
+\item{soil_potentialInteflow_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} interflow}
+
 \item{soil_potentialCapirise_mm}{<0.01, 7> (mm/m2/TS) \strong{potential} capillary rise}
 
 \item{ground_water_mm}{(mm/m2/TS) water volume in \code{groundLy}}

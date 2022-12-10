@@ -36,6 +36,7 @@
 #' @param soil_interflow_mm (mm/m2/TS) subsurface flow directly to the river
 #' @param soil_actualEvatrans_mm (mm/m2/TS) **actual** evapotranspiration from `soilLy`
 #' @param soil_potentialPercola_mm <0.01, 7> (mm/m2/TS) **potential** percolation 
+#' @param soil_potentialInteflow_mm <0.01, 7> (mm/m2/TS) **potential** interflow 
 #' @param soil_potentialCapirise_mm <0.01, 7> (mm/m2/TS) **potential** capillary rise 
 #' @param ground_water_mm (mm/m2/TS) water volume in `groundLy`
 #' @param ground_capacity_mm (mm/m2) water storage capacity in `groundLy`

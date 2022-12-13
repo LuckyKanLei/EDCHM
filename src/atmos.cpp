@@ -85,4 +85,3 @@ NumericVector atmosSnow_UBC(
   atmos_snow_mm = ifelse(atmos_temperature_Cel <= 0, atmos_precipitation_mm, atmos_snow_mm);
   return ifelse(atmos_temperature_Cel > param_atmos_ubc_A0FORM, 0, atmos_snow_mm);
 }
-

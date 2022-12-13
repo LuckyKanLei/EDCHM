@@ -1,13 +1,15 @@
 Package: EDCHM
 Type: Package
 Title: Editable Distributed Conceptual (c++) Hydrological Model
-Version: 0.1.0
+Version: 0.1.8
 Author: Kan Lei
 Maintainer: Kan Lei <kan.lei@tu-dresden.de>
-Description: A colletion of some hydrological models (processes). 
-  In order to improve the model efficency, the processes are in c++ implemented.
+Description: EDCHM is a flexible hydrological modeling framework that incorporates a collection of well-known models, such as GR4J, HBV, VIC, and UBC. Every model is divided into clear, well-defined processes as individual, self-contained modules.
+  Editable means: EDCHM allows users not only easily select and combine different process as new model structures, but also can choose from a range of methods for each specific process. EDCHM providing a high degree of flexibility and customization.
+  Distributed means: EDCHM allows users to divide the research catchment into sub-basins, grids, or hydrological response units (HRUs), providing a high degree of spatial resolution and flexibility. This enables users to capture and simulate the water cycle at different scales, from the regional level down to the level of individual land units or catchment areas.
+  Conceptual means: While all of the modules in a modular hydrological model use simplified, abstract methods, or empirical approaches, but not physical equation and detailed, mathematical method.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.7), RcppArmadillo, mathjaxr, Rdpack, purrr, stringr, utils
+Imports: Rcpp (>= 1.0.7), RcppArmadillo, mathjaxr, Rdpack, purrr, stringr, utils, stats, hydroGOF
 LinkingTo: Rcpp
 RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)

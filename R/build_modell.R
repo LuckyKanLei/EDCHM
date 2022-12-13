@@ -3,7 +3,7 @@
 #' The **EDCHM-standard-structure** include 15 process:
 #'
 #' \if{html}{\figure{structure_standard.svg}}
-#' \if{latex}{\figure{structure_standard.pdf}{options: width=80mm}}
+#' \if{latex}{\figure{structure_standard.pdf}{options: width=140mm}}
 #' 
 #' Some of them can be set in `"NULL"`, means without this process.
 #' - `stmosSnow` with input data

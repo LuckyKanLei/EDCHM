@@ -22,7 +22,7 @@ Build a hydrological model (based on c++) with EDCHM modules.
 The \strong{EDCHM-standard-structure} include 15 process:
 
 \if{html}{\figure{structure_standard.svg}}
-\if{latex}{\figure{structure_standard.pdf}{options: width=80mm}}
+\if{latex}{\figure{structure_standard.pdf}{options: width=140mm}}
 
 Some of them can be set in \code{"NULL"}, means without this process.
 \itemize{

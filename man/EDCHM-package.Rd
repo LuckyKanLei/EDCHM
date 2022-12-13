@@ -5,66 +5,77 @@
 \alias{EDCHM-package}
 \title{basic concept of EDCHM}
 \description{
-EDCHM is a conceptional hydrologist modelling framework,
-with that we can easy assembly a new hydrologist model with difficult process-method (modular).
+EDCHM is a conceptional hydrological modelling framework and tools,
+that allows user easy to build new hydrology models using various modular process methods.
 }
-\section{Layer and Boundary}{
-Under EDCHM the \strong{Layer} is defined layer with vertical space, in that have some common characters.
-And the Layer always have top and bottom two \strong{Boundary},
-one Boundary in the same time the top Boundary of one Layer but also the bottom Layer of other Layer, that on the above.
-
-So for EDCHM there are five basic Layers (now one additional snowLy) and six Boundaries:
-\itemize{
-\item Layer:
-\itemize{
-\item atmosLy
-\item landLy (snowLy)
-\item soilLy
-\item groundLy
-}
-\item Boundary:
-\itemize{
-\item topBd
-\item atmosBd
-\item landBd
-\item groundBd
-\item btmBd
-}
+\section{Overview of this document}{
+Before using the \code{EDCHM} framework, it is necessary to have a basic understanding of its concepts.
 }
 
+\section{Layer and Process}{
 \if{html}{\figure{edchm_layer.svg}}
-\if{latex}{\figure{edchm_layer.pdf}{options: width=165mm}}
-}
+\if{latex}{\figure{edchm_layer.pdf}{options: width=150mm}}
 
-\section{Variable define}{
-All the names of the variables make up of three parties: \strong{group-name}, \strong{physical-name} and \strong{variable-units}
-and split with underline \verb{_}.
+In the \code{EDCHM} framework, a \code{Layer} is defined as a vertical space with common characteristics.
+\code{EDCHM} defines five basic layers:
 \itemize{
-\item group-name: the Layer or Boundary name, which is defined in EDCHM.
+\item \code{atmosLy}: only stores meteorological data but doesn't interact with other hydrological processes (in current version).
+\item \code{snowLy}: is the layer of snow.
+\item \code{landLy}: consists of two sublayers. Sublayer \code{intcpt} is a storage for intercepted water, which can be evaporated. Sublayer \code{land} serves only as a temperature layer for "pounded water" and doesn't have any storage capacity.
+\item \code{soilLy}: is defined as an unsaturated zone between land surface and water table of groundwater.
+\item \code{groundLy}: is defined as a saturated zone of groundwater.
+}
+
+In the \code{EDCHM} framework, a \code{Process} related to the movement or distribution of water on Earth.
+Some of them occur in a single layer, some of them occur between two layers.
+Here has defined 9 hydrological processes:
+\itemize{
+\item \link{snow} (snowMelt): melt the snow into liqued water.
+\item \link{intercep}: intercept the water before ist arrive the land surface.
+\item \link{evatransActual}: calculate the actual evapotranspiration from interception of water in th soil.
+\item \link{infilt}: water from land surface enters the soil.
+\item \link{percola}: soil water through the pores of aquifer movement to ground water.
+\item \link{inteflow}: runoff in the soil layer, which from \code{soilLy} directly into the streams or rivers.
+\item \link{capirise}: ground water upward to the unsaturated soil layer.
+\item \link{baseflow}: the portion of groundwater, that directly into the streams or rivers.
+\item \link{lateral}: water exchange with other basin  in the groundwater layer.
+\item \link{confluenIUH}: runoff (runoff, interflow, baseflow) from the hydrological unit to the rivers,
+in this process the water volume will not be changed but the distribution the time axis will be recalculeted with IUH (Instantaneous Unit Hydrograph) method.
+}
+
+In addition, there are two meteological process:
+\itemize{
+\item \link{atmosSnow}: devide the precipitation into rainfall and snowfall.
+\item \link{evatransPotential}: calculates the potential evapotranspiration.
+are both considered meteorological processes because they can be directly obtained from meteorological datasets or calculated using only meteorological data.
+The results of these processes serve always as input data for hydrological processes.
+\code{evatransPotential} is a crucial step in determining the actual evapotranspiration by most hydrological models.
+}
+}
+
+\section{Variable and Parameter define}{
+With a clear understanding of layers and processes, we can now move on to the basic definitions in the context of modeling.
+
+All variable names in the EDCHM framework are composed of three parts: a \strong{group-name}, a \strong{physical-name} and a \strong{variable-units}
+These parts are separated by an underscore \verb{_}.
+\itemize{
+\item \code{group-name}: name of the \code{Layer} in which the variable is located.
 Sometimes it can also be the Process name or \code{time}, one important dimension.
-But the group-name is no longer than 8 and all small letters.
-\item physical-name: the physical variable name, this part will with \emph{camelCase} to combine more words.
-\item variable-units: the physical units of the variable, in order to simplify the program,
-all the time dependent variable will use the \code{TS} as the time units, it will be defined by the model.
-But the time units part will not appear in the name.
-And also all the variable meant they are homogeneous in the area, so all the variable will not give the square meter (m2) in the name.
+The \code{group-name} is limited to a maximum of 8 characters and must be in lowercase letters.
+\item \code{physical-name}: the physical variable name, and it uses \emph{camelCase} to combine multiple words. And the water volume will always simplified as \code{water}.
+\item \code{variable-units}: the physical units of the variable
+To simplify the program, all time-dependent variables use \code{TS} as the time unit, which is defined by the model, it can be 1 hour, 4, 12, 24 hours and so on,
+but the time unit is not included in the variable name.
+Additionally, all variables are assumed to be homogeneous in the area, so the area unit square meter (\code{m2}) is also not included in the variable name.
 }
 
-e.g. \strong{group_variableName_unit}
-}
-
-\section{Parameter define}{
-The Parameter will defined in every function topic, but there will define the naming regulation:
-Parameters make up with prefix \code{param}, Process name (sometimes same as Layer name),
-abbreviation in threee small letters of the Method, and the Parameter name in the original.
-
-e.g. \strong{param_processName_mtd_k}
+\strong{group_variableName_unit} some like \code{land_water_mm}, \code{atmos_temperature_Cel}
 
 \loadmathjax
 
-The tables show the collection model variables and the formula symbols:
+The following tables list the model variables and their corresponding formula symbols used in the \code{EDCHM}:
 \itemize{
-\item some state variables:
+\item some state variables and Capicity of the layer storage:
 }\tabular{llll}{
    \strong{Variable} \tab \strong{Symbol} \tab \strong{Unit} \tab \strong{Description} \cr
    \code{water_mm} \tab \mjseqn{W} \tab mm/m2 \tab water volume in one \code{Layer} \cr
@@ -80,7 +91,7 @@ The tables show the collection model variables and the formula symbols:
 }
 
 \itemize{
-\item some flux variables:
+\item some flux variables and potential flux:
 }\tabular{llll}{
    \strong{Variable} \tab \strong{Symbol} \tab \strong{Unit} \tab \strong{Description} \cr
    \code{flux_mm} \tab \mjseqn{F} \tab mm/m2/TS \tab flux or flow in unit area \cr
@@ -88,7 +99,7 @@ The tables show the collection model variables and the formula symbols:
    \code{atmos_rain_mm} \tab \mjseqn{P_r} \tab mm/m2/TS \tab .. of rain fall \cr
    \code{atmos_snow_mm} \tab \mjseqn{P_s} \tab mm/m2/TS \tab .. of snow fall \cr
    \code{atmos_evatrans_mm} \tab \mjseqn{E_a} \tab mm/m2/TS \tab .. of evapotranspiration \cr
-   \code{land_intercept_mm} \tab \mjseqn{F_{iflt}} \tab mm/m2/TS \tab .. of interception \cr
+   \code{land_intercept_mm} \tab \mjseqn{F_{itcp}} \tab mm/m2/TS \tab .. of interception \cr
    \code{land_infilt_mm} \tab \mjseqn{F_{iflt}} \tab mm/m2/TS \tab .. of infiltration \cr
    \code{land_runof_mm} \tab \mjseqn{F_{roff}} \tab mm/m2/TS \tab .. of runoff \cr
    \code{snow_melt_mm} \tab \mjseqn{F_{melt}} \tab mm/m2/TS \tab .. of snow melt \cr
@@ -133,36 +144,51 @@ Additional there are also some symbols from the program-view:
 }
 }
 
-\section{Process}{
-There are now 10 Process available:
+\section{Parameter define}{
+The parameters will be defined in every function topic
+The naming convention for parameters consists of four parts: a prefix \code{param}, the process name
+Parameters make up with prefix , Process name (sometimes same as Layer name), an abbreviation of the method in three small letters, and the original parameter name.
+This allows for clear and consistent naming of parameters within the program.
 
-\if{html}{\figure{hydro_modula_structure.svg}}
-\if{latex}{\figure{hydro_modula_structure.pdf}{options: width=165mm}}
-\itemize{
-\item atmos: caculate the basic variable (data) in the \code{atmosLy}, sometimes the variable komm directly from the original data
-\itemize{
-\item atmosSnow: rain and snoe to split
+\strong{param_process_mtd_k} some like \code{param_atmos_ubc_A0FORM}, \code{param_infilt_hbv_beta}
+
+In every function topic, the range of parameters will be provided in the format of \verb{<low, upper>}. \link{all_param} list also all the parameters from \code{EDCHM}.
 }
-\item evatrans: evapotranspiration
-\itemize{
-\item evatransPotential: potential ET calculate
-\item evatransActual: actual ET calculate
+
+\section{Modula define}{
+In the last section, ten hydrological and two meteorological processes are defined in the conceptual view.
+Now they will be defined in programming view:
+
+For every process there is \strong{only one} output variable and several input data (data and parameters):\tabular{lll}{
+   \strong{Process} \tab \strong{Main Input} \tab \strong{Output} \cr
+   \code{intercep} \tab atmos_perc_mm \tab land_intercept_mm \cr
+   \code{snowMelt} \tab snow_ice_mm \tab snow_melt_mm \cr
+   \code{evatransActual} \tab layer_water_mm \tab layer_evatrans_mm \cr
+   \code{infilt} \tab land_water_mm \tab land_infilt_mm \cr
+   \code{percola} \tab soil_water_mm \tab soil_percola_mm \cr
+   \code{inteflow} \tab soil_water_mm \tab soil_interflow_mm \cr
+   \code{capirise} \tab ground_water_mm \tab ground_capirise_mm \cr
+   \code{baseflow} \tab ground_water_mm \tab ground_baseflow_mm \cr
+   \code{lateral} \tab ground_water_mm \tab ground_lateral_mm \cr
+   \code{confluenIUH} \tab layer_flux_mm \tab flow_water_mm \cr
+   \code{atmosSnow} \tab atmos_perc_mm \tab atmos_snow_mm \cr
+   \code{evatransPotential} \tab atmos_DATA \tab evatrans_potential_mm \cr
 }
-\item snow: snow
-\itemize{
-\item snowMelt:
+
+
+And then a \code{modula} is defined as: a specific process with different method from well-know models.
+The name of modula is composed of three parts: the process name and method name:
+
+\strong{process_Method} some like \code{evatransActual_VIC} and \code{evatransActual_LiangLand}
+
+The following figure shows all 12 processes and 62 modules that have been defined to date.
+
+\if{html}{\figure{all_modula.svg}}
+\if{latex}{\figure{all_modula.pdf}{options: width=150mm}}
 }
-\item intercep: interception
-\item infilt: infiltration \code{landLy} to \code{soilLy}
-\item capirise: capital rise, \code{groundLy} to \code{soilLy}
-\item percola: percolation, \code{soilLy} to \code{groundLy}
-\item baseflow: interception, \code{groundLy}
-\item lateral: lateral flow, exchange with outside region, \code{groundLy}
-\item confluen: confluence from catchment (or subcatchment) to river
-\itemize{
-\item confluenIUH: IUH to calculate
-}
-}
+
+\section{Build a model and calibrate the parameters}{
+more see
 }
 
 \references{

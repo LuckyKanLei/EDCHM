@@ -31,9 +31,11 @@ IUH (list of num vector)
 }
 \description{
 \loadmathjax
+
 The process \code{confluenIUH} return a series of portions, that means how many flux water will
 in those moment into the river.
 The sum of this series will always in 1.
+
 So we can give the function:
 
 \mjsdeqn{u = f_{confluenIUH}(t_r, ...)}

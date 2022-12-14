@@ -87,9 +87,12 @@ percola_mm (mm/m2)
 }
 \description{
 \loadmathjax
-Under the concept of the conceptional HM, the flux of capillary rise always
-be calculated by the water in the soil layer \mjseqn{W_{soil}},
+
+In hydrological modeling, percolation refers to the process by which water from the soil moves downward through the pores and cracks in the soil or rock.
+This process is physically driven by a moisture gradient, but this is often simplified in conceptual percolation models \insertCite{Raven_Manual_35}{EDCHM}.
+It can be calculated by the water in the soil layer \mjseqn{W_{soil}},
 it can also be tread as the part of the \mjseqn{W_{soil}}.
+
 So we can give the function from:
 
 \mjsdeqn{F_{prcl} = f_{percola}(D_{grnd}, D_{soil})}

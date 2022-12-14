@@ -52,9 +52,10 @@ EDCHM_snow <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipi
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the snowfall is always calculated by 
-#' the temperature \mjseqn{T} and 
-#' the precipitation availability, the portion of snowfall is always decided by the air tempature.
+#' 
+#' Under the concept of the conceptual HM, the amount of snowfall is always calculated by the temperature \mjseqn{T} and the precipitation \mjseqn{P} availability. 
+#' The proportion of snowfall is always determined by the air temperature.
+#' 
 #' 
 #' So we can give the function from:
 #' 
@@ -121,9 +122,14 @@ atmosSnow_UBC <- function(atmos_precipitation_mm, atmos_temperature_Cel, param_a
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the flux of baseflow always be calculated (only) by the water in the ground layer \mjseqn{W_{grnd}},
-#' it can also be tread as the part of the \mjseqn{W_{grnd}}.
-#' But the impact with other RU (response unit) in route to the river will be ignored.
+#' 
+#' In hydrological modeling, baseflow refers to the flow of water in rivers and streams that is sustained by the release of water from the groundwater.
+#' Or baseflow refers to the flow of water from an aquifer or deeper soil horizon to surface water, typically due to a head gradient between fully saturated soil and stream  \insertCite{Raven_Manual_35}{EDCHM}. 
+#' It may be considered the sum of the contribution of deep groundwater exchange with a river and delayed storage  \insertCite{Raven_Manual_35}{EDCHM}.
+#' 
+#' It is always calculated (only) by the water in the ground layer \mjseqn{W_{grnd}}, which can also be treated as part of \mjseqn{W_{grnd}}. 
+#' However, the impact of other RUs (response units) on the route to the river will be ignored.
+#' 
 #' So we can give the function from:
 #' 
 #' \mjsdeqn{F_{base} = f_{baseflow}(D_{grnd})}
@@ -279,11 +285,15 @@ baseflow_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialB
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the flux of capillary rise always be calculated (only) by the water in the ground layer \mjseqn{W_{grnd}},
-#' it can also be tread as the part of the \mjseqn{W_{grnd}}.
-#' There are also not so many methods to describe this process. the most HM ignore this process, 
-#' maybe because in the most situation it's not so significant, 
-#' or maybe because the process `percola` can deal with this process in the same time.
+#' 
+#' In hydrological modeling, capillary rise refers to the process by which water is drawn upward from groundwater (table) through the soil due to the force of capillary action.
+#' In conceptual watershed models, the capillary rise term often refers to a process that moves water from lower to higher soil water stores, 
+#' which may also implicitly include lateral groundwater flow processes in a sloping domain  \insertCite{Raven_Manual_35}{EDCHM}.
+#' 
+#' It can be calculated by the water in the ground layer \mjseqn{W_{grnd}}, which can also be treated as part of \mjseqn{W_{grnd}}. 
+#' There are not many methods to describe this process. Most HMs ignore this process, 
+#' perhaps because it is not significant in most situations, or because the process of percolation can deal with this process at the same time.
+#' 
 #' So we can give the function from:
 #' 
 #' \mjsdeqn{F_{capi} = f_{capirise}(D_{grnd}, D_{soil})}
@@ -377,14 +387,23 @@ capirise_AcceptPow <- function(ground_water_mm, soil_water_mm, soil_capacity_mm,
 #' **confluence**
 #' @description 
 #' \loadmathjax
-#' `confluence` is just a calculate function, that make the water resource confluent to the gauge point.
+#' 
+#' In hydrological modeling, routing (named as [confluen] in EDCHM) refers to the process of simulating the movement of water through a river network or other drainage system. 
+#' It allows the model to predict the flow of water in rivers and streams. 
+#' In hydrological models, routing is typically performed using mathematical algorithms that account for the physical properties of the river network, 
+#' such as its geometry, roughness, and discharge capacity. 
+#' The parameters that govern routing, such as flow velocity and channel roughness, 
+#' can have a significant impact on the accuracy of the model.
+#' 
+#' `confluence` is a calculation function that causes water to flow into the gauge point.
 #' - `IUH`: IUH (Instant Unit Hydrograph) with one watercourse, 
-#' - `IUH2S`; IUH with two water resource, those have the two different IUH-vector, 
-#' - `IUH3S`; IUH with three water resource, those have the three different IUH-vector, 
-#' Under the concept of the conceptional HM, the water from flux to the water flow will by the `confluen` process calculated.
-#' This process will not calculate the water balance, but the time varying. 
-#' And the "Instant Unit Hydrograph" is the most effective method to deal with the time varying.
-#' In the first stage will also only `confluenIUH` supported.
+#' - `IUH2S`: IUH with two water sources, each with a different IUH vector, 
+#' - `IUH3S`: IUH with three water sources, each with a different IUH vector.
+#' 
+#' Under the concept of the conceptual HM, the water flux to the water flow will be calculated using the confluence process. 
+#' This process does not calculate the water balance, but rather the time-varying nature of the water flow. 
+#' The "Instant Unit Hydrograph" method is the most effective way to deal with time-varying flows. 
+#' In the first stage, only [confluenIUH] will be supported.
 #' 
 #' So we can give the function:
 #' 
@@ -424,9 +443,11 @@ confluen_IUH3S <- function(land_runoff_mm, soil_interflow_mm, ground_baseflow_mm
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
+#' 
 #' The process `confluenIUH` return a series of portions, that means how many flux water will
 #' in those moment into the river.
 #' The sum of this series will always in 1.
+#' 
 #' So we can give the function:
 #' 
 #' \mjsdeqn{u = f_{confluenIUH}(t_r, ...)}
@@ -526,12 +547,18 @@ confluenIUH_Clark <- function(confluen_responseTime_TS) {
 
 #' **potential evapotranspiration**
 #' @name evatransPotential
-#' @description The concept potential ET estimate mainly the confluence from atmosphere, 
-#' when the water in the ET-area is always enough. 
-#' Actually we should also consider the charterers of the ET-area, there is free water area or vegetation or bar soil,
-#' But we may don't have so many information and effective method, in order to get the truly potential ET.
-#' So there is the simplified method: reference ET, it define the ET-area with some fest charterers, e.g. [evatransPotential_FAO56()].
-#' In this situation we should give some factor for different ET-area.
+#' @description 
+#' 
+#' The concept of potential evapotranspiration (ET) estimates the ability of water lost from the soil and vegetation in an area due to evaporation and transpiration. 
+#' It assumes that there is always enough water in the ET area to meet the demand for evapotranspiration.
+#' However, the characteristics of the ET area, such as whether it is covered with vegetation or bare soil, can affect the amount of evapotranspiration that occurs. 
+#' In order to accurately estimate potential ET, we need to consider these characteristics. 
+#' 
+#' But we may not always have access to the necessary information or effective methods to do this.
+#' In these cases, we can use a simplified method known as **reference ET**. 
+#' This method defines the ET area using certain fixed characteristics, such as those provided by the [evatransPotential_FAO56()] function. 
+#' In this situation, we need to provide factors to account for the differences between the actual ET area and the reference ET area.
+#' 
 #' @references
 #' \insertAllCited{}
 #' @inheritParams all_vari
@@ -589,9 +616,10 @@ evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmo
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the actually ET is always calculated by the potential ET \mjseqn{E_p}, 
-#' which evaluate the meteorological situation and the landuse (vegetation) situation. 
-#' The second point is the water availability of the land.
+#' Actual ET, or actual evapotranspiration, is a measure of the amount of water that is lost from the land surface through evaporation and transpiration by plants.
+#' 
+#' Under the concept of the conceptual HM, the actual ET is always calculated by the potential ET \mjseqn{E_p}, which evaluates the meteorological and landuse (vegetation) situations. 
+#' The second point to consider is the water availability of the land or soil.
 #' 
 #' So we can give the function from:
 #' 
@@ -757,9 +785,11 @@ evatransActual_LiangSoil <- function(atmos_potentialEvatrans_mm, water_mm, capac
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the flux of infiltration always be calculated by the pounded water on the land \mjseqn{W_{land}}, 
-#' which can be precipitation, precipitation after interception or precipitation with sonow melt and so on. 
-#' The second point is the water acceptability of the soil layer (\mjseqn{C_{soil} - W_{soil}}).
+#' In hydrological modeling, infiltration refers to the process by which water from precipitation snowmelt or irrigation enters the soil \insertCite{Handbook_Hydrology_1993}{EDCHM}. 
+#' 
+#' Under the concept of the conceptual HM, the flux of infiltration is always calculated by the amount of water on the land \mjseqn{W_{land}}, 
+#' which can be precipitation, precipitation after interception, or precipitation with snowmelt, among others. 
+#' The second point to consider is the water acceptability of the soil layer (\mjseqn{C_{soil} - W_{soil}}).
 #' 
 #' So we can give the function from:
 #' 
@@ -951,9 +981,13 @@ infilt_VIC <- function(land_water_mm, soil_water_mm, soil_capacity_mm, param_inf
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the flux of capillary rise always 
-#' be calculated by the water in the soil layer \mjseqn{W_{soil}},
-#' it can also be tread as the part of the \mjseqn{W_{soil}}.
+#' 
+#' In hydrological modeling, interflow refers to the movement of water that is transported horizontally through the soil or aquifer.
+#' Like [baseflow], the impact of other RUs (response units) on the route to the river will be ignored.
+#' 
+#' It can be calculated by the water in the soil layer \mjseqn{W_{soil}},
+#' which can also be tread as the part of the \mjseqn{W_{soil}}.
+#' 
 #' So we can give the function from:
 #' 
 #' \mjsdeqn{F_{itfl} = f_{inteflow}(D_{grnd}, D_{soil})}
@@ -1128,9 +1162,14 @@ inteflow_SupplyRatio <- function(soil_water_mm, param_inteflow_sur_k) {
 #' @inheritParams all_vari
 #' @description 
 #' \loadmathjax
+#' 
+#' In hydrological modeling, interception refers to the process by which water from precipitation is temporarily retained on the surfaces of vegetation, such as leaves and branches, before being returned to the atmosphere through evaporation or drip.
+#' 
 #' Under the concept of the conceptional HM, the interception will simply be calculated with the maximal interception of the land.
+#' And the interception water will also not go to the land, but will be evaporated.
 #' The maximal Interception of the canopy is maybe difficult to estimate 
 #' but the process is really simple and there is also not so many method to describe it. 
+#' 
 #' @details
 #' # **_Full** : 
 #' 
@@ -1155,11 +1194,12 @@ intercep_Full <- function(atmos_precipitation_mm, land_interceptWater_mm, land_i
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the flux of lateral exchange always be calculated (only) 
-#' by the water in the ground layer \mjseqn{W_{grnd}}.
-#' Compare to other fluxes the lateral exchange can be positive or negative, 
-#' positive means the supply from other region
-#' and negative means distribution to the other region.
+#' 
+#' In hydrological modeling, lateral flow refers to the process by which water flows horizontally through the soil or aquifer, rather than vertically.
+#' It is typically represented by a loss term in the water balance equation, so it also named as groundwater exchange (e.g. GR4J \insertCite{GR4J_Perrin_2003}{EDCHM}).
+#' The flux of lateral exchange is always calculated (only) by the water in the ground layer \mjseqn{W_{grnd}}. 
+#' Unlike other fluxes, the lateral exchange can be positive or negative, 
+#' with positive indicating a supply from other regions and negative indicating distribution to other regions.
 #' 
 #' This process is so flexible that we must carefully use it, 
 #' because it can easily destroy the waster balance in the research catchment.
@@ -1297,9 +1337,12 @@ lateral_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialLa
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the flux of capillary rise always 
-#' be calculated by the water in the soil layer \mjseqn{W_{soil}},
+#' 
+#' In hydrological modeling, percolation refers to the process by which water from the soil moves downward through the pores and cracks in the soil or rock.
+#' This process is physically driven by a moisture gradient, but this is often simplified in conceptual percolation models \insertCite{Raven_Manual_35}{EDCHM}.
+#' It can be calculated by the water in the soil layer \mjseqn{W_{soil}},
 #' it can also be tread as the part of the \mjseqn{W_{soil}}.
+#' 
 #' So we can give the function from:
 #' 
 #' \mjsdeqn{F_{prcl} = f_{percola}(D_{grnd}, D_{soil})}
@@ -1468,17 +1511,17 @@ percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
 }
 
 #' **snow**
-#' @name snow
+#' @name snowMelt
 #' @inheritParams all_vari
 #' @description
 #' \loadmathjax
-#' Under the concept of the conceptional HM, the melt of snowpack is always calculated by 
-#' the energy availability (the state-variable temperature \mjseqn{T} or flux-variable (nett-) radiation \mjseqn{Rn})
-#' and the solid water (snow or ice) availability \mjseqn{W_{snow}} of the snowpack.
 #' 
-#' Some more complex processes will be ignored, some like refrozen and residual water.
-#' Due to the simplify the layer `snowLy` will store only the solid water 
-#' and the solid water will also be melted as possible when the energy is enough.
+#' Under the concept of the conceptual HM, the melt of snowpack is always calculated by 
+#' the energy availability (the state-variable temperature \mjseqn{T} or flux-variable (nett-) radiation \mjseqn{Rn}) 
+#' and the solid water (snow or ice) availability \mjseqn{W_{snow}} of the snowpack. 
+#' 
+#' Some more complex processes, such as refrozen and residual water, will be ignored. 
+#' To simplify the model, the layer snowLy will store only the solid water and will melt it as much as possible when the energy is sufficient.
 #' 
 #' So we can give the function from:
 #' 
@@ -1527,7 +1570,7 @@ snowMelt_Kustas <- function(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_
     .Call(`_EDCHM_snowMelt_Kustas`, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, time_step_h, param_snow_kus_fE, param_snow_kus_fT)
 }
 
-#' @rdname snow
+#' @rdname snowMelt
 #' @details
 #' # **_Factor** \insertCite{phyHydro_dingman_2014}{EDCHM}: 
 #'

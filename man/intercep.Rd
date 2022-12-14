@@ -23,7 +23,11 @@ intercept_water_mm (mm/m2) intercepted water in this timestep
 }
 \description{
 \loadmathjax
+
+In hydrological modeling, interception refers to the process by which water from precipitation is temporarily retained on the surfaces of vegetation, such as leaves and branches, before being returned to the atmosphere through evaporation or drip.
+
 Under the concept of the conceptional HM, the interception will simply be calculated with the maximal interception of the land.
+And the interception water will also not go to the land, but will be evaporated.
 The maximal Interception of the canopy is maybe difficult to estimate
 but the process is really simple and there is also not so many method to describe it.
 }

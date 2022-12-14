@@ -72,11 +72,12 @@ lateral_mm (mm/m2)
 }
 \description{
 \loadmathjax
-Under the concept of the conceptional HM, the flux of lateral exchange always be calculated (only)
-by the water in the ground layer \mjseqn{W_{grnd}}.
-Compare to other fluxes the lateral exchange can be positive or negative,
-positive means the supply from other region
-and negative means distribution to the other region.
+
+In hydrological modeling, lateral flow refers to the process by which water flows horizontally through the soil or aquifer, rather than vertically.
+It is typically represented by a loss term in the water balance equation, so it also named as groundwater exchange (e.g. GR4J \insertCite{GR4J_Perrin_2003}{EDCHM}).
+The flux of lateral exchange is always calculated (only) by the water in the ground layer \mjseqn{W_{grnd}}.
+Unlike other fluxes, the lateral exchange can be positive or negative,
+with positive indicating a supply from other regions and negative indicating distribution to other regions.
 
 This process is so flexible that we must carefully use it,
 because it can easily destroy the waster balance in the research catchment.

@@ -1,15 +1,47 @@
-#' basic concept of EDCHM
+#' A Brief Introduction to EDCHM
 #' @docType package
 #' @name EDCHM-package
 #' @description 
-#' EDCHM is a conceptional hydrological modelling framework and tools, 
-#' that allows user easy to build new hydrology models using various modular process methods.
+#' The [EDCHM] package is a flexible hydrological modeling framework that incorporates a collection of well-known models, 
+#' such as GR4J \insertCite{GR4J_Perrin_2003}{EDCHM}, HBV \insertCite{HBV_Lindstrom_1997}{EDCHM}, VIC \insertCite{VIC_Wood_1992}{EDCHM}, and UBC \insertCite{UBC_Quick_1977}{EDCHM}. Each model is divided into clear, well-defined processes as individual, self-contained modules.
+#' [EDCHM] allows users to not only easily select and combine different processes to create new model structures, but also to choose from a range of methods for each specific process. 
+#' This provides a high degree of flexibility and customization.
+#' [EDCHM] also allows users to divide the research catchment into sub-basins, grids, or hydrological response units (HRUs), providing a high degree of spatial resolution and flexibility. 
+#' This enables users to capture and simulate the water cycle at different scales, from the regional level down to the level of individual land units or catchment areas.
+#' 
+#' 
 #' 
 #' # Overview of this document
 #' 
-#' Before using the `EDCHM` framework, it is necessary to have a basic understanding of its concepts.
+#' Due to the limitations of the Rd document format, the topics in the [EDCHM] package documentation are ordered alphabetically. 
+#' To help users navigate the documentation, an auxiliary table is provided that outlines the design of the [EDCHM] package.
+#' 
+#' You will find some basic concepts and overview of hole [EDCHM] in:
+#' - [EDCHM-package]: basic concepts and describe of this document
+#' - [all_vari]: description of all the variables
+#' - [all_param]: description of all the parameters with ranges
+#' 
+#' You can see all of the 12 process with their associated 62 methods (modules) in:
+#' - [snowMelt]: melt the snow into liquid water
+#' - [intercep]: intercept the water before is arrive the land surface
+#' - [evatransActual]: calculate the actual evapotranspiration from interception of water in th soil
+#' - [infilt]: water from land surface enters the soil
+#' - [percola]: soil water through the pores of aquifer movement to ground water
+#' - [inteflow]: runoff in the soil layer, which from `soilLy` directly into the streams or rivers
+#' - [capirise]: ground water upward to the unsaturated soil layer
+#' - [baseflow]: the portion of groundwater, that directly into the streams or rivers
+#' - [lateral]: water exchange with other basin  in the groundwater layer
+#' - [confluenIUH]: runoff (runoff, interflow, baseflow) from the hydrological unit to the rivers
+#' - [atmosSnow]: devide the precipitation into rainfall and snowfall
+#' - [evatransPotential]: calculates the potential evapotranspiration
+#' 
+#' You get the information how to use [EDCHM] and calibrate in:
+#' - [build_modell]: model building
+#' - [cali]: calibrate algorithms
 #' 
 #' # Layer and Process
+#' 
+#' Before using the `EDCHM` framework, it is necessary to have a basic understanding of its concepts.
 #' 
 #' \if{html}{\figure{edchm_layer.svg}}
 #' \if{latex}{\figure{edchm_layer.pdf}{options: width=150mm}}
@@ -27,8 +59,8 @@
 #' Some of them occur in a single layer, some of them occur between two layers.
 #' Here has defined 9 hydrological processes:
 #' 
-#' - [snow] (snowMelt): melt the snow into liqued water.
-#' - [intercep]: intercept the water before ist arrive the land surface.
+#' - [snowMelt]: melt the snow into liquid water.
+#' - [intercep]: intercept the water before is arrive the land surface.
 #' - [evatransActual]: calculate the actual evapotranspiration from interception of water in th soil.
 #' - [infilt]: water from land surface enters the soil.
 #' - [percola]: soil water through the pores of aquifer movement to ground water.
@@ -137,7 +169,7 @@
 #'    - \mjseqn{D_{grnd}}: data in `groundLy`
 #'    - \mjseqn{D_{lssg}}: data in any (but the one) `landLy`, `snowLy`, `soilLy` or `groundLy`
 #' 
-#' - \mjseqn{f}: function or modular e.g. \mjseqn{f_{atmosSnow}} or \mjseqn{f_{inflt}}
+#' - \mjseqn{f}: function or modulr e.g. \mjseqn{f_{atmosSnow}} or \mjseqn{f_{inflt}}
 #' 
 #' # Parameter define
 #' The parameters will be defined in every function topic
@@ -152,7 +184,8 @@
 #' 
 #' 
 #' 
-#' # Modula define
+#' # Module define
+#' 
 #' In the last section, ten hydrological and two meteorological processes are defined in the conceptual view. 
 #' Now they will be defined in programming view:
 #' 
@@ -173,8 +206,8 @@
 #' | `atmosSnow`         | atmos_perc_mm   | atmos_snow_mm         |
 #' | `evatransPotential` | atmos_DATA      | evatrans_potential_mm |
 #' 
-#' And then a `modula` is defined as: a specific process with different method from well-know models.
-#' The name of modula is composed of three parts: the process name and method name:
+#' And then a `module` is defined as: a specific process with different method from well-know models.
+#' The name of module is composed of three parts: the process name and method name:
 #' 
 #' **process_Method** some like `evatransActual_VIC` and `evatransActual_LiangLand`
 #' 
@@ -187,7 +220,67 @@
 #' 
 #' # Build a model and calibrate the parameters
 #'
-#' more see
+#' The generally way of using the regular model can be described as follows:
+#' 
+#' 1. Select a model that suits your research needs and acquire the necessary software (or script).
+#' 2. Prepare the input data and parameters and ensure they are accurate and complete.
+#' 3. Use observed data to calibrate the model's parameters.
+#' 4. Validate the optimized parameters by comparing them to known results or other models.
+#' 5. Apply the model and its optimized parameter sets to research.
+#' 
+#' But in EDCHM, you need to at first build a model. The process of building a model is an intricate and nuanced task. 
+#' It requires a deep understanding of the system of hydrological modelling to ensure that every component (process) is properly integrated and optimized.
+#' 
+#' 1. Identify the essential processes involved in your research.
+#' 2. Organize and connect these processes in a logical sequence that reflects the real-world system and the data-flow.
+#' 3. Select the appropriate method (module) for each process, taking into account the specific requirements and constraints of your research.
+#' 4. Assemble the model script using the chosen modules, and compile it into a working model that can be tested and refined.
+#' 
+#' By following this approach, you can create a custom-built model that is tailored to your specific research needs, 
+#' and that can be easily adjusted and updated as new information becomes available.
+#' 
+#' 
+#' **BUT** despite the complexity of building a model, EDCHM also offers powerful tools [build_modell] that make the process more straightforward and efficient. 
+#' EDCHM has defined a well-organized structure, so you just need to choose some necessary process and a method for every process. 
+#' Once you have chosen your processes and methods, [build_modell] will automatically generate a model script, and it includes all the input arguments. 
+#' In the same time it will also return the parameter ranges that are needed for calibration and validation.
+#' 
+#' In the standard structure, there are twelve processes available for selection. 
+#' However, you can also choose to use only a subset of these processes, such as the six minimal processes. 
+#' Certainly, you are not limited to the standard or minimal structures when building a model with [build_modell]. 
+#' Instead, you have the freedom to choose any combination of processes that are relevant to your research.
+#' 
+#' The mininal-, snow- and standard-structure are showed in the fowling figure:
+#' 
+#' \if{html}{\figure{structure_miniSnowStad.svg}}
+#' \if{latex}{\figure{structure_miniSnowStad.pdf}{options: width=150mm}}
+#' 
+#' [EDCHM] offers also three compiled models [EDCHM_mini], [EDCHM_snow] and [EDCHM_GR4J].
+#' 
+#' - [EDCHM_mini] and [EDCHM_snow] has used the mininal- and snow-structure with random method.
+#' - [EDCHM_GR4J] is just the GR4J from EDCHM version,
+#' The results produced by [EDCHM_GR4J] have been verified against the original [airGR::RunModel_GR4J()] implementation of the GR4J model, from [airGR].
+#' 
+#' Overall, [build_modell] offers a flexible and customizable approach to building models, allowing you to create a model that is tailored to your specific research needs and requirements.
+#' More details goto section [build_modell].
+#' 
+#' 
+#' 
+#' 
+#' After building the model, we can proceed to calibrate its parameters. 
+#' Typically, we need to evaluate the simulated results with observations to do this. 
+#' We can use the [hydroGOF] package, which offers many goodness-of-fit (GOF) functions, such as the Nash-Sutcliffe efficiency (NSE) and Kling-Gupta efficiency (KGE). 
+#' We still need an **evaluation function**, which takes the parameters as input and produces the evaluation results as output. 
+#' These inputs and outputs are then given to a calibration algorithm function, which decides the next set of probe parameters based on the result of the GOF.
+#' 
+#' The evaluation function is more flexible because it depends on whether the parameters are lumped or distributed, 
+#' whether all or some of them need to be calibrated, and whether they are directly measured or calculated from categorical data such as soil class and land use. 
+#' EDCHM does not offer an evaluation function, but it is not difficult to create one.
+#' 
+#' EDCHM offers two calibration algorithm functions: [cali_DDS()] \insertCite{DDS_Tolson_2007}{EDCHM} and [cali_UVS()]. 
+#' [cali_DDS()] is very powerful and recommended for most cases. 
+#' [cali_UVS()] is recommended for specific tasks and is a very original algorithm. 
+#' For more details, see the [cali] section of the documentation.
 #' 
 #' 
 #' 

@@ -8,11 +8,15 @@
 //' @inheritParams all_vari
 //' @description
 //' \loadmathjax
-//' Under the concept of the conceptional HM, the flux of capillary rise always be calculated (only) by the water in the ground layer \mjseqn{W_{grnd}},
-//' it can also be tread as the part of the \mjseqn{W_{grnd}}.
-//' There are also not so many methods to describe this process. the most HM ignore this process, 
-//' maybe because in the most situation it's not so significant, 
-//' or maybe because the process `percola` can deal with this process in the same time.
+//' 
+//' In hydrological modeling, capillary rise refers to the process by which water is drawn upward from groundwater (table) through the soil due to the force of capillary action.
+//' In conceptual watershed models, the capillary rise term often refers to a process that moves water from lower to higher soil water stores, 
+//' which may also implicitly include lateral groundwater flow processes in a sloping domain  \insertCite{Raven_Manual_35}{EDCHM}.
+//' 
+//' It can be calculated by the water in the ground layer \mjseqn{W_{grnd}}, which can also be treated as part of \mjseqn{W_{grnd}}. 
+//' There are not many methods to describe this process. Most HMs ignore this process, 
+//' perhaps because it is not significant in most situations, or because the process of percolation can deal with this process at the same time.
+//' 
 //' So we can give the function from:
 //' 
 //' \mjsdeqn{F_{capi} = f_{capirise}(D_{grnd}, D_{soil})}

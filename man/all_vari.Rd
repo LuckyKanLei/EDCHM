@@ -92,9 +92,9 @@
 
 \item{confluen_responseTime_TS}{(TS) response or concentration time in every routeline}
 
-\item{water_mm}{(mm/m2/TS) water volume in \code{soilLy} or interceptof \code{landLy}, same as \code{land_interceptWater_mm} or \code{soil_water_mm}}
+\item{water_mm}{(mm/m2/TS) water volume in \code{soilLy}, \code{groundLy} or intercept of \code{landLy}, same as \code{soil_water_mm}, \code{ground_water_mm} or \code{land_interceptWater_mm}}
 
-\item{capacity_mm}{(mm/m2) water storage capacity in \code{soilLy} or interceptof \code{landLy}, same as \code{land_interceptCapacity_mm} or \code{soil_capacity_mm}}
+\item{capacity_mm}{(mm/m2) water storage capacity in \code{soilLy}, \code{groundLy} or intercept of \code{landLy}, same as \code{soil_capacity_mm}, \code{ground_capacity_mm} or\code{land_interceptCapacity_mm}}
 }
 \description{
 In this topic all of the variable in the EDCHM will be defined.

@@ -3,17 +3,17 @@
 
 
 //' **snow**
-//' @name snow
+//' @name snowMelt
 //' @inheritParams all_vari
 //' @description
 //' \loadmathjax
-//' Under the concept of the conceptional HM, the melt of snowpack is always calculated by 
-//' the energy availability (the state-variable temperature \mjseqn{T} or flux-variable (nett-) radiation \mjseqn{Rn})
-//' and the solid water (snow or ice) availability \mjseqn{W_{snow}} of the snowpack.
 //' 
-//' Some more complex processes will be ignored, some like refrozen and residual water.
-//' Due to the simplify the layer `snowLy` will store only the solid water 
-//' and the solid water will also be melted as possible when the energy is enough.
+//' Under the concept of the conceptual HM, the melt of snowpack is always calculated by 
+//' the energy availability (the state-variable temperature \mjseqn{T} or flux-variable (nett-) radiation \mjseqn{Rn}) 
+//' and the solid water (snow or ice) availability \mjseqn{W_{snow}} of the snowpack. 
+//' 
+//' Some more complex processes, such as refrozen and residual water, will be ignored. 
+//' To simplify the model, the layer snowLy will store only the solid water and will melt it as much as possible when the energy is sufficient.
 //' 
 //' So we can give the function from:
 //' 
@@ -73,7 +73,7 @@ NumericVector snowMelt_Kustas(
   
 }
 
-//' @rdname snow
+//' @rdname snowMelt
 //' @details
 //' # **_Factor** \insertCite{phyHydro_dingman_2014}{EDCHM}: 
 //'

@@ -5,14 +5,23 @@
 //' **confluence**
 //' @description 
 //' \loadmathjax
-//' `confluence` is just a calculate function, that make the water resource confluent to the gauge point.
+//' 
+//' In hydrological modeling, routing (named as [confluen] in EDCHM) refers to the process of simulating the movement of water through a river network or other drainage system. 
+//' It allows the model to predict the flow of water in rivers and streams. 
+//' In hydrological models, routing is typically performed using mathematical algorithms that account for the physical properties of the river network, 
+//' such as its geometry, roughness, and discharge capacity. 
+//' The parameters that govern routing, such as flow velocity and channel roughness, 
+//' can have a significant impact on the accuracy of the model.
+//' 
+//' `confluence` is a calculation function that causes water to flow into the gauge point.
 //' - `IUH`: IUH (Instant Unit Hydrograph) with one watercourse, 
-//' - `IUH2S`; IUH with two water resource, those have the two different IUH-vector, 
-//' - `IUH3S`; IUH with three water resource, those have the three different IUH-vector, 
-//' Under the concept of the conceptional HM, the water from flux to the water flow will by the `confluen` process calculated.
-//' This process will not calculate the water balance, but the time varying. 
-//' And the "Instant Unit Hydrograph" is the most effective method to deal with the time varying.
-//' In the first stage will also only `confluenIUH` supported.
+//' - `IUH2S`: IUH with two water sources, each with a different IUH vector, 
+//' - `IUH3S`: IUH with three water sources, each with a different IUH vector.
+//' 
+//' Under the concept of the conceptual HM, the water flux to the water flow will be calculated using the confluence process. 
+//' This process does not calculate the water balance, but rather the time-varying nature of the water flow. 
+//' The "Instant Unit Hydrograph" method is the most effective way to deal with time-varying flows. 
+//' In the first stage, only [confluenIUH] will be supported.
 //' 
 //' So we can give the function:
 //' 
@@ -117,9 +126,11 @@ NumericVector confluen_IUH3S(
 //' @inheritParams all_vari
 //' @description
 //' \loadmathjax
+//' 
 //' The process `confluenIUH` return a series of portions, that means how many flux water will
 //' in those moment into the river.
 //' The sum of this series will always in 1.
+//' 
 //' So we can give the function:
 //' 
 //' \mjsdeqn{u = f_{confluenIUH}(t_r, ...)}

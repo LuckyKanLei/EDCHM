@@ -7,9 +7,10 @@
 //' @inheritParams all_vari
 //' @description
 //' \loadmathjax
-//' Under the concept of the conceptional HM, the snowfall is always calculated by 
-//' the temperature \mjseqn{T} and 
-//' the precipitation availability, the portion of snowfall is always decided by the air tempature.
+//' 
+//' Under the concept of the conceptual HM, the amount of snowfall is always calculated by the temperature \mjseqn{T} and the precipitation \mjseqn{P} availability. 
+//' The proportion of snowfall is always determined by the air temperature.
+//' 
 //' 
 //' So we can give the function from:
 //' 

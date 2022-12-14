@@ -36,7 +36,7 @@ cali_UVS(
 \description{
 Calibrate algorithms
 }
-\section{DDS}{
+\section{DDS \insertCite{DDS_Tolson_2007}{EDCHM}}{
 dynamically dimensioned search (DDS) calibration algorithm
 }
 

@@ -65,12 +65,15 @@ evatransPotential_FAO56(
 potential evapotranspiration (mm/m2)
 }
 \description{
-The concept potential ET estimate mainly the confluence from atmosphere,
-when the water in the ET-area is always enough.
-Actually we should also consider the charterers of the ET-area, there is free water area or vegetation or bar soil,
-But we may don't have so many information and effective method, in order to get the truly potential ET.
-So there is the simplified method: reference ET, it define the ET-area with some fest charterers, e.g. \code{\link[=evatransPotential_FAO56]{evatransPotential_FAO56()}}.
-In this situation we should give some factor for different ET-area.
+The concept of potential evapotranspiration (ET) estimates the ability of water lost from the soil and vegetation in an area due to evaporation and transpiration.
+It assumes that there is always enough water in the ET area to meet the demand for evapotranspiration.
+However, the characteristics of the ET area, such as whether it is covered with vegetation or bare soil, can affect the amount of evapotranspiration that occurs.
+In order to accurately estimate potential ET, we need to consider these characteristics.
+
+But we may not always have access to the necessary information or effective methods to do this.
+In these cases, we can use a simplified method known as \strong{reference ET}.
+This method defines the ET area using certain fixed characteristics, such as those provided by the \code{\link[=evatransPotential_FAO56]{evatransPotential_FAO56()}} function.
+In this situation, we need to provide factors to account for the differences between the actual ET area and the reference ET area.
 }
 \details{
 \itemize{

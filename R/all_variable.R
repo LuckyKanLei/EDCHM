@@ -47,8 +47,8 @@
 #' @param confluen_inputWater_mm,land_runoff_mm,ground_baseflow_mm (mm/m2) input water volum in every routeline
 #' @param confluen_iuh_1,confluen_iuhLand_1,confluen_iuhSoil_1,confluen_iuhGround_1 (vector of num, sume() = 1) the ratio in every timestep, can be calculated by [confluenIUH_GR4J1()], [confluenIUH_GR4J2()]
 #' @param confluen_responseTime_TS (TS) response or concentration time in every routeline
-#' @param water_mm (mm/m2/TS) water volume in `soilLy` or interceptof `landLy`, same as `land_interceptWater_mm` or `soil_water_mm`
-#' @param capacity_mm (mm/m2) water storage capacity in `soilLy` or interceptof `landLy`, same as `land_interceptCapacity_mm` or `soil_capacity_mm`
+#' @param water_mm (mm/m2/TS) water volume in `soilLy`, `groundLy` or intercept of `landLy`, same as `soil_water_mm`, `ground_water_mm` or `land_interceptWater_mm` 
+#' @param capacity_mm (mm/m2) water storage capacity in `soilLy`, `groundLy` or intercept of `landLy`, same as `soil_capacity_mm`, `ground_capacity_mm` or`land_interceptCapacity_mm`
 NULL
 
 

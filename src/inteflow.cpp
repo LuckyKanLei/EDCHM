@@ -8,9 +8,13 @@
 //' @inheritParams all_vari
 //' @description
 //' \loadmathjax
-//' Under the concept of the conceptional HM, the flux of capillary rise always 
-//' be calculated by the water in the soil layer \mjseqn{W_{soil}},
-//' it can also be tread as the part of the \mjseqn{W_{soil}}.
+//' 
+//' In hydrological modeling, interflow refers to the movement of water that is transported horizontally through the soil or aquifer.
+//' Like [baseflow], the impact of other RUs (response units) on the route to the river will be ignored.
+//' 
+//' It can be calculated by the water in the soil layer \mjseqn{W_{soil}},
+//' which can also be tread as the part of the \mjseqn{W_{soil}}.
+//' 
 //' So we can give the function from:
 //' 
 //' \mjsdeqn{F_{itfl} = f_{inteflow}(D_{grnd}, D_{soil})}

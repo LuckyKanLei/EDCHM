@@ -76,9 +76,14 @@ ground_baseflow_mm (mm/m2/TS)
 }
 \description{
 \loadmathjax
-Under the concept of the conceptional HM, the flux of baseflow always be calculated (only) by the water in the ground layer \mjseqn{W_{grnd}},
-it can also be tread as the part of the \mjseqn{W_{grnd}}.
-But the impact with other RU (response unit) in route to the river will be ignored.
+
+In hydrological modeling, baseflow refers to the flow of water in rivers and streams that is sustained by the release of water from the groundwater.
+Or baseflow refers to the flow of water from an aquifer or deeper soil horizon to surface water, typically due to a head gradient between fully saturated soil and stream  \insertCite{Raven_Manual_35}{EDCHM}.
+It may be considered the sum of the contribution of deep groundwater exchange with a river and delayed storage  \insertCite{Raven_Manual_35}{EDCHM}.
+
+It is always calculated (only) by the water in the ground layer \mjseqn{W_{grnd}}, which can also be treated as part of \mjseqn{W_{grnd}}.
+However, the impact of other RUs (response units) on the route to the river will be ignored.
+
 So we can give the function from:
 
 \mjsdeqn{F_{base} = f_{baseflow}(D_{grnd})}

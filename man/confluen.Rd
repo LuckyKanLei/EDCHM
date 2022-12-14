@@ -37,16 +37,25 @@ confluenced water (mm/m2)
 }
 \description{
 \loadmathjax
-\code{confluence} is just a calculate function, that make the water resource confluent to the gauge point.
+
+In hydrological modeling, routing (named as \link{confluen} in EDCHM) refers to the process of simulating the movement of water through a river network or other drainage system.
+It allows the model to predict the flow of water in rivers and streams.
+In hydrological models, routing is typically performed using mathematical algorithms that account for the physical properties of the river network,
+such as its geometry, roughness, and discharge capacity.
+The parameters that govern routing, such as flow velocity and channel roughness,
+can have a significant impact on the accuracy of the model.
+
+\code{confluence} is a calculation function that causes water to flow into the gauge point.
 \itemize{
 \item \code{IUH}: IUH (Instant Unit Hydrograph) with one watercourse,
-\item \code{IUH2S}; IUH with two water resource, those have the two different IUH-vector,
-\item \code{IUH3S}; IUH with three water resource, those have the three different IUH-vector,
-Under the concept of the conceptional HM, the water from flux to the water flow will by the \code{confluen} process calculated.
-This process will not calculate the water balance, but the time varying.
-And the "Instant Unit Hydrograph" is the most effective method to deal with the time varying.
-In the first stage will also only \code{confluenIUH} supported.
+\item \code{IUH2S}: IUH with two water sources, each with a different IUH vector,
+\item \code{IUH3S}: IUH with three water sources, each with a different IUH vector.
 }
+
+Under the concept of the conceptual HM, the water flux to the water flow will be calculated using the confluence process.
+This process does not calculate the water balance, but rather the time-varying nature of the water flow.
+The "Instant Unit Hydrograph" method is the most effective way to deal with time-varying flows.
+In the first stage, only \link{confluenIUH} will be supported.
 
 So we can give the function:
 

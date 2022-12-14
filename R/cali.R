@@ -1,7 +1,7 @@
 #' Calibrate algorithms
 #' @name cali
 #' @description
-#' # DDS
+#' # DDS \insertCite{DDS_Tolson_2007}{EDCHM}
 #' dynamically dimensioned search (DDS) calibration algorithm
 #' @param fitness fitness function
 #' @param x_Min,x_Max,x_Init minimal, maximal initial parameter

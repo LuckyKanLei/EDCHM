@@ -59,9 +59,9 @@ evatransActual_LiangSoil(
 \arguments{
 \item{atmos_potentialEvatrans_mm}{(mm/m2/TS) \strong{potential / reference} evapotranspiration}
 
-\item{water_mm}{(mm/m2/TS) water volume in \code{soilLy} or interceptof \code{landLy}, same as \code{land_interceptWater_mm} or \code{soil_water_mm}}
+\item{water_mm}{(mm/m2/TS) water volume in \code{soilLy}, \code{groundLy} or intercept of \code{landLy}, same as \code{soil_water_mm}, \code{ground_water_mm} or \code{land_interceptWater_mm}}
 
-\item{capacity_mm}{(mm/m2) water storage capacity in \code{soilLy} or interceptof \code{landLy}, same as \code{land_interceptCapacity_mm} or \code{soil_capacity_mm}}
+\item{capacity_mm}{(mm/m2) water storage capacity in \code{soilLy}, \code{groundLy} or intercept of \code{landLy}, same as \code{soil_capacity_mm}, \code{ground_capacity_mm} or\code{land_interceptCapacity_mm}}
 
 \item{param_evatrans_sur_k}{<0.1, 1> parameter for \code{\link[=evatransActual_SupplyRatio]{evatransActual_SupplyRatio()}}, ratio of potential ET, that is estimated as actually ET}
 
@@ -87,9 +87,10 @@ actually ET in (mm/m2/TS)
 }
 \description{
 \loadmathjax
-Under the concept of the conceptional HM, the actually ET is always calculated by the potential ET \mjseqn{E_p},
-which evaluate the meteorological situation and the landuse (vegetation) situation.
-The second point is the water availability of the land.
+Actual ET, or actual evapotranspiration, is a measure of the amount of water that is lost from the land surface through evaporation and transpiration by plants.
+
+Under the concept of the conceptual HM, the actual ET is always calculated by the potential ET \mjseqn{E_p}, which evaluates the meteorological and landuse (vegetation) situations.
+The second point to consider is the water availability of the land or soil.
 
 So we can give the function from:
 

@@ -7,9 +7,11 @@
 //' @inheritParams all_vari
 //' @description
 //' \loadmathjax
-//' Under the concept of the conceptional HM, the flux of infiltration always be calculated by the pounded water on the land \mjseqn{W_{land}}, 
-//' which can be precipitation, precipitation after interception or precipitation with sonow melt and so on. 
-//' The second point is the water acceptability of the soil layer (\mjseqn{C_{soil} - W_{soil}}).
+//' In hydrological modeling, infiltration refers to the process by which water from precipitation snowmelt or irrigation enters the soil \insertCite{Handbook_Hydrology_1993}{EDCHM}. 
+//' 
+//' Under the concept of the conceptual HM, the flux of infiltration is always calculated by the amount of water on the land \mjseqn{W_{land}}, 
+//' which can be precipitation, precipitation after interception, or precipitation with snowmelt, among others. 
+//' The second point to consider is the water acceptability of the soil layer (\mjseqn{C_{soil} - W_{soil}}).
 //' 
 //' So we can give the function from:
 //' 

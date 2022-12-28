@@ -189,7 +189,8 @@ NumericVector inteflow_BevenWood(
   soil_inteflowAvilibale_mm = soil_water_mm - soil_capacity_mm * (1-soil_fieldCapacityPerc_1);
   soil_inteflowAvilibale_mm = ifelse(soil_inteflowAvilibale_mm < 0, 0, soil_inteflowAvilibale_mm);
   soil_diff_mm = soil_capacity_mm - soil_water_mm;
-  k_ = ifelse(soil_diff_mm < 1, soil_water_mm, soil_water_mm / soil_diff_mm);
+  soil_diff_mm = ifelse(soil_diff_mm < soil_water_mm, soil_water_mm, soil_diff_mm);
+  k_ = soil_water_mm / soil_diff_mm;
   soil_inteflow_mm = k_ * soil_potentialInteflow_mm;
   soil_inteflow_mm = ifelse(soil_water_mm > soil_inteflowAvilibale_mm, soil_inteflow_mm, 0.0);
   return ifelse(soil_inteflow_mm > soil_inteflowAvilibale_mm, soil_inteflowAvilibale_mm, soil_inteflow_mm) ;

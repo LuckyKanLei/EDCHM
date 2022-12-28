@@ -208,7 +208,8 @@ NumericVector percola_BevenWood(
   soil_percolaAvilibale_mm = soil_water_mm - soil_capacity_mm * (1-soil_fieldCapacityPerc_1);
   soil_percolaAvilibale_mm = ifelse(soil_percolaAvilibale_mm < 0, 0, soil_percolaAvilibale_mm);
   soil_diff_mm = soil_capacity_mm - soil_water_mm;
-  k_ = ifelse(soil_diff_mm < 1, soil_water_mm, soil_water_mm / soil_diff_mm);
+  soil_diff_mm = ifelse(soil_diff_mm < soil_water_mm, soil_water_mm, soil_diff_mm);
+  k_ = soil_water_mm / soil_diff_mm;
   soil_percola_mm = k_ * soil_potentialPercola_mm;
   soil_percola_mm = ifelse(soil_water_mm > soil_percolaAvilibale_mm, soil_percola_mm, 0.0);
   return ifelse(soil_percola_mm > soil_percolaAvilibale_mm, soil_percolaAvilibale_mm, soil_percola_mm) ;

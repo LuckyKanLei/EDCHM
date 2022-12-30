@@ -214,11 +214,16 @@ NumericVector lateral_Arno(
   NumericVector ground_lateral_mm, lateral_1, lateral_2, Ws_Wc;
   NumericVector ground_diff_mm = (ground_capacity_mm - ground_water_mm);
   Ws_Wc = ground_capacity_mm * param_lateral_arn_thresh;
+  
+  
   lateral_1 = param_lateral_arn_k * ground_potentialLateral_mm / (ground_capacity_mm) * ground_water_mm;
   lateral_2 = param_lateral_arn_k * ground_potentialLateral_mm / (ground_capacity_mm) * ground_water_mm + ground_potentialLateral_mm * (1 - param_lateral_arn_k) * pow((ground_water_mm - Ws_Wc) / (ground_capacity_mm - Ws_Wc),2);
   ground_lateral_mm = ifelse(ground_water_mm < Ws_Wc, lateral_1, lateral_2);
   ground_lateral_mm = ifelse(ground_potentialLateral_mm > Ws_Wc, ground_water_mm, ground_lateral_mm);
-
+  
+  ground_lateral_mm = ifelse((ground_lateral_mm < ground_potentialLateral_mm) & (ground_potentialLateral_mm < 0.), ground_potentialLateral_mm, ground_lateral_mm);
+  ground_lateral_mm = ifelse((ground_lateral_mm > ground_potentialLateral_mm) & (ground_potentialLateral_mm > 0.), ground_potentialLateral_mm, ground_lateral_mm);
+  
   ground_lateral_mm = ifelse(ground_lateral_mm > ground_diff_mm, ground_diff_mm, ground_lateral_mm) ;
   return ifelse(ground_lateral_mm > - ground_water_mm, ground_lateral_mm, - ground_water_mm) ;
 }

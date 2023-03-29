@@ -1,21 +1,6 @@
 #include "EDCHM_GR4J.h"
 // [[Rcpp::interfaces(r, cpp)]]
 
-double sum_product(NumericVector lhs,
-                   NumericVector rhs)
-{
-  int n = lhs.size();
-  double s = 0.0;
-  for (int i= 0; i < n; i++) {
-    s += lhs(i) * rhs(i);
-  }
-  return s;
-}
-void resetVector(Rcpp::NumericVector& x) {
-  // Fill the vector with zeros
-  std::fill(x.begin(), x.end(), 0.0);
-}
-
 //' @name modells
 //' @param S_,R_ storage water S and R
 //' @param X_1,X_2,X_3,X_4 parameters in GR4J
@@ -78,10 +63,10 @@ NumericMatrix EDCHM_GR4J(
     P_n = ifelse(P_n > 13 * X_1, 13 * X_1, P_n);
     E_n = ifelse(E_n > 13 * X_1, 13 * X_1, E_n);
     P_s = infilt_GR4J(P_n, S_, X_1);
-    E_s = evatransActual_GR4J(E_n, X_1, S_);
+    E_s = evatransActual_GR4J(E_n, S_, X_1);
     
-    P_s = ifelse(P_ > E_, P_s, 0.0);
-    E_s = ifelse(P_ > E_, 0.0, E_s);
+    // P_s = ifelse(P_ > E_, P_s, 0.0);
+    // E_s = ifelse(P_ > E_, 0.0, E_s);
     A_E = ifelse(P_ > E_, E_, E_s + P_);
     S_ += (P_s - E_s);
     

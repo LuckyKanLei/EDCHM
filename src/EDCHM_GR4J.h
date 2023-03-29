@@ -5,6 +5,9 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+double sum_product(NumericVector lhs, NumericVector rhs);
+void resetVector(Rcpp::NumericVector& x);
+
 NumericVector infilt_GR4J(
     NumericVector land_water_mm,
     NumericVector soil_water_mm,

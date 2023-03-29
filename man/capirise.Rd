@@ -65,7 +65,7 @@ ground_capirise_mm (mm/m2/TS) capillary rise
 
 In hydrological modeling, capillary rise refers to the process by which water is drawn upward from groundwater (table) through the soil due to the force of capillary action.
 In conceptual watershed models, the capillary rise term often refers to a process that moves water from lower to higher soil water stores,
-which may also implicitly include lateral groundwater flow processes in a sloping domain  \insertCite{Raven_Manual_35}{EDCHM}.
+which may also implicitly include lateral groundwater flow processes in a sloping domain.
 
 It can be calculated by the water in the ground layer \mjseqn{W_{grnd}}, which can also be treated as part of \mjseqn{W_{grnd}}.
 There are not many methods to describe this process. Most HMs ignore this process,

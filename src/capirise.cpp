@@ -7,11 +7,12 @@
 //' @name capirise
 //' @inheritParams all_vari
 //' @description
+//' 
 //' \loadmathjax
 //' 
 //' In hydrological modeling, capillary rise refers to the process by which water is drawn upward from groundwater (table) through the soil due to the force of capillary action.
 //' In conceptual watershed models, the capillary rise term often refers to a process that moves water from lower to higher soil water stores, 
-//' which may also implicitly include lateral groundwater flow processes in a sloping domain  \insertCite{Raven_Manual_35}{EDCHM}.
+//' which may also implicitly include lateral groundwater flow processes in a sloping domain.
 //' 
 //' It can be calculated by the water in the ground layer \mjseqn{W_{grnd}}, which can also be treated as part of \mjseqn{W_{grnd}}. 
 //' There are not many methods to describe this process. Most HMs ignore this process, 
@@ -52,6 +53,7 @@
 //' \mjsdeqn{F_{capi} = M_{capi} \left( 1 - \frac{W_{soil}}{C_{soil}} \right)}
 //' where
 //'   - \mjseqn{M_{capi}} is `soil_potentialCapirise_mm`
+//'   
 //' @export
 // [[Rcpp::export]]
 NumericVector capirise_HBV(
@@ -145,6 +147,7 @@ NumericVector capirise_AcceptRatio(
 //' where
 //'   - \mjseqn{k} is `param_capirise_acp_k`
 //'   - \mjseqn{\gamma} is `param_capirise_acp_gamma`
+//'   
 //' @param param_capirise_acp_k <0.01, 1> coefficient parameter for [capirise_AcceptPow()]
 //' @param param_capirise_acp_gamma <0.01, 1> exponential parameter for [capirise_AcceptPow()]
 //' @export

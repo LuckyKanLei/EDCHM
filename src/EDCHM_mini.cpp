@@ -9,7 +9,9 @@
 //' @inheritParams all_vari
 //' @references
 //' \insertAllCited{}
-//' @return stream flow in mm/TS
+//' @return 
+//' - `EDCHM_xxxx`: stream flow in mm/TS
+//' - `EDCHM_xxxx_full`: list of variablen
 //' @details
 //' # **EDCHM_mini**: 
 //' A model based on mini-structure with only six process:

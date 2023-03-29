@@ -14,6 +14,17 @@ EDCHM_GR4J <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipi
     .Call(`_EDCHM_EDCHM_GR4J`, n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, S_, R_, X_1, X_2, X_3, X_4)
 }
 
+#' @name modells
+#' @details
+#' # **EDCHM_GR4J_full** \insertCite{GR4J_Perrin_2003}{EDCHM}: 
+#' 
+#' With all variable output
+#' 
+#' @export
+EDCHM_GR4J_full <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, S_, R_, X_1, X_2, X_3, X_4) {
+    .Call(`_EDCHM_EDCHM_GR4J_full`, n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, S_, R_, X_1, X_2, X_3, X_4)
+}
+
 #' modells build with EDCHM modulas
 #' @name modells
 #' @description some example models with EDCHM modulas
@@ -21,7 +32,9 @@ EDCHM_GR4J <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipi
 #' @inheritParams all_vari
 #' @references
 #' \insertAllCited{}
-#' @return stream flow in mm/TS
+#' @return 
+#' - `EDCHM_xxxx`: stream flow in mm/TS
+#' - `EDCHM_xxxx_full`: list of variablen
 #' @details
 #' # **EDCHM_mini**: 
 #' A model based on mini-structure with only six process:
@@ -38,6 +51,22 @@ EDCHM_mini <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipi
     .Call(`_EDCHM_EDCHM_mini`, n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh)
 }
 
+#' modells build with EDCHM modulas
+#' @name modells
+#' @description some example models with EDCHM modulas
+#' @inheritParams all_param
+#' @inheritParams all_vari
+#' @references
+#' \insertAllCited{}
+#' @return stream flow in mm/TS
+#' @details
+#' # **EDCHM_mini_full**: 
+#' With full Output
+#' @export
+EDCHM_mini_full <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh) {
+    .Call(`_EDCHM_EDCHM_mini_full`, n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh)
+}
+
 #' @name modells
 #' @details
 #' # **EDCHM_snow**: 
@@ -45,6 +74,15 @@ EDCHM_mini <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipi
 #' @export
 EDCHM_snow <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, time_step_h, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt) {
     .Call(`_EDCHM_EDCHM_snow`, n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, time_step_h, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt)
+}
+
+#' @name modells
+#' @details
+#' # **EDCHM_snow_full**: 
+#' With full Output
+#' @export
+EDCHM_snow_full <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, time_step_h, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt) {
+    .Call(`_EDCHM_EDCHM_snow_full`, n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, time_step_h, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt)
 }
 
 #' caculate **snowfall**
@@ -284,11 +322,12 @@ baseflow_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialB
 #' @name capirise
 #' @inheritParams all_vari
 #' @description
+#' 
 #' \loadmathjax
 #' 
 #' In hydrological modeling, capillary rise refers to the process by which water is drawn upward from groundwater (table) through the soil due to the force of capillary action.
 #' In conceptual watershed models, the capillary rise term often refers to a process that moves water from lower to higher soil water stores, 
-#' which may also implicitly include lateral groundwater flow processes in a sloping domain  \insertCite{Raven_Manual_35}{EDCHM}.
+#' which may also implicitly include lateral groundwater flow processes in a sloping domain.
 #' 
 #' It can be calculated by the water in the ground layer \mjseqn{W_{grnd}}, which can also be treated as part of \mjseqn{W_{grnd}}. 
 #' There are not many methods to describe this process. Most HMs ignore this process, 
@@ -329,6 +368,7 @@ baseflow_Arno <- function(ground_water_mm, ground_capacity_mm, ground_potentialB
 #' \mjsdeqn{F_{capi} = M_{capi} \left( 1 - \frac{W_{soil}}{C_{soil}} \right)}
 #' where
 #'   - \mjseqn{M_{capi}} is `soil_potentialCapirise_mm`
+#'   
 #' @export
 capirise_HBV <- function(ground_water_mm, soil_water_mm, soil_capacity_mm, soil_potentialCapirise_mm) {
     .Call(`_EDCHM_capirise_HBV`, ground_water_mm, soil_water_mm, soil_capacity_mm, soil_potentialCapirise_mm)
@@ -377,6 +417,7 @@ capirise_AcceptRatio <- function(ground_water_mm, soil_water_mm, soil_capacity_m
 #' where
 #'   - \mjseqn{k} is `param_capirise_acp_k`
 #'   - \mjseqn{\gamma} is `param_capirise_acp_gamma`
+#'   
 #' @param param_capirise_acp_k <0.01, 1> coefficient parameter for [capirise_AcceptPow()]
 #' @param param_capirise_acp_gamma <0.01, 1> exponential parameter for [capirise_AcceptPow()]
 #' @export

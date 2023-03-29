@@ -3,11 +3,27 @@
 \name{modells}
 \alias{modells}
 \alias{EDCHM_GR4J}
+\alias{EDCHM_GR4J_full}
 \alias{EDCHM_mini}
+\alias{EDCHM_mini_full}
 \alias{EDCHM_snow}
+\alias{EDCHM_snow_full}
 \title{modells build with EDCHM modulas}
 \usage{
 EDCHM_GR4J(
+  n_time,
+  n_spat,
+  atmos_potentialEvatrans_mm,
+  atmos_precipitation_mm,
+  S_,
+  R_,
+  X_1,
+  X_2,
+  X_3,
+  X_4
+)
+
+EDCHM_GR4J_full(
   n_time,
   n_spat,
   atmos_potentialEvatrans_mm,
@@ -41,7 +57,55 @@ EDCHM_mini(
   param_percola_arn_thresh
 )
 
+EDCHM_mini_full(
+  n_time,
+  n_spat,
+  atmos_potentialEvatrans_mm,
+  atmos_precipitation_mm,
+  ground_capacity_mm,
+  ground_water_mm,
+  land_impermeableFrac_1,
+  soil_capacity_mm,
+  soil_potentialPercola_mm,
+  soil_water_mm,
+  confluenLand_responseTime_TS,
+  confluenGround_responseTime_TS,
+  param_baseflow_grf_gamma,
+  param_confluenLand_kel_k,
+  param_evatrans_ubc_gamma,
+  param_infilt_ubc_P0AGEN,
+  param_percola_arn_k,
+  param_percola_arn_thresh
+)
+
 EDCHM_snow(
+  n_time,
+  n_spat,
+  atmos_potentialEvatrans_mm,
+  atmos_precipitation_mm,
+  atmos_temperature_Cel,
+  ground_capacity_mm,
+  ground_water_mm,
+  land_impermeableFrac_1,
+  snow_ice_mm,
+  soil_capacity_mm,
+  soil_potentialPercola_mm,
+  soil_water_mm,
+  time_step_h,
+  confluenLand_responseTime_TS,
+  confluenGround_responseTime_TS,
+  param_atmos_thr_Ts,
+  param_baseflow_grf_gamma,
+  param_confluenLand_kel_k,
+  param_evatrans_ubc_gamma,
+  param_infilt_ubc_P0AGEN,
+  param_percola_arn_k,
+  param_percola_arn_thresh,
+  param_snow_fac_f,
+  param_snow_fac_Tmelt
+)
+
+EDCHM_snow_full(
   n_time,
   n_spat,
   atmos_potentialEvatrans_mm,
@@ -116,13 +180,24 @@ EDCHM_snow(
 \item{param_snow_fac_Tmelt}{<0, 3> (Cel) snow melt temperature parameter for \code{\link[=snowMelt_Factor]{snowMelt_Factor()}}}
 }
 \value{
+\itemize{
+\item \code{EDCHM_xxxx}: stream flow in mm/TS
+\item \code{EDCHM_xxxx_full}: list of variablen
+}
+
 stream flow in mm/TS
 }
 \description{
 some example models with EDCHM modulas
+
+some example models with EDCHM modulas
 }
 \section{\strong{EDCHM_GR4J} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
 Total same like original GR4J
+}
+
+\section{\strong{EDCHM_GR4J_full} \insertCite{GR4J_Perrin_2003}{EDCHM}:}{
+With all variable output
 }
 
 \section{\strong{EDCHM_mini}:}{
@@ -137,10 +212,20 @@ A model based on mini-structure with only six process:
 }
 }
 
+\section{\strong{EDCHM_mini_full}:}{
+With full Output
+}
+
 \section{\strong{EDCHM_snow}:}{
 A model with \code{snowMelt} and \code{atmosSnow} based on mini-modell
 }
 
+\section{\strong{EDCHM_snow_full}:}{
+With full Output
+}
+
 \references{
+\insertAllCited{}
+
 \insertAllCited{}
 }

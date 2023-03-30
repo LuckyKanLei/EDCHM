@@ -4,68 +4,549 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="EDCHM is a flexible hydrological modeling framework that incorporates a collection of well-known models, such as GR4J, HBV, VIC, and UBC. Every model is divided into clear, well-defined processes as individual, self-contained modules.
+  Editable means: EDCHM allows users not only easily select and combine different process as new model structures, but also can choose from a range of methods for each specific process. EDCHM providing a high degree of flexibility and customization.
+  Distributed means: EDCHM allows users to divide the research catchment into sub-basins, grids, or hydrological response units (HRUs), providing a high degree of spatial resolution and flexibility. This enables users to capture and simulate the water cycle at different scales, from the regional level down to the level of individual land units or catchment areas.
+  Conceptual means: While all of the modules in a modular hydrological model use simplified, abstract methods, or empirical approaches, but not physical equation and detailed, mathematical method.">
 <title>Editable Distributed Conceptual (c++) Hydrological Model • EDCHM</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="deps/_Open%20Sans-0.4.1/font.css" rel="stylesheet">
+<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Editable Distributed Conceptual (c++) Hydrological Model">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Editable Distributed Conceptual (c++) Hydrological Model">
 <meta property="og:description" content="EDCHM is a flexible hydrological modeling framework that incorporates a collection of well-known models, such as GR4J, HBV, VIC, and UBC. Every model is divided into clear, well-defined processes as individual, self-contained modules.
   Editable means: EDCHM allows users not only easily select and combine different process as new model structures, but also can choose from a range of methods for each specific process. EDCHM providing a high degree of flexibility and customization.
   Distributed means: EDCHM allows users to divide the research catchment into sub-basins, grids, or hydrological response units (HRUs), providing a high degree of spatial resolution and flexibility. This enables users to capture and simulate the water cycle at different scales, from the regional level down to the level of individual land units or catchment areas.
   Conceptual means: While all of the modules in a modular hydrological model use simplified, abstract methods, or empirical approaches, but not physical equation and detailed, mathematical method.">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">EDCHM</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.9</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="index.html">EDCHM</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="reference/index.html">Reference</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="articles/EDCHM.html">Get started</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav"></ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="editable-distributed-conceptual-c-hydrological-model-">Editable Distributed Conceptual (c++) Hydrological Model 
+<a class="anchor" aria-label="anchor" href="#editable-distributed-conceptual-c-hydrological-model-"></a>
+</h1>
 </div>
-<!--/.navbar -->
+<p>The EDCHM package is a flexible hydrological modeling framework that incorporates a collection of well-known models, such as GR4J , HBV , VIC , and UBC . Each model is divided into clear, well-defined processes as individual, self-contained modules. EDCHM allows users to not only easily select and combine different processes to create new model structures, but also to choose from a range of methods for each specific process. This provides a high degree of flexibility and customization. EDCHM also allows users to divide the research catchment into sub-basins, grids, or hydrological response units (HRUs), providing a high degree of spatial resolution and flexibility. This enables users to capture and simulate the water cycle at different scales, from the regional level down to the level of individual land units or catchment areas.</p>
+</div>
+<div class="section level1">
+<h1 id="overview-of-this-document">Overview of this document<a class="anchor" aria-label="anchor" href="#overview-of-this-document"></a>
+</h1>
+<p>Due to the limitations of the Rd document format, the topics in the <code>EDCHM</code> package documentation are ordered alphabetically. To help users navigate the documentation, an auxiliary table is provided that outlines the design of the <code>EDCHM</code> package.</p>
+<p>You will find some basic concepts and overview of hole <code>EDCHM</code> in:</p>
+<ul>
+<li>
+<code>EDCHM-package</code>: basic concepts and describe of this document</li>
+<li>
+<code>all_vari</code>: description of all the variables</li>
+<li>
+<code>all_param</code>: description of all the parameters with ranges</li>
+</ul>
+<p>You can see all of the 12 process with their associated 62 methods (modules) in:</p>
+<ul>
+<li>
+<code>snowMelt</code>: melt the snow into liquid water</li>
+<li>
+<code>intercep</code>: intercept the water before is arrive the land surface</li>
+<li>
+<code>evatransActual</code>: calculate the actual evapotranspiration from interception of water in th soil</li>
+<li>
+<code>infilt</code>: water from land surface enters the soil</li>
+<li>
+<code>percola</code>: soil water through the pores of aquifer movement to ground water</li>
+<li>
+<code>inteflow</code>: runoff in the soil layer, which from <code>soilLy</code> directly into the streams or rivers</li>
+<li>
+<code>capirise</code>: ground water upward to the unsaturated soil layer</li>
+<li>
+<code>baseflow</code>: the portion of groundwater, that directly into the streams or rivers</li>
+<li>
+<code>lateral</code>: water exchange with other basin in the groundwater layer</li>
+<li>
+<code>confluenIUH</code>: runoff (runoff, interflow, baseflow) from the hydrological unit to the rivers</li>
+<li>
+<code>atmosSnow</code>: devide the precipitation into rainfall and snowfall</li>
+<li>
+<code>evatransPotential</code>: calculates the potential evapotranspiration</li>
+</ul>
+<p>You get the information how to use <code>EDCHM</code> and calibrate in: - <code>build_modell</code>: model building - <code>cali</code>: calibrate algorithms</p>
+</div>
+<div class="section level1">
+<h1 id="layer-and-process">Layer and Process<a class="anchor" aria-label="anchor" href="#layer-and-process"></a>
+</h1>
+<p>Before using the <code>EDCHM</code> framework, it is necessary to have a basic understanding of its concepts.</p>
+<p><img src="reference/figures/edchm_layer.svg"></p>
+<p>In the <code>EDCHM</code> framework, a <code>Layer</code> is defined as a vertical space with common characteristics. <code>EDCHM</code> defines five basic layers:</p>
+<ul>
+<li><p><code>atmosLy</code>: only stores meteorological data but doesn’t interact with other hydrological processes (in current version).</p></li>
+<li><p><code>snowLy</code>: is the layer of snow.</p></li>
+<li><p><code>landLy</code>: consists of two sublayers. Sublayer <code>intcpt</code> is a storage for intercepted water, which can be evaporated. Sublayer <code>land</code> serves only as a temperature layer for “pounded water” and doesn’t have any storage capacity.</p></li>
+<li><p><code>soilLy</code>: is defined as an unsaturated zone between land surface and water table of groundwater.</p></li>
+<li><p><code>groundLy</code>: is defined as a saturated zone of groundwater.</p></li>
+</ul>
+<p>In the <code>EDCHM</code> framework, a <code>Process</code> related to the movement or distribution of water on Earth. Some of them occur in a single layer, some of them occur between two layers. Here has defined 9 hydrological processes:</p>
+<ul>
+<li>
+<code>snowMelt</code>: melt the snow into liquid water.</li>
+<li>
+<code>intercep</code>: intercept the water before is arrive the land surface.</li>
+<li>
+<code>evatransActual</code>: calculate the actual evapotranspiration from interception of water in th soil.</li>
+<li>
+<code>infilt</code>: water from land surface enters the soil.</li>
+<li>
+<code>percola</code>: soil water through the pores of aquifer movement to ground water.</li>
+<li>
+<code>inteflow</code>: runoff in the soil layer, which from <code>soilLy</code> directly into the streams or rivers.</li>
+<li>
+<code>capirise</code>: ground water upward to the unsaturated soil layer.</li>
+<li>
+<code>baseflow</code>: the portion of groundwater, that directly into the streams or rivers.</li>
+<li>
+<code>lateral</code>: water exchange with other basin in the groundwater layer.</li>
+<li>
+<code>confluenIUH</code>: runoff (runoff, interflow, baseflow) from the hydrological unit to the rivers, in this process the water volume will not be changed but the distribution the time axis will be recalculeted with IUH (Instantaneous Unit Hydrograph) method.</li>
+</ul>
+<p>In addition, there are two meteological process:</p>
+<ul>
+<li>
+<code>atmosSnow</code>: devide the precipitation into rainfall and snowfall.</li>
+<li>
+<code>evatransPotential</code>: calculates the potential evapotranspiration.</li>
+</ul>
+<p>are both considered meteorological processes because they can be directly obtained from meteorological datasets or calculated using only meteorological data. The results of these processes serve always as input data for hydrological processes. <code>evatransPotential</code> is a crucial step in determining the actual evapotranspiration by most hydrological models.</p>
+</div>
+<div class="section level1">
+<h1 id="variable-and-parameter-define">Variable and Parameter define<a class="anchor" aria-label="anchor" href="#variable-and-parameter-define"></a>
+</h1>
+<p>With a clear understanding of layers and processes, we can now move on to the basic definitions in the context of modeling.</p>
+<p>All variable names in the EDCHM framework are composed of three parts: a <strong>group-name</strong>, a <strong>physical-name</strong> and a <strong>variable-units</strong> These parts are separated by an underscore <code>_</code>.</p>
+<ul>
+<li><p><code>group-name</code>: name of the <code>Layer</code> in which the variable is located. Sometimes it can also be the Process name or <code>time</code>, one important dimension. The <code>group-name</code> is limited to a maximum of 8 characters and must be in lowercase letters.</p></li>
+<li><p><code>physical-name</code>: the physical variable name, and it uses <em>camelCase</em> to combine multiple words. And the water volume will always simplified as <code>water</code>.</p></li>
+<li><p><code>variable-units</code>: the physical units of the variable</p></li>
+</ul>
+<p>To simplify the program, all time-dependent variables use <code>TS</code> as the time unit, which is defined by the model, it can be 1 hour, 4, 12, 24 hours and so on, but the time unit is not included in the variable name. Additionally, all variables are assumed to be homogeneous in the area, so the area unit square meter (<code>m2</code>) is also not included in the variable name.</p>
+<p><strong>group_variableName_unit</strong> some like <code>land_water_mm</code>, <code>atmos_temperature_Cel</code></p>
+<p>The following tables list the model variables and their corresponding formula symbols used in the <code>EDCHM</code>:</p>
+<ul><li>some state variables and Capicity of the layer storage:</li></ul>
+<table class="table">
+<thead><tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>Symbol</strong></th>
+<th><strong>Unit</strong></th>
+<th><strong>Description</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>water_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;W" title="W" alt="W"></td>
+<td>mm/m2</td>
+<td>water volume in one <code>Layer</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>land_water_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;W_%7Bland%7D" title="W_{land}" alt="W_{land}"></td>
+<td>mm/m2</td>
+<td>.. in <code>landLy</code>
+</td>
+</tr>
+<tr class="odd">
+<td><code>land_interceptWater_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;W_%7Bitcp%7D" title="W_{itcp}" alt="W_{itcp}"></td>
+<td>mm/m2</td>
+<td>.. in <code>landLy</code> (intercepted)</td>
+</tr>
+<tr class="even">
+<td><code>snow_ice_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;W_%7Bsnow%7D" title="W_{snow}" alt="W_{snow}"></td>
+<td>mm/m2</td>
+<td>.. in <code>snowLy</code> (equal water)</td>
+</tr>
+<tr class="odd">
+<td><code>soil_water_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;W_%7Bsoil%7D" title="W_{soil}" alt="W_{soil}"></td>
+<td>mm/m2</td>
+<td>.. in <code>soilLy</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>ground_water_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;W_%7Bgrnd%7D" title="W_{grnd}" alt="W_{grnd}"></td>
+<td>mm/m2</td>
+<td>.. in <code>groundLy</code>
+</td>
+</tr>
+<tr class="odd">
+<td><code>capacity_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;C" title="C" alt="C"></td>
+<td>mm/m2</td>
+<td>maximal capacity of storage in one <code>Layer</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>land_interceptCapacity_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;C_%7Bitcp%7D" title="C_{itcp}" alt="C_{itcp}"></td>
+<td>mm/m2</td>
+<td>.. in <code>landLy</code> (intercepted)</td>
+</tr>
+<tr class="odd">
+<td><code>soil_capacity_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;C_%7Bsoil%7D" title="C_{soil}" alt="C_{soil}"></td>
+<td>mm/m2</td>
+<td>.. in <code>soilLy</code>
+</td>
+</tr>
+<tr class="even">
+<td><code>ground_capacity_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;C_%7Bgrnd%7D" title="C_{grnd}" alt="C_{grnd}"></td>
+<td>mm/m2</td>
+<td>. in <code>groundLy</code>
+</td>
+</tr>
+</tbody>
+</table>
+<ul><li>some flux variables and potential flux:</li></ul>
+<table class="table">
+<thead><tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>Symbol</strong></th>
+<th><strong>Unit</strong></th>
+<th><strong>Description</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>flux_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F" title="F" alt="F"></td>
+<td>mm/m2/TS</td>
+<td>flux or flow in unit area</td>
+</tr>
+<tr class="even">
+<td><code>atmos_precipitation_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;P" title="P" alt="P"></td>
+<td>mm/m2/TS</td>
+<td>.. of precipitation</td>
+</tr>
+<tr class="odd">
+<td><code>atmos_rain_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;P_r" title="P_r" alt="P_r"></td>
+<td>mm/m2/TS</td>
+<td>.. of rain fall</td>
+</tr>
+<tr class="even">
+<td><code>atmos_snow_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;P_s" title="P_s" alt="P_s"></td>
+<td>mm/m2/TS</td>
+<td>.. of snow fall</td>
+</tr>
+<tr class="odd">
+<td><code>atmos_evatrans_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;E_a" title="E_a" alt="E_a"></td>
+<td>mm/m2/TS</td>
+<td>.. of evapotranspiration</td>
+</tr>
+<tr class="even">
+<td><code>land_intercept_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Bitcp%7D" title="F_{itcp}" alt="F_{itcp}"></td>
+<td>mm/m2/TS</td>
+<td>.. of interception</td>
+</tr>
+<tr class="odd">
+<td><code>land_infilt_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Biflt%7D" title="F_{iflt}" alt="F_{iflt}"></td>
+<td>mm/m2/TS</td>
+<td>.. of infiltration</td>
+</tr>
+<tr class="even">
+<td><code>land_runof_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Broff%7D" title="F_{roff}" alt="F_{roff}"></td>
+<td>mm/m2/TS</td>
+<td>.. of runoff</td>
+</tr>
+<tr class="odd">
+<td><code>snow_melt_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Bmelt%7D" title="F_{melt}" alt="F_{melt}"></td>
+<td>mm/m2/TS</td>
+<td>.. of snow melt</td>
+</tr>
+<tr class="even">
+<td><code>soil_percola_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Bpecl%7D" title="F_{pecl}" alt="F_{pecl}"></td>
+<td>mm/m2/TS</td>
+<td>.. of percolation</td>
+</tr>
+<tr class="odd">
+<td><code>soil_interflow_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Bintf%7D" title="F_{intf}" alt="F_{intf}"></td>
+<td>mm/m2/TS</td>
+<td>.. of interflow</td>
+</tr>
+<tr class="even">
+<td><code>ground_baseflow_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Bbase%7D" title="F_{base}" alt="F_{base}"></td>
+<td>mm/m2/TS</td>
+<td>.. of baseflow</td>
+</tr>
+<tr class="odd">
+<td><code>ground_capillarise_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Bcapi%7D" title="F_{capi}" alt="F_{capi}"></td>
+<td>mm/m2/TS</td>
+<td>.. of capillary rise</td>
+</tr>
+<tr class="even">
+<td><code>ground_lateral_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;F_%7Bltrl%7D" title="F_{ltrl}" alt="F_{ltrl}"></td>
+<td>mm/m2/TS</td>
+<td>.. of lateral flow</td>
+</tr>
+<tr class="odd">
+<td><code>potentialFlux_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;M" title="M" alt="M"></td>
+<td>mm/m2/TS</td>
+<td>potential (maximal) flux or flow</td>
+</tr>
+<tr class="even">
+<td><code>atmos_evatrans_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;E_p" title="E_p" alt="E_p"></td>
+<td>mm/m2/TS</td>
+<td>.. of evapotranspiration</td>
+</tr>
+<tr class="odd">
+<td><code>land_potentialInfilt_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;M_%7Biflt%7D" title="M_{iflt}" alt="M_{iflt}"></td>
+<td>mm/m2/TS</td>
+<td>.. of infiltration</td>
+</tr>
+<tr class="even">
+<td><code>soil_potentialPercola_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;M_%7Bpecl%7D" title="M_{pecl}" alt="M_{pecl}"></td>
+<td>mm/m2/TS</td>
+<td>.. of percolation</td>
+</tr>
+<tr class="odd">
+<td><code>soil_potentialInterflow_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;M_%7Bintf%7D" title="M_{intf}" alt="M_{intf}"></td>
+<td>mm/m2/TS</td>
+<td>.. of subsurface flow</td>
+</tr>
+<tr class="even">
+<td><code>ground_potentialBaseflow_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;M_%7Bbase%7D" title="M_{base}" alt="M_{base}"></td>
+<td>mm/m2/TS</td>
+<td>.. of baseflow</td>
+</tr>
+<tr class="odd">
+<td><code>soil_potentialCapirise_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;M_%7Bcapi%7D" title="M_{capi}" alt="M_{capi}"></td>
+<td>mm/m2/TS</td>
+<td>.. of capillary rise</td>
+</tr>
+<tr class="even">
+<td><code>ground_potentialLateral_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;M_%7Bltrl%7D" title="M_{ltrl}" alt="M_{ltrl}"></td>
+<td>mm/m2/TS</td>
+<td>.. of lateral flow</td>
+</tr>
+</tbody>
+</table>
+<ul><li>the stream flow will not in m3/TS or m3/s but also in flux dimension:</li></ul>
+<table class="table">
+<thead><tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>Symbol</strong></th>
+<th><strong>Unit</strong></th>
+<th><strong>Description</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>streamflow_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;Q" title="Q" alt="Q"></td>
+<td>mm/m2/TS</td>
+<td>streamflow in flux dimension</td>
+</tr>
+<tr class="even">
+<td><code>flow_runoff_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;Q_%7Broff%7D" title="Q_{roff}" alt="Q_{roff}"></td>
+<td>mm/m2/TS</td>
+<td>.. from runoff</td>
+</tr>
+<tr class="odd">
+<td><code>flow_interflow_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;Q_%7Bitfl%7D" title="Q_{itfl}" alt="Q_{itfl}"></td>
+<td>mm/m2/TS</td>
+<td>.. from interflow</td>
+</tr>
+<tr class="even">
+<td><code>flow_baseflow_mm</code></td>
+<td><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;Q_%7Bbase%7D" title="Q_{base}" alt="Q_{base}"></td>
+<td>mm/m2/TS</td>
+<td>.. from baseflow</td>
+</tr>
+</tbody>
+</table>
+<p>Additional there are also some symbols from the program-view:</p>
+<ul>
+<li>
+<p><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;D" title="D" alt="D">: the collection of all data of one group or layer</p>
+<ul>
+<li>
+<img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;D_%7Batms%7D" title="D_{atms}" alt="D_{atms}">: data in <code>atmosLy</code>
+</li>
+<li>
+<img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;D_%7Bland%7D" title="D_{land}" alt="D_{land}">: data in <code>landLy</code>
+</li>
+<li>
+<img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;D_%7Bsnow%7D" title="D_{snow}" alt="D_{snow}">: data in <code>snowLy</code>
+</li>
+<li>
+<img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;D_%7Bsoil%7D" title="D_{soil}" alt="D_{soil}">: data in <code>soilLy</code>
+</li>
+<li>
+<img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;D_%7Bgrnd%7D" title="D_{grnd}" alt="D_{grnd}">: data in <code>groundLy</code>
+</li>
+<li>
+<img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;D_%7Blssg%7D" title="D_{lssg}" alt="D_{lssg}">: data in any (but the one) <code>landLy</code>, <code>snowLy</code>, <code>soilLy</code> or <code>groundLy</code>
+</li>
+</ul>
+</li>
+<li><p><img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;f" title="f" alt="f">: function or modulr e.g. <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;f_%7BatmosSnow%7D" title="f_{atmosSnow}" alt="f_{atmosSnow}"> or <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;f_%7Binflt%7D" title="f_{inflt}" alt="f_{inflt}"></p></li>
+</ul>
+</div>
+<div class="section level1">
+<h1 id="parameter-define">Parameter define<a class="anchor" aria-label="anchor" href="#parameter-define"></a>
+</h1>
+<p>The parameters will be defined in every function topic The naming convention for parameters consists of four parts: a prefix <code>param</code>, the process name Parameters make up with prefix , Process name (sometimes same as Layer name), an abbreviation of the method in three small letters, and the original parameter name. This allows for clear and consistent naming of parameters within the program.</p>
+<p><strong>param_process_mtd_k</strong> some like <code>param_atmos_ubc_A0FORM</code>, <code>param_infilt_hbv_beta</code></p>
+<p>In every function topic, the range of parameters will be provided in the format of <code>&lt;low, upper&gt;</code>. <code>all_param</code> list also all the parameters from <code>EDCHM</code>.</p>
+</div>
+<div class="section level1">
+<h1 id="module-define">Module define<a class="anchor" aria-label="anchor" href="#module-define"></a>
+</h1>
+<p>In the last section, ten hydrological and two meteorological processes are defined in the conceptual view. Now they will be defined in programming view:</p>
+<p>For every process there is <strong>only one</strong> output variable and several input data (data and parameters):</p>
+<table class="table">
+<thead><tr class="header">
+<th><strong>Process</strong></th>
+<th><strong>Main Input</strong></th>
+<th><strong>Output</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>intercep</code></td>
+<td>atmos_perc_mm</td>
+<td>land_intercept_mm</td>
+</tr>
+<tr class="even">
+<td><code>snowMelt</code></td>
+<td>snow_ice_mm</td>
+<td>snow_melt_mm</td>
+</tr>
+<tr class="odd">
+<td><code>evatransActual</code></td>
+<td>layer_water_mm</td>
+<td>layer_evatrans_mm</td>
+</tr>
+<tr class="even">
+<td><code>infilt</code></td>
+<td>land_water_mm</td>
+<td>land_infilt_mm</td>
+</tr>
+<tr class="odd">
+<td><code>percola</code></td>
+<td>soil_water_mm</td>
+<td>soil_percola_mm</td>
+</tr>
+<tr class="even">
+<td><code>inteflow</code></td>
+<td>soil_water_mm</td>
+<td>soil_interflow_mm</td>
+</tr>
+<tr class="odd">
+<td><code>capirise</code></td>
+<td>ground_water_mm</td>
+<td>ground_capirise_mm</td>
+</tr>
+<tr class="even">
+<td><code>baseflow</code></td>
+<td>ground_water_mm</td>
+<td>ground_baseflow_mm</td>
+</tr>
+<tr class="odd">
+<td><code>lateral</code></td>
+<td>ground_water_mm</td>
+<td>ground_lateral_mm</td>
+</tr>
+<tr class="even">
+<td><code>confluenIUH</code></td>
+<td>layer_flux_mm</td>
+<td>flow_water_mm</td>
+</tr>
+<tr class="odd">
+<td><code>atmosSnow</code></td>
+<td>atmos_perc_mm</td>
+<td>atmos_snow_mm</td>
+</tr>
+<tr class="even">
+<td><code>evatransPotential</code></td>
+<td>atmos_DATA</td>
+<td>evatrans_potential_mm</td>
+</tr>
+</tbody>
+</table>
+<p>And then a <code>module</code> is defined as: a specific process with different method from well-know models. The name of module is composed of three parts: the process name and method name:</p>
+<p><strong>process_Method</strong> some like <code>evatransActual_VIC</code> and <code>evatransActual_LiangLand</code></p>
+<p>The following figure shows all 12 processes and 62 modules that have been defined to date.</p>
+<p><img src="reference/figures/all_modula.svg"></p>
+</div>
 
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-EDCHM is a flexible hydrological modeling framework that incorporates a collection of well-known models, such as GR4J, HBV, VIC, and UBC. Every model is divided into clear, well-defined processes as individual, self-contained modules.
-  Editable means: EDCHM allows users not only easily select and combine different process as new model structures, but also can choose from a range of methods for each specific process. EDCHM providing a high degree of flexibility and customization.
-  Distributed means: EDCHM allows users to divide the research catchment into sub-basins, grids, or hydrological response units (HRUs), providing a high degree of spatial resolution and flexibility. This enables users to capture and simulate the water cycle at different scales, from the regional level down to the level of individual land units or catchment areas.
-  Conceptual means: While all of the modules in a modular hydrological model use simplified, abstract methods, or empirical approaches, but not physical equation and detailed, mathematical method.
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+  </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>GPL (&gt;= 2)</li>
@@ -89,25 +570,24 @@ EDCHM is a flexible hydrological modeling framework that incorporates a collecti
 
 
 
-  </div>
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by Kan Lei.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 

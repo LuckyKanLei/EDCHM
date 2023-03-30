@@ -1,0 +1,9 @@
+template:
+  bootstrap: 5
+  bslib:
+    pkgdown-nav-height: 100px
+    bg: "#ffffff"
+    fg: "#00305d"
+    primary: "#EC008D"
+    base_font: {google: "Open Sans"}
+    heading_font: {google: "Open Sans"}

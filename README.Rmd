@@ -239,7 +239,7 @@ Instead, you have the freedom to choose any combination of processes that are re
 
 The mininal-, snow- and standard-structure are showed in the fowling figure:
 
-![](../man/figures/structure_miniSnowStad.svg)
+![](man/figures/structure_miniSnowStad.svg)
 
 `EDCHM` offers also three compiled models `EDCHM_mini`, `EDCHM_snow` and `EDCHM_GR4J`.
 

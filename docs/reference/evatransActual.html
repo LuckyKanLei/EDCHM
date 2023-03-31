@@ -61,7 +61,13 @@ The output density distribution from 7 methods:
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/LuckyKanLei/EDCHM/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -69,7 +75,7 @@ The output density distribution from 7 methods:
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1><strong>actuall evapotranspiration</strong></h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/LuckyKanLei/EDCHM/blob/HEAD/R/RcppExports.R" class="external-link"><code>R/RcppExports.R</code></a></small>
       <div class="d-none name"><code>evatransActual.Rd</code></div>
     </div>
 
@@ -235,8 +241,8 @@ And it need <strong>no parameter</strong>.
 where</p><ul><li><p><em></em>\(\gamma\) is <code>param_evatrans_ubc_gamma</code></p></li>
 </ul></div>
     <div class="section level2">
-    <h2 id="land-liang-liang-et-al-"><strong>Land_Liang</strong> (Liang et al. 1994)
-:<a class="anchor" aria-label="anchor" href="#land-liang-liang-et-al-"></a></h2>
+    <h2 id="-liangland-liang-et-al-"><strong>_LiangLand</strong> (Liang et al. 1994)
+:<a class="anchor" aria-label="anchor" href="#-liangland-liang-et-al-"></a></h2>
     <p><img src="figures/mdl_evatransActual_lia.svg" alt=""></p>
 <p>It is also a similar method like <code>evatransActual_SupplyPow()</code>,
 but it will estimate the supply ability agian, whwn the water is still not enough.

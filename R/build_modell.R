@@ -39,6 +39,7 @@
 #' confluenGround = "confluenIUH_Nash"
 #' )
 #' @return the range of parameters 
+#' @export
 build_modell <- function(process_method, path_model, name_model) {
   
   vari_initial <- c("land_interceptWater_mm", "soil_water_mm", "ground_water_mm", "snow_ice_mm")
@@ -226,7 +227,7 @@ using namespace EDCHM;
   
   
   # Param RANGE --------------------
-  lines_all_parameter <- readLines(file.path(path.package("EDCHM"), "R/all_parameter.R"))
+  # lines_all_parameter <- readLines("https://github.com/LuckyKanLei/EDCHM/blob/main/R/all_parameter.R")
   param_ori_ori <- param_ori |>  str_replace("param_confluenGround", "param_confluen") |> 
     str_replace("param_confluenSoil", "param_confluen") |>  
     str_replace("param_confluenLand", "param_confluen") |>  

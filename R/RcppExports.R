@@ -781,7 +781,7 @@ evatransActual_UBC <- function(atmos_potentialEvatrans_mm, water_mm, capacity_mm
 #' @rdname evatransActual
 #' 
 #' @details
-#' # **Land_Liang** \insertCite{VIC2_Liang_1994}{EDCHM}: 
+#' # **_LiangLand** \insertCite{VIC2_Liang_1994}{EDCHM}: 
 #'
 #' \if{html}{\figure{mdl_evatransActual_lia.svg}}
 #' \if{latex}{\figure{mdl_evatransActual_lia.pdf}{options: width=140mm}}

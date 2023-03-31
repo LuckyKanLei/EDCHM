@@ -19,65 +19,99 @@ library(EDCHM)
 ```
 
 
-# Build a model and calibrate the parameters
+# Three Ways to Obtain One Model
 
-The generally way of using the regular model can be described as follows:
+`EDCHM` provides three methods for obtaining a hydrological model that simulates the hydrological process.
 
-1. Select a model that suits your research needs and acquire the necessary software (or script).
-2. Prepare the input data and parameters and ensure they are accurate and complete.
-3. Use observed data to calibrate the model's parameters.
-4. Validate the optimized parameters by comparing them to known results or other models.
-5. Apply the model and its optimized parameter sets to research.
+## Use the Pre-Defined Model
 
-But in EDCHM, you need to at first build a model. The process of building a model is an intricate and nuanced task. 
-It requires a deep understanding of the system of hydrological modelling to ensure that every component (process) is properly integrated and optimized.
+`EDCHM` offers three pre-defined models:
+(Note: models with the `_full` suffix will return all variables in a `list`. 
+Otherwise, the standard model returns only the stream flow to speed up the calibration process.)
 
-1. Identify the essential processes involved in your research.
-2. Organize and connect these processes in a logical sequence that reflects the real-world system and the data-flow.
-3. Select the appropriate method (module) for each process, taking into account the specific requirements and constraints of your research.
-4. Assemble the model script using the chosen modules, and compile it into a working model that can be tested and refined.
+- `EDCHM_GR4J()` and `EDCHM_GR4J_full()`: original GR4J model, same as `airGR::RunModel_GR4J()`.
+- `EDCHM_mini()` and `EDCHM_mini_full()`: a minimal model structure with random process method.
+- `EDCHM_snow()` and `EDCHM_snow_full()`: a snow-structure model with random process method.
 
-By following this approach, you can create a custom-built model that is tailored to your specific research needs, 
-and that can be easily adjusted and updated as new information becomes available.
+The function arguments will show all the **boundary (input) variable** and **parameters**
+
+## Create a Model with a Pre-Defined Model Structure
+
+The `build_modell()` function offers a standard structure that contains 15 processes and 34 sub-structures, 
+which can generate more than ten millions models.
+
+To build a model, you only need to:
+
+1. Provide the method name for every process:
+
+```{r buildMdell1}
+## select the process method
+my_process_method <- c( 
+atmosSnow = "atmosSnow_ThresholdT",
+evatransPotential = "NULL",
+evatransLand = "NULL",
+evatransSoil = "evatransActual_SupplyRatio",
+intercep = "NULL",
+snowMelt = "snowMelt_Kustas",
+infilt = "infilt_AcceptRatio",
+percola = "percola_SupplyRatio",
+inteflow = "NULL",
+capirise = "NULL",
+baseflow = "baseflow_SupplyRatio",
+lateral = "lateral_GR4Jfix",
+confluenLand = "confluenIUH_Kelly",
+confluenSoil = "NULL",
+confluenGround = "confluenIUH_Nash"
+)
+```
+
+2. Create the model with `build_modell()`, this function will return the **rang of all parameters** in R-Space and a **.cpp-file** in a folder, which represents the model.
+
+**NOTE: Make sure that there is no model with the same name in the file path.**
+
+```{r buildMdell2}
+## build
+my_ParamRange <- build_modell(my_process_method, "E:\\Kan_Lei\\try", "TestModel")
+
+## check
+my_ParamRange
+```
+
+The .cpp-file looks like the [source code of EDCHM_mini](https://github.com/LuckyKanLei/EDCHM/blob/main/src/EDCHM_mini.cpp), which will be shown in the next section on how to use it.
+
+## Manually build a model with EDCHM modules
+
+Although `build_modell()` offers the possibility of generating over a million models, there may still be a requirement to create a model with a different structure. For example, it may involve adding or deleting some processes, or adding more layers.
 
 
-**BUT** despite the complexity of building a model, EDCHM also offers powerful tools `build_modell` that make the process more straightforward and efficient. 
-EDCHM has defined a well-organized structure, so you just need to choose some necessary process and a method for every process. 
-Once you have chosen your processes and methods, `build_modell` will automatically generate a model script, and it includes all the input arguments. 
-In the same time it will also return the parameter ranges that are needed for calibration and validation.
+As shown in the model [source code of EDCHM_mini](https://github.com/LuckyKanLei/EDCHM/blob/main/src/EDCHM_mini.cpp), it is straightforward to assemble a model with EDCHM modules. The steps are as follows:
 
-In the standard structure, there are twelve processes available for selection. 
-However, you can also choose to use only a subset of these processes, such as the six minimal processes. 
-Certainly, you are not limited to the standard or minimal structures when building a model with `build_modell`. 
-Instead, you have the freedom to choose any combination of processes that are relevant to your research.
+1. Select the deciding processes and their methods.
+2. Fill the arguments of the module (function) with specific variables and parameters. The original argument names are well-defined, so they can be used as variable names.
+3. Complete the boundary conditions (BC) variables (input, meteorological data) in matrix-form. The BC variables are always given as time series, so they must be in matrix form, for example, `atmos_precipitation_mm` and `atmos_potentialEvatrans_mm`.
+4. Complete the outflow variables in matrix-form. The outflow variables refer to the variables that will flow to the catchment outlet through "routing", for example, `land_runoff_mm` and `ground_baseflow_mm`.
+5. Set the processing after the module, the relationship between the calculated process-variable and the standard variables.
+6. Define all the parameters and input (BC) variables as arguments and declare all the other variables.
 
-The mininal-, snow- and standard-structure are showed in the fowling figure:
+With these six steps, we can build a new model, but it is important to ensure that the logic of relationships between variables is correct.
 
-![](../man/figures/structure_miniSnowStad.svg)
+# Run the model
 
-`EDCHM` offers also three compiled models `EDCHM_mini`, `EDCHM_snow` and `EDCHM_GR4J`.
+## Run the pre-defined model from EDCHM
 
-- `EDCHM_mini` and `EDCHM_snow` has used the mininal- and snow-structure with random method.
-- `EDCHM_GR4J` is just the GR4J from EDCHM version,
-The results produced by `EDCHM_GR4J` have been verified against the original `airGR::RunModel_GR4J()` implementation of the GR4J model, from `airGR`.
+The pre-defined model can be used like normal functions. You just need to provide the input data and the parameters in the correct format as specified in the function arguments. For example:
 
-Overall, `build_modell` offers a flexible and customizable approach to building models, allowing you to create a model that is tailored to your specific research needs and requirements.
-More details goto section `build_modell`.
+## Run the model with cpp source code
+
+If the model is still in CPP source code, you first need to compile it into a function using the `Rcpp::sourceCpp()` function. 
+For example:
+
+```{r eval = FALSE}
+
+Rcpp::sourceCpp("path/to/your/model.cpp")
+
+```
+
+Once the model is compiled, you can use it as a normal function by providing the input data and parameters in the correct format.
 
 
-
-
-After building the model, we can proceed to calibrate its parameters. 
-Typically, we need to evaluate the simulated results with observations to do this. 
-We can use the `hydroGOF` package, which offers many goodness-of-fit (GOF) functions, such as the Nash-Sutcliffe efficiency (NSE) and Kling-Gupta efficiency (KGE). 
-We still need an **evaluation function**, which takes the parameters as input and produces the evaluation results as output. 
-These inputs and outputs are then given to a calibration algorithm function, which decides the next set of probe parameters based on the result of the GOF.
-
-The evaluation function is more flexible because it depends on whether the parameters are lumped or distributed, 
-whether all or some of them need to be calibrated, and whether they are directly measured or calculated from categorical data such as soil class and land use. 
-EDCHM does not offer an evaluation function, but it is not difficult to create one.
-
-EDCHM offers two calibration algorithm functions: `cali_DDS()` \insertCite{DDS_Tolson_2007}{EDCHM} and `cali_UVS()`. 
-`cali_DDS()` is very powerful and recommended for most cases. 
-`cali_UVS()` is recommended for specific tasks and is a very original algorithm. 
-For more details, see the `cali` section of the documentation.

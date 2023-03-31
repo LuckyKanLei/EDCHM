@@ -27,7 +27,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/LuckyKanLei/EDCHM/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -38,8 +44,14 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="overview-of-edchm">Overview of EDCHM<a class="anchor" aria-label="anchor" href="#overview-of-edchm"></a></h2>
       
+      <p class="section-desc"></p><p>The basical description of EDCHM.</p>
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="basical-concept">Basical Concept<a class="anchor" aria-label="anchor" href="#basical-concept"></a></h3>
       
 
       
@@ -50,106 +62,340 @@
 
       <dl><dt>
           
-          <code><a href="all_param.html">all_param</a></code> 
+          <code><a href="EDCHM-package.html">EDCHM-package</a></code> 
+        </dt>
+        <dd>A Brief Introduction to EDCHM</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="parameter-list">Parameter List<a class="anchor" aria-label="anchor" href="#parameter-list"></a></h3>
+      <p class="section-desc"></p><p>All Parameters, that must be calibrated, with their range.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="all_param.html">lines_all_parameter</a></code> 
         </dt>
         <dd>parameters</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      
+      <h3 id="variable-list">Variable List<a class="anchor" aria-label="anchor" href="#variable-list"></a></h3>
+      <p class="section-desc"></p><p>All Variables, that as input of module or some commen variable for the whole model, some of them also need to calibrate.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="all_vari.html">all_vari</a></code> 
         </dt>
         <dd>variable define</dd>
-      </dl><dl><dt>
-          
-          <code><a href="atmos.html">atmos_NettoRadiat()</a></code> <code><a href="atmos.html">atmos_SaturatVaporPress()</a></code> <code><a href="atmos.html">atmos_VaporPress()</a></code> <code><a href="atmos.html">atmos_WindSpeed2m()</a></code> 
-        </dt>
-        <dd>functions for <strong>atmosphere</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="atmosSnow.html">atmosSnow_ThresholdT()</a></code> <code><a href="atmosSnow.html">atmosSnow_UBC()</a></code> 
-        </dt>
-        <dd>caculate <strong>snowfall</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="baseflow.html">baseflow_GR4J()</a></code> <code><a href="baseflow.html">baseflow_GR4Jfix()</a></code> <code><a href="baseflow.html">baseflow_SupplyRatio()</a></code> <code><a href="baseflow.html">baseflow_SupplyPow()</a></code> <code><a href="baseflow.html">baseflow_MaxPow()</a></code> <code><a href="baseflow.html">baseflow_ThreshPow()</a></code> <code><a href="baseflow.html">baseflow_Arno()</a></code> 
-        </dt>
-        <dd><strong>baseflow</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="build_modell.html">build_modell()</a></code> 
-        </dt>
-        <dd>build model with <strong>EDCHM-standard-structure</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="cali.html">cali_DDS()</a></code> <code><a href="cali.html">cali_UVS()</a></code> 
-        </dt>
-        <dd>Calibrate algorithms</dd>
-      </dl><dl><dt>
-          
-          <code><a href="capirise.html">capirise_HBV()</a></code> <code><a href="capirise.html">capirise_HBVfix()</a></code> <code><a href="capirise.html">capirise_AcceptRatio()</a></code> <code><a href="capirise.html">capirise_AcceptPow()</a></code> 
-        </dt>
-        <dd><strong>capilarise</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="confluen.html">confluen_IUH()</a></code> <code><a href="confluen.html">confluen_IUH2S()</a></code> <code><a href="confluen.html">confluen_IUH3S()</a></code> 
-        </dt>
-        <dd><strong>confluence</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="confluenIUH.html">confluenIUH_GR4J1()</a></code> <code><a href="confluenIUH.html">confluenIUH_GR4J2()</a></code> <code><a href="confluenIUH.html">confluenIUH_Kelly()</a></code> <code><a href="confluenIUH.html">confluenIUH_Nash()</a></code> <code><a href="confluenIUH.html">confluenIUH_Clark()</a></code> 
-        </dt>
-        <dd>create <strong>IUH</strong> (Instant Unit Hydrograph)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="EDCHM-package.html">EDCHM-package</a></code> 
-        </dt>
-        <dd>A Brief Introduction to EDCHM</dd>
-      </dl><dl><dt>
-          
-          <code><a href="evatransActual.html">evatransActual_SupplyRatio()</a></code> <code><a href="evatransActual.html">evatransActual_SupplyPow()</a></code> <code><a href="evatransActual.html">evatransActual_VIC()</a></code> <code><a href="evatransActual.html">evatransActual_GR4J()</a></code> <code><a href="evatransActual.html">evatransActual_UBC()</a></code> <code><a href="evatransActual.html">evatransActual_LiangLand()</a></code> <code><a href="evatransActual.html">evatransActual_LiangSoil()</a></code> 
-        </dt>
-        <dd><strong>actuall evapotranspiration</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="evatransPotential.html">evatransPotential_TurcWendling()</a></code> <code><a href="evatransPotential.html">evatransPotential_Linacre()</a></code> <code><a href="evatransPotential.html">evatransPotential_FAO56()</a></code> 
-        </dt>
-        <dd><strong>potential evapotranspiration</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="infilt.html">infilt_GR4J()</a></code> <code><a href="infilt.html">infilt_UBC()</a></code> <code><a href="infilt.html">infilt_SupplyRatio()</a></code> <code><a href="infilt.html">infilt_AcceptRatio()</a></code> <code><a href="infilt.html">infilt_SupplyPow()</a></code> <code><a href="infilt.html">infilt_AcceptPow()</a></code> <code><a href="infilt.html">infilt_HBV()</a></code> <code><a href="infilt.html">infilt_XAJ()</a></code> <code><a href="infilt.html">infilt_VIC()</a></code> 
-        </dt>
-        <dd><strong>infiltration</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="inteflow.html">inteflow_GR4Jfix()</a></code> <code><a href="inteflow.html">inteflow_MaxPow()</a></code> <code><a href="inteflow.html">inteflow_ThreshPow()</a></code> <code><a href="inteflow.html">inteflow_Arno()</a></code> <code><a href="inteflow.html">inteflow_BevenWood()</a></code> <code><a href="inteflow.html">inteflow_SupplyPow0()</a></code> <code><a href="inteflow.html">inteflow_SupplyPow()</a></code> <code><a href="inteflow.html">inteflow_SupplyRatio()</a></code> 
-        </dt>
-        <dd><strong>interflow</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="intercep.html">intercep_Full()</a></code> 
-        </dt>
-        <dd><strong>interception</strong> water from land go into the soil.</dd>
-      </dl><dl><dt>
-          
-          <code><a href="lateral.html">lateral_SupplyPow()</a></code> <code><a href="lateral.html">lateral_SupplyRatio()</a></code> <code><a href="lateral.html">lateral_GR4J()</a></code> <code><a href="lateral.html">lateral_GR4Jfix()</a></code> <code><a href="lateral.html">lateral_ThreshPow()</a></code> <code><a href="lateral.html">lateral_Arno()</a></code> 
-        </dt>
-        <dd><strong>lateral flux</strong></dd>
-      </dl><dl><dt>
-          
-          <code><a href="modells.html">EDCHM_GR4J()</a></code> <code><a href="modells.html">EDCHM_GR4J_full()</a></code> <code><a href="modells.html">EDCHM_mini()</a></code> <code><a href="modells.html">EDCHM_mini_full()</a></code> <code><a href="modells.html">EDCHM_snow()</a></code> <code><a href="modells.html">EDCHM_snow_full()</a></code> 
-        </dt>
-        <dd>modells build with EDCHM modulas</dd>
-      </dl><dl><dt>
-          
-          <code><a href="percola.html">percola_GR4J()</a></code> <code><a href="percola.html">percola_GR4Jfix()</a></code> <code><a href="percola.html">percola_MaxPow()</a></code> <code><a href="percola.html">percola_ThreshPow()</a></code> <code><a href="percola.html">percola_Arno()</a></code> <code><a href="percola.html">percola_BevenWood()</a></code> <code><a href="percola.html">percola_SupplyPow()</a></code> <code><a href="percola.html">percola_SupplyRatio()</a></code> 
-        </dt>
-        <dd><strong>percolation</strong></dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="hydrological-prozess-methode-function-">Hydrological Prozess Methode (Function)<a class="anchor" aria-label="anchor" href="#hydrological-prozess-methode-function-"></a></h2>
+      
+      <p class="section-desc"></p><p>Prozess methodes for hydrological process, that occur in the independet unit.</p>
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="snow-melt-">Snow (melt)<a class="anchor" aria-label="anchor" href="#snow-melt-"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="snowMelt.html">snowMelt_Kustas()</a></code> <code><a href="snowMelt.html">snowMelt_Factor()</a></code> 
         </dt>
         <dd><strong>snow</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="interception">Interception<a class="anchor" aria-label="anchor" href="#interception"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="intercep.html">intercep_Full()</a></code> 
+        </dt>
+        <dd><strong>interception</strong> water from land go into the soil.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="actual-evapotranspiration">Actual Evapotranspiration<a class="anchor" aria-label="anchor" href="#actual-evapotranspiration"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="evatransActual.html">evatransActual_SupplyRatio()</a></code> <code><a href="evatransActual.html">evatransActual_SupplyPow()</a></code> <code><a href="evatransActual.html">evatransActual_VIC()</a></code> <code><a href="evatransActual.html">evatransActual_GR4J()</a></code> <code><a href="evatransActual.html">evatransActual_UBC()</a></code> <code><a href="evatransActual.html">evatransActual_LiangLand()</a></code> <code><a href="evatransActual.html">evatransActual_LiangSoil()</a></code> 
+        </dt>
+        <dd><strong>actuall evapotranspiration</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="infiltartion">Infiltartion<a class="anchor" aria-label="anchor" href="#infiltartion"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="infilt.html">infilt_GR4J()</a></code> <code><a href="infilt.html">infilt_UBC()</a></code> <code><a href="infilt.html">infilt_SupplyRatio()</a></code> <code><a href="infilt.html">infilt_AcceptRatio()</a></code> <code><a href="infilt.html">infilt_SupplyPow()</a></code> <code><a href="infilt.html">infilt_AcceptPow()</a></code> <code><a href="infilt.html">infilt_HBV()</a></code> <code><a href="infilt.html">infilt_XAJ()</a></code> <code><a href="infilt.html">infilt_VIC()</a></code> 
+        </dt>
+        <dd><strong>infiltration</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="interflow">Interflow<a class="anchor" aria-label="anchor" href="#interflow"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="inteflow.html">inteflow_GR4Jfix()</a></code> <code><a href="inteflow.html">inteflow_MaxPow()</a></code> <code><a href="inteflow.html">inteflow_ThreshPow()</a></code> <code><a href="inteflow.html">inteflow_Arno()</a></code> <code><a href="inteflow.html">inteflow_BevenWood()</a></code> <code><a href="inteflow.html">inteflow_SupplyPow0()</a></code> <code><a href="inteflow.html">inteflow_SupplyPow()</a></code> <code><a href="inteflow.html">inteflow_SupplyRatio()</a></code> 
+        </dt>
+        <dd><strong>interflow</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="percolation">Percolation<a class="anchor" aria-label="anchor" href="#percolation"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="percola.html">percola_GR4J()</a></code> <code><a href="percola.html">percola_GR4Jfix()</a></code> <code><a href="percola.html">percola_MaxPow()</a></code> <code><a href="percola.html">percola_ThreshPow()</a></code> <code><a href="percola.html">percola_Arno()</a></code> <code><a href="percola.html">percola_BevenWood()</a></code> <code><a href="percola.html">percola_SupplyPow()</a></code> <code><a href="percola.html">percola_SupplyRatio()</a></code> 
+        </dt>
+        <dd><strong>percolation</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="capillary-rise">Capillary rise<a class="anchor" aria-label="anchor" href="#capillary-rise"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="capirise.html">capirise_HBV()</a></code> <code><a href="capirise.html">capirise_HBVfix()</a></code> <code><a href="capirise.html">capirise_AcceptRatio()</a></code> <code><a href="capirise.html">capirise_AcceptPow()</a></code> 
+        </dt>
+        <dd><strong>capilarise</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="baseflow">Baseflow<a class="anchor" aria-label="anchor" href="#baseflow"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="baseflow.html">baseflow_GR4J()</a></code> <code><a href="baseflow.html">baseflow_GR4Jfix()</a></code> <code><a href="baseflow.html">baseflow_SupplyRatio()</a></code> <code><a href="baseflow.html">baseflow_SupplyPow()</a></code> <code><a href="baseflow.html">baseflow_MaxPow()</a></code> <code><a href="baseflow.html">baseflow_ThreshPow()</a></code> <code><a href="baseflow.html">baseflow_Arno()</a></code> 
+        </dt>
+        <dd><strong>baseflow</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="lateral-flow">Lateral flow<a class="anchor" aria-label="anchor" href="#lateral-flow"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="lateral.html">lateral_SupplyPow()</a></code> <code><a href="lateral.html">lateral_SupplyRatio()</a></code> <code><a href="lateral.html">lateral_GR4J()</a></code> <code><a href="lateral.html">lateral_GR4Jfix()</a></code> <code><a href="lateral.html">lateral_ThreshPow()</a></code> <code><a href="lateral.html">lateral_Arno()</a></code> 
+        </dt>
+        <dd><strong>lateral flux</strong></dd>
+      </dl></div><div class="section level2">
+      <h2 id="meteological-prozess-methode-function-">Meteological Prozess Methode (Function)<a class="anchor" aria-label="anchor" href="#meteological-prozess-methode-function-"></a></h2>
+      
+      <p class="section-desc"></p><p>Prozess methodes for meteological process, that kann always be calculated just with the boundary data.</p>
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="meteological-variable">Meteological Variable<a class="anchor" aria-label="anchor" href="#meteological-variable"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="atmos.html">atmos_NettoRadiat()</a></code> <code><a href="atmos.html">atmos_SaturatVaporPress()</a></code> <code><a href="atmos.html">atmos_VaporPress()</a></code> <code><a href="atmos.html">atmos_WindSpeed2m()</a></code> 
+        </dt>
+        <dd>functions for <strong>atmosphere</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="snowfall">Snowfall<a class="anchor" aria-label="anchor" href="#snowfall"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="atmosSnow.html">atmosSnow_ThresholdT()</a></code> <code><a href="atmosSnow.html">atmosSnow_UBC()</a></code> 
+        </dt>
+        <dd>caculate <strong>snowfall</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="potential-reference-evapotranspiration">Potential (Reference) Evapotranspiration<a class="anchor" aria-label="anchor" href="#potential-reference-evapotranspiration"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="evatransPotential.html">evatransPotential_TurcWendling()</a></code> <code><a href="evatransPotential.html">evatransPotential_Linacre()</a></code> <code><a href="evatransPotential.html">evatransPotential_FAO56()</a></code> 
+        </dt>
+        <dd><strong>potential evapotranspiration</strong></dd>
+      </dl></div><div class="section level2">
+      <h2 id="confluence-routing-">Confluence (Routing)<a class="anchor" aria-label="anchor" href="#confluence-routing-"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions for confluence (routing), that connect the flow from every unit to the river or catchment outlet.</p>
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="function-for-confluence">Function for Confluence<a class="anchor" aria-label="anchor" href="#function-for-confluence"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="confluen.html">confluen_IUH()</a></code> <code><a href="confluen.html">confluen_IUH2S()</a></code> <code><a href="confluen.html">confluen_IUH3S()</a></code> 
+        </dt>
+        <dd><strong>confluence</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="create-iuh">Create IUH<a class="anchor" aria-label="anchor" href="#create-iuh"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="confluenIUH.html">confluenIUH_GR4J1()</a></code> <code><a href="confluenIUH.html">confluenIUH_GR4J2()</a></code> <code><a href="confluenIUH.html">confluenIUH_Kelly()</a></code> <code><a href="confluenIUH.html">confluenIUH_Nash()</a></code> <code><a href="confluenIUH.html">confluenIUH_Clark()</a></code> 
+        </dt>
+        <dd>create <strong>IUH</strong> (Instant Unit Hydrograph)</dd>
+      </dl></div><div class="section level2">
+      <h2 id="model-create-run-and-calibrate">Model Create, Run and Calibrate<a class="anchor" aria-label="anchor" href="#model-create-run-and-calibrate"></a></h2>
+      
+      
+
+      
+    </div><div class="section level2">
+      
+      <h3 id="model-create">Model Create<a class="anchor" aria-label="anchor" href="#model-create"></a></h3>
+      <p class="section-desc"></p><p>Functions assemble Modell from Modules.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="build_modell.html">build_modell()</a></code> 
+        </dt>
+        <dd>build model with <strong>EDCHM-standard-structure</strong></dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="assembled-models">Assembled Models<a class="anchor" aria-label="anchor" href="#assembled-models"></a></h3>
+      <p class="section-desc"></p><p>Three assembled models, that can directly used or as example for users.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="modells.html">EDCHM_GR4J()</a></code> <code><a href="modells.html">EDCHM_GR4J_full()</a></code> <code><a href="modells.html">EDCHM_mini()</a></code> <code><a href="modells.html">EDCHM_mini_full()</a></code> <code><a href="modells.html">EDCHM_snow()</a></code> <code><a href="modells.html">EDCHM_snow_full()</a></code> 
+        </dt>
+        <dd>modells build with EDCHM modulas</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="calibrate-algorithmus">Calibrate Algorithmus<a class="anchor" aria-label="anchor" href="#calibrate-algorithmus"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="cali.html">cali_DDS()</a></code> <code><a href="cali.html">cali_UVS()</a></code> 
+        </dt>
+        <dd>Calibrate algorithms</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

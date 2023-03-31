@@ -3,6 +3,11 @@
 
 # Editable Distributed Conceptual (c++) Hydrological Model <a href="https://luckykanlei.github.io/EDCHM"><img src="man/figures/logo.png" align="right" height="138" style="float:right; height:200px;"></a>
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/tidyverse/ggplot2/actions/workflows/R-CMD-check.yaml/badge.svg)]()
+<!-- badges: end -->
+
 The EDCHM package is a flexible hydrological modeling framework that
 incorporates a collection of well-known models, such as GR4J , HBV , VIC
 , and UBC . Each model is divided into clear, well-defined processes as

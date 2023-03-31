@@ -54,7 +54,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/LuckyKanLei/EDCHM/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -69,50 +76,118 @@
       <img src="../logo.png" class="logo" alt=""><h1>EDCHM</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/LuckyKanLei/EDCHM/blob/HEAD/vignettes/EDCHM.Rmd" class="external-link"><code>vignettes/EDCHM.Rmd</code></a></small>
       <div class="d-none name"><code>EDCHM.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">EDCHM</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/LuckyKanLei/EDCHM" class="external-link">EDCHM</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="build-a-model-and-calibrate-the-parameters">Build a model and calibrate the parameters<a class="anchor" aria-label="anchor" href="#build-a-model-and-calibrate-the-parameters"></a>
+<h2 id="three-ways-to-obtain-one-model">Three Ways to Obtain One Model<a class="anchor" aria-label="anchor" href="#three-ways-to-obtain-one-model"></a>
 </h2>
-<p>The generally way of using the regular model can be described as follows:</p>
-<ol style="list-style-type: decimal">
-<li>Select a model that suits your research needs and acquire the necessary software (or script).</li>
-<li>Prepare the input data and parameters and ensure they are accurate and complete.</li>
-<li>Use observed data to calibrate the model’s parameters.</li>
-<li>Validate the optimized parameters by comparing them to known results or other models.</li>
-<li>Apply the model and its optimized parameter sets to research.</li>
-</ol>
-<p>But in EDCHM, you need to at first build a model. The process of building a model is an intricate and nuanced task. It requires a deep understanding of the system of hydrological modelling to ensure that every component (process) is properly integrated and optimized.</p>
-<ol style="list-style-type: decimal">
-<li>Identify the essential processes involved in your research.</li>
-<li>Organize and connect these processes in a logical sequence that reflects the real-world system and the data-flow.</li>
-<li>Select the appropriate method (module) for each process, taking into account the specific requirements and constraints of your research.</li>
-<li>Assemble the model script using the chosen modules, and compile it into a working model that can be tested and refined.</li>
-</ol>
-<p>By following this approach, you can create a custom-built model that is tailored to your specific research needs, and that can be easily adjusted and updated as new information becomes available.</p>
-<p><strong>BUT</strong> despite the complexity of building a model, EDCHM also offers powerful tools <code>build_modell</code> that make the process more straightforward and efficient. EDCHM has defined a well-organized structure, so you just need to choose some necessary process and a method for every process. Once you have chosen your processes and methods, <code>build_modell</code> will automatically generate a model script, and it includes all the input arguments. In the same time it will also return the parameter ranges that are needed for calibration and validation.</p>
-<p>In the standard structure, there are twelve processes available for selection. However, you can also choose to use only a subset of these processes, such as the six minimal processes. Certainly, you are not limited to the standard or minimal structures when building a model with <code>build_modell</code>. Instead, you have the freedom to choose any combination of processes that are relevant to your research.</p>
-<p>The mininal-, snow- and standard-structure are showed in the fowling figure:</p>
-<p><img src="../reference/figures/structure_miniSnowStad.svg"></p>
-<p><code>EDCHM</code> offers also three compiled models <code>EDCHM_mini</code>, <code>EDCHM_snow</code> and <code>EDCHM_GR4J</code>.</p>
+<p><code>EDCHM</code> provides three methods for obtaining a hydrological model that simulates the hydrological process.</p>
+<div class="section level3">
+<h3 id="use-the-pre-defined-model">Use the Pre-Defined Model<a class="anchor" aria-label="anchor" href="#use-the-pre-defined-model"></a>
+</h3>
+<p><code>EDCHM</code> offers three pre-defined models: (Note: models with the <code>_full</code> suffix will return all variables in a <code>list</code>. Otherwise, the standard model returns only the stream flow to speed up the calibration process.)</p>
 <ul>
 <li>
-<code>EDCHM_mini</code> and <code>EDCHM_snow</code> has used the mininal- and snow-structure with random method.</li>
+<code><a href="../reference/modells.html">EDCHM_GR4J()</a></code> and <code><a href="../reference/modells.html">EDCHM_GR4J_full()</a></code>: original GR4J model, same as <code><a href="https://rdrr.io/pkg/airGR/man/RunModel_GR4J.html" class="external-link">airGR::RunModel_GR4J()</a></code>.</li>
 <li>
-<code>EDCHM_GR4J</code> is just the GR4J from EDCHM version, The results produced by <code>EDCHM_GR4J</code> have been verified against the original <code><a href="https://rdrr.io/pkg/airGR/man/RunModel_GR4J.html" class="external-link">airGR::RunModel_GR4J()</a></code> implementation of the GR4J model, from <code>airGR</code>.</li>
+<code><a href="../reference/modells.html">EDCHM_mini()</a></code> and <code><a href="../reference/modells.html">EDCHM_mini_full()</a></code>: a minimal model structure with random process method.</li>
+<li>
+<code><a href="../reference/modells.html">EDCHM_snow()</a></code> and <code><a href="../reference/modells.html">EDCHM_snow_full()</a></code>: a snow-structure model with random process method.</li>
 </ul>
-<p>Overall, <code>build_modell</code> offers a flexible and customizable approach to building models, allowing you to create a model that is tailored to your specific research needs and requirements. More details goto section <code>build_modell</code>.</p>
-<p>After building the model, we can proceed to calibrate its parameters. Typically, we need to evaluate the simulated results with observations to do this. We can use the <code>hydroGOF</code> package, which offers many goodness-of-fit (GOF) functions, such as the Nash-Sutcliffe efficiency (NSE) and Kling-Gupta efficiency (KGE). We still need an <strong>evaluation function</strong>, which takes the parameters as input and produces the evaluation results as output. These inputs and outputs are then given to a calibration algorithm function, which decides the next set of probe parameters based on the result of the GOF.</p>
-<p>The evaluation function is more flexible because it depends on whether the parameters are lumped or distributed, whether all or some of them need to be calibrated, and whether they are directly measured or calculated from categorical data such as soil class and land use. EDCHM does not offer an evaluation function, but it is not difficult to create one.</p>
-<p>EDCHM offers two calibration algorithm functions: <code><a href="../reference/cali.html">cali_DDS()</a></code>  and <code><a href="../reference/cali.html">cali_UVS()</a></code>. <code><a href="../reference/cali.html">cali_DDS()</a></code> is very powerful and recommended for most cases. <code><a href="../reference/cali.html">cali_UVS()</a></code> is recommended for specific tasks and is a very original algorithm. For more details, see the <code>cali</code> section of the documentation.</p>
+<p>The function arguments will show all the <strong>boundary (input) variable</strong> and <strong>parameters</strong></p>
 </div>
-  </main>
+<div class="section level3">
+<h3 id="create-a-model-with-a-pre-defined-model-structure">Create a Model with a Pre-Defined Model Structure<a class="anchor" aria-label="anchor" href="#create-a-model-with-a-pre-defined-model-structure"></a>
+</h3>
+<p>The <code><a href="../reference/build_modell.html">build_modell()</a></code> function offers a standard structure that contains 15 processes and 34 sub-structures, which can generate more than ten millions models.</p>
+<p>To build a model, you only need to:</p>
+<ol style="list-style-type: decimal">
+<li>Provide the method name for every process:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## select the process method</span></span>
+<span><span class="va">my_process_method</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> </span>
+<span>atmosSnow <span class="op">=</span> <span class="st">"atmosSnow_ThresholdT"</span>,</span>
+<span>evatransPotential <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>evatransLand <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>evatransSoil <span class="op">=</span> <span class="st">"evatransActual_SupplyRatio"</span>,</span>
+<span>intercep <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>snowMelt <span class="op">=</span> <span class="st">"snowMelt_Kustas"</span>,</span>
+<span>infilt <span class="op">=</span> <span class="st">"infilt_AcceptRatio"</span>,</span>
+<span>percola <span class="op">=</span> <span class="st">"percola_SupplyRatio"</span>,</span>
+<span>inteflow <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>capirise <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>baseflow <span class="op">=</span> <span class="st">"baseflow_SupplyRatio"</span>,</span>
+<span>lateral <span class="op">=</span> <span class="st">"lateral_GR4Jfix"</span>,</span>
+<span>confluenLand <span class="op">=</span> <span class="st">"confluenIUH_Kelly"</span>,</span>
+<span>confluenSoil <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>confluenGround <span class="op">=</span> <span class="st">"confluenIUH_Nash"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Create the model with <code><a href="../reference/build_modell.html">build_modell()</a></code>, this function will return the <strong>rang of all parameters</strong> in R-Space and a <strong>.cpp-file</strong> in a folder, which represents the model.</li>
+</ol>
+<p><strong>NOTE: Make sure that there is no model with the same name in the file path.</strong></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## build</span></span>
+<span><span class="va">my_ParamRange</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_modell.html">build_modell</a></span><span class="op">(</span><span class="va">my_process_method</span>, <span class="st">"E:\\Kan_Lei\\try"</span>, <span class="st">"TestModel"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## check</span></span>
+<span><span class="va">my_ParamRange</span></span>
+<span><span class="co">#&gt;                               min   max</span></span>
+<span><span class="co">#&gt; param_atmos_thr_Ts         -1e+00 3.000</span></span>
+<span><span class="co">#&gt; param_baseflow_sur_k        1e-02 1.000</span></span>
+<span><span class="co">#&gt; param_confluenGround_nas_n  1e+00 8.000</span></span>
+<span><span class="co">#&gt; param_confluenLand_kel_k    1e+00 4.000</span></span>
+<span><span class="co">#&gt; param_evatrans_sur_k        1e-01 1.000</span></span>
+<span><span class="co">#&gt; param_infilt_acr_k          1e-02 1.000</span></span>
+<span><span class="co">#&gt; param_lateral_grf_gamma     1e-02 5.000</span></span>
+<span><span class="co">#&gt; param_percola_sur_k         1e-02 1.000</span></span>
+<span><span class="co">#&gt; param_snow_kus_fE           5e-04 0.003</span></span>
+<span><span class="co">#&gt; param_snow_kus_fT           5e-02 1.000</span></span></code></pre></div>
+<p>The .cpp-file looks like the <a href="https://github.com/LuckyKanLei/EDCHM/blob/main/src/EDCHM_mini.cpp" class="external-link">source code of EDCHM_mini</a>, which will be shown in the next section on how to use it.</p>
+</div>
+<div class="section level3">
+<h3 id="manually-build-a-model-with-edchm-modules">Manually build a model with EDCHM modules<a class="anchor" aria-label="anchor" href="#manually-build-a-model-with-edchm-modules"></a>
+</h3>
+<p>Although <code><a href="../reference/build_modell.html">build_modell()</a></code> offers the possibility of generating over a million models, there may still be a requirement to create a model with a different structure. For example, it may involve adding or deleting some processes, or adding more layers.</p>
+<p>As shown in the model <a href="https://github.com/LuckyKanLei/EDCHM/blob/main/src/EDCHM_mini.cpp" class="external-link">source code of EDCHM_mini</a>, it is straightforward to assemble a model with EDCHM modules. The steps are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Select the deciding processes and their methods.</li>
+<li>Fill the arguments of the module (function) with specific variables and parameters. The original argument names are well-defined, so they can be used as variable names.</li>
+<li>Complete the boundary conditions (BC) variables (input, meteorological data) in matrix-form. The BC variables are always given as time series, so they must be in matrix form, for example, <code>atmos_precipitation_mm</code> and <code>atmos_potentialEvatrans_mm</code>.</li>
+<li>Complete the outflow variables in matrix-form. The outflow variables refer to the variables that will flow to the catchment outlet through “routing”, for example, <code>land_runoff_mm</code> and <code>ground_baseflow_mm</code>.</li>
+<li>Set the processing after the module, the relationship between the calculated process-variable and the standard variables.</li>
+<li>Define all the parameters and input (BC) variables as arguments and declare all the other variables.</li>
+</ol>
+<p>With these six steps, we can build a new model, but it is important to ensure that the logic of relationships between variables is correct.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="run-the-model">Run the model<a class="anchor" aria-label="anchor" href="#run-the-model"></a>
+</h2>
+<div class="section level3">
+<h3 id="run-the-pre-defined-model-from-edchm">Run the pre-defined model from EDCHM<a class="anchor" aria-label="anchor" href="#run-the-pre-defined-model-from-edchm"></a>
+</h3>
+<p>The pre-defined model can be used like normal functions. You just need to provide the input data and the parameters in the correct format as specified in the function arguments. For example:</p>
+</div>
+<div class="section level3">
+<h3 id="run-the-model-with-cpp-source-code">Run the model with cpp source code<a class="anchor" aria-label="anchor" href="#run-the-model-with-cpp-source-code"></a>
+</h3>
+<p>If the model is still in CPP source code, you first need to compile it into a function using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">Rcpp::sourceCpp()</a></code> function. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">Rcpp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">sourceCpp</a></span><span class="op">(</span><span class="st">"path/to/your/model.cpp"</span><span class="op">)</span></span></code></pre></div>
+<p>Once the model is compiled, you can use it as a normal function by providing the input data and parameters in the correct format.</p>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

@@ -178,7 +178,7 @@ where
 }
 }
 
-\section{\strong{Land_Liang} \insertCite{VIC2_Liang_1994}{EDCHM}:}{
+\section{\strong{_LiangLand} \insertCite{VIC2_Liang_1994}{EDCHM}:}{
 \if{html}{\figure{mdl_evatransActual_lia.svg}}
 \if{latex}{\figure{mdl_evatransActual_lia.pdf}{options: width=140mm}}
 

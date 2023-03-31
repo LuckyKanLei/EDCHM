@@ -7,3 +7,79 @@ template:
     primary: "#EC008D"
     base_font: {google: "Open Sans"}
     heading_font: {google: "Open Sans"}
+
+
+reference:
+- title: Overview of EDCHM
+  desc: The basical description of EDCHM.
+- subtitle: Basical Concept
+- contents:
+  - EDCHM-package
+- subtitle: Parameter List
+  desc: All Parameters, that must be calibrated, with their range.
+- contents:
+  - all_param
+- subtitle: Variable List
+  desc: All Variables, that as input of module or some commen variable for the whole model, some of them also need to calibrate.
+  contents:
+  - all_vari
+- title: Hydrological Prozess Methode (Function)
+  desc: Prozess methodes for hydrological process, that occur in the independet unit.
+- subtitle: Snow (melt)
+- contents:
+  - snowMelt
+- subtitle: Interception
+- contents:
+  - intercep
+- subtitle: Actual Evapotranspiration
+- contents:
+  - evatransActual
+- subtitle: Infiltartion
+- contents:
+  - infilt
+- subtitle: Interflow
+- contents:
+  - inteflow
+- subtitle: Percolation
+- contents:
+  - percola
+- subtitle: Capillary rise
+- contents:
+  - capirise
+- subtitle: Baseflow
+- contents:
+  - baseflow
+- subtitle: Lateral flow
+- contents:
+  - lateral
+- title: Meteological Prozess Methode (Function)
+  desc: Prozess methodes for meteological process, that kann always be calculated just with the boundary data.
+- subtitle: Meteological Variable
+- contents:
+  - atmos
+- subtitle: Snowfall
+- contents:
+  - atmosSnow
+- subtitle: Potential (Reference) Evapotranspiration
+- contents:
+  - evatransPotential
+- title: Confluence (Routing)
+  desc: Functions for confluence (routing), that connect the flow from every unit to the river or catchment outlet.
+- subtitle: Function for Confluence
+- contents:
+  - confluen
+- subtitle: Create IUH
+- contents:
+  - confluenIUH
+- title: Model Create, Run and Calibrate
+- subtitle: Model Create
+  desc: Functions assemble Modell from Modules.
+- contents:
+  - build_modell
+- subtitle: Assembled Models
+  desc: Three assembled models, that can directly used or as example for users.
+- contents:
+  - modells
+- subtitle: Calibrate Algorithmus
+- contents:
+  - cali

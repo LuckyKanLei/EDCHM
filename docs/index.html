@@ -84,48 +84,6 @@
 <p>The EDCHM package is a flexible hydrological modeling framework that incorporates a collection of well-known models, such as GR4J , HBV , VIC , and UBC . Each model is divided into clear, well-defined processes as individual, self-contained modules. EDCHM allows users to not only easily select and combine different processes to create new model structures, but also to choose from a range of methods for each specific process. This provides a high degree of flexibility and customization. EDCHM also allows users to divide the research catchment into sub-basins, grids, or hydrological response units (HRUs), providing a high degree of spatial resolution and flexibility. This enables users to capture and simulate the water cycle at different scales, from the regional level down to the level of individual land units or catchment areas.</p>
 </div>
 <div class="section level1">
-<h1 id="overview-of-this-document">Overview of this document<a class="anchor" aria-label="anchor" href="#overview-of-this-document"></a>
-</h1>
-<p>Due to the limitations of the Rd document format, the topics in the <code>EDCHM</code> package documentation are ordered alphabetically. To help users navigate the documentation, an auxiliary table is provided that outlines the design of the <code>EDCHM</code> package.</p>
-<p>You will find some basic concepts and overview of hole <code>EDCHM</code> in:</p>
-<ul>
-<li>
-<code>EDCHM-package</code>: basic concepts and describe of this document</li>
-<li>
-<code>all_vari</code>: description of all the variables</li>
-<li>
-<code>all_param</code>: description of all the parameters with ranges</li>
-</ul>
-<p>You can see all of the 12 process with their associated 62 methods (modules) in:</p>
-<ul>
-<li>
-<code>snowMelt</code>: melt the snow into liquid water</li>
-<li>
-<code>intercep</code>: intercept the water before is arrive the land surface</li>
-<li>
-<code>evatransActual</code>: calculate the actual evapotranspiration from interception of water in th soil</li>
-<li>
-<code>infilt</code>: water from land surface enters the soil</li>
-<li>
-<code>percola</code>: soil water through the pores of aquifer movement to ground water</li>
-<li>
-<code>inteflow</code>: runoff in the soil layer, which from <code>soilLy</code> directly into the streams or rivers</li>
-<li>
-<code>capirise</code>: ground water upward to the unsaturated soil layer</li>
-<li>
-<code>baseflow</code>: the portion of groundwater, that directly into the streams or rivers</li>
-<li>
-<code>lateral</code>: water exchange with other basin in the groundwater layer</li>
-<li>
-<code>confluenIUH</code>: runoff (runoff, interflow, baseflow) from the hydrological unit to the rivers</li>
-<li>
-<code>atmosSnow</code>: devide the precipitation into rainfall and snowfall</li>
-<li>
-<code>evatransPotential</code>: calculates the potential evapotranspiration</li>
-</ul>
-<p>You get the information how to use <code>EDCHM</code> and calibrate in: - <code>build_modell</code>: model building - <code>cali</code>: calibrate algorithms</p>
-</div>
-<div class="section level1">
 <h1 id="layer-and-process">Layer and Process<a class="anchor" aria-label="anchor" href="#layer-and-process"></a>
 </h1>
 <p>Before using the <code>EDCHM</code> framework, it is necessary to have a basic understanding of its concepts.</p>
@@ -552,6 +510,41 @@
 <p><strong>process_Method</strong> some like <code>evatransActual_VIC</code> and <code>evatransActual_LiangLand</code></p>
 <p>The following figure shows all 12 processes and 62 modules that have been defined to date.</p>
 <p><img src="reference/figures/all_modula.svg"></p>
+</div>
+<div class="section level1">
+<h1 id="build-a-model-and-calibrate-the-parameters">Build a model and calibrate the parameters<a class="anchor" aria-label="anchor" href="#build-a-model-and-calibrate-the-parameters"></a>
+</h1>
+<p>The generally way of using the regular model can be described as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Select a model that suits your research needs and acquire the necessary software (or script).</li>
+<li>Prepare the input data and parameters and ensure they are accurate and complete.</li>
+<li>Use observed data to calibrate the model’s parameters.</li>
+<li>Validate the optimized parameters by comparing them to known results or other models.</li>
+<li>Apply the model and its optimized parameter sets to research.</li>
+</ol>
+<p>But in EDCHM, you need to at first build a model. The process of building a model is an intricate and nuanced task. It requires a deep understanding of the system of hydrological modelling to ensure that every component (process) is properly integrated and optimized.</p>
+<ol style="list-style-type: decimal">
+<li>Identify the essential processes involved in your research.</li>
+<li>Organize and connect these processes in a logical sequence that reflects the real-world system and the data-flow.</li>
+<li>Select the appropriate method (module) for each process, taking into account the specific requirements and constraints of your research.</li>
+<li>Assemble the model script using the chosen modules, and compile it into a working model that can be tested and refined.</li>
+</ol>
+<p>By following this approach, you can create a custom-built model that is tailored to your specific research needs, and that can be easily adjusted and updated as new information becomes available.</p>
+<p><strong>BUT</strong> despite the complexity of building a model, EDCHM also offers powerful tools <code>build_modell</code> that make the process more straightforward and efficient. EDCHM has defined a well-organized structure, so you just need to choose some necessary process and a method for every process. Once you have chosen your processes and methods, <code>build_modell</code> will automatically generate a model script, and it includes all the input arguments. In the same time it will also return the parameter ranges that are needed for calibration and validation.</p>
+<p>In the standard structure, there are twelve processes available for selection. However, you can also choose to use only a subset of these processes, such as the six minimal processes. Certainly, you are not limited to the standard or minimal structures when building a model with <code>build_modell</code>. Instead, you have the freedom to choose any combination of processes that are relevant to your research.</p>
+<p>The mininal-, snow- and standard-structure are showed in the fowling figure:</p>
+<p><img src="reference/figures/structure_miniSnowStad.svg"></p>
+<p><code>EDCHM</code> offers also three compiled models <code>EDCHM_mini</code>, <code>EDCHM_snow</code> and <code>EDCHM_GR4J</code>.</p>
+<ul>
+<li>
+<code>EDCHM_mini</code> and <code>EDCHM_snow</code> has used the mininal- and snow-structure with random method.</li>
+<li>
+<code>EDCHM_GR4J</code> is just the GR4J from EDCHM version, The results produced by <code>EDCHM_GR4J</code> have been verified against the original <code><a href="https://rdrr.io/pkg/airGR/man/RunModel_GR4J.html" class="external-link">airGR::RunModel_GR4J()</a></code> implementation of the GR4J model, from <code>airGR</code>.</li>
+</ul>
+<p>Overall, <code>build_modell</code> offers a flexible and customizable approach to building models, allowing you to create a model that is tailored to your specific research needs and requirements. More details goto section <code>build_modell</code>.</p>
+<p>After building the model, we can proceed to calibrate its parameters. Typically, we need to evaluate the simulated results with observations to do this. We can use the <code>hydroGOF</code> package, which offers many goodness-of-fit (GOF) functions, such as the Nash-Sutcliffe efficiency (NSE) and Kling-Gupta efficiency (KGE). We still need an <strong>evaluation function</strong>, which takes the parameters as input and produces the evaluation results as output. These inputs and outputs are then given to a calibration algorithm function, which decides the next set of probe parameters based on the result of the GOF.</p>
+<p>The evaluation function is more flexible because it depends on whether the parameters are lumped or distributed, whether all or some of them need to be calibrated, and whether they are directly measured or calculated from categorical data such as soil class and land use. EDCHM does not offer an evaluation function, but it is not difficult to create one.</p>
+<p>EDCHM offers two calibration algorithm functions: <code><a href="reference/cali.html">cali_DDS()</a></code> and <code><a href="reference/cali.html">cali_UVS()</a></code>. <code><a href="reference/cali.html">cali_DDS()</a></code> is very powerful and recommended for most cases. <code><a href="reference/cali.html">cali_UVS()</a></code> is recommended for specific tasks and is a very original algorithm. For more details, see the <code>cali</code> section of the documentation.</p>
 </div>
 
   </main><aside class="col-md-3"><div class="links">

@@ -9,6 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  dpi=300,fig.width=7,
   collapse = TRUE,
   comment = "#>"
 )
@@ -86,12 +87,105 @@ Although `build_modell()` offers the possibility of generating over a million mo
 
 As shown in the model [source code of EDCHM_mini](https://github.com/LuckyKanLei/EDCHM/blob/main/src/EDCHM_mini.cpp), it is straightforward to assemble a model with EDCHM modules. The steps are as follows:
 
-1. Select the deciding processes and their methods.
+1. Select the deciding processes and their methods, the [Reference-Page](https://luckykanlei.github.io/EDCHM/reference/index.html) shows all of the processes and process-methods.
+
+
+
+
 2. Fill the arguments of the module (function) with specific variables and parameters. The original argument names are well-defined, so they can be used as variable names.
-3. Complete the boundary conditions (BC) variables (input, meteorological data) in matrix-form. The BC variables are always given as time series, so they must be in matrix form, for example, `atmos_precipitation_mm` and `atmos_potentialEvatrans_mm`.
-4. Complete the outflow variables in matrix-form. The outflow variables refer to the variables that will flow to the catchment outlet through "routing", for example, `land_runoff_mm` and `ground_baseflow_mm`.
-5. Set the processing after the module, the relationship between the calculated process-variable and the standard variables.
+
+The function with arguments looks like:
+
+```{Rcpp eval = FALSE}
+infilt_UBC(
+  land_water_mm,
+  land_impermeableFrac_1,
+  soil_water_mm,
+  soil_capacity_mm,
+  param_infilt_ubc_P0AGEN
+)
+```
+
+The code line in the model source code looks like:
+
+```{Rcpp eval = FALSE}
+soil_infilt_mm = infilt_UBC(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN);
+```
+
+In the most Situations the arguments names can be used directly.
+
+3. Set the processing after the module, the relationship between the calculated process-variable and the standard variables.
+
+```{Rcpp eval = FALSE}
+soil_infilt_mm = infilt_UBC(land_water_mm, land_impermeableFrac_1, soil_water_mm, soil_capacity_mm, param_infilt_ubc_P0AGEN);
+soil_water_mm += soil_infilt_mm;
+land_runoff_mm(i, _) = land_water_mm - soil_infilt_mm;
+```
+
+The infiltration water will infiltrate from the land-layer to the soil-layer, while the remaining water will flow as runoff to the river or catchment outlet. So these two lines will be added in to the model.
+
+
+4. Complete the boundary conditions (BC) variables (input, meteorological data) in matrix-form. The BC variables are always given as time series, so they must be in matrix form, for example, `atmos_precipitation_mm` and `atmos_potentialEvatrans_mm`.
+
+```{Rcpp eval = FALSE}
+soil_evatrans_mm = evatransActual_UBC(atmos_potentialEvatrans_mm(i, _), soil_water_mm, soil_capacity_mm, param_evatrans_ubc_gamma);
+soil_water_mm += - soil_evatrans_mm;
+land_water_mm = atmos_precipitation_mm(i, _);
+
+```
+
+Both variables is defined as matrices in input, so the time dimension (index i) must be specified.
+
+5. Complete the outflow variables in matrix-form. The outflow variables refer to the variables that will flow to the catchment outlet through "routing", for example, `land_runoff_mm` and `ground_baseflow_mm`.
+
+```{Rcpp eval = FALSE}
+land_runoff_mm(i, _) = land_water_mm - soil_infilt_mm;
+
+ground_baseflow_mm(i, _) = ground_baseflow_mm(i, _) + baseflow_temp;
+
+```
+
+Both variables must be declared as matrices, so the time dimension (index i) must be specified.
+
 6. Define all the parameters and input (BC) variables as arguments and declare all the other variables.
+
+
+```{Rcpp eval = FALSE}
+NumericMatrix EDCHM_mini(
+// basci parameter
+int n_time, 
+int n_spat,
+// BC data (Input)
+NumericMatrix atmos_potentialEvatrans_mm, 
+NumericMatrix atmos_precipitation_mm,
+// parameters, that schould be estimated and innitial condition (IC) data
+NumericVector ground_capacity_mm, 
+NumericVector ground_water_mm, 
+NumericVector land_impermeableFrac_1, 
+NumericVector soil_capacity_mm, 
+NumericVector soil_potentialPercola_mm, 
+NumericVector soil_water_mm, 
+// parameters, that need to calibrated
+NumericVector confluenLand_responseTime_TS, 
+NumericVector confluenGround_responseTime_TS, 
+NumericVector param_baseflow_grf_gamma, 
+NumericVector param_confluenLand_kel_k, 
+NumericVector param_evatrans_ubc_gamma, 
+NumericVector param_infilt_ubc_P0AGEN, 
+NumericVector param_percola_arn_k, 
+NumericVector param_percola_arn_thresh
+)
+{
+
+// declare the vector-variable, that contain only on dimension time like confluenLand_iuh_1 and confluenGround_iuh_1
+// or spat like land_water_mm, soil_evatrans_mm, soil_infilt_mm and soil_percolation_mm
+NumericVector land_water_mm, soil_evatrans_mm, soil_infilt_mm, soil_percolation_mm, confluenLand_iuh_1, confluenGround_iuh_1;
+// declare the matric-variable, that contain two dimensions time and spat
+NumericMatrix land_runoff_mm(n_time, n_spat), ground_baseflow_mm(n_time, n_spat), confluen_streamflow_mm(n_time, n_spat);
+
+return confluen_streamflow_mm;
+}
+```
 
 With these six steps, we can build a new model, but it is important to ensure that the logic of relationships between variables is correct.
 
@@ -99,7 +193,62 @@ With these six steps, we can build a new model, but it is important to ensure th
 
 ## Run the pre-defined model from EDCHM
 
-The pre-defined model can be used like normal functions. You just need to provide the input data and the parameters in the correct format as specified in the function arguments. For example:
+The pre-defined model can be used like normal functions. You just need to provide the input data and the parameters **in the correct format** as specified in the function arguments. For example:
+
+```{r runModel}
+## reform the data into matrix
+mat_EDCHM_TestData <- EDCHM_TestData |> as.matrix()
+
+## Parameter initial
+Param_mini <- c(land_impermeableFrac_1 = .5, 
+                     soil_potentialPercola_mm = 5, 
+                     confluenLand_responseTime_TS = 2, 
+                     confluenGround_responseTime_TS = 4, 
+                     Param_baseflow_grf_gamma = 3, 
+                     Param_confluenLand_kel_k = 2, 
+                     Param_evatrans_ubc_gamma = 1.5, 
+                     Param_infilt_ubc_P0AGEN = 2, 
+                     Param_percola_arn_k = .6, 
+                     Param_percola_arn_thresh = .7)
+
+## run the model
+test_Q <- EDCHM_mini(
+    180, # n_time, number of time step
+    1, # n_spat, number of spatial unit
+    mat_EDCHM_TestData[,"EC"] |> as.matrix(), # atmos_potentialEvatrans_mm, Input matrix
+    mat_EDCHM_TestData[,"PA2"] |> as.matrix(), # atmos_precipitation_mm, Input matrix
+    200., # ground_capacity_mm, (physical based) parameter
+    100., # ground_water_mm, initial condition
+    Param_mini["land_impermeableFrac_1"], 
+    200., # soil_capacity_mm, (physical based) parameter
+    Param_mini["soil_potentialPercola_mm"], 
+    100., # soil_water_mm, initial condition
+    Param_mini["confluenLand_responseTime_TS"], 
+    Param_mini["confluenGround_responseTime_TS"], 
+    Param_mini["Param_baseflow_grf_gamma"], 
+    Param_mini["Param_confluenLand_kel_k"], 
+    Param_mini["Param_evatrans_ubc_gamma"], 
+    Param_mini["Param_infilt_ubc_P0AGEN"], 
+    Param_mini["Param_percola_arn_k"], 
+    Param_mini["Param_percola_arn_thresh"])
+```
+
+
+The input (boundary condition) data, including precipitation (P) and potential evapotranspiration (PET), as well as the simulated model result stream flow (contribution in mm/TS, equivalent to precipitation) (Q), are shown below:
+
+```{r echo=FALSE, warning=FALSE, out.width = '100%', message = FALSE}
+library(tidyverse)
+ggplot() +
+  geom_line(data = EDCHM_TestData, aes(x = 1:180, y = PA2, color = "P")) +
+  geom_line(data = EDCHM_TestData, aes(x = 1:180, y = EC, color = "PET")) +
+  geom_line(aes(x = 1:180, y = test_Q, color = "Q_sim"), linewidth = 1) +
+  scale_color_manual("", values = c(P = "#009de0", PET = "#007d3f", Q_sim = "#00305d")) +
+  theme_bw()+
+  labs(x = "TS", y = "Flux [mm/TS]")+
+  theme(aspect.ratio = .618)
+  
+```
+
 
 ## Run the model with cpp source code
 
@@ -107,7 +256,6 @@ If the model is still in CPP source code, you first need to compile it into a fu
 For example:
 
 ```{r eval = FALSE}
-
 Rcpp::sourceCpp("path/to/your/model.cpp")
 
 ```

@@ -91,7 +91,7 @@
 <div class="section level3">
 <h3 id="use-the-pre-defined-model">Use the Pre-Defined Model<a class="anchor" aria-label="anchor" href="#use-the-pre-defined-model"></a>
 </h3>
-<p><code>EDCHM</code> offers three pre-defined models: (Note: models with the <code>_full</code> suffix will return all variables in a <code>list</code>. Otherwise, the standard model returns only the stream flow to speed up the calibration process.)</p>
+<p><code>EDCHM</code> offers three pre-defined models: (Note: models with the <code>_full</code> suffix will return all variables in a <code>list</code>. Otherwise, the standard model returns only the discharge to speed up the calibration process.)</p>
 <ul>
 <li>
 <code><a href="../reference/modells.html">EDCHM_GR4J()</a></code> and <code><a href="../reference/modells.html">EDCHM_GR4J_full()</a></code>: original GR4J model, same as <code><a href="https://rdrr.io/pkg/airGR/man/RunModel_GR4J.html" class="external-link">airGR::RunModel_GR4J()</a></code>.</li>
@@ -276,7 +276,7 @@
 <span>    <span class="va">Param_mini</span><span class="op">[</span><span class="st">"Param_infilt_ubc_P0AGEN"</span><span class="op">]</span>, </span>
 <span>    <span class="va">Param_mini</span><span class="op">[</span><span class="st">"Param_percola_arn_k"</span><span class="op">]</span>, </span>
 <span>    <span class="va">Param_mini</span><span class="op">[</span><span class="st">"Param_percola_arn_thresh"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p>The input (boundary condition) data, including precipitation (P) and potential evapotranspiration (PET), as well as the simulated model result stream flow (contribution in mm/TS, equivalent to precipitation) (Q), are shown below:</p>
+<p>The input (boundary condition) data, including precipitation (P) and potential evapotranspiration (PET), as well as the simulated model result discharge (contribution in mm/TS, equivalent to precipitation) (Q), are shown below:</p>
 <p><img src="EDCHM_files/figure-html/unnamed-chunk-8-1.png" width="100%"></p>
 </div>
 <div class="section level3">
@@ -284,8 +284,7 @@
 </h3>
 <p>If the model is still in CPP source code, you first need to compile it into a function using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">Rcpp::sourceCpp()</a></code> function. For example:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu">Rcpp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">sourceCpp</a></span><span class="op">(</span><span class="st">"path/to/your/model.cpp"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">Rcpp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">sourceCpp</a></span><span class="op">(</span><span class="st">"path/to/your/model.cpp"</span><span class="op">)</span></span></code></pre></div>
 <p>Once the model is compiled, you can use it as a normal function by providing the input data and parameters in the correct format.</p>
 </div>
 </div>

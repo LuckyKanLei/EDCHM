@@ -28,7 +28,7 @@ library(EDCHM)
 
 `EDCHM` offers three pre-defined models:
 (Note: models with the `_full` suffix will return all variables in a `list`. 
-Otherwise, the standard model returns only the stream flow to speed up the calibration process.)
+Otherwise, the standard model returns only the discharge to speed up the calibration process.)
 
 - `EDCHM_GR4J()` and `EDCHM_GR4J_full()`: original GR4J model, same as `airGR::RunModel_GR4J()`.
 - `EDCHM_mini()` and `EDCHM_mini_full()`: a minimal model structure with random process method.
@@ -234,7 +234,7 @@ test_Q <- EDCHM_mini(
 ```
 
 
-The input (boundary condition) data, including precipitation (P) and potential evapotranspiration (PET), as well as the simulated model result stream flow (contribution in mm/TS, equivalent to precipitation) (Q), are shown below:
+The input (boundary condition) data, including precipitation (P) and potential evapotranspiration (PET), as well as the simulated model result discharge (contribution in mm/TS, equivalent to precipitation) (Q), are shown below:
 
 ```{r echo=FALSE, warning=FALSE, out.width = '100%', message = FALSE}
 library(tidyverse)

@@ -68,14 +68,19 @@ confluenGround = "confluenIUH_Nash"
 
 2. Create the model with `build_modell()`, this function will return the **rang of all parameters** in R-Space and a **.cpp-file** in a folder, which represents the model.
 
-**NOTE: Make sure that there is no model with the same name in the file path.**
+**NOTE: Make sure that there is no model with the same name in the file path, when you give the file path.**
 
 ```{r buildMdell2}
 ## build
-my_ParamRange <- build_modell(my_process_method, "TestModel")
+my_Model <- build_modell(my_process_method, "TestModel")
 
-## check
-my_ParamRange
+## check model code
+my_Model$code_Model |> cat(sep = "\n")
+```
+
+```{r buildMdell3}
+## check parameter range
+my_Model$range_Parameter
 ```
 
 The .cpp-file looks like the [source code of EDCHM_mini](https://github.com/LuckyKanLei/EDCHM/blob/main/src/EDCHM_mini.cpp), which will be shown in the next section on how to use it.

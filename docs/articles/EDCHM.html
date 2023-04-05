@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Open%20Sans-0.4.1/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Open_Sans-0.4.5/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="EDCHM">
@@ -132,13 +132,91 @@
 <ol start="2" style="list-style-type: decimal">
 <li>Create the model with <code><a href="../reference/build_modell.html">build_modell()</a></code>, this function will return the <strong>rang of all parameters</strong> in R-Space and a <strong>.cpp-file</strong> in a folder, which represents the model.</li>
 </ol>
-<p><strong>NOTE: Make sure that there is no model with the same name in the file path.</strong></p>
+<p><strong>NOTE: Make sure that there is no model with the same name in the file path, when you give the file path.</strong></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## build</span></span>
-<span><span class="va">my_ParamRange</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_modell.html">build_modell</a></span><span class="op">(</span><span class="va">my_process_method</span>, <span class="st">"E:\\Kan_Lei\\try"</span>, <span class="st">"TestModel"</span><span class="op">)</span></span>
+<span><span class="va">my_Model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/build_modell.html">build_modell</a></span><span class="op">(</span><span class="va">my_process_method</span>, <span class="st">"TestModel"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## check</span></span>
-<span><span class="va">my_ParamRange</span></span>
+<span><span class="co">## check model code</span></span>
+<span><span class="va">my_Model</span><span class="op">$</span><span class="va">code_Model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span>sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; #include &lt;Rcpp.h&gt;</span></span>
+<span><span class="co">#&gt; // [[Rcpp::depends(EDCHM)]]</span></span>
+<span><span class="co">#&gt; #include &lt;EDCHM.h&gt;</span></span>
+<span><span class="co">#&gt; using namespace Rcpp;</span></span>
+<span><span class="co">#&gt; using namespace EDCHM;</span></span>
+<span><span class="co">#&gt; // [[Rcpp::export]]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; NumericMatrix EDCHM_TestModel(</span></span>
+<span><span class="co">#&gt; int n_time, </span></span>
+<span><span class="co">#&gt; int n_spat,</span></span>
+<span><span class="co">#&gt; NumericMatrix atmos_netRadiat_MJ, </span></span>
+<span><span class="co">#&gt; NumericMatrix atmos_potentialEvatrans_mm, </span></span>
+<span><span class="co">#&gt; NumericMatrix atmos_precipitation_mm, </span></span>
+<span><span class="co">#&gt; NumericMatrix atmos_temperature_Cel, </span></span>
+<span><span class="co">#&gt; NumericVector ground_capacity_mm, </span></span>
+<span><span class="co">#&gt; NumericVector ground_potentialLateral_mm, </span></span>
+<span><span class="co">#&gt; NumericVector ground_water_mm, </span></span>
+<span><span class="co">#&gt; NumericVector snow_ice_mm, </span></span>
+<span><span class="co">#&gt; NumericVector soil_capacity_mm, </span></span>
+<span><span class="co">#&gt; NumericVector soil_water_mm, </span></span>
+<span><span class="co">#&gt; NumericVector time_step_h, </span></span>
+<span><span class="co">#&gt; NumericVector confluenGround_responseTime_TS, </span></span>
+<span><span class="co">#&gt; NumericVector confluenLand_responseTime_TS, </span></span>
+<span><span class="co">#&gt; NumericVector param_atmos_thr_Ts, </span></span>
+<span><span class="co">#&gt; NumericVector param_baseflow_sur_k, </span></span>
+<span><span class="co">#&gt; NumericVector param_confluenGround_nas_n, </span></span>
+<span><span class="co">#&gt; NumericVector param_confluenLand_kel_k, </span></span>
+<span><span class="co">#&gt; NumericVector param_evatrans_sur_k, </span></span>
+<span><span class="co">#&gt; NumericVector param_infilt_acr_k, </span></span>
+<span><span class="co">#&gt; NumericVector param_lateral_grf_gamma, </span></span>
+<span><span class="co">#&gt; NumericVector param_percola_sur_k, </span></span>
+<span><span class="co">#&gt; NumericVector param_snow_kus_fE, </span></span>
+<span><span class="co">#&gt; NumericVector param_snow_kus_fT</span></span>
+<span><span class="co">#&gt; )</span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; NumericVector atmos_snow_mm, confluenGround_iuh_1, confluenLand_iuh_1, ground_lateral_mm, land_water_mm, snow_melt_mm, soil_evatrans_mm, soil_infilt_mm, soil_percolation_mm;</span></span>
+<span><span class="co">#&gt; NumericMatrix land_runoff_mm(n_time, n_spat), ground_baseflow_mm(n_time, n_spat), confluen_streamflow_mm(n_time, n_spat);</span></span>
+<span><span class="co">#&gt; for (int i= 0; i &lt; n_time; i++) {</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; atmos_snow_mm = atmosSnow_ThresholdT(atmos_precipitation_mm(i, _), atmos_temperature_Cel(i, _), param_atmos_thr_Ts);</span></span>
+<span><span class="co">#&gt; atmos_precipitation_mm(i, _) = atmos_precipitation_mm(i, _) - atmos_snow_mm;</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; soil_evatrans_mm = evatransActual_SupplyRatio(atmos_potentialEvatrans_mm(i, _), soil_water_mm, soil_capacity_mm, param_evatrans_sur_k);</span></span>
+<span><span class="co">#&gt; soil_water_mm += - soil_evatrans_mm;</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; snow_melt_mm = snowMelt_Kustas(snow_ice_mm, atmos_temperature_Cel(i, _), atmos_netRadiat_MJ(i, _), time_step_h, param_snow_kus_fE, param_snow_kus_fT);</span></span>
+<span><span class="co">#&gt; land_water_mm += snow_melt_mm;</span></span>
+<span><span class="co">#&gt; snow_ice_mm += -snow_melt_mm;</span></span>
+<span><span class="co">#&gt; snow_ice_mm += atmos_snow_mm;</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; soil_infilt_mm = infilt_AcceptRatio(land_water_mm, soil_water_mm, soil_capacity_mm, param_infilt_acr_k);</span></span>
+<span><span class="co">#&gt; soil_water_mm += soil_infilt_mm;</span></span>
+<span><span class="co">#&gt; land_runoff_mm(i, _) = land_water_mm - soil_infilt_mm;</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; soil_percolation_mm = percola_SupplyRatio(soil_water_mm, param_percola_sur_k);</span></span>
+<span><span class="co">#&gt; ground_water_mm += soil_percolation_mm;</span></span>
+<span><span class="co">#&gt; soil_water_mm += - soil_percolation_mm;</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ground_baseflow_mm(i, _) = baseflow_SupplyRatio(ground_water_mm, param_baseflow_sur_k);</span></span>
+<span><span class="co">#&gt; ground_water_mm += - ground_baseflow_mm(i, _);</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ground_lateral_mm = lateral_GR4Jfix(ground_water_mm, ground_capacity_mm, ground_potentialLateral_mm, param_lateral_grf_gamma);</span></span>
+<span><span class="co">#&gt; ground_water_mm += ground_lateral_mm;</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; for (int j= 0; j &lt; n_spat; j++) {</span></span>
+<span><span class="co">#&gt; confluenLand_iuh_1 = confluenIUH_Kelly(confluenLand_responseTime_TS(j), param_confluenLand_kel_k(j));</span></span>
+<span><span class="co">#&gt; confluenGround_iuh_1 = confluenIUH_Nash(confluenGround_responseTime_TS(j), param_confluenGround_nas_n(j));</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; confluen_streamflow_mm(_, j) = confluen_IUH2S(land_runoff_mm(_, j), ground_baseflow_mm(_, j), confluenLand_iuh_1, confluenGround_iuh_1);</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; return confluen_streamflow_mm;</span></span>
+<span><span class="co">#&gt; }</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## check parameter range</span></span>
+<span><span class="va">my_Model</span><span class="op">$</span><span class="va">range_Parameter</span></span>
 <span><span class="co">#&gt;                               min   max</span></span>
 <span><span class="co">#&gt; param_atmos_thr_Ts         -1e+00 3.000</span></span>
 <span><span class="co">#&gt; param_baseflow_sur_k        1e-02 1.000</span></span>
@@ -162,74 +240,74 @@
 <li><p>Fill the arguments of the module (function) with specific variables and parameters. The original argument names are well-defined, so they can be used as variable names.</p></li>
 </ol>
 <p>The function with arguments looks like:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>infilt_UBC<span class="op">(</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  land_water_mm<span class="op">,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  land_impermeableFrac_1<span class="op">,</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  soil_water_mm<span class="op">,</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  soil_capacity_mm<span class="op">,</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  param_infilt_ubc_P0AGEN</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>infilt_UBC<span class="op">(</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  land_water_mm<span class="op">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  land_impermeableFrac_1<span class="op">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  soil_water_mm<span class="op">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  soil_capacity_mm<span class="op">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  param_infilt_ubc_P0AGEN</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span></code></pre></div>
 <p>The code line in the model source code looks like:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>soil_infilt_mm <span class="op">=</span> infilt_UBC<span class="op">(</span>land_water_mm<span class="op">,</span> land_impermeableFrac_1<span class="op">,</span> soil_water_mm<span class="op">,</span> soil_capacity_mm<span class="op">,</span> param_infilt_ubc_P0AGEN<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>soil_infilt_mm <span class="op">=</span> infilt_UBC<span class="op">(</span>land_water_mm<span class="op">,</span> land_impermeableFrac_1<span class="op">,</span> soil_water_mm<span class="op">,</span> soil_capacity_mm<span class="op">,</span> param_infilt_ubc_P0AGEN<span class="op">);</span></span></code></pre></div>
 <p>In the most Situations the arguments names can be used directly.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Set the processing after the module, the relationship between the calculated process-variable and the standard variables.</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>soil_infilt_mm <span class="op">=</span> infilt_UBC<span class="op">(</span>land_water_mm<span class="op">,</span> land_impermeableFrac_1<span class="op">,</span> soil_water_mm<span class="op">,</span> soil_capacity_mm<span class="op">,</span> param_infilt_ubc_P0AGEN<span class="op">);</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>soil_water_mm <span class="op">+=</span> soil_infilt_mm<span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>land_runoff_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">=</span> land_water_mm <span class="op">-</span> soil_infilt_mm<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>soil_infilt_mm <span class="op">=</span> infilt_UBC<span class="op">(</span>land_water_mm<span class="op">,</span> land_impermeableFrac_1<span class="op">,</span> soil_water_mm<span class="op">,</span> soil_capacity_mm<span class="op">,</span> param_infilt_ubc_P0AGEN<span class="op">);</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>soil_water_mm <span class="op">+=</span> soil_infilt_mm<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>land_runoff_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">=</span> land_water_mm <span class="op">-</span> soil_infilt_mm<span class="op">;</span></span></code></pre></div>
 <p>The infiltration water will infiltrate from the land-layer to the soil-layer, while the remaining water will flow as runoff to the river or catchment outlet. So these two lines will be added in to the model.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Complete the boundary conditions (BC) variables (input, meteorological data) in matrix-form. The BC variables are always given as time series, so they must be in matrix form, for example, <code>atmos_precipitation_mm</code> and <code>atmos_potentialEvatrans_mm</code>.</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>soil_evatrans_mm <span class="op">=</span> evatransActual_UBC<span class="op">(</span>atmos_potentialEvatrans_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">),</span> soil_water_mm<span class="op">,</span> soil_capacity_mm<span class="op">,</span> param_evatrans_ubc_gamma<span class="op">);</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>soil_water_mm <span class="op">+=</span> <span class="op">-</span> soil_evatrans_mm<span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>land_water_mm <span class="op">=</span> atmos_precipitation_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>soil_evatrans_mm <span class="op">=</span> evatransActual_UBC<span class="op">(</span>atmos_potentialEvatrans_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">),</span> soil_water_mm<span class="op">,</span> soil_capacity_mm<span class="op">,</span> param_evatrans_ubc_gamma<span class="op">);</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>soil_water_mm <span class="op">+=</span> <span class="op">-</span> soil_evatrans_mm<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>land_water_mm <span class="op">=</span> atmos_precipitation_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">);</span></span></code></pre></div>
 <p>Both variables is defined as matrices in input, so the time dimension (index i) must be specified.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Complete the outflow variables in matrix-form. The outflow variables refer to the variables that will flow to the catchment outlet through “routing”, for example, <code>land_runoff_mm</code> and <code>ground_baseflow_mm</code>.</li>
 </ol>
-<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>land_runoff_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">=</span> land_water_mm <span class="op">-</span> soil_infilt_mm<span class="op">;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ground_baseflow_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">=</span> ground_baseflow_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">+</span> baseflow_temp<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>land_runoff_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">=</span> land_water_mm <span class="op">-</span> soil_infilt_mm<span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ground_baseflow_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">=</span> ground_baseflow_mm<span class="op">(</span>i<span class="op">,</span> _<span class="op">)</span> <span class="op">+</span> baseflow_temp<span class="op">;</span></span></code></pre></div>
 <p>Both variables must be declared as matrices, so the time dimension (index i) must be specified.</p>
 <ol start="6" style="list-style-type: decimal">
 <li>Define all the parameters and input (BC) variables as arguments and declare all the other variables.</li>
 </ol>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>NumericMatrix EDCHM_mini<span class="op">(</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">// basci parameter</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n_time<span class="op">,</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n_spat<span class="op">,</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">// BC data (Input)</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>NumericMatrix atmos_potentialEvatrans_mm<span class="op">,</span> </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>NumericMatrix atmos_precipitation_mm<span class="op">,</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">// parameters, that schould be estimated and innitial condition (IC) data</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>NumericVector ground_capacity_mm<span class="op">,</span> </span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>NumericVector ground_water_mm<span class="op">,</span> </span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>NumericVector land_impermeableFrac_1<span class="op">,</span> </span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>NumericVector soil_capacity_mm<span class="op">,</span> </span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>NumericVector soil_potentialPercola_mm<span class="op">,</span> </span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>NumericVector soil_water_mm<span class="op">,</span> </span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">// parameters, that need to calibrated</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>NumericVector confluenLand_responseTime_TS<span class="op">,</span> </span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>NumericVector confluenGround_responseTime_TS<span class="op">,</span> </span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>NumericVector param_baseflow_grf_gamma<span class="op">,</span> </span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>NumericVector param_confluenLand_kel_k<span class="op">,</span> </span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>NumericVector param_evatrans_ubc_gamma<span class="op">,</span> </span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>NumericVector param_infilt_ubc_P0AGEN<span class="op">,</span> </span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>NumericVector param_percola_arn_k<span class="op">,</span> </span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>NumericVector param_percola_arn_thresh</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">// declare the vector-variable, that contain only on dimension time like confluenLand_iuh_1 and confluenGround_iuh_1</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">// or spat like land_water_mm, soil_evatrans_mm, soil_infilt_mm and soil_percolation_mm</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>NumericVector land_water_mm<span class="op">,</span> soil_evatrans_mm<span class="op">,</span> soil_infilt_mm<span class="op">,</span> soil_percolation_mm<span class="op">,</span> confluenLand_iuh_1<span class="op">,</span> confluenGround_iuh_1<span class="op">;</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">// declare the matric-variable, that contain two dimensions time and spat</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>NumericMatrix land_runoff_mm<span class="op">(</span>n_time<span class="op">,</span> n_spat<span class="op">),</span> ground_baseflow_mm<span class="op">(</span>n_time<span class="op">,</span> n_spat<span class="op">),</span> confluen_streamflow_mm<span class="op">(</span>n_time<span class="op">,</span> n_spat<span class="op">);</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> confluen_streamflow_mm<span class="op">;</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>NumericMatrix EDCHM_mini<span class="op">(</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// basci parameter</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n_time<span class="op">,</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n_spat<span class="op">,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">// BC data (Input)</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>NumericMatrix atmos_potentialEvatrans_mm<span class="op">,</span> </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>NumericMatrix atmos_precipitation_mm<span class="op">,</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">// parameters, that schould be estimated and innitial condition (IC) data</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>NumericVector ground_capacity_mm<span class="op">,</span> </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>NumericVector ground_water_mm<span class="op">,</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>NumericVector land_impermeableFrac_1<span class="op">,</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>NumericVector soil_capacity_mm<span class="op">,</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>NumericVector soil_potentialPercola_mm<span class="op">,</span> </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>NumericVector soil_water_mm<span class="op">,</span> </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">// parameters, that need to calibrated</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>NumericVector confluenLand_responseTime_TS<span class="op">,</span> </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>NumericVector confluenGround_responseTime_TS<span class="op">,</span> </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>NumericVector param_baseflow_grf_gamma<span class="op">,</span> </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>NumericVector param_confluenLand_kel_k<span class="op">,</span> </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>NumericVector param_evatrans_ubc_gamma<span class="op">,</span> </span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>NumericVector param_infilt_ubc_P0AGEN<span class="op">,</span> </span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>NumericVector param_percola_arn_k<span class="op">,</span> </span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>NumericVector param_percola_arn_thresh</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co">// declare the vector-variable, that contain only on dimension time like confluenLand_iuh_1 and confluenGround_iuh_1</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co">// or spat like land_water_mm, soil_evatrans_mm, soil_infilt_mm and soil_percolation_mm</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>NumericVector land_water_mm<span class="op">,</span> soil_evatrans_mm<span class="op">,</span> soil_infilt_mm<span class="op">,</span> soil_percolation_mm<span class="op">,</span> confluenLand_iuh_1<span class="op">,</span> confluenGround_iuh_1<span class="op">;</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co">// declare the matric-variable, that contain two dimensions time and spat</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>NumericMatrix land_runoff_mm<span class="op">(</span>n_time<span class="op">,</span> n_spat<span class="op">),</span> ground_baseflow_mm<span class="op">(</span>n_time<span class="op">,</span> n_spat<span class="op">),</span> confluen_streamflow_mm<span class="op">(</span>n_time<span class="op">,</span> n_spat<span class="op">);</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> confluen_streamflow_mm<span class="op">;</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>With these six steps, we can build a new model, but it is important to ensure that the logic of relationships between variables is correct.</p>
 </div>
 </div>
@@ -240,7 +318,7 @@
 <h3 id="run-the-pre-defined-model-from-edchm">Run the pre-defined model from EDCHM<a class="anchor" aria-label="anchor" href="#run-the-pre-defined-model-from-edchm"></a>
 </h3>
 <p>The pre-defined model can be used like normal functions. You just need to provide the input data and the parameters <strong>in the correct format</strong> as specified in the function arguments. For example:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## reform the data into matrix</span></span>
 <span><span class="va">mat_EDCHM_TestData</span> <span class="op">&lt;-</span> <span class="va">EDCHM_TestData</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -283,7 +361,7 @@
 <h3 id="run-the-model-with-cpp-source-code">Run the model with cpp source code<a class="anchor" aria-label="anchor" href="#run-the-model-with-cpp-source-code"></a>
 </h3>
 <p>If the model is still in CPP source code, you first need to compile it into a function using the <code><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">Rcpp::sourceCpp()</a></code> function. For example:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">Rcpp</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Rcpp/man/sourceCpp.html" class="external-link">sourceCpp</a></span><span class="op">(</span><span class="st">"path/to/your/model.cpp"</span><span class="op">)</span></span></code></pre></div>
 <p>Once the model is compiled, you can use it as a normal function by providing the input data and parameters in the correct format.</p>
 </div>

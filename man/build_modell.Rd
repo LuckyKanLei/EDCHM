@@ -4,15 +4,15 @@
 \alias{build_modell}
 \title{build model with \strong{EDCHM-standard-structure}}
 \usage{
-build_modell(process_method, path_model, name_model)
+build_modell(process_method, name_model, path_model = NULL)
 }
 \arguments{
 \item{process_method}{named char vector, some like example.
 It must contian all the 15 processes. But you can set process in \code{"NULL"}, when it not necessary.}
 
-\item{path_model}{char of path, path to space the c++ source files}
-
 \item{name_model}{char, name of the model}
+
+\item{path_model}{char of path, path to space the c++ source files}
 }
 \value{
 the range of parameters

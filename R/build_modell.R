@@ -40,7 +40,7 @@
 #' )
 #' @return the range of parameters 
 #' @export
-build_modell <- function(process_method, path_model, name_model) {
+build_modell <- function(process_method, name_model, path_model = NULL) {
   
   vari_initial <- c("land_interceptWater_mm", "soil_water_mm", "ground_water_mm", "snow_ice_mm")
   vari_boundary <- c("atmos_precipitation_mm",
@@ -214,29 +214,53 @@ using namespace EDCHM;
   
   
   # EXPORT -----------
-  write(c(lines_head,
-          lines_argu,
-          lines_declare_vector,
-          lines_declare_matrix,
-          lines_for_i,
-          lines_process_i,
-          lines_for_j,
-          lines_process_j,
-          lines_end),
-        file.path(path_model, paste0("EDCHM_", name_model, ".cpp")))
-  
+  # write(c(lines_head,
+  #         lines_argu,
+  #         lines_declare_vector,
+  #         lines_declare_matrix,
+  #         lines_for_i,
+  #         lines_process_i,
+  #         lines_for_j,
+  #         lines_process_j,
+  #         lines_end),
+  #       file.path(path_model, paste0("EDCHM_", name_model, ".cpp")))
+  line_Model <- c(lines_head,
+                  lines_argu,
+                  lines_declare_vector,
+                  lines_declare_matrix,
+                  lines_for_i,
+                  lines_process_i,
+                  lines_for_j,
+                  lines_process_j,
+                  lines_end)
   
   # Param RANGE --------------------
-  # lines_all_parameter <- readLines("https://github.com/LuckyKanLei/EDCHM/blob/main/R/all_parameter.R")
+  # lines_all_parameter <- readLines("E:\\Kan_Lei\\PACKAGE\\EDCHM\\R/all_parameter.R")
+  # idx_Param <- str_which(lines_all_parameter, "@param")
+  # lines_parameter_range <- (lines_all_parameter[idx_Param] |> str_split_fixed("[<|>]", 3))[,2]
+  # lines_parameter_Name <- (lines_all_parameter[idx_Param] |> str_split_fixed("[<]", 3))[,1] |> str_remove("#' @param") |> str_remove_all(" ")
+  # Paramrange <- read.csv(text = lines_parameter_range, header = F)
+  # colnames(Paramrange) <- c("min", "max")
+  # rownames(Paramrange) <- lines_parameter_Name
+  
+  
   param_ori_ori <- param_ori |>  str_replace("param_confluenGround", "param_confluen") |> 
     str_replace("param_confluenSoil", "param_confluen") |>  
     str_replace("param_confluenLand", "param_confluen") |>  
     str_replace("param_evatransLand_", "param_evatrans_")
-  idx_param_select <- map(param_ori_ori, \(x) str_which(lines_all_parameter, x)) |> unlist()
-  lines_parameter_range <- (lines_all_parameter[idx_param_select] |> str_split_fixed("[<|>]", 3))[,2]
-  df_range <- read.csv(text = lines_parameter_range, header = F)
-  colnames(df_range) <- c("min", "max")
+  # idx_param_select <- map(param_ori_ori, \(x) str_which(lines_all_parameter, x)) |> unlist()
+  # lines_parameter_range <- (lines_all_parameter[idx_param_select] |> str_split_fixed("[<|>]", 3))[,2]
+  # df_range <- read.csv(text = lines_parameter_range, header = F)
+  # colnames(df_range) <- c("min", "max")
+  # rownames(df_range) <- param_ori
+  df_range <- Paramrange[param_ori_ori,]
   rownames(df_range) <- param_ori
-  df_range
   
+  
+  if(is.null(path_model)) {
+    return(list(code_Model = line_Model, range_Parameter = df_range))
+  } else {
+    write(line_Model, file.path(path_model, paste0("EDCHM_", name_model, ".cpp")))
+    return(df_range)
+  }
 }

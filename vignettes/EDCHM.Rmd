@@ -72,7 +72,7 @@ confluenGround = "confluenIUH_Nash"
 
 ```{r buildMdell2}
 ## build
-my_ParamRange <- build_modell(my_process_method, "E:\\Kan_Lei\\try", "TestModel")
+my_ParamRange <- build_modell(my_process_method, "TestModel")
 
 ## check
 my_ParamRange

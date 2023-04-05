@@ -170,12 +170,14 @@ build_modell <- function(process_method, name_model, path_model = NULL) {
 #include <EDCHM.h>
 using namespace Rcpp;
 using namespace EDCHM;
-// [[Rcpp::export]]")
+// [[Rcpp::export]]
+")
   
   lines_head_full <- paste0("#include \"00utilis.h\"
 //' @rdname full_modells
 //' @export
-// [[Rcpp::export]]")
+// [[Rcpp::export]]
+")
   
   ## argument ------------
   lines_argu <- paste0("\n\nNumericMatrix EDCHM_", name_model,
@@ -184,9 +186,9 @@ using namespace EDCHM;
                          paste0("NumericVector ", c(argu_vector, argu_param))) |> paste0(collapse = ", \n"), "\n)\n{\n")
   
   ## declare ------------
-  lines_declare_vector <- paste0("NumericVector ", paste0(vari_declare_vector[!(vari_declare_vector %in% c("soil_interflow_mm", "land_runoff_mm", "ground_baseflow_mm", "confluen_streamflow_mm"))], collapse = ", "), ";")
-  # lines_declare_matrix <- paste0("NumericMatrix ", paste0(c("land_runoff_mm(n_time, n_spat)", "ground_baseflow_mm(n_time, n_spat)", "confluen_streamflow_mm(n_time, n_spat)"), collapse = ", "), ";")
-  lines_declare_matrix <- paste0("NumericMatrix ", paste0(paste0(vari_declare_matrxi, "(n_time, n_spat)"), collapse = ", "), ";")
+  lines_declare_vector <- paste0("NumericVector ", paste0(vari_declare_vector[!(vari_declare_vector %in% c("soil_interflow_mm", "land_runoff_mm", "ground_baseflow_mm", "confluen_streamflow_mm"))], collapse = ", "), ";\n")
+  # lines_declare_matrix <- paste0("NumericMatrix ", paste0(c("land_runoff_mm(n_time, n_spat)", "ground_baseflow_mm(n_time, n_spat)", "confluen_streamflow_mm(n_time, n_spat)"), collapse = ", "), ";\n")
+  lines_declare_matrix <- paste0("NumericMatrix ", paste0(paste0(vari_declare_matrxi, "(n_time, n_spat)"), collapse = ", "), ";\n")
   
   ## time loop ------------
   lines_for_i <- "for (int i= 0; i < n_time; i++) {\n"
@@ -205,10 +207,10 @@ using namespace EDCHM;
   lines_process_j <- lines_process_select[idx_process_j] |>
     str_replace_all("_TS", "_TS(j)") |> str_replace_all("nas_n(?=[\\)|,])", "nas_n(j)") |> str_replace_all("kel_k(?=[\\)|,])", "kel_k(j)")
   if (process_method["confluenSoil"] != "NULL") {
-    lines_end <- "\nconfluen_streamflow_mm(_, j) = confluen_IUH3S(land_runoff_mm(_, j), soil_interflow_mm(_, j), ground_baseflow_mm(_, j), confluenLand_iuh_1, confluenSoil_iuh_1, confluenGround_iuh_1);\n}\nreturn confluen_streamflow_mm;\n}"
+    lines_end <- "\nconfluen_streamflow_mm(_, j) = confluen_IUH3S(land_runoff_mm(_, j), soil_interflow_mm(_, j), ground_baseflow_mm(_, j), confluenLand_iuh_1, confluenSoil_iuh_1, confluenGround_iuh_1);\n}\nreturn confluen_streamflow_mm;\n}\n"
     
   } else {
-    lines_end <- "\nconfluen_streamflow_mm(_, j) = confluen_IUH2S(land_runoff_mm(_, j), ground_baseflow_mm(_, j), confluenLand_iuh_1, confluenGround_iuh_1);\n}\nreturn confluen_streamflow_mm;\n}"
+    lines_end <- "\nconfluen_streamflow_mm(_, j) = confluen_IUH2S(land_runoff_mm(_, j), ground_baseflow_mm(_, j), confluenLand_iuh_1, confluenGround_iuh_1);\n}\nreturn confluen_streamflow_mm;\n}\n"
     
   }
   

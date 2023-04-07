@@ -106,10 +106,10 @@ To simplify the model, the layer snowLy will store only the solid water and will
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">snowMelt_Kustas</span><span class="op">(</span></span>
+<span>  <span class="va">time_step_h</span>,</span>
 <span>  <span class="va">snow_ice_mm</span>,</span>
 <span>  <span class="va">atmos_temperature_Cel</span>,</span>
 <span>  <span class="va">atmos_netRadiat_MJ</span>,</span>
-<span>  <span class="va">time_step_h</span>,</span>
 <span>  <span class="va">param_snow_kus_fE</span>,</span>
 <span>  <span class="va">param_snow_kus_fT</span></span>
 <span><span class="op">)</span></span>
@@ -125,7 +125,11 @@ To simplify the model, the layer snowLy will store only the solid water and will
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>snow_ice_mm</dt>
+    <dl><dt>time_step_h</dt>
+<dd><p>&lt;1, 24&gt; (h) time step in hour</p></dd>
+
+
+<dt>snow_ice_mm</dt>
 <dd><p>(mm/m2) water equivalent of <strong>ice</strong> in snowpack</p></dd>
 
 
@@ -135,10 +139,6 @@ To simplify the model, the layer snowLy will store only the solid water and will
 
 <dt>atmos_netRadiat_MJ</dt>
 <dd><p>(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation</p></dd>
-
-
-<dt>time_step_h</dt>
-<dd><p>&lt;1, 24&gt; (h) time step in hour</p></dd>
 
 
 <dt>param_snow_kus_fE</dt>

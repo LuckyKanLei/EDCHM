@@ -73,14 +73,13 @@ In this situation, we need to provide factors to account for the differences bet
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">evatransPotential_TurcWendling</span><span class="op">(</span></span>
+<span>  <span class="va">time_step_h</span>,</span>
 <span>  <span class="va">atmos_temperature_Cel</span>,</span>
 <span>  <span class="va">atmos_solarRadiat_MJ</span>,</span>
-<span>  <span class="va">time_step_h</span>,</span>
 <span>  <span class="va">param_evatrans_tur_k</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">evatransPotential_Linacre</span><span class="op">(</span></span>
-<span>  <span class="va">time_dayOfYear_</span>,</span>
 <span>  <span class="va">atmos_temperature_Cel</span>,</span>
 <span>  <span class="va">atmos_relativeHumidity_1</span>,</span>
 <span>  <span class="va">land_latitude_Degree</span>,</span>
@@ -89,7 +88,6 @@ In this situation, we need to provide factors to account for the differences bet
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">evatransPotential_FAO56</span><span class="op">(</span></span>
-<span>  <span class="va">time_dayOfYear_</span>,</span>
 <span>  <span class="va">atmos_temperature_Cel</span>,</span>
 <span>  <span class="va">atmos_vaporPress_hPa</span>,</span>
 <span>  <span class="va">atmos_saturatVaporPress_hPa</span>,</span>
@@ -102,7 +100,11 @@ In this situation, we need to provide factors to account for the differences bet
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>atmos_temperature_Cel</dt>
+    <dl><dt>time_step_h</dt>
+<dd><p>&lt;1, 24&gt; (h) time step in hour</p></dd>
+
+
+<dt>atmos_temperature_Cel</dt>
 <dd><p>(Cel) the average air temperature in the time phase</p></dd>
 
 
@@ -110,16 +112,8 @@ In this situation, we need to provide factors to account for the differences bet
 <dd><p>(MJ/m2/TS) the solar radiation that actually reaches the earths surface</p></dd>
 
 
-<dt>time_step_h</dt>
-<dd><p>&lt;1, 24&gt; (h) time step in hour</p></dd>
-
-
 <dt>param_evatrans_tur_k</dt>
 <dd><p>&lt;0.6, 1&gt; parameter for <code>evatransPotential_TurcWendling()</code>, higher value when closer to the sea</p></dd>
-
-
-<dt>time_dayOfYear_</dt>
-<dd><p>&lt;1, 366&gt; (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)</p></dd>
 
 
 <dt>atmos_relativeHumidity_1</dt>

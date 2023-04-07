@@ -87,5 +87,5 @@ reference:
   desc: Test data for modelling.
 - contents:
   - test_data
-  - Paramrange
+  - ParamRange
 

@@ -114,7 +114,7 @@
 <code class="sourceCode R"><span><span class="co">## select the process method</span></span>
 <span><span class="va">my_process_method</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> </span>
 <span>atmosSnow <span class="op">=</span> <span class="st">"atmosSnow_ThresholdT"</span>,</span>
-<span>evatransPotential <span class="op">=</span> <span class="st">"NULL"</span>,</span>
+<span>evatransPotential <span class="op">=</span> <span class="st">"evatransPotential_TurcWendling"</span>,</span>
 <span>evatransLand <span class="op">=</span> <span class="st">"NULL"</span>,</span>
 <span>evatransSoil <span class="op">=</span> <span class="st">"evatransActual_SupplyRatio"</span>,</span>
 <span>intercep <span class="op">=</span> <span class="st">"NULL"</span>,</span>
@@ -147,12 +147,14 @@
 <span><span class="co">#&gt; // [[Rcpp::export]]</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; NumericMatrix EDCHM_TestModel(</span></span>
 <span><span class="co">#&gt; int n_time, </span></span>
-<span><span class="co">#&gt; int n_spat,</span></span>
+<span><span class="co">#&gt; int n_spat, </span></span>
+<span><span class="co">#&gt; int time_step_h,</span></span>
 <span><span class="co">#&gt; NumericMatrix atmos_netRadiat_MJ, </span></span>
-<span><span class="co">#&gt; NumericMatrix atmos_potentialEvatrans_mm, </span></span>
 <span><span class="co">#&gt; NumericMatrix atmos_precipitation_mm, </span></span>
+<span><span class="co">#&gt; NumericMatrix atmos_solarRadiat_MJ, </span></span>
 <span><span class="co">#&gt; NumericMatrix atmos_temperature_Cel, </span></span>
 <span><span class="co">#&gt; NumericVector ground_capacity_mm, </span></span>
 <span><span class="co">#&gt; NumericVector ground_potentialLateral_mm, </span></span>
@@ -168,6 +170,7 @@
 <span><span class="co">#&gt; NumericVector param_confluenGround_nas_n, </span></span>
 <span><span class="co">#&gt; NumericVector param_confluenLand_kel_k, </span></span>
 <span><span class="co">#&gt; NumericVector param_evatrans_sur_k, </span></span>
+<span><span class="co">#&gt; NumericVector param_evatrans_tur_k, </span></span>
 <span><span class="co">#&gt; NumericVector param_infilt_acr_k, </span></span>
 <span><span class="co">#&gt; NumericVector param_lateral_grf_gamma, </span></span>
 <span><span class="co">#&gt; NumericVector param_percola_sur_k, </span></span>
@@ -176,17 +179,22 @@
 <span><span class="co">#&gt; )</span></span>
 <span><span class="co">#&gt; {</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; NumericVector atmos_snow_mm, confluenGround_iuh_1, confluenLand_iuh_1, ground_lateral_mm, land_water_mm, snow_melt_mm, soil_evatrans_mm, soil_infilt_mm, soil_percolation_mm;</span></span>
+<span><span class="co">#&gt; NumericVector atmos_potentialEvatrans_mm, atmos_snow_mm, confluenGround_iuh_1, confluenLand_iuh_1, ground_lateral_mm, land_water_mm, snow_melt_mm, soil_evatrans_mm, soil_infilt_mm, soil_percolation_mm;</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; NumericMatrix land_runoff_mm(n_time, n_spat), ground_baseflow_mm(n_time, n_spat), confluen_streamflow_mm(n_time, n_spat);</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; for (int i= 0; i &lt; n_time; i++) {</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; atmos_snow_mm = atmosSnow_ThresholdT(atmos_precipitation_mm(i, _), atmos_temperature_Cel(i, _), param_atmos_thr_Ts);</span></span>
 <span><span class="co">#&gt; atmos_precipitation_mm(i, _) = atmos_precipitation_mm(i, _) - atmos_snow_mm;</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; soil_evatrans_mm = evatransActual_SupplyRatio(atmos_potentialEvatrans_mm(i, _), soil_water_mm, soil_capacity_mm, param_evatrans_sur_k);</span></span>
+<span><span class="co">#&gt; atmos_potentialEvatrans_mm = evatransPotential_TurcWendling(time_step_h, atmos_temperature_Cel(i, _), atmos_solarRadiat_MJ(i, _), param_evatrans_tur_k);</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; soil_evatrans_mm = evatransActual_SupplyRatio(atmos_potentialEvatrans_mm, soil_water_mm, soil_capacity_mm, param_evatrans_sur_k);</span></span>
 <span><span class="co">#&gt; soil_water_mm += - soil_evatrans_mm;</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; snow_melt_mm = snowMelt_Kustas(snow_ice_mm, atmos_temperature_Cel(i, _), atmos_netRadiat_MJ(i, _), time_step_h, param_snow_kus_fE, param_snow_kus_fT);</span></span>
+<span><span class="co">#&gt; snow_melt_mm = snowMelt_Kustas(time_step_h, snow_ice_mm, atmos_temperature_Cel(i, _), atmos_netRadiat_MJ(i, _), param_snow_kus_fE, param_snow_kus_fT);</span></span>
 <span><span class="co">#&gt; land_water_mm += snow_melt_mm;</span></span>
 <span><span class="co">#&gt; snow_ice_mm += -snow_melt_mm;</span></span>
 <span><span class="co">#&gt; snow_ice_mm += atmos_snow_mm;</span></span>
@@ -223,6 +231,7 @@
 <span><span class="co">#&gt; param_confluenGround_nas_n  1e+00 8.000</span></span>
 <span><span class="co">#&gt; param_confluenLand_kel_k    1e+00 4.000</span></span>
 <span><span class="co">#&gt; param_evatrans_sur_k        1e-01 1.000</span></span>
+<span><span class="co">#&gt; param_evatrans_tur_k        6e-01 1.000</span></span>
 <span><span class="co">#&gt; param_infilt_acr_k          1e-02 1.000</span></span>
 <span><span class="co">#&gt; param_lateral_grf_gamma     1e-02 5.000</span></span>
 <span><span class="co">#&gt; param_percola_sur_k         1e-02 1.000</span></span>

@@ -8,14 +8,13 @@
 \title{\strong{potential evapotranspiration}}
 \usage{
 evatransPotential_TurcWendling(
+  time_step_h,
   atmos_temperature_Cel,
   atmos_solarRadiat_MJ,
-  time_step_h,
   param_evatrans_tur_k
 )
 
 evatransPotential_Linacre(
-  time_dayOfYear_,
   atmos_temperature_Cel,
   atmos_relativeHumidity_1,
   land_latitude_Degree,
@@ -24,7 +23,6 @@ evatransPotential_Linacre(
 )
 
 evatransPotential_FAO56(
-  time_dayOfYear_,
   atmos_temperature_Cel,
   atmos_vaporPress_hPa,
   atmos_saturatVaporPress_hPa,
@@ -35,15 +33,13 @@ evatransPotential_FAO56(
 )
 }
 \arguments{
+\item{time_step_h}{<1, 24> (h) time step in hour}
+
 \item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
 \item{atmos_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}
 
-\item{time_step_h}{<1, 24> (h) time step in hour}
-
 \item{param_evatrans_tur_k}{<0.6, 1> parameter for \code{\link[=evatransPotential_TurcWendling]{evatransPotential_TurcWendling()}}, higher value when closer to the sea}
-
-\item{time_dayOfYear_}{<1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
 
 \item{atmos_relativeHumidity_1}{(0, 1) relative humidity}
 

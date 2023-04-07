@@ -615,8 +615,8 @@ confluenIUH_Clark <- function(confluen_responseTime_TS) {
 #' @param param_evatrans_tur_k <0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea
 #' @return potential evapotranspiration (mm/m2)
 #' @export
-evatransPotential_TurcWendling <- function(atmos_temperature_Cel, atmos_solarRadiat_MJ, time_step_h, param_evatrans_tur_k) {
-    .Call(`_EDCHM_evatransPotential_TurcWendling`, atmos_temperature_Cel, atmos_solarRadiat_MJ, time_step_h, param_evatrans_tur_k)
+evatransPotential_TurcWendling <- function(time_step_h, atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k) {
+    .Call(`_EDCHM_evatransPotential_TurcWendling`, time_step_h, atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k)
 }
 
 #' @rdname evatransPotential
@@ -630,8 +630,8 @@ evatransPotential_TurcWendling <- function(atmos_temperature_Cel, atmos_solarRad
 #'   - \mjseqn{T_d} is dewpoint temperature,
 #'   - \mjseqn{H_R} is relative humidity, `atmos_relativeHumidity_1`
 #' @export
-evatransPotential_Linacre <- function(time_dayOfYear_, atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1) {
-    .Call(`_EDCHM_evatransPotential_Linacre`, time_dayOfYear_, atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1)
+evatransPotential_Linacre <- function(atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1) {
+    .Call(`_EDCHM_evatransPotential_Linacre`, atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1)
 }
 
 #' @rdname evatransPotential
@@ -648,8 +648,8 @@ evatransPotential_Linacre <- function(time_dayOfYear_, atmos_temperature_Cel, at
 #'   - \mjseqn{e_a} is actual vapour pressure, `atmos_vaporPress_hPa`
 #'   - \mjseqn{\gamma} is psychrometric constant
 #' @export
-evatransPotential_FAO56 <- function(time_dayOfYear_, atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m) {
-    .Call(`_EDCHM_evatransPotential_FAO56`, time_dayOfYear_, atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m)
+evatransPotential_FAO56 <- function(atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m) {
+    .Call(`_EDCHM_evatransPotential_FAO56`, atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m)
 }
 
 #' **actuall evapotranspiration**
@@ -1607,8 +1607,8 @@ percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
 #' @param param_snow_kus_fE <0.0005, 0.003> (mm/m2/MJ) snow melt temperature parameter for [snowMelt_Factor()]
 #' @param param_snow_kus_fT <0.05, 1> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 #' @export
-snowMelt_Kustas <- function(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, time_step_h, param_snow_kus_fE, param_snow_kus_fT) {
-    .Call(`_EDCHM_snowMelt_Kustas`, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, time_step_h, param_snow_kus_fE, param_snow_kus_fT)
+snowMelt_Kustas <- function(time_step_h, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT) {
+    .Call(`_EDCHM_snowMelt_Kustas`, time_step_h, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT)
 }
 
 #' @rdname snowMelt

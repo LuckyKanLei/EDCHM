@@ -591,17 +591,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector evatransPotential_TurcWendling(NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector time_step_h, NumericVector param_evatrans_tur_k) {
+    inline NumericVector evatransPotential_TurcWendling(int time_step_h, NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector param_evatrans_tur_k) {
         typedef SEXP(*Ptr_evatransPotential_TurcWendling)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransPotential_TurcWendling p_evatransPotential_TurcWendling = NULL;
         if (p_evatransPotential_TurcWendling == NULL) {
-            validateSignature("NumericVector(*evatransPotential_TurcWendling)(NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*evatransPotential_TurcWendling)(int,NumericVector,NumericVector,NumericVector)");
             p_evatransPotential_TurcWendling = (Ptr_evatransPotential_TurcWendling)R_GetCCallable("EDCHM", "_EDCHM_evatransPotential_TurcWendling");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_evatransPotential_TurcWendling(Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_solarRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(param_evatrans_tur_k)));
+            rcpp_result_gen = p_evatransPotential_TurcWendling(Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_solarRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(param_evatrans_tur_k)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -612,17 +612,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector evatransPotential_Linacre(NumericVector time_dayOfYear_, NumericVector atmos_temperature_Cel, NumericVector atmos_relativeHumidity_1, NumericVector land_latitude_Degree, NumericVector land_elevation_m, NumericVector land_albedo_1) {
-        typedef SEXP(*Ptr_evatransPotential_Linacre)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+    inline NumericVector evatransPotential_Linacre(NumericVector atmos_temperature_Cel, NumericVector atmos_relativeHumidity_1, NumericVector land_latitude_Degree, NumericVector land_elevation_m, NumericVector land_albedo_1) {
+        typedef SEXP(*Ptr_evatransPotential_Linacre)(SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransPotential_Linacre p_evatransPotential_Linacre = NULL;
         if (p_evatransPotential_Linacre == NULL) {
-            validateSignature("NumericVector(*evatransPotential_Linacre)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*evatransPotential_Linacre)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_evatransPotential_Linacre = (Ptr_evatransPotential_Linacre)R_GetCCallable("EDCHM", "_EDCHM_evatransPotential_Linacre");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_evatransPotential_Linacre(Shield<SEXP>(Rcpp::wrap(time_dayOfYear_)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_relativeHumidity_1)), Shield<SEXP>(Rcpp::wrap(land_latitude_Degree)), Shield<SEXP>(Rcpp::wrap(land_elevation_m)), Shield<SEXP>(Rcpp::wrap(land_albedo_1)));
+            rcpp_result_gen = p_evatransPotential_Linacre(Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_relativeHumidity_1)), Shield<SEXP>(Rcpp::wrap(land_latitude_Degree)), Shield<SEXP>(Rcpp::wrap(land_elevation_m)), Shield<SEXP>(Rcpp::wrap(land_albedo_1)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -633,17 +633,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector evatransPotential_FAO56(NumericVector time_dayOfYear_, NumericVector atmos_temperature_Cel, NumericVector atmos_vaporPress_hPa, NumericVector atmos_saturatVaporPress_hPa, NumericVector atmos_netRadiat_MJ, NumericVector atmos_windSpeed2m_m_s, NumericVector land_latitude_Degree, NumericVector land_elevation_m) {
-        typedef SEXP(*Ptr_evatransPotential_FAO56)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+    inline NumericVector evatransPotential_FAO56(NumericVector atmos_temperature_Cel, NumericVector atmos_vaporPress_hPa, NumericVector atmos_saturatVaporPress_hPa, NumericVector atmos_netRadiat_MJ, NumericVector atmos_windSpeed2m_m_s, NumericVector land_latitude_Degree, NumericVector land_elevation_m) {
+        typedef SEXP(*Ptr_evatransPotential_FAO56)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransPotential_FAO56 p_evatransPotential_FAO56 = NULL;
         if (p_evatransPotential_FAO56 == NULL) {
-            validateSignature("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_evatransPotential_FAO56 = (Ptr_evatransPotential_FAO56)R_GetCCallable("EDCHM", "_EDCHM_evatransPotential_FAO56");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_evatransPotential_FAO56(Shield<SEXP>(Rcpp::wrap(time_dayOfYear_)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_vaporPress_hPa)), Shield<SEXP>(Rcpp::wrap(atmos_saturatVaporPress_hPa)), Shield<SEXP>(Rcpp::wrap(atmos_netRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(atmos_windSpeed2m_m_s)), Shield<SEXP>(Rcpp::wrap(land_latitude_Degree)), Shield<SEXP>(Rcpp::wrap(land_elevation_m)));
+            rcpp_result_gen = p_evatransPotential_FAO56(Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_vaporPress_hPa)), Shield<SEXP>(Rcpp::wrap(atmos_saturatVaporPress_hPa)), Shield<SEXP>(Rcpp::wrap(atmos_netRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(atmos_windSpeed2m_m_s)), Shield<SEXP>(Rcpp::wrap(land_latitude_Degree)), Shield<SEXP>(Rcpp::wrap(land_elevation_m)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1473,17 +1473,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector snowMelt_Kustas(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector time_step_h, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT) {
+    inline NumericVector snowMelt_Kustas(int time_step_h, NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT) {
         typedef SEXP(*Ptr_snowMelt_Kustas)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_snowMelt_Kustas p_snowMelt_Kustas = NULL;
         if (p_snowMelt_Kustas == NULL) {
-            validateSignature("NumericVector(*snowMelt_Kustas)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*snowMelt_Kustas)(int,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_snowMelt_Kustas = (Ptr_snowMelt_Kustas)R_GetCCallable("EDCHM", "_EDCHM_snowMelt_Kustas");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_snowMelt_Kustas(Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_netRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(param_snow_kus_fE)), Shield<SEXP>(Rcpp::wrap(param_snow_kus_fT)));
+            rcpp_result_gen = p_snowMelt_Kustas(Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_netRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(param_snow_kus_fE)), Shield<SEXP>(Rcpp::wrap(param_snow_kus_fT)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

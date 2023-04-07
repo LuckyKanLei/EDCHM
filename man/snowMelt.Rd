@@ -7,10 +7,10 @@
 \title{\strong{snow}}
 \usage{
 snowMelt_Kustas(
+  time_step_h,
   snow_ice_mm,
   atmos_temperature_Cel,
   atmos_netRadiat_MJ,
-  time_step_h,
   param_snow_kus_fE,
   param_snow_kus_fT
 )
@@ -24,13 +24,13 @@ snowMelt_Factor(
 )
 }
 \arguments{
+\item{time_step_h}{<1, 24> (h) time step in hour}
+
 \item{snow_ice_mm}{(mm/m2) water equivalent of \strong{ice} in snowpack}
 
 \item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
 \item{atmos_netRadiat_MJ}{(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation}
-
-\item{time_step_h}{<1, 24> (h) time step in hour}
 
 \item{param_snow_kus_fE}{<0.0005, 0.003> (mm/m2/MJ) snow melt temperature parameter for \code{\link[=snowMelt_Factor]{snowMelt_Factor()}}}
 

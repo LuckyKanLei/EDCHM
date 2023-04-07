@@ -49,7 +49,7 @@ To build a model, you only need to:
 ## select the process method
 my_process_method <- c( 
 atmosSnow = "atmosSnow_ThresholdT",
-evatransPotential = "NULL",
+evatransPotential = "evatransPotential_TurcWendling",
 evatransLand = "NULL",
 evatransSoil = "evatransActual_SupplyRatio",
 intercep = "NULL",

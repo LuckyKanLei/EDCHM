@@ -84,6 +84,7 @@ build_modell <- function(process_method, name_model, path_model = NULL) {
   lines_h <- readLines(file.path(path.package("EDCHM"), "include/EDCHM_RcppExports.h"))
   lines_process <- lines_h[str_which(lines_h, "    inline")] |>
     str_remove_all("NumericVector ") |>
+    str_remove_all("int ") |>
     str_remove_all("double ") |>
     str_remove("    inline ") |>
     str_remove(" \\{")
@@ -181,7 +182,7 @@ using namespace EDCHM;
   
   ## argument ------------
   lines_argu <- paste0("\n\nNumericMatrix EDCHM_", name_model,
-                       "(\nint n_time, \nint n_spat,\n",
+                       "(\nint n_time, \nint n_spat, \nint time_step_h,\n",
                        c(paste0("NumericMatrix ", argu_matrix),
                          paste0("NumericVector ", c(argu_vector, argu_param))) |> paste0(collapse = ", \n"), "\n)\n{\n")
   

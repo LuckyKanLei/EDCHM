@@ -32,9 +32,9 @@
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_TurcWendling(
+    int time_step_h,
     NumericVector atmos_temperature_Cel, 
     NumericVector atmos_solarRadiat_MJ, 
-    NumericVector time_step_h,
     NumericVector param_evatrans_tur_k 
 )
 {
@@ -54,7 +54,6 @@ NumericVector evatransPotential_TurcWendling(
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_Linacre(
-    NumericVector time_dayOfYear_,
     NumericVector atmos_temperature_Cel,
     NumericVector atmos_relativeHumidity_1,
     NumericVector land_latitude_Degree,
@@ -81,7 +80,6 @@ NumericVector evatransPotential_Linacre(
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_FAO56(
-    NumericVector time_dayOfYear_,
     NumericVector atmos_temperature_Cel, 
     NumericVector atmos_vaporPress_hPa, 
     NumericVector atmos_saturatVaporPress_hPa, 

@@ -60,10 +60,10 @@
 //' @export
 // [[Rcpp::export]]
 NumericVector snowMelt_Kustas(
+    int time_step_h,
     NumericVector snow_ice_mm,
     NumericVector atmos_temperature_Cel,
     NumericVector atmos_netRadiat_MJ,
-    NumericVector time_step_h,
     NumericVector param_snow_kus_fE,
     NumericVector param_snow_kus_fT
 )

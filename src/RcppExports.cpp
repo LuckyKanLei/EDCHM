@@ -1078,23 +1078,23 @@ RcppExport SEXP _EDCHM_confluenIUH_Clark(SEXP confluen_responseTime_TSSEXP) {
     return rcpp_result_gen;
 }
 // evatransPotential_TurcWendling
-NumericVector evatransPotential_TurcWendling(NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector time_step_h, NumericVector param_evatrans_tur_k);
-static SEXP _EDCHM_evatransPotential_TurcWendling_try(SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP time_step_hSEXP, SEXP param_evatrans_tur_kSEXP) {
+NumericVector evatransPotential_TurcWendling(int time_step_h, NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector param_evatrans_tur_k);
+static SEXP _EDCHM_evatransPotential_TurcWendling_try(SEXP time_step_hSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP param_evatrans_tur_kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_solarRadiat_MJ(atmos_solarRadiat_MJSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_tur_k(param_evatrans_tur_kSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransPotential_TurcWendling(atmos_temperature_Cel, atmos_solarRadiat_MJ, time_step_h, param_evatrans_tur_k));
+    rcpp_result_gen = Rcpp::wrap(evatransPotential_TurcWendling(time_step_h, atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransPotential_TurcWendling(SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP time_step_hSEXP, SEXP param_evatrans_tur_kSEXP) {
+RcppExport SEXP _EDCHM_evatransPotential_TurcWendling(SEXP time_step_hSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP param_evatrans_tur_kSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransPotential_TurcWendling_try(atmos_temperature_CelSEXP, atmos_solarRadiat_MJSEXP, time_step_hSEXP, param_evatrans_tur_kSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransPotential_TurcWendling_try(time_step_hSEXP, atmos_temperature_CelSEXP, atmos_solarRadiat_MJSEXP, param_evatrans_tur_kSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1115,25 +1115,24 @@ RcppExport SEXP _EDCHM_evatransPotential_TurcWendling(SEXP atmos_temperature_Cel
     return rcpp_result_gen;
 }
 // evatransPotential_Linacre
-NumericVector evatransPotential_Linacre(NumericVector time_dayOfYear_, NumericVector atmos_temperature_Cel, NumericVector atmos_relativeHumidity_1, NumericVector land_latitude_Degree, NumericVector land_elevation_m, NumericVector land_albedo_1);
-static SEXP _EDCHM_evatransPotential_Linacre_try(SEXP time_dayOfYear_SEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_relativeHumidity_1SEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP, SEXP land_albedo_1SEXP) {
+NumericVector evatransPotential_Linacre(NumericVector atmos_temperature_Cel, NumericVector atmos_relativeHumidity_1, NumericVector land_latitude_Degree, NumericVector land_elevation_m, NumericVector land_albedo_1);
+static SEXP _EDCHM_evatransPotential_Linacre_try(SEXP atmos_temperature_CelSEXP, SEXP atmos_relativeHumidity_1SEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP, SEXP land_albedo_1SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type time_dayOfYear_(time_dayOfYear_SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_relativeHumidity_1(atmos_relativeHumidity_1SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type land_latitude_Degree(land_latitude_DegreeSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type land_elevation_m(land_elevation_mSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type land_albedo_1(land_albedo_1SEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransPotential_Linacre(time_dayOfYear_, atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1));
+    rcpp_result_gen = Rcpp::wrap(evatransPotential_Linacre(atmos_temperature_Cel, atmos_relativeHumidity_1, land_latitude_Degree, land_elevation_m, land_albedo_1));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransPotential_Linacre(SEXP time_dayOfYear_SEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_relativeHumidity_1SEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP, SEXP land_albedo_1SEXP) {
+RcppExport SEXP _EDCHM_evatransPotential_Linacre(SEXP atmos_temperature_CelSEXP, SEXP atmos_relativeHumidity_1SEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP, SEXP land_albedo_1SEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransPotential_Linacre_try(time_dayOfYear_SEXP, atmos_temperature_CelSEXP, atmos_relativeHumidity_1SEXP, land_latitude_DegreeSEXP, land_elevation_mSEXP, land_albedo_1SEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransPotential_Linacre_try(atmos_temperature_CelSEXP, atmos_relativeHumidity_1SEXP, land_latitude_DegreeSEXP, land_elevation_mSEXP, land_albedo_1SEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1154,11 +1153,10 @@ RcppExport SEXP _EDCHM_evatransPotential_Linacre(SEXP time_dayOfYear_SEXP, SEXP 
     return rcpp_result_gen;
 }
 // evatransPotential_FAO56
-NumericVector evatransPotential_FAO56(NumericVector time_dayOfYear_, NumericVector atmos_temperature_Cel, NumericVector atmos_vaporPress_hPa, NumericVector atmos_saturatVaporPress_hPa, NumericVector atmos_netRadiat_MJ, NumericVector atmos_windSpeed2m_m_s, NumericVector land_latitude_Degree, NumericVector land_elevation_m);
-static SEXP _EDCHM_evatransPotential_FAO56_try(SEXP time_dayOfYear_SEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_vaporPress_hPaSEXP, SEXP atmos_saturatVaporPress_hPaSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP atmos_windSpeed2m_m_sSEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP) {
+NumericVector evatransPotential_FAO56(NumericVector atmos_temperature_Cel, NumericVector atmos_vaporPress_hPa, NumericVector atmos_saturatVaporPress_hPa, NumericVector atmos_netRadiat_MJ, NumericVector atmos_windSpeed2m_m_s, NumericVector land_latitude_Degree, NumericVector land_elevation_m);
+static SEXP _EDCHM_evatransPotential_FAO56_try(SEXP atmos_temperature_CelSEXP, SEXP atmos_vaporPress_hPaSEXP, SEXP atmos_saturatVaporPress_hPaSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP atmos_windSpeed2m_m_sSEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type time_dayOfYear_(time_dayOfYear_SEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_vaporPress_hPa(atmos_vaporPress_hPaSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_saturatVaporPress_hPa(atmos_saturatVaporPress_hPaSEXP);
@@ -1166,15 +1164,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type atmos_windSpeed2m_m_s(atmos_windSpeed2m_m_sSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type land_latitude_Degree(land_latitude_DegreeSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type land_elevation_m(land_elevation_mSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransPotential_FAO56(time_dayOfYear_, atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m));
+    rcpp_result_gen = Rcpp::wrap(evatransPotential_FAO56(atmos_temperature_Cel, atmos_vaporPress_hPa, atmos_saturatVaporPress_hPa, atmos_netRadiat_MJ, atmos_windSpeed2m_m_s, land_latitude_Degree, land_elevation_m));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransPotential_FAO56(SEXP time_dayOfYear_SEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_vaporPress_hPaSEXP, SEXP atmos_saturatVaporPress_hPaSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP atmos_windSpeed2m_m_sSEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP) {
+RcppExport SEXP _EDCHM_evatransPotential_FAO56(SEXP atmos_temperature_CelSEXP, SEXP atmos_vaporPress_hPaSEXP, SEXP atmos_saturatVaporPress_hPaSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP atmos_windSpeed2m_m_sSEXP, SEXP land_latitude_DegreeSEXP, SEXP land_elevation_mSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransPotential_FAO56_try(time_dayOfYear_SEXP, atmos_temperature_CelSEXP, atmos_vaporPress_hPaSEXP, atmos_saturatVaporPress_hPaSEXP, atmos_netRadiat_MJSEXP, atmos_windSpeed2m_m_sSEXP, land_latitude_DegreeSEXP, land_elevation_mSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransPotential_FAO56_try(atmos_temperature_CelSEXP, atmos_vaporPress_hPaSEXP, atmos_saturatVaporPress_hPaSEXP, atmos_netRadiat_MJSEXP, atmos_windSpeed2m_m_sSEXP, land_latitude_DegreeSEXP, land_elevation_mSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2634,25 +2632,25 @@ RcppExport SEXP _EDCHM_percola_SupplyRatio(SEXP soil_water_mmSEXP, SEXP param_pe
     return rcpp_result_gen;
 }
 // snowMelt_Kustas
-NumericVector snowMelt_Kustas(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector time_step_h, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT);
-static SEXP _EDCHM_snowMelt_Kustas_try(SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP time_step_hSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
+NumericVector snowMelt_Kustas(int time_step_h, NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT);
+static SEXP _EDCHM_snowMelt_Kustas_try(SEXP time_step_hSEXP, SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type snow_ice_mm(snow_ice_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_netRadiat_MJ(atmos_netRadiat_MJSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_kus_fE(param_snow_kus_fESEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_kus_fT(param_snow_kus_fTSEXP);
-    rcpp_result_gen = Rcpp::wrap(snowMelt_Kustas(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, time_step_h, param_snow_kus_fE, param_snow_kus_fT));
+    rcpp_result_gen = Rcpp::wrap(snowMelt_Kustas(time_step_h, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_snowMelt_Kustas(SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP time_step_hSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
+RcppExport SEXP _EDCHM_snowMelt_Kustas(SEXP time_step_hSEXP, SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_snowMelt_Kustas_try(snow_ice_mmSEXP, atmos_temperature_CelSEXP, atmos_netRadiat_MJSEXP, time_step_hSEXP, param_snow_kus_fESEXP, param_snow_kus_fTSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_snowMelt_Kustas_try(time_step_hSEXP, snow_ice_mmSEXP, atmos_temperature_CelSEXP, atmos_netRadiat_MJSEXP, param_snow_kus_fESEXP, param_snow_kus_fTSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2742,9 +2740,9 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*confluenIUH_Kelly)(double,double)");
         signatures.insert("NumericVector(*confluenIUH_Nash)(double,double)");
         signatures.insert("NumericVector(*confluenIUH_Clark)(double)");
-        signatures.insert("NumericVector(*evatransPotential_TurcWendling)(NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*evatransPotential_Linacre)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*evatransPotential_TurcWendling)(int,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*evatransPotential_Linacre)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_SupplyRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_VIC)(NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -2784,7 +2782,7 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*percola_BevenWood)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_SupplyRatio)(NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*snowMelt_Kustas)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*snowMelt_Kustas)(int,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*snowMelt_Factor)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
     }
     return signatures.find(sig) != signatures.end();
@@ -2896,8 +2894,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_confluenIUH_Nash", (DL_FUNC) &_EDCHM_confluenIUH_Nash, 2},
     {"_EDCHM_confluenIUH_Clark", (DL_FUNC) &_EDCHM_confluenIUH_Clark, 1},
     {"_EDCHM_evatransPotential_TurcWendling", (DL_FUNC) &_EDCHM_evatransPotential_TurcWendling, 4},
-    {"_EDCHM_evatransPotential_Linacre", (DL_FUNC) &_EDCHM_evatransPotential_Linacre, 6},
-    {"_EDCHM_evatransPotential_FAO56", (DL_FUNC) &_EDCHM_evatransPotential_FAO56, 8},
+    {"_EDCHM_evatransPotential_Linacre", (DL_FUNC) &_EDCHM_evatransPotential_Linacre, 5},
+    {"_EDCHM_evatransPotential_FAO56", (DL_FUNC) &_EDCHM_evatransPotential_FAO56, 7},
     {"_EDCHM_evatransActual_SupplyRatio", (DL_FUNC) &_EDCHM_evatransActual_SupplyRatio, 4},
     {"_EDCHM_evatransActual_SupplyPow", (DL_FUNC) &_EDCHM_evatransActual_SupplyPow, 5},
     {"_EDCHM_evatransActual_VIC", (DL_FUNC) &_EDCHM_evatransActual_VIC, 4},

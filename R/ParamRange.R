@@ -1,4 +1,4 @@
 #' Parameter Range
-#' @name Paramrange
+#' @name ParamRange
 #' @description Parameter range for calibration
-"Paramrange"
+"ParamRange"

@@ -12,7 +12,7 @@
 #' @param atmos_temperatureMax_Cel (Cel) the maximal air temperature in the time phase
 #' @param atmos_temperatureMin_Cel (Cel) the minimal air temperature in the time phase
 #' @param atmos_solarRadiat_MJ (MJ/m2/TS) the solar radiation that actually reaches the earths surface
-#' @param atmos_netRadiat_MJ	(MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
+#' @param atmos_netRadiat_MJ (MJ/m2/TS) the balance between the energy absorbed, reflected and emitted by the earths surface or the difference between the incoming net shortwave (Rns) and the net outgoing longwave (Rnl) radiation
 #' @param atmos_relativeHumidity_1 (0, 1) relative humidity
 #' @param atmos_vaporPress_hPa (hPa) actual vapour pressure, can be calculated by [atmos_VaporPress()]
 #' @param atmos_saturatVaporPress_hPa (hPa) saturation vapour pressure at `atmos_temperature_Cel`, can be calculated by [atmos_SaturatVaporPress()]

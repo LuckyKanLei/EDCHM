@@ -241,9 +241,9 @@ using namespace EDCHM;
   # idx_Param <- str_which(lines_all_parameter, "@param")
   # lines_parameter_range <- (lines_all_parameter[idx_Param] |> str_split_fixed("[<|>]", 3))[,2]
   # lines_parameter_Name <- (lines_all_parameter[idx_Param] |> str_split_fixed("[<]", 3))[,1] |> str_remove("#' @param") |> str_remove_all(" ")
-  # Paramrange <- read.csv(text = lines_parameter_range, header = F)
-  # colnames(Paramrange) <- c("min", "max")
-  # rownames(Paramrange) <- lines_parameter_Name
+  # ParamRange <- read.csv(text = lines_parameter_range, header = F)
+  # colnames(ParamRange) <- c("min", "max")
+  # rownames(ParamRange) <- lines_parameter_Name
   
   
   param_ori_ori <- param_ori |>  str_replace("param_confluenGround", "param_confluen") |> 
@@ -255,7 +255,7 @@ using namespace EDCHM;
   # df_range <- read.csv(text = lines_parameter_range, header = F)
   # colnames(df_range) <- c("min", "max")
   # rownames(df_range) <- param_ori
-  df_range <- Paramrange[param_ori_ori,]
+  df_range <- ParamRange[param_ori_ori,]
   rownames(df_range) <- param_ori
   
   

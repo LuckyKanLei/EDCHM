@@ -108,17 +108,17 @@ namespace EDCHM {
         return Rcpp::as<List >(rcpp_result_gen);
     }
 
-    inline NumericMatrix EDCHM_snow(int n_time, int n_spat, NumericMatrix atmos_potentialEvatrans_mm, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericVector ground_capacity_mm, NumericVector ground_water_mm, NumericVector land_impermeableFrac_1, NumericVector snow_ice_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector soil_water_mm, NumericVector time_step_h, NumericVector confluenLand_responseTime_TS, NumericVector confluenGround_responseTime_TS, NumericVector param_atmos_thr_Ts, NumericVector param_baseflow_grf_gamma, NumericVector param_confluenLand_kel_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_ubc_P0AGEN, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt) {
+    inline NumericMatrix EDCHM_snow(int n_time, int n_spat, int time_step_h, NumericMatrix atmos_potentialEvatrans_mm, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericVector ground_capacity_mm, NumericVector ground_water_mm, NumericVector land_impermeableFrac_1, NumericVector snow_ice_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector soil_water_mm, NumericVector confluenLand_responseTime_TS, NumericVector confluenGround_responseTime_TS, NumericVector param_atmos_thr_Ts, NumericVector param_baseflow_grf_gamma, NumericVector param_confluenLand_kel_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_ubc_P0AGEN, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt) {
         typedef SEXP(*Ptr_EDCHM_snow)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_EDCHM_snow p_EDCHM_snow = NULL;
         if (p_EDCHM_snow == NULL) {
-            validateSignature("NumericMatrix(*EDCHM_snow)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericMatrix(*EDCHM_snow)(int,int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_EDCHM_snow = (Ptr_EDCHM_snow)R_GetCCallable("EDCHM", "_EDCHM_EDCHM_snow");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_EDCHM_snow(Shield<SEXP>(Rcpp::wrap(n_time)), Shield<SEXP>(Rcpp::wrap(n_spat)), Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(atmos_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(land_impermeableFrac_1)), Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(soil_capacity_mm)), Shield<SEXP>(Rcpp::wrap(soil_potentialPercola_mm)), Shield<SEXP>(Rcpp::wrap(soil_water_mm)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(confluenLand_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(confluenGround_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(param_atmos_thr_Ts)), Shield<SEXP>(Rcpp::wrap(param_baseflow_grf_gamma)), Shield<SEXP>(Rcpp::wrap(param_confluenLand_kel_k)), Shield<SEXP>(Rcpp::wrap(param_evatrans_ubc_gamma)), Shield<SEXP>(Rcpp::wrap(param_infilt_ubc_P0AGEN)), Shield<SEXP>(Rcpp::wrap(param_percola_arn_k)), Shield<SEXP>(Rcpp::wrap(param_percola_arn_thresh)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_f)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tmelt)));
+            rcpp_result_gen = p_EDCHM_snow(Shield<SEXP>(Rcpp::wrap(n_time)), Shield<SEXP>(Rcpp::wrap(n_spat)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(atmos_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(land_impermeableFrac_1)), Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(soil_capacity_mm)), Shield<SEXP>(Rcpp::wrap(soil_potentialPercola_mm)), Shield<SEXP>(Rcpp::wrap(soil_water_mm)), Shield<SEXP>(Rcpp::wrap(confluenLand_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(confluenGround_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(param_atmos_thr_Ts)), Shield<SEXP>(Rcpp::wrap(param_baseflow_grf_gamma)), Shield<SEXP>(Rcpp::wrap(param_confluenLand_kel_k)), Shield<SEXP>(Rcpp::wrap(param_evatrans_ubc_gamma)), Shield<SEXP>(Rcpp::wrap(param_infilt_ubc_P0AGEN)), Shield<SEXP>(Rcpp::wrap(param_percola_arn_k)), Shield<SEXP>(Rcpp::wrap(param_percola_arn_thresh)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_f)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tmelt)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -129,17 +129,17 @@ namespace EDCHM {
         return Rcpp::as<NumericMatrix >(rcpp_result_gen);
     }
 
-    inline List EDCHM_snow_full(int n_time, int n_spat, NumericMatrix atmos_potentialEvatrans_mm, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericVector ground_capacity_mm, NumericVector ground_water_mm, NumericVector land_impermeableFrac_1, NumericVector snow_ice_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector soil_water_mm, NumericVector time_step_h, NumericVector confluenLand_responseTime_TS, NumericVector confluenGround_responseTime_TS, NumericVector param_atmos_thr_Ts, NumericVector param_baseflow_grf_gamma, NumericVector param_confluenLand_kel_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_ubc_P0AGEN, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt) {
+    inline List EDCHM_snow_full(int n_time, int n_spat, int time_step_h, NumericMatrix atmos_potentialEvatrans_mm, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericVector ground_capacity_mm, NumericVector ground_water_mm, NumericVector land_impermeableFrac_1, NumericVector snow_ice_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector soil_water_mm, NumericVector confluenLand_responseTime_TS, NumericVector confluenGround_responseTime_TS, NumericVector param_atmos_thr_Ts, NumericVector param_baseflow_grf_gamma, NumericVector param_confluenLand_kel_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_ubc_P0AGEN, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt) {
         typedef SEXP(*Ptr_EDCHM_snow_full)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_EDCHM_snow_full p_EDCHM_snow_full = NULL;
         if (p_EDCHM_snow_full == NULL) {
-            validateSignature("List(*EDCHM_snow_full)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("List(*EDCHM_snow_full)(int,int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_EDCHM_snow_full = (Ptr_EDCHM_snow_full)R_GetCCallable("EDCHM", "_EDCHM_EDCHM_snow_full");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_EDCHM_snow_full(Shield<SEXP>(Rcpp::wrap(n_time)), Shield<SEXP>(Rcpp::wrap(n_spat)), Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(atmos_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(land_impermeableFrac_1)), Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(soil_capacity_mm)), Shield<SEXP>(Rcpp::wrap(soil_potentialPercola_mm)), Shield<SEXP>(Rcpp::wrap(soil_water_mm)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(confluenLand_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(confluenGround_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(param_atmos_thr_Ts)), Shield<SEXP>(Rcpp::wrap(param_baseflow_grf_gamma)), Shield<SEXP>(Rcpp::wrap(param_confluenLand_kel_k)), Shield<SEXP>(Rcpp::wrap(param_evatrans_ubc_gamma)), Shield<SEXP>(Rcpp::wrap(param_infilt_ubc_P0AGEN)), Shield<SEXP>(Rcpp::wrap(param_percola_arn_k)), Shield<SEXP>(Rcpp::wrap(param_percola_arn_thresh)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_f)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tmelt)));
+            rcpp_result_gen = p_EDCHM_snow_full(Shield<SEXP>(Rcpp::wrap(n_time)), Shield<SEXP>(Rcpp::wrap(n_spat)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(atmos_potentialEvatrans_mm)), Shield<SEXP>(Rcpp::wrap(atmos_precipitation_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(ground_capacity_mm)), Shield<SEXP>(Rcpp::wrap(ground_water_mm)), Shield<SEXP>(Rcpp::wrap(land_impermeableFrac_1)), Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(soil_capacity_mm)), Shield<SEXP>(Rcpp::wrap(soil_potentialPercola_mm)), Shield<SEXP>(Rcpp::wrap(soil_water_mm)), Shield<SEXP>(Rcpp::wrap(confluenLand_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(confluenGround_responseTime_TS)), Shield<SEXP>(Rcpp::wrap(param_atmos_thr_Ts)), Shield<SEXP>(Rcpp::wrap(param_baseflow_grf_gamma)), Shield<SEXP>(Rcpp::wrap(param_confluenLand_kel_k)), Shield<SEXP>(Rcpp::wrap(param_evatrans_ubc_gamma)), Shield<SEXP>(Rcpp::wrap(param_infilt_ubc_P0AGEN)), Shield<SEXP>(Rcpp::wrap(param_percola_arn_k)), Shield<SEXP>(Rcpp::wrap(param_percola_arn_thresh)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_f)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tmelt)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -633,17 +633,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector evatransPotential_FAO56(NumericVector atmos_temperature_Cel, NumericVector atmos_vaporPress_hPa, NumericVector atmos_saturatVaporPress_hPa, NumericVector atmos_netRadiat_MJ, NumericVector atmos_windSpeed2m_m_s, NumericVector land_latitude_Degree, NumericVector land_elevation_m) {
-        typedef SEXP(*Ptr_evatransPotential_FAO56)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+    inline NumericVector evatransPotential_FAO56(NumericVector atmos_temperature_Cel, NumericVector atmos_vaporPress_hPa, NumericVector atmos_saturatVaporPress_hPa, NumericVector atmos_netRadiat_MJ, NumericVector atmos_windSpeed2m_m_s, NumericVector land_elevation_m) {
+        typedef SEXP(*Ptr_evatransPotential_FAO56)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_evatransPotential_FAO56 p_evatransPotential_FAO56 = NULL;
         if (p_evatransPotential_FAO56 == NULL) {
-            validateSignature("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_evatransPotential_FAO56 = (Ptr_evatransPotential_FAO56)R_GetCCallable("EDCHM", "_EDCHM_evatransPotential_FAO56");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_evatransPotential_FAO56(Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_vaporPress_hPa)), Shield<SEXP>(Rcpp::wrap(atmos_saturatVaporPress_hPa)), Shield<SEXP>(Rcpp::wrap(atmos_netRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(atmos_windSpeed2m_m_s)), Shield<SEXP>(Rcpp::wrap(land_latitude_Degree)), Shield<SEXP>(Rcpp::wrap(land_elevation_m)));
+            rcpp_result_gen = p_evatransPotential_FAO56(Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(atmos_vaporPress_hPa)), Shield<SEXP>(Rcpp::wrap(atmos_saturatVaporPress_hPa)), Shield<SEXP>(Rcpp::wrap(atmos_netRadiat_MJ)), Shield<SEXP>(Rcpp::wrap(atmos_windSpeed2m_m_s)), Shield<SEXP>(Rcpp::wrap(land_elevation_m)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();
@@ -1494,17 +1494,17 @@ namespace EDCHM {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline NumericVector snowMelt_Factor(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector time_step_h, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt) {
+    inline NumericVector snowMelt_Factor(int time_step_h, NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt) {
         typedef SEXP(*Ptr_snowMelt_Factor)(SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_snowMelt_Factor p_snowMelt_Factor = NULL;
         if (p_snowMelt_Factor == NULL) {
-            validateSignature("NumericVector(*snowMelt_Factor)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+            validateSignature("NumericVector(*snowMelt_Factor)(int,NumericVector,NumericVector,NumericVector,NumericVector)");
             p_snowMelt_Factor = (Ptr_snowMelt_Factor)R_GetCCallable("EDCHM", "_EDCHM_snowMelt_Factor");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_snowMelt_Factor(Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_f)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tmelt)));
+            rcpp_result_gen = p_snowMelt_Factor(Shield<SEXP>(Rcpp::wrap(time_step_h)), Shield<SEXP>(Rcpp::wrap(snow_ice_mm)), Shield<SEXP>(Rcpp::wrap(atmos_temperature_Cel)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_f)), Shield<SEXP>(Rcpp::wrap(param_snow_fac_Tmelt)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

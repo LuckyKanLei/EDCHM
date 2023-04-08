@@ -16,9 +16,9 @@ snowMelt_Kustas(
 )
 
 snowMelt_Factor(
+  time_step_h,
   snow_ice_mm,
   atmos_temperature_Cel,
-  time_step_h,
   param_snow_fac_f,
   param_snow_fac_Tmelt
 )

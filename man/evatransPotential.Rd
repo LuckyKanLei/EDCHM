@@ -28,7 +28,6 @@ evatransPotential_FAO56(
   atmos_saturatVaporPress_hPa,
   atmos_netRadiat_MJ,
   atmos_windSpeed2m_m_s,
-  land_latitude_Degree,
   land_elevation_m
 )
 }

@@ -85,7 +85,6 @@ NumericVector evatransPotential_FAO56(
     NumericVector atmos_saturatVaporPress_hPa, 
     NumericVector atmos_netRadiat_MJ,
     NumericVector atmos_windSpeed2m_m_s,
-    NumericVector land_latitude_Degree,
     NumericVector land_elevation_m
 )
 {

@@ -17,9 +17,9 @@ NumericVector evatransActual_UBC(
     NumericVector param_evatrans_ubc_gamma
 );
 NumericVector snowMelt_Factor(
+    int time_step_h,
     NumericVector snow_ice_mm,
     NumericVector atmos_temperature_Cel,
-    NumericVector time_step_h,
     NumericVector param_snow_fac_f,
     NumericVector param_snow_fac_Tmelt
 );

@@ -81,6 +81,7 @@ EDCHM_mini_full(
 EDCHM_snow(
   n_time,
   n_spat,
+  time_step_h,
   atmos_potentialEvatrans_mm,
   atmos_precipitation_mm,
   atmos_temperature_Cel,
@@ -91,7 +92,6 @@ EDCHM_snow(
   soil_capacity_mm,
   soil_potentialPercola_mm,
   soil_water_mm,
-  time_step_h,
   confluenLand_responseTime_TS,
   confluenGround_responseTime_TS,
   param_atmos_thr_Ts,
@@ -108,6 +108,7 @@ EDCHM_snow(
 EDCHM_snow_full(
   n_time,
   n_spat,
+  time_step_h,
   atmos_potentialEvatrans_mm,
   atmos_precipitation_mm,
   atmos_temperature_Cel,
@@ -118,7 +119,6 @@ EDCHM_snow_full(
   soil_capacity_mm,
   soil_potentialPercola_mm,
   soil_water_mm,
-  time_step_h,
   confluenLand_responseTime_TS,
   confluenGround_responseTime_TS,
   param_atmos_thr_Ts,
@@ -167,11 +167,11 @@ EDCHM_snow_full(
 
 \item{param_percola_arn_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=percola_ThreshPow]{percola_ThreshPow()}}}
 
+\item{time_step_h}{<1, 24> (h) time step in hour}
+
 \item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
 \item{snow_ice_mm}{(mm/m2) water equivalent of \strong{ice} in snowpack}
-
-\item{time_step_h}{<1, 24> (h) time step in hour}
 
 \item{param_atmos_thr_Ts}{<-1, 3> (Cel) threshold air temperature that snow, parameter for \code{\link[=atmosSnow_ThresholdT]{atmosSnow_ThresholdT()}}}
 

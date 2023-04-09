@@ -4,8 +4,6 @@
 \alias{all_vari}
 \title{variable define}
 \arguments{
-\item{time_step_h}{<1, 24> (h) time step in hour}
-
 \item{time_dayOfYear_}{<1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)}
 
 \item{atmos_precipitation_mm}{(mm/m2/TS) precipitaion volum}

@@ -60,7 +60,6 @@
 //' @export
 // [[Rcpp::export]]
 NumericVector snowMelt_Kustas(
-    int time_step_h,
     NumericVector snow_ice_mm,
     NumericVector atmos_temperature_Cel,
     NumericVector atmos_netRadiat_MJ,
@@ -68,7 +67,8 @@ NumericVector snowMelt_Kustas(
     NumericVector param_snow_kus_fT
 )
 {
-  NumericVector snow_melt_mm = ifelse(atmos_temperature_Cel < 0, 0, atmos_temperature_Cel) * param_snow_kus_fT * time_step_h + param_snow_kus_fE * atmos_netRadiat_MJ;
+  // NumericVector snow_melt_mm = ifelse(atmos_temperature_Cel < 0, 0, atmos_temperature_Cel) * param_snow_kus_fT * time_step_h + param_snow_kus_fE * atmos_netRadiat_MJ;
+  NumericVector snow_melt_mm = ifelse(atmos_temperature_Cel < 0, 0, atmos_temperature_Cel) * param_snow_kus_fT * 24 + param_snow_kus_fE * atmos_netRadiat_MJ;
   return ifelse(snow_melt_mm > snow_ice_mm, snow_ice_mm, snow_melt_mm) ;
   
 }
@@ -90,7 +90,6 @@ NumericVector snowMelt_Kustas(
 //' @export
 // [[Rcpp::export]]
 NumericVector snowMelt_Factor(
-    int time_step_h,
     NumericVector snow_ice_mm,
     NumericVector atmos_temperature_Cel,
     NumericVector param_snow_fac_f,
@@ -101,7 +100,8 @@ NumericVector snowMelt_Factor(
   diff_T = atmos_temperature_Cel - param_snow_fac_Tmelt;
   diff_T = ifelse(diff_T > 0, diff_T, 0);
   
-  snow_melt_mm = param_snow_fac_f * time_step_h * diff_T;
+  snow_melt_mm = param_snow_fac_f * 24 * diff_T;
+  // snow_melt_mm = param_snow_fac_f * time_step_h * diff_T;
   return ifelse(snow_melt_mm > snow_ice_mm, snow_ice_mm, snow_melt_mm) ;
 }
 

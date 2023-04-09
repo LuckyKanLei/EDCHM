@@ -106,7 +106,6 @@ To simplify the model, the layer snowLy will store only the solid water and will
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">snowMelt_Kustas</span><span class="op">(</span></span>
-<span>  <span class="va">time_step_h</span>,</span>
 <span>  <span class="va">snow_ice_mm</span>,</span>
 <span>  <span class="va">atmos_temperature_Cel</span>,</span>
 <span>  <span class="va">atmos_netRadiat_MJ</span>,</span>
@@ -115,7 +114,6 @@ To simplify the model, the layer snowLy will store only the solid water and will
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">snowMelt_Factor</span><span class="op">(</span></span>
-<span>  <span class="va">time_step_h</span>,</span>
 <span>  <span class="va">snow_ice_mm</span>,</span>
 <span>  <span class="va">atmos_temperature_Cel</span>,</span>
 <span>  <span class="va">param_snow_fac_f</span>,</span>
@@ -125,11 +123,7 @@ To simplify the model, the layer snowLy will store only the solid water and will
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>time_step_h</dt>
-<dd><p>&lt;1, 24&gt; (h) time step in hour</p></dd>
-
-
-<dt>snow_ice_mm</dt>
+    <dl><dt>snow_ice_mm</dt>
 <dd><p>(mm/m2) water equivalent of <strong>ice</strong> in snowpack</p></dd>
 
 

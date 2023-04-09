@@ -182,7 +182,7 @@ using namespace EDCHM;
   
   ## argument ------------
   lines_argu <- paste0("\n\nNumericMatrix EDCHM_", name_model,
-                       "(\nint n_time, \nint n_spat, \nint time_step_h,\n",
+                       "(\nint n_time, \nint n_spat,\n",
                        c(paste0("NumericMatrix ", argu_matrix),
                          paste0("NumericVector ", c(argu_vector, argu_param))) |> paste0(collapse = ", \n"), "\n)\n{\n")
   

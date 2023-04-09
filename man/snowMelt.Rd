@@ -7,7 +7,6 @@
 \title{\strong{snow}}
 \usage{
 snowMelt_Kustas(
-  time_step_h,
   snow_ice_mm,
   atmos_temperature_Cel,
   atmos_netRadiat_MJ,
@@ -16,7 +15,6 @@ snowMelt_Kustas(
 )
 
 snowMelt_Factor(
-  time_step_h,
   snow_ice_mm,
   atmos_temperature_Cel,
   param_snow_fac_f,
@@ -24,8 +22,6 @@ snowMelt_Factor(
 )
 }
 \arguments{
-\item{time_step_h}{<1, 24> (h) time step in hour}
-
 \item{snow_ice_mm}{(mm/m2) water equivalent of \strong{ice} in snowpack}
 
 \item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}

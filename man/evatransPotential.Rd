@@ -8,7 +8,6 @@
 \title{\strong{potential evapotranspiration}}
 \usage{
 evatransPotential_TurcWendling(
-  time_step_h,
   atmos_temperature_Cel,
   atmos_solarRadiat_MJ,
   param_evatrans_tur_k
@@ -32,8 +31,6 @@ evatransPotential_FAO56(
 )
 }
 \arguments{
-\item{time_step_h}{<1, 24> (h) time step in hour}
-
 \item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}
 
 \item{atmos_solarRadiat_MJ}{(MJ/m2/TS) the solar radiation that actually reaches the earths surface}

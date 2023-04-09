@@ -81,7 +81,6 @@ EDCHM_mini_full(
 EDCHM_snow(
   n_time,
   n_spat,
-  time_step_h,
   atmos_potentialEvatrans_mm,
   atmos_precipitation_mm,
   atmos_temperature_Cel,
@@ -108,7 +107,6 @@ EDCHM_snow(
 EDCHM_snow_full(
   n_time,
   n_spat,
-  time_step_h,
   atmos_potentialEvatrans_mm,
   atmos_precipitation_mm,
   atmos_temperature_Cel,
@@ -166,8 +164,6 @@ EDCHM_snow_full(
 \item{param_percola_arn_k}{<0.1, 1> exponential parameter for \code{\link[=percola_ThreshPow]{percola_ThreshPow()}}}
 
 \item{param_percola_arn_thresh}{<0.1, 0.9> coefficient parameter for \code{\link[=percola_ThreshPow]{percola_ThreshPow()}}}
-
-\item{time_step_h}{<1, 24> (h) time step in hour}
 
 \item{atmos_temperature_Cel}{(Cel) the average air temperature in the time phase}
 

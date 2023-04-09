@@ -32,13 +32,13 @@
 //' @export
 // [[Rcpp::export]]
 NumericVector evatransPotential_TurcWendling(
-    int time_step_h,
     NumericVector atmos_temperature_Cel, 
     NumericVector atmos_solarRadiat_MJ, 
     NumericVector param_evatrans_tur_k 
 )
 {
-  return (atmos_solarRadiat_MJ * 100 + 3.875 * time_step_h * param_evatrans_tur_k) * (atmos_temperature_Cel + 22) / 150 / (atmos_temperature_Cel + 123);
+  return (atmos_solarRadiat_MJ * 100 + 3.875 * 24 * param_evatrans_tur_k) * (atmos_temperature_Cel + 22) / 150 / (atmos_temperature_Cel + 123);
+  // return (atmos_solarRadiat_MJ * 100 + 3.875 * time_step_h * param_evatrans_tur_k) * (atmos_temperature_Cel + 22) / 150 / (atmos_temperature_Cel + 123);
 }
 
 //' @rdname evatransPotential

@@ -72,8 +72,8 @@ EDCHM_mini_full <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_pr
 #' # **EDCHM_snow**: 
 #' A model with `snowMelt` and `atmosSnow` based on mini-modell
 #' @export
-EDCHM_snow <- function(n_time, n_spat, time_step_h, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt) {
-    .Call(`_EDCHM_EDCHM_snow`, n_time, n_spat, time_step_h, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt)
+EDCHM_snow <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt) {
+    .Call(`_EDCHM_EDCHM_snow`, n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt)
 }
 
 #' @name modells
@@ -81,8 +81,8 @@ EDCHM_snow <- function(n_time, n_spat, time_step_h, atmos_potentialEvatrans_mm, 
 #' # **EDCHM_snow_full**: 
 #' With full Output
 #' @export
-EDCHM_snow_full <- function(n_time, n_spat, time_step_h, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt) {
-    .Call(`_EDCHM_EDCHM_snow_full`, n_time, n_spat, time_step_h, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt)
+EDCHM_snow_full <- function(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt) {
+    .Call(`_EDCHM_EDCHM_snow_full`, n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt)
 }
 
 #' caculate **snowfall**
@@ -615,8 +615,8 @@ confluenIUH_Clark <- function(confluen_responseTime_TS) {
 #' @param param_evatrans_tur_k <0.6, 1> parameter for [evatransPotential_TurcWendling()], higher value when closer to the sea
 #' @return potential evapotranspiration (mm/m2)
 #' @export
-evatransPotential_TurcWendling <- function(time_step_h, atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k) {
-    .Call(`_EDCHM_evatransPotential_TurcWendling`, time_step_h, atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k)
+evatransPotential_TurcWendling <- function(atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k) {
+    .Call(`_EDCHM_evatransPotential_TurcWendling`, atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k)
 }
 
 #' @rdname evatransPotential
@@ -1607,8 +1607,8 @@ percola_SupplyRatio <- function(soil_water_mm, param_percola_sur_k) {
 #' @param param_snow_kus_fE <0.0005, 0.003> (mm/m2/MJ) snow melt temperature parameter for [snowMelt_Factor()]
 #' @param param_snow_kus_fT <0.05, 1> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 #' @export
-snowMelt_Kustas <- function(time_step_h, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT) {
-    .Call(`_EDCHM_snowMelt_Kustas`, time_step_h, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT)
+snowMelt_Kustas <- function(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT) {
+    .Call(`_EDCHM_snowMelt_Kustas`, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT)
 }
 
 #' @rdname snowMelt
@@ -1626,8 +1626,8 @@ snowMelt_Kustas <- function(time_step_h, snow_ice_mm, atmos_temperature_Cel, atm
 #' @param param_snow_fac_Tmelt <0, 3> (Cel) snow melt temperature parameter for [snowMelt_Factor()]
 #' @param param_snow_fac_f <0.05, 2> (mm/m2/h/Cel) potential melt volum per Cel per hour parameter for [snowMelt_Factor()]
 #' @export
-snowMelt_Factor <- function(time_step_h, snow_ice_mm, atmos_temperature_Cel, param_snow_fac_f, param_snow_fac_Tmelt) {
-    .Call(`_EDCHM_snowMelt_Factor`, time_step_h, snow_ice_mm, atmos_temperature_Cel, param_snow_fac_f, param_snow_fac_Tmelt)
+snowMelt_Factor <- function(snow_ice_mm, atmos_temperature_Cel, param_snow_fac_f, param_snow_fac_Tmelt) {
+    .Call(`_EDCHM_snowMelt_Factor`, snow_ice_mm, atmos_temperature_Cel, param_snow_fac_f, param_snow_fac_Tmelt)
 }
 
 # Register entry points for exported C++ functions

@@ -11,7 +11,6 @@
 NumericMatrix EDCHM_snow(
 int n_time,
 int n_spat,
-int time_step_h,
 NumericMatrix atmos_potentialEvatrans_mm,
 NumericMatrix atmos_precipitation_mm,
 NumericMatrix atmos_temperature_Cel,
@@ -47,7 +46,7 @@ soil_evatrans_mm = evatransActual_UBC(atmos_potentialEvatrans_mm(i, _), soil_wat
 soil_water_mm += - soil_evatrans_mm;
 land_water_mm = atmos_precipitation_mm(i, _);
 
-snow_melt_mm = snowMelt_Factor(time_step_h, snow_ice_mm, atmos_temperature_Cel(i, _), param_snow_fac_f, param_snow_fac_Tmelt);
+snow_melt_mm = snowMelt_Factor(snow_ice_mm, atmos_temperature_Cel(i, _), param_snow_fac_f, param_snow_fac_Tmelt);
 land_water_mm += snow_melt_mm;
 snow_ice_mm += -snow_melt_mm;
 snow_ice_mm += atmos_snow_mm;

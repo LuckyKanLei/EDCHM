@@ -3,7 +3,6 @@
 #' @description In this topic all of the variable in the EDCHM will be defined.
 #' 
 #' 
-#' @param time_step_h <1, 24> (h) time step in hour
 #' @param time_dayOfYear_ <1, 366> (d) the number of the day in the year between 1 (1 January) and 365 or 366 (31 December)
 #' @param atmos_precipitation_mm (mm/m2/TS) precipitaion volum
 #' @param atmos_rain_mm (mm/m2/TS) precipitation in rain form

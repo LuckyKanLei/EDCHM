@@ -202,13 +202,12 @@ RcppExport SEXP _EDCHM_EDCHM_mini_full(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP at
     return rcpp_result_gen;
 }
 // EDCHM_snow
-NumericMatrix EDCHM_snow(int n_time, int n_spat, int time_step_h, NumericMatrix atmos_potentialEvatrans_mm, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericVector ground_capacity_mm, NumericVector ground_water_mm, NumericVector land_impermeableFrac_1, NumericVector snow_ice_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector soil_water_mm, NumericVector confluenLand_responseTime_TS, NumericVector confluenGround_responseTime_TS, NumericVector param_atmos_thr_Ts, NumericVector param_baseflow_grf_gamma, NumericVector param_confluenLand_kel_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_ubc_P0AGEN, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt);
-static SEXP _EDCHM_EDCHM_snow_try(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP time_step_hSEXP, SEXP atmos_potentialEvatrans_mmSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP snow_ice_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP soil_water_mmSEXP, SEXP confluenLand_responseTime_TSSEXP, SEXP confluenGround_responseTime_TSSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_baseflow_grf_gammaSEXP, SEXP param_confluenLand_kel_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_ubc_P0AGENSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
+NumericMatrix EDCHM_snow(int n_time, int n_spat, NumericMatrix atmos_potentialEvatrans_mm, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericVector ground_capacity_mm, NumericVector ground_water_mm, NumericVector land_impermeableFrac_1, NumericVector snow_ice_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector soil_water_mm, NumericVector confluenLand_responseTime_TS, NumericVector confluenGround_responseTime_TS, NumericVector param_atmos_thr_Ts, NumericVector param_baseflow_grf_gamma, NumericVector param_confluenLand_kel_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_ubc_P0AGEN, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt);
+static SEXP _EDCHM_EDCHM_snow_try(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP atmos_potentialEvatrans_mmSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP snow_ice_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP soil_water_mmSEXP, SEXP confluenLand_responseTime_TSSEXP, SEXP confluenGround_responseTime_TSSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_baseflow_grf_gammaSEXP, SEXP param_confluenLand_kel_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_ubc_P0AGENSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< int >::type n_time(n_timeSEXP);
     Rcpp::traits::input_parameter< int >::type n_spat(n_spatSEXP);
-    Rcpp::traits::input_parameter< int >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type atmos_precipitation_mm(atmos_precipitation_mmSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
@@ -230,15 +229,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type param_percola_arn_thresh(param_percola_arn_threshSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_fac_f(param_snow_fac_fSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_fac_Tmelt(param_snow_fac_TmeltSEXP);
-    rcpp_result_gen = Rcpp::wrap(EDCHM_snow(n_time, n_spat, time_step_h, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt));
+    rcpp_result_gen = Rcpp::wrap(EDCHM_snow(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_EDCHM_snow(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP time_step_hSEXP, SEXP atmos_potentialEvatrans_mmSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP snow_ice_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP soil_water_mmSEXP, SEXP confluenLand_responseTime_TSSEXP, SEXP confluenGround_responseTime_TSSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_baseflow_grf_gammaSEXP, SEXP param_confluenLand_kel_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_ubc_P0AGENSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
+RcppExport SEXP _EDCHM_EDCHM_snow(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP atmos_potentialEvatrans_mmSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP snow_ice_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP soil_water_mmSEXP, SEXP confluenLand_responseTime_TSSEXP, SEXP confluenGround_responseTime_TSSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_baseflow_grf_gammaSEXP, SEXP param_confluenLand_kel_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_ubc_P0AGENSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_EDCHM_snow_try(n_timeSEXP, n_spatSEXP, time_step_hSEXP, atmos_potentialEvatrans_mmSEXP, atmos_precipitation_mmSEXP, atmos_temperature_CelSEXP, ground_capacity_mmSEXP, ground_water_mmSEXP, land_impermeableFrac_1SEXP, snow_ice_mmSEXP, soil_capacity_mmSEXP, soil_potentialPercola_mmSEXP, soil_water_mmSEXP, confluenLand_responseTime_TSSEXP, confluenGround_responseTime_TSSEXP, param_atmos_thr_TsSEXP, param_baseflow_grf_gammaSEXP, param_confluenLand_kel_kSEXP, param_evatrans_ubc_gammaSEXP, param_infilt_ubc_P0AGENSEXP, param_percola_arn_kSEXP, param_percola_arn_threshSEXP, param_snow_fac_fSEXP, param_snow_fac_TmeltSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_EDCHM_snow_try(n_timeSEXP, n_spatSEXP, atmos_potentialEvatrans_mmSEXP, atmos_precipitation_mmSEXP, atmos_temperature_CelSEXP, ground_capacity_mmSEXP, ground_water_mmSEXP, land_impermeableFrac_1SEXP, snow_ice_mmSEXP, soil_capacity_mmSEXP, soil_potentialPercola_mmSEXP, soil_water_mmSEXP, confluenLand_responseTime_TSSEXP, confluenGround_responseTime_TSSEXP, param_atmos_thr_TsSEXP, param_baseflow_grf_gammaSEXP, param_confluenLand_kel_kSEXP, param_evatrans_ubc_gammaSEXP, param_infilt_ubc_P0AGENSEXP, param_percola_arn_kSEXP, param_percola_arn_threshSEXP, param_snow_fac_fSEXP, param_snow_fac_TmeltSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -259,13 +258,12 @@ RcppExport SEXP _EDCHM_EDCHM_snow(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP time_st
     return rcpp_result_gen;
 }
 // EDCHM_snow_full
-List EDCHM_snow_full(int n_time, int n_spat, int time_step_h, NumericMatrix atmos_potentialEvatrans_mm, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericVector ground_capacity_mm, NumericVector ground_water_mm, NumericVector land_impermeableFrac_1, NumericVector snow_ice_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector soil_water_mm, NumericVector confluenLand_responseTime_TS, NumericVector confluenGround_responseTime_TS, NumericVector param_atmos_thr_Ts, NumericVector param_baseflow_grf_gamma, NumericVector param_confluenLand_kel_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_ubc_P0AGEN, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt);
-static SEXP _EDCHM_EDCHM_snow_full_try(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP time_step_hSEXP, SEXP atmos_potentialEvatrans_mmSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP snow_ice_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP soil_water_mmSEXP, SEXP confluenLand_responseTime_TSSEXP, SEXP confluenGround_responseTime_TSSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_baseflow_grf_gammaSEXP, SEXP param_confluenLand_kel_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_ubc_P0AGENSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
+List EDCHM_snow_full(int n_time, int n_spat, NumericMatrix atmos_potentialEvatrans_mm, NumericMatrix atmos_precipitation_mm, NumericMatrix atmos_temperature_Cel, NumericVector ground_capacity_mm, NumericVector ground_water_mm, NumericVector land_impermeableFrac_1, NumericVector snow_ice_mm, NumericVector soil_capacity_mm, NumericVector soil_potentialPercola_mm, NumericVector soil_water_mm, NumericVector confluenLand_responseTime_TS, NumericVector confluenGround_responseTime_TS, NumericVector param_atmos_thr_Ts, NumericVector param_baseflow_grf_gamma, NumericVector param_confluenLand_kel_k, NumericVector param_evatrans_ubc_gamma, NumericVector param_infilt_ubc_P0AGEN, NumericVector param_percola_arn_k, NumericVector param_percola_arn_thresh, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt);
+static SEXP _EDCHM_EDCHM_snow_full_try(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP atmos_potentialEvatrans_mmSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP snow_ice_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP soil_water_mmSEXP, SEXP confluenLand_responseTime_TSSEXP, SEXP confluenGround_responseTime_TSSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_baseflow_grf_gammaSEXP, SEXP param_confluenLand_kel_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_ubc_P0AGENSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< int >::type n_time(n_timeSEXP);
     Rcpp::traits::input_parameter< int >::type n_spat(n_spatSEXP);
-    Rcpp::traits::input_parameter< int >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type atmos_potentialEvatrans_mm(atmos_potentialEvatrans_mmSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type atmos_precipitation_mm(atmos_precipitation_mmSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
@@ -287,15 +285,15 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type param_percola_arn_thresh(param_percola_arn_threshSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_fac_f(param_snow_fac_fSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_fac_Tmelt(param_snow_fac_TmeltSEXP);
-    rcpp_result_gen = Rcpp::wrap(EDCHM_snow_full(n_time, n_spat, time_step_h, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt));
+    rcpp_result_gen = Rcpp::wrap(EDCHM_snow_full(n_time, n_spat, atmos_potentialEvatrans_mm, atmos_precipitation_mm, atmos_temperature_Cel, ground_capacity_mm, ground_water_mm, land_impermeableFrac_1, snow_ice_mm, soil_capacity_mm, soil_potentialPercola_mm, soil_water_mm, confluenLand_responseTime_TS, confluenGround_responseTime_TS, param_atmos_thr_Ts, param_baseflow_grf_gamma, param_confluenLand_kel_k, param_evatrans_ubc_gamma, param_infilt_ubc_P0AGEN, param_percola_arn_k, param_percola_arn_thresh, param_snow_fac_f, param_snow_fac_Tmelt));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_EDCHM_snow_full(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP time_step_hSEXP, SEXP atmos_potentialEvatrans_mmSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP snow_ice_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP soil_water_mmSEXP, SEXP confluenLand_responseTime_TSSEXP, SEXP confluenGround_responseTime_TSSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_baseflow_grf_gammaSEXP, SEXP param_confluenLand_kel_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_ubc_P0AGENSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
+RcppExport SEXP _EDCHM_EDCHM_snow_full(SEXP n_timeSEXP, SEXP n_spatSEXP, SEXP atmos_potentialEvatrans_mmSEXP, SEXP atmos_precipitation_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP ground_capacity_mmSEXP, SEXP ground_water_mmSEXP, SEXP land_impermeableFrac_1SEXP, SEXP snow_ice_mmSEXP, SEXP soil_capacity_mmSEXP, SEXP soil_potentialPercola_mmSEXP, SEXP soil_water_mmSEXP, SEXP confluenLand_responseTime_TSSEXP, SEXP confluenGround_responseTime_TSSEXP, SEXP param_atmos_thr_TsSEXP, SEXP param_baseflow_grf_gammaSEXP, SEXP param_confluenLand_kel_kSEXP, SEXP param_evatrans_ubc_gammaSEXP, SEXP param_infilt_ubc_P0AGENSEXP, SEXP param_percola_arn_kSEXP, SEXP param_percola_arn_threshSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_EDCHM_snow_full_try(n_timeSEXP, n_spatSEXP, time_step_hSEXP, atmos_potentialEvatrans_mmSEXP, atmos_precipitation_mmSEXP, atmos_temperature_CelSEXP, ground_capacity_mmSEXP, ground_water_mmSEXP, land_impermeableFrac_1SEXP, snow_ice_mmSEXP, soil_capacity_mmSEXP, soil_potentialPercola_mmSEXP, soil_water_mmSEXP, confluenLand_responseTime_TSSEXP, confluenGround_responseTime_TSSEXP, param_atmos_thr_TsSEXP, param_baseflow_grf_gammaSEXP, param_confluenLand_kel_kSEXP, param_evatrans_ubc_gammaSEXP, param_infilt_ubc_P0AGENSEXP, param_percola_arn_kSEXP, param_percola_arn_threshSEXP, param_snow_fac_fSEXP, param_snow_fac_TmeltSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_EDCHM_snow_full_try(n_timeSEXP, n_spatSEXP, atmos_potentialEvatrans_mmSEXP, atmos_precipitation_mmSEXP, atmos_temperature_CelSEXP, ground_capacity_mmSEXP, ground_water_mmSEXP, land_impermeableFrac_1SEXP, snow_ice_mmSEXP, soil_capacity_mmSEXP, soil_potentialPercola_mmSEXP, soil_water_mmSEXP, confluenLand_responseTime_TSSEXP, confluenGround_responseTime_TSSEXP, param_atmos_thr_TsSEXP, param_baseflow_grf_gammaSEXP, param_confluenLand_kel_kSEXP, param_evatrans_ubc_gammaSEXP, param_infilt_ubc_P0AGENSEXP, param_percola_arn_kSEXP, param_percola_arn_threshSEXP, param_snow_fac_fSEXP, param_snow_fac_TmeltSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -1078,23 +1076,22 @@ RcppExport SEXP _EDCHM_confluenIUH_Clark(SEXP confluen_responseTime_TSSEXP) {
     return rcpp_result_gen;
 }
 // evatransPotential_TurcWendling
-NumericVector evatransPotential_TurcWendling(int time_step_h, NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector param_evatrans_tur_k);
-static SEXP _EDCHM_evatransPotential_TurcWendling_try(SEXP time_step_hSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP param_evatrans_tur_kSEXP) {
+NumericVector evatransPotential_TurcWendling(NumericVector atmos_temperature_Cel, NumericVector atmos_solarRadiat_MJ, NumericVector param_evatrans_tur_k);
+static SEXP _EDCHM_evatransPotential_TurcWendling_try(SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP param_evatrans_tur_kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< int >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_solarRadiat_MJ(atmos_solarRadiat_MJSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_evatrans_tur_k(param_evatrans_tur_kSEXP);
-    rcpp_result_gen = Rcpp::wrap(evatransPotential_TurcWendling(time_step_h, atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k));
+    rcpp_result_gen = Rcpp::wrap(evatransPotential_TurcWendling(atmos_temperature_Cel, atmos_solarRadiat_MJ, param_evatrans_tur_k));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_evatransPotential_TurcWendling(SEXP time_step_hSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP param_evatrans_tur_kSEXP) {
+RcppExport SEXP _EDCHM_evatransPotential_TurcWendling(SEXP atmos_temperature_CelSEXP, SEXP atmos_solarRadiat_MJSEXP, SEXP param_evatrans_tur_kSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_evatransPotential_TurcWendling_try(time_step_hSEXP, atmos_temperature_CelSEXP, atmos_solarRadiat_MJSEXP, param_evatrans_tur_kSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_evatransPotential_TurcWendling_try(atmos_temperature_CelSEXP, atmos_solarRadiat_MJSEXP, param_evatrans_tur_kSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2631,25 +2628,24 @@ RcppExport SEXP _EDCHM_percola_SupplyRatio(SEXP soil_water_mmSEXP, SEXP param_pe
     return rcpp_result_gen;
 }
 // snowMelt_Kustas
-NumericVector snowMelt_Kustas(int time_step_h, NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT);
-static SEXP _EDCHM_snowMelt_Kustas_try(SEXP time_step_hSEXP, SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
+NumericVector snowMelt_Kustas(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector atmos_netRadiat_MJ, NumericVector param_snow_kus_fE, NumericVector param_snow_kus_fT);
+static SEXP _EDCHM_snowMelt_Kustas_try(SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< int >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type snow_ice_mm(snow_ice_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_netRadiat_MJ(atmos_netRadiat_MJSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_kus_fE(param_snow_kus_fESEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_kus_fT(param_snow_kus_fTSEXP);
-    rcpp_result_gen = Rcpp::wrap(snowMelt_Kustas(time_step_h, snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT));
+    rcpp_result_gen = Rcpp::wrap(snowMelt_Kustas(snow_ice_mm, atmos_temperature_Cel, atmos_netRadiat_MJ, param_snow_kus_fE, param_snow_kus_fT));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_snowMelt_Kustas(SEXP time_step_hSEXP, SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
+RcppExport SEXP _EDCHM_snowMelt_Kustas(SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP atmos_netRadiat_MJSEXP, SEXP param_snow_kus_fESEXP, SEXP param_snow_kus_fTSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_snowMelt_Kustas_try(time_step_hSEXP, snow_ice_mmSEXP, atmos_temperature_CelSEXP, atmos_netRadiat_MJSEXP, param_snow_kus_fESEXP, param_snow_kus_fTSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_snowMelt_Kustas_try(snow_ice_mmSEXP, atmos_temperature_CelSEXP, atmos_netRadiat_MJSEXP, param_snow_kus_fESEXP, param_snow_kus_fTSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2670,24 +2666,23 @@ RcppExport SEXP _EDCHM_snowMelt_Kustas(SEXP time_step_hSEXP, SEXP snow_ice_mmSEX
     return rcpp_result_gen;
 }
 // snowMelt_Factor
-NumericVector snowMelt_Factor(int time_step_h, NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt);
-static SEXP _EDCHM_snowMelt_Factor_try(SEXP time_step_hSEXP, SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
+NumericVector snowMelt_Factor(NumericVector snow_ice_mm, NumericVector atmos_temperature_Cel, NumericVector param_snow_fac_f, NumericVector param_snow_fac_Tmelt);
+static SEXP _EDCHM_snowMelt_Factor_try(SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< int >::type time_step_h(time_step_hSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type snow_ice_mm(snow_ice_mmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type atmos_temperature_Cel(atmos_temperature_CelSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_fac_f(param_snow_fac_fSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type param_snow_fac_Tmelt(param_snow_fac_TmeltSEXP);
-    rcpp_result_gen = Rcpp::wrap(snowMelt_Factor(time_step_h, snow_ice_mm, atmos_temperature_Cel, param_snow_fac_f, param_snow_fac_Tmelt));
+    rcpp_result_gen = Rcpp::wrap(snowMelt_Factor(snow_ice_mm, atmos_temperature_Cel, param_snow_fac_f, param_snow_fac_Tmelt));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _EDCHM_snowMelt_Factor(SEXP time_step_hSEXP, SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
+RcppExport SEXP _EDCHM_snowMelt_Factor(SEXP snow_ice_mmSEXP, SEXP atmos_temperature_CelSEXP, SEXP param_snow_fac_fSEXP, SEXP param_snow_fac_TmeltSEXP) {
     SEXP rcpp_result_gen;
     {
         Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_EDCHM_snowMelt_Factor_try(time_step_hSEXP, snow_ice_mmSEXP, atmos_temperature_CelSEXP, param_snow_fac_fSEXP, param_snow_fac_TmeltSEXP));
+        rcpp_result_gen = PROTECT(_EDCHM_snowMelt_Factor_try(snow_ice_mmSEXP, atmos_temperature_CelSEXP, param_snow_fac_fSEXP, param_snow_fac_TmeltSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -2716,8 +2711,8 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("List(*EDCHM_GR4J_full)(int,int,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericMatrix(*EDCHM_mini)(int,int,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("List(*EDCHM_mini_full)(int,int,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericMatrix(*EDCHM_snow)(int,int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("List(*EDCHM_snow_full)(int,int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericMatrix(*EDCHM_snow)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("List(*EDCHM_snow_full)(int,int,NumericMatrix,NumericMatrix,NumericMatrix,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*atmosSnow_ThresholdT)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*atmosSnow_UBC)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*baseflow_GR4J)(NumericVector,NumericVector)");
@@ -2739,7 +2734,7 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*confluenIUH_Kelly)(double,double)");
         signatures.insert("NumericVector(*confluenIUH_Nash)(double,double)");
         signatures.insert("NumericVector(*confluenIUH_Clark)(double)");
-        signatures.insert("NumericVector(*evatransPotential_TurcWendling)(int,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*evatransPotential_TurcWendling)(NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_Linacre)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransPotential_FAO56)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*evatransActual_SupplyRatio)(NumericVector,NumericVector,NumericVector,NumericVector)");
@@ -2781,8 +2776,8 @@ static int _EDCHM_RcppExport_validate(const char* sig) {
         signatures.insert("NumericVector(*percola_BevenWood)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_SupplyPow)(NumericVector,NumericVector,NumericVector,NumericVector)");
         signatures.insert("NumericVector(*percola_SupplyRatio)(NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*snowMelt_Kustas)(int,NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
-        signatures.insert("NumericVector(*snowMelt_Factor)(int,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*snowMelt_Kustas)(NumericVector,NumericVector,NumericVector,NumericVector,NumericVector)");
+        signatures.insert("NumericVector(*snowMelt_Factor)(NumericVector,NumericVector,NumericVector,NumericVector)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -2869,8 +2864,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_EDCHM_GR4J_full", (DL_FUNC) &_EDCHM_EDCHM_GR4J_full, 10},
     {"_EDCHM_EDCHM_mini", (DL_FUNC) &_EDCHM_EDCHM_mini, 18},
     {"_EDCHM_EDCHM_mini_full", (DL_FUNC) &_EDCHM_EDCHM_mini_full, 18},
-    {"_EDCHM_EDCHM_snow", (DL_FUNC) &_EDCHM_EDCHM_snow, 24},
-    {"_EDCHM_EDCHM_snow_full", (DL_FUNC) &_EDCHM_EDCHM_snow_full, 24},
+    {"_EDCHM_EDCHM_snow", (DL_FUNC) &_EDCHM_EDCHM_snow, 23},
+    {"_EDCHM_EDCHM_snow_full", (DL_FUNC) &_EDCHM_EDCHM_snow_full, 23},
     {"_EDCHM_atmosSnow_ThresholdT", (DL_FUNC) &_EDCHM_atmosSnow_ThresholdT, 3},
     {"_EDCHM_atmosSnow_UBC", (DL_FUNC) &_EDCHM_atmosSnow_UBC, 3},
     {"_EDCHM_baseflow_GR4J", (DL_FUNC) &_EDCHM_baseflow_GR4J, 2},
@@ -2892,7 +2887,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_confluenIUH_Kelly", (DL_FUNC) &_EDCHM_confluenIUH_Kelly, 2},
     {"_EDCHM_confluenIUH_Nash", (DL_FUNC) &_EDCHM_confluenIUH_Nash, 2},
     {"_EDCHM_confluenIUH_Clark", (DL_FUNC) &_EDCHM_confluenIUH_Clark, 1},
-    {"_EDCHM_evatransPotential_TurcWendling", (DL_FUNC) &_EDCHM_evatransPotential_TurcWendling, 4},
+    {"_EDCHM_evatransPotential_TurcWendling", (DL_FUNC) &_EDCHM_evatransPotential_TurcWendling, 3},
     {"_EDCHM_evatransPotential_Linacre", (DL_FUNC) &_EDCHM_evatransPotential_Linacre, 5},
     {"_EDCHM_evatransPotential_FAO56", (DL_FUNC) &_EDCHM_evatransPotential_FAO56, 6},
     {"_EDCHM_evatransActual_SupplyRatio", (DL_FUNC) &_EDCHM_evatransActual_SupplyRatio, 4},
@@ -2934,8 +2929,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EDCHM_percola_BevenWood", (DL_FUNC) &_EDCHM_percola_BevenWood, 4},
     {"_EDCHM_percola_SupplyPow", (DL_FUNC) &_EDCHM_percola_SupplyPow, 4},
     {"_EDCHM_percola_SupplyRatio", (DL_FUNC) &_EDCHM_percola_SupplyRatio, 2},
-    {"_EDCHM_snowMelt_Kustas", (DL_FUNC) &_EDCHM_snowMelt_Kustas, 6},
-    {"_EDCHM_snowMelt_Factor", (DL_FUNC) &_EDCHM_snowMelt_Factor, 5},
+    {"_EDCHM_snowMelt_Kustas", (DL_FUNC) &_EDCHM_snowMelt_Kustas, 5},
+    {"_EDCHM_snowMelt_Factor", (DL_FUNC) &_EDCHM_snowMelt_Factor, 4},
     {"_EDCHM_RcppExport_registerCCallable", (DL_FUNC) &_EDCHM_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };

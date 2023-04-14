@@ -134,6 +134,7 @@ build_modell <- function(process_method, name_model, path_model = NULL) {
     process_after["infilt"] <- process_after["infilt"] |> str_replace_all("land_water_mm", "atmos_precipitation_mm")
   } 
   
+  
   # VARIABLE --------------
   argu_select <- str_split_fixed(lines_process_select, "\\(", 2)[,2] |>
     str_remove("\\);") |> str_split(", ") |>
@@ -142,27 +143,39 @@ build_modell <- function(process_method, name_model, path_model = NULL) {
   if(process_method["evatransPotential"] == "NULL" ) {
     vari_boundary <- c("atmos_potentialEvatrans_mm", vari_boundary)
   }
-  if(process_method["atmosSnow"] == "NULL" & process_method["snowMelt"] != "NULL") {
-    vari_boundary <- c("atmos_snow_mm", vari_boundary)
-  }
   
   
   argu_select <- unique(argu_select)
   argu_matrix <- argu_select[argu_select %in% vari_boundary] |> sort()
+  
   param_ori <- argu_select[str_which(argu_select, "^param_")] |> sort()
   argu_param <- c("confluenLand_responseTime_TS", "confluenGround_responseTime_TS", param_ori) |> sort()
   if (process_method["confluenSoil"] != "NULL") argu_param <- c(argu_param, "confluenSoil_responseTime_TS") |> sort()
   vari_declare_matrxi <- c("land_runoff_mm", "ground_baseflow_mm", "confluen_streamflow_mm")
   if (process_method["confluenSoil"] != "NULL") vari_declare_matrxi <- c(vari_declare_matrxi, "soil_interflow_mm")
-  if (process_method["intercep"] == "NULL" & process_method["atmosSnow"] == "NULL") {
-    vari_declare_vector <- process_vari[idx_process] |> unique() |> sort()
-  } else {
-    vari_declare_vector <- process_vari[idx_process] |> c("land_water_mm") |> unique() |> sort()
+  # if (process_method["intercep"] == "NULL" & process_method["atmosSnow"] == "NULL") {
+  #   vari_declare_vector <- process_vari[idx_process] |> unique() |> sort()
+  # } else {
+  #   vari_declare_vector <- process_vari[idx_process] |> c("land_water_mm") |> unique() |> sort()
+  # }
+  vari_declare_vector <- process_vari[idx_process] |> c("land_water_mm") |> unique() |> sort()
+  if(process_method["atmosSnow"] == "NULL" & process_method["snowMelt"] != "NULL") {
+    argu_matrix <- c("atmos_snow_mm", argu_matrix) |> sort()
+    vari_declare_vector <- setdiff(vari_declare_vector, "atmos_snow_mm")
   }
   
+  # if(process_method["evatransPotential"] != "NULL") {
+  #   vari_declare_vector <- c(vari_declare_vector, "atmos_potentialEvatrans_mm") |> sort()
+  # }
   
   argu_vector <- argu_select[!(argu_select %in% c(argu_matrix, argu_param, vari_declare_matrxi, vari_declare_vector))] |> sort()
   vari_matrix <- c(argu_matrix, vari_declare_matrxi)
+  ## fix grund capacity ---------
+  if(any(str_detect(lines_process_select, "ground_capacity_mm"))) {
+    lines_process_select["baseflow"] <- paste0('NumericVector baseflow_temp = ifelse(ground_water_mm < ground_capacity_mm, 0, ground_water_mm - ground_capacity_mm);\nground_water_mm = ifelse(ground_water_mm < ground_capacity_mm,ground_water_mm, ground_capacity_mm);\n\n', lines_process_select["baseflow"])
+    process_after["baseflow"] <- paste0(process_after["baseflow"], '\nground_baseflow_mm = ground_baseflow_mm + baseflow_temp;')
+    
+  }
   
   # BUILD UP -----------
   ## header --------
@@ -261,9 +274,9 @@ using namespace EDCHM;
   
   
   if(is.null(path_model)) {
-    return(list(code_Model = line_Model, range_Parameter = df_range))
+    return(list(code_Model = line_Model |> paste0(collapse = "\n"), range_Parameter = df_range))
   } else {
-    write(line_Model, file.path(path_model, paste0("EDCHM_", name_model, ".cpp")))
+    write(line_Model |> paste0(collapse = "\n"), file.path(path_model, paste0("EDCHM_", name_model, ".cpp")))
     return(df_range)
   }
 }

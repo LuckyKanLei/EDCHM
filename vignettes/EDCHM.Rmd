@@ -50,18 +50,18 @@ To build a model, you only need to:
 my_process_method <- c( 
 atmosSnow = "atmosSnow_ThresholdT",
 evatransPotential = "evatransPotential_TurcWendling",
-evatransLand = "NULL",
+evatransLand = "evatransActual_SupplyRatio",
 evatransSoil = "evatransActual_SupplyRatio",
-intercep = "NULL",
+intercep = "intercep_Full",
 snowMelt = "snowMelt_Kustas",
 infilt = "infilt_AcceptRatio",
 percola = "percola_SupplyRatio",
-inteflow = "NULL",
-capirise = "NULL",
+inteflow = "inteflow_Arno",
+capirise = "capirise_HBV",
 baseflow = "baseflow_SupplyRatio",
 lateral = "lateral_GR4Jfix",
 confluenLand = "confluenIUH_Kelly",
-confluenSoil = "NULL",
+confluenSoil = "confluenIUH_Kelly",
 confluenGround = "confluenIUH_Nash"
 )
 ```

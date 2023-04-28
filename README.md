@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+Shiny <https://kanlei.shinyapps.io/ShinyEDCHM/>
+
 # Editable Distributed Conceptual (c++) Hydrological Model <a href="https://luckykanlei.github.io/EDCHM"><img src="man/figures/logo.png" align="right" height="138" style="float:right; height:200px;"></a>
 
 <!-- badges: start -->
